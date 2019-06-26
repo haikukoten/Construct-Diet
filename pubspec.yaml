@@ -1,0 +1,21 @@
+name: construct_diet
+description: Construct Diet
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  scoped_model: ^1.0.1
+  gradient_widgets: ^0.5.0
+  dynamic_theme: ^1.0.1
+  material_design_icons_flutter: ^3.2.3695
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
