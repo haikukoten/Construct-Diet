@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'ui/common/custom_app_bar.dart';
 
 void main() => runApp(MyApp());
@@ -6,6 +7,9 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        systemNavigationBarColor: Colors.grey[200],
+        systemNavigationBarIconBrightness: Brightness.dark));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Construct Diet',
