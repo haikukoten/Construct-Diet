@@ -27,8 +27,14 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[CustomAppBar()],
+      body: Stack(
+        children: <Widget>[
+          Container(
+              padding: EdgeInsets.only(top: 140),
+              alignment: Alignment.topCenter,
+              child: Text("а)")),
+          CustomAppBar(),
+        ],
       ),
     );
   }
