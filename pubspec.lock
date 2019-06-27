@@ -29,13 +29,24 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.14.11"
-  dynamic_theme:
+  flare_dart:
+    dependency: transitive
+    description:
+      path: flare_dart
+      ref: dev
+      resolved-ref: "0ee2efeb22ee2c2ecbc6a265383b337ad02768c9"
+      url: "git://github.com/2d-inc/Flare-Flutter.git"
+    source: git
+    version: "1.4.1"
+  flare_flutter:
     dependency: "direct main"
     description:
-      name: dynamic_theme
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.1"
+      path: flare_flutter
+      ref: dev
+      resolved-ref: "0ee2efeb22ee2c2ecbc6a265383b337ad02768c9"
+      url: "git://github.com/2d-inc/Flare-Flutter.git"
+    source: git
+    version: "1.5.1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -46,13 +57,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  gradient_widgets:
-    dependency: "direct main"
-    description:
-      name: gradient_widgets
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.5.0"
   matcher:
     dependency: transitive
     description:
@@ -102,13 +106,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
-  shared_preferences:
-    dependency: transitive
-    description:
-      name: shared_preferences
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.5.3+1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -172,4 +169,4 @@ packages:
     version: "2.0.8"
 sdks:
   dart: ">=2.2.2 <3.0.0"
-  flutter: ">=1.5.0 <2.0.0"
+  flutter: ">=0.1.2"

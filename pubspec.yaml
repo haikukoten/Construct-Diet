@@ -9,9 +9,12 @@ dependencies:
   flutter:
     sdk: flutter
   scoped_model: ^1.0.1
-  gradient_widgets: ^0.5.0
-  dynamic_theme: ^1.0.1
   material_design_icons_flutter: ^3.2.3695
+  flare_flutter:
+    git: 
+      url: git://github.com/2d-inc/Flare-Flutter.git
+      ref: dev
+      path: flare_flutter
 
 dev_dependencies:
   flutter_test:
@@ -19,3 +22,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+   - assets/app_bar_animations.flr
+
