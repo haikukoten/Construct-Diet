@@ -38,17 +38,20 @@ class _RoundedAppBarState extends State<RoundedAppBar> {
                       IconButton(
                           tooltip: "Анимация перехода в About",
                           color: Theme.of(context).bottomAppBarColor,
-                          icon: Icon(MdiIcons.settingsOutline, size: 20),
+                          icon: Icon(MdiIcons.informationOutline, size: 20),
                           onPressed: () {
                             setState(() {
                               animationName = "startRectState";
                             });
                           }),
-                      Text("Construct Diet",
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              color: Theme.of(context).bottomAppBarColor)),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 1),
+                        child: Text("Construct Diet",
+                            style: TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.w400,
+                                color: Theme.of(context).bottomAppBarColor)),
+                      ),
                       IconButton(
                           tooltip: "Сброс анимации",
                           color: Theme.of(context).bottomAppBarColor,
@@ -79,14 +82,14 @@ class _RoundedAppBarState extends State<RoundedAppBar> {
                           Text("мужчина, 16 лет, 182 см, 66 кг, нормостеник",
                               style: TextStyle(
                                   fontSize: 14,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w400,
                                   color: Theme.of(context).bottomAppBarColor)),
                           Padding(
                             padding: EdgeInsets.only(top: 3),
                             child: Text("нажмите для редактирования",
                                 style: TextStyle(
                                     fontSize: 14,
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.w400,
                                     color:
                                         Theme.of(context).bottomAppBarColor)),
                           )
