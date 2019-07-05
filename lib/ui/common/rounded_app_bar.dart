@@ -10,7 +10,7 @@ class RoundedAppBar extends StatefulWidget {
 }
 
 class _RoundedAppBarState extends State<RoundedAppBar> {
-  String animationName;
+  String currentAnimation;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class _RoundedAppBarState extends State<RoundedAppBar> {
         children: <Widget>[
           FlareActor(
             "assets/app_bar_animations.flr",
-            animation: animationName,
+            animation: currentAnimation,
             fit: BoxFit.fitHeight,
           ),
           Padding(
@@ -41,16 +41,18 @@ class _RoundedAppBarState extends State<RoundedAppBar> {
                           icon: Icon(MdiIcons.informationOutline, size: 20),
                           onPressed: () {
                             setState(() {
-                              animationName = "startRectState";
+                              currentAnimation = "startRectState";
                             });
                           }),
                       Padding(
                         padding: const EdgeInsets.only(top: 1),
-                        child: Text("Construct Diet",
-                            style: TextStyle(
-                                fontSize: 19,
-                                fontWeight: FontWeight.w400,
-                                color: Theme.of(context).bottomAppBarColor)),
+                        child: Text(
+                          "Construct Diet",
+                          style: TextStyle(
+                              fontSize: 19,
+                              fontWeight: FontWeight.w400,
+                              color: Theme.of(context).bottomAppBarColor),
+                        ),
                       ),
                       IconButton(
                           tooltip: "Сброс анимации",
@@ -58,11 +60,11 @@ class _RoundedAppBarState extends State<RoundedAppBar> {
                           icon: Icon(MdiIcons.restart, size: 20),
                           onPressed: () {
                             setState(() {
-                              animationName == "open"
-                                  ? animationName = "close"
-                                  : animationName == "startRectState"
-                                      ? animationName = "endRectState"
-                                      : animationName = "";
+                              currentAnimation == "open"
+                                  ? currentAnimation = "close"
+                                  : currentAnimation == "startRectState"
+                                      ? currentAnimation = "endRectState"
+                                      : currentAnimation = "";
                             });
                           }),
                     ],
@@ -73,7 +75,7 @@ class _RoundedAppBarState extends State<RoundedAppBar> {
                   child: TransparentButton(
                       onTap: () {
                         setState(() {
-                          animationName = "open";
+                          currentAnimation = "open";
                         });
                       },
                       child: Column(
@@ -92,10 +94,10 @@ class _RoundedAppBarState extends State<RoundedAppBar> {
                                     fontWeight: FontWeight.w400,
                                     color:
                                         Theme.of(context).bottomAppBarColor)),
-                          )
+                          ),
                         ],
                       )),
-                )
+                ),
               ],
             ),
           ),
