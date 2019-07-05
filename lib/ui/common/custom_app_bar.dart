@@ -1,5 +1,3 @@
-import 'package:construct_diet/ui/screens/settings_page.dart';
-import 'package:flare_dart/actor.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
