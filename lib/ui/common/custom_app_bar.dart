@@ -28,40 +28,40 @@ class _CustomAppBarState extends State<CustomAppBar> {
             padding: EdgeInsets.fromLTRB(3, statusBarHeight + 5, 3, 22),
             child: Column(
               children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    IconButton(
-                        tooltip: "Анимация перехода в настройки",
-                        color: Theme.of(context).bottomAppBarColor,
-                        icon: Icon(MdiIcons.settingsOutline, size: 20),
-                        onPressed: () {
-                          setState(() {
-                            animationName = "startRectState";
-                          });
-                        }),
-                    Padding(
-                      padding: EdgeInsets.only(top: 1),
-                      child: Text("Construct Diet",
+                Padding(
+                  padding: const EdgeInsets.only(top: 1),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      IconButton(
+                          tooltip: "Анимация перехода в настройки",
+                          color: Theme.of(context).bottomAppBarColor,
+                          icon: Icon(MdiIcons.settingsOutline, size: 20),
+                          onPressed: () {
+                            setState(() {
+                              animationName = "startRectState";
+                            });
+                          }),
+                      Text("Construct Diet",
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w600,
                               color: Theme.of(context).bottomAppBarColor)),
-                    ),
-                    IconButton(
-                        tooltip: "Сброс анимации",
-                        color: Theme.of(context).bottomAppBarColor,
-                        icon: Icon(MdiIcons.restart, size: 20),
-                        onPressed: () {
-                          setState(() {
-                            animationName == "open"
-                                ? animationName = "close"
-                                : animationName == "startRectState"
-                                    ? animationName = "endRectState"
-                                    : animationName = "";
-                          });
-                        }),
-                  ],
+                      IconButton(
+                          tooltip: "Сброс анимации",
+                          color: Theme.of(context).bottomAppBarColor,
+                          icon: Icon(MdiIcons.restart, size: 20),
+                          onPressed: () {
+                            setState(() {
+                              animationName == "open"
+                                  ? animationName = "close"
+                                  : animationName == "startRectState"
+                                      ? animationName = "endRectState"
+                                      : animationName = "";
+                            });
+                          }),
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 4),
