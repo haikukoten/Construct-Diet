@@ -2,6 +2,8 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import 'transparent_button.dart';
+
 class CustomAppBar extends StatefulWidget {
   @override
   _CustomAppBarState createState() => _CustomAppBarState();
@@ -65,7 +67,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 4),
-                  child: UIFlatButton(
+                  child: TransparentButton(
                       onTap: () {
                         setState(() {
                           animationName = "open";
@@ -97,25 +99,5 @@ class _CustomAppBarState extends State<CustomAppBar> {
         ],
       ),
     );
-  }
-}
-
-class UIFlatButton extends StatelessWidget {
-  UIFlatButton({Key key, this.onTap, this.child}) : super(key: key);
-
-  final VoidCallback onTap;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: onTap,
-        child: Opacity(
-          opacity: 0.95,
-          child: Material(
-            type: MaterialType.transparency,
-            child: child,
-          ),
-        ));
   }
 }
