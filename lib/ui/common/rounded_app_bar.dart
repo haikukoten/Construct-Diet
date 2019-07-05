@@ -4,12 +4,12 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import 'transparent_button.dart';
 
-class CustomAppBar extends StatefulWidget {
+class RoundedAppBar extends StatefulWidget {
   @override
-  _CustomAppBarState createState() => _CustomAppBarState();
+  _RoundedAppBarState createState() => _RoundedAppBarState();
 }
 
-class _CustomAppBarState extends State<CustomAppBar> {
+class _RoundedAppBarState extends State<RoundedAppBar> {
   String animationName;
 
   @override
@@ -36,7 +36,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       IconButton(
-                          tooltip: "Анимация перехода в настройки",
+                          tooltip: "Анимация перехода в About",
                           color: Theme.of(context).bottomAppBarColor,
                           icon: Icon(MdiIcons.settingsOutline, size: 20),
                           onPressed: () {
