@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'ui/common/custom_app_bar.dart';
+import 'ui/common/rounded_app_bar.dart';
 
 void main() => runApp(MyApp());
 
@@ -38,7 +38,7 @@ class _MainPageState extends State<MainPage> {
               padding: EdgeInsets.only(top: 140),
               alignment: Alignment.topCenter,
               child: Text("а)")),
-          CustomAppBar(),
+          RoundedAppBar(),
         ],
       ),
     );
