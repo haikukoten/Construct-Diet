@@ -1,8 +1,5 @@
-import 'package:flare_flutter/flare_actor.dart';
+import 'package:construct_diet/ui/common/transparent_button.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
-import 'transparent_button.dart';
 
 class RoundedAppBar extends StatefulWidget {
   @override
@@ -10,97 +7,69 @@ class RoundedAppBar extends StatefulWidget {
 }
 
 class _RoundedAppBarState extends State<RoundedAppBar> {
-  String currentAnimation;
-
   @override
   Widget build(BuildContext context) {
     final statusBarHeight = MediaQuery.of(context).padding.top;
     final contentWidth = MediaQuery.of(context).size.width;
     return Container(
       width: contentWidth,
-      height: 340,
-      child: Stack(
-        children: <Widget>[
-          FlareActor(
-            "assets/app_bar_animations.flr",
-            animation: currentAnimation,
-            fit: BoxFit.fitHeight,
+      height: 135,
+      padding: EdgeInsets.only(top: statusBarHeight + 12, bottom: 12),
+      decoration: new BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 3,
           ),
+        ],
+        borderRadius: BorderRadius.vertical(bottom: Radius.elliptical(240, 20)),
+        gradient: LinearGradient(colors: [
+          Theme.of(context).brightness == Brightness.light
+              ? Color(0xffF55B9A)
+              : Color(0xff5bf5b6),
+          Theme.of(context).brightness == Brightness.light
+              ? Color(0xffF9B16E)
+              : Color(0xff6eb6f9),
+        ], begin: Alignment.centerLeft, end: Alignment.centerRight),
+      ),
+      child: Column(
+        children: <Widget>[
           Padding(
-            padding: EdgeInsets.fromLTRB(3, statusBarHeight + 5, 3, 22),
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(top: 1),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      IconButton(
-                          tooltip: "Анимация перехода в About",
-                          color: Theme.of(context).bottomAppBarColor,
-                          icon: Icon(MdiIcons.informationOutline, size: 20),
-                          onPressed: () {
-                            setState(() {
-                              currentAnimation = "startRectState";
-                            });
-                          }),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 1),
-                        child: Text(
-                          "Construct Diet",
-                          style: TextStyle(
-                              fontSize: 19,
-                              fontWeight: FontWeight.w400,
-                              color: Theme.of(context).bottomAppBarColor),
-                        ),
-                      ),
-                      IconButton(
-                          tooltip: "Сброс анимации",
-                          color: Theme.of(context).bottomAppBarColor,
-                          icon: Icon(MdiIcons.restart, size: 20),
-                          onPressed: () {
-                            setState(() {
-                              currentAnimation == "open"
-                                  ? currentAnimation = "close"
-                                  : currentAnimation == "startRectState"
-                                      ? currentAnimation = "endRectState"
-                                      : currentAnimation = "";
-                            });
-                          }),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 4),
-                  child: TransparentButton(
-                      onTap: () {
-                        setState(() {
-                          currentAnimation = "open";
-                        });
-                      },
-                      child: Column(
-                        textDirection: TextDirection.ltr,
-                        children: <Widget>[
-                          Text("мужчина, 16 лет, 182 см, 66 кг, нормостеник",
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: Theme.of(context).bottomAppBarColor)),
-                          Padding(
-                            padding: EdgeInsets.only(top: 3),
-                            child: Text("нажмите для редактирования",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color:
-                                        Theme.of(context).bottomAppBarColor)),
-                          ),
-                        ],
-                      )),
-                ),
-              ],
+            padding: const EdgeInsets.all(6),
+            child: Text(
+              "Construct Diet",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: Theme.of(context).bottomAppBarColor,
+              ),
             ),
           ),
+          TransparentButton(
+              child: Column(
+            textDirection: TextDirection.ltr,
+            children: <Widget>[
+              Text(
+                "мужчина, 16 лет, 182 см, 66 кг, нормостеник",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Theme.of(context).bottomAppBarColor,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 3),
+                child: Text(
+                  "нажмите для редактирования",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Theme.of(context).bottomAppBarColor,
+                  ),
+                ),
+              ),
+            ],
+          ))
         ],
       ),
     );

@@ -8,14 +8,17 @@ class TransparentButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: onTap,
-        child: Opacity(
-          opacity: 0.95,
-          child: Material(
-            type: MaterialType.transparency,
-            child: child,
-          ),
-        ));
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: GestureDetector(
+          onTap: onTap,
+          child: Opacity(
+            opacity: 0.95,
+            child: Material(
+              type: MaterialType.transparency,
+              child: child,
+            ),
+          )),
+    );
   }
 }
