@@ -1,16 +1,14 @@
-import 'dart:math';
-
-import 'package:flutter/rendering.dart';
-
-import 'ui/tabs/result_tab.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'ui/tabs/favorite_tab.dart';
-import 'ui/tabs/settings_tab.dart';
 import 'package:md2_tab_indicator/md2_tab_indicator.dart';
+
 import 'ui/common/custom_appbar.dart' as custom;
+import 'ui/tabs/favorite_tab.dart';
+import 'ui/tabs/result_tab.dart';
+import 'ui/tabs/settings_tab.dart';
 
 void main() => runApp(MyApp());
 
@@ -90,6 +88,12 @@ class _MainPageState extends State<MainPage>
   double appBarHeight = 150;
   bool isAnimateScroll = false;
 
+  final List<Widget> tabs = <Widget>[
+    ResultTab(),
+    FavoritesTab(),
+    SettingsTab(),
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -103,13 +107,7 @@ class _MainPageState extends State<MainPage>
     super.dispose();
   }
 
-  final List<Widget> tabs = <Widget>[
-    ResultTab(),
-    FavoritesTab(),
-    SettingsTab(),
-  ];
-
-  _onEndScroll(ScrollMetrics metrics) {
+  animateScrollInfoContainer(ScrollMetrics metrics) {
     if (metrics.pixels != 0 && metrics.pixels < 68 && !isAnimateScroll) {
       isAnimateScroll = true;
       Future.delayed(const Duration(milliseconds: 0), () {}).then((s) {
@@ -124,7 +122,7 @@ class _MainPageState extends State<MainPage>
     }
   }
 
-  Widget infoContainer(double step) {
+  Widget infoContainer() {
     final contentWidth = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
@@ -178,8 +176,9 @@ class _MainPageState extends State<MainPage>
             child: NotificationListener<ScrollNotification>(
               onNotification: (scrollNotification) {
                 if (scrollNotification is ScrollEndNotification) {
-                  _onEndScroll(scrollNotification.metrics);
+                  animateScrollInfoContainer(scrollNotification.metrics);
                 }
+                return true;
               },
               child: NestedScrollView(
                 controller: controllerScroll,
@@ -198,7 +197,7 @@ class _MainPageState extends State<MainPage>
                           step = ((constraints.maxHeight - 82) *
                               100 /
                               (appBarHeight - 82));
-                          return infoContainer(step);
+                          return infoContainer();
                         },
                       ),
                     ),
@@ -238,9 +237,10 @@ class _MainPageState extends State<MainPage>
                       indicatorSize: TabBarIndicatorSize.label,
                       unselectedLabelColor: Colors.grey[600],
                       indicator: MD2Indicator(
-                          indicatorHeight: 3,
-                          indicatorColor: Theme.of(context).primaryColor,
-                          indicatorSize: MD2IndicatorSize.full),
+                        indicatorHeight: 3,
+                        indicatorColor: Theme.of(context).primaryColor,
+                        indicatorSize: MD2IndicatorSize.full,
+                      ),
                       tabs: <Tab>[
                         Tab(
                           icon: Icon(MdiIcons.fileDocumentBoxOutline),
