@@ -42,7 +42,10 @@ class MyApp extends StatelessWidget {
             brightness: brightness,
             primaryColor: brightness == Brightness.light
                 ? Color(0xFF1A73E8)
-                : Color(0xFF185ABC),
+                : Color(0xFF8AB4F8),
+            primaryColorDark: brightness == Brightness.light
+                ? Color(0xFF5F6368)
+                : Color(0xFF9AA0A6),
             cardColor: brightness == Brightness.light
                 ? Color(0xFFFFFFFF)
                 : Color(0xFF2E2F32),
@@ -59,6 +62,11 @@ class MyApp extends StatelessWidget {
             ),
             primaryTextTheme: TextTheme(
               body1: TextStyle(color: Colors.white),
+              caption: TextStyle(
+                color: brightness == Brightness.light
+                    ? Color(0xFF3C4043)
+                    : Color(0xFFFFFFFF),
+              ),
             ),
           );
         },
@@ -114,7 +122,7 @@ class _MainPageState extends State<MainPage>
         controllerScroll
             .animateTo(step < 50 ? 68 : -appBarHeight,
                 curve: Curves.fastOutSlowIn,
-                duration: Duration(milliseconds: 200))
+                duration: Duration(milliseconds: 300))
             .then((s) {
           isAnimateScroll = false;
         });
@@ -127,14 +135,16 @@ class _MainPageState extends State<MainPage>
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
       child: Container(
-        padding: EdgeInsets.fromLTRB(18, 14, 18, 14),
+        padding: EdgeInsets.fromLTRB(18, 14.5, 18, 14.5),
         decoration: new BoxDecoration(
           color: Theme.of(context).cardColor,
           border: Border.all(color: Theme.of(context).cardTheme.color),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withAlpha(15),
-              blurRadius: 3,
+              color: controllerAnimation.value == 0.0
+                  ? Colors.black.withAlpha(30)
+                  : Colors.black.withAlpha(15),
+              blurRadius: 2,
             ),
           ],
           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -235,7 +245,7 @@ class _MainPageState extends State<MainPage>
                       labelPadding: EdgeInsets.all(4),
                       labelColor: Theme.of(context).primaryColor,
                       indicatorSize: TabBarIndicatorSize.label,
-                      unselectedLabelColor: Colors.grey[600],
+                      unselectedLabelColor: Theme.of(context).primaryColorDark,
                       indicator: MD2Indicator(
                         indicatorHeight: 3,
                         indicatorColor: Theme.of(context).primaryColor,
