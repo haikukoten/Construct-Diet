@@ -123,7 +123,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   }
 
   animateScrollInfoContainer(ScrollMetrics metrics) {
-    if (metrics.pixels != 0 && metrics.pixels < 68 && !isAnimateScroll) {
+    if (controllerAnimation.value != 0 &&
+        controllerAnimation.value != 1 &&
+        !isAnimateScroll) {
       isAnimateScroll = true;
       Future.delayed(const Duration(milliseconds: 0), () {}).then((s) {
         controllerScroll
