@@ -40,6 +40,13 @@ class MyApp extends StatelessWidget {
           );
           return ThemeData(
             brightness: brightness,
+            accentColor: Colors.grey,
+            splashColor: brightness == Brightness.light
+                ? Color(0x551A73E8)
+                : Color(0x558AB4F8),
+            highlightColor: brightness == Brightness.light
+                ? Color(0x221A73E8)
+                : Color(0x228AB4F8),
             primaryColor: brightness == Brightness.light
                 ? Color(0xFF1A73E8)
                 : Color(0xFF8AB4F8),
@@ -60,12 +67,17 @@ class MyApp extends StatelessWidget {
                   ? Color(0xFFEEEEEE)
                   : Color(0xFF1D1E21),
             ),
-            primaryTextTheme: TextTheme(
+            textTheme: TextTheme(
               body1: TextStyle(color: Colors.white),
               caption: TextStyle(
                 color: brightness == Brightness.light
                     ? Color(0xFF3C4043)
                     : Color(0xFFFFFFFF),
+              ),
+              button: TextStyle(
+                color: brightness == Brightness.light
+                    ? Color(0xFF1A73E8)
+                    : Color(0xFF8AB4F8),
               ),
             ),
           );
@@ -93,7 +105,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   ScrollController controllerScroll;
   AnimationController controllerAnimation;
   Animation<AlignmentGeometry> animationTitle;
-  double appBarHeight = 150;
+  Animation<double> animationOpacity;
+  double appBarHeight = 140;
   bool isAnimateScroll = false;
 
   final List<Widget> tabs = <Widget>[
@@ -105,15 +118,18 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    controllerTab = new TabController(length: 3, vsync: this);
+    controllerTab = TabController(length: 3, vsync: this);
     controllerScroll = ScrollController();
     controllerAnimation = AnimationController(vsync: this);
 
+    animationOpacity = Tween(begin: 0.0, end: 1.0).animate(new CurvedAnimation(
+        parent: controllerAnimation,
+        curve: new Interval(0.5, 1, curve: Curves.easeInOutSine)));
+
     animationTitle = Tween<AlignmentGeometry>(
-            begin: Alignment.centerLeft, end: Alignment.center)
-        .animate(new CurvedAnimation(
-            parent: controllerAnimation,
-            curve: new Interval(0.0, 1, curve: Curves.fastOutSlowIn)));
+            begin: Alignment.centerLeft, end: Alignment.topCenter)
+        .animate(CurvedAnimation(
+            parent: controllerAnimation, curve: Curves.easeInOutSine));
   }
 
   @override
@@ -139,8 +155,43 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     }
   }
 
-  Widget infoContainer() {
-    final contentWidth = MediaQuery.of(context).size.width;
+  Widget separatorVertical() {
+    return Padding(
+      padding: EdgeInsets.only(left: 25, right: 25),
+      child: Container(
+        width: 1,
+        height: 25,
+        color: Theme.of(context).primaryColorDark.withAlpha(50),
+      ),
+    );
+  }
+
+  Widget infoBlock(String title, int value) {
+    return Column(
+      children: <Widget>[
+        Text(
+          value.toString(),
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            color: Theme.of(context).textTheme.caption.color,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: 3),
+          child: Text(
+            title,
+            style: TextStyle(
+              fontSize: 12,
+              color: Theme.of(context).textTheme.caption.color,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget appBar() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
       child: Container(
@@ -158,32 +209,37 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           ],
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
-        child: Column(
+        child: Stack(
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                Stack(
-                  children: <Widget>[
-                    Container(
-                      width: contentWidth - 70,
-                      child: AlignTransition(
-                        alignment: animationTitle,
-                        child: Text(
-                          "Construct Diet",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                            color: Theme.of(context)
-                                .primaryTextTheme
-                                .caption
-                                .color,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+            AlignTransition(
+              alignment: animationTitle,
+              child: Text(
+                "Construct Diet",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: Theme.of(context).textTheme.caption.color,
                 ),
-              ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: FadeTransition(
+                opacity: animationOpacity,
+                child: Container(
+                  height: 40,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      infoBlock("кг", 65),
+                      separatorVertical(),
+                      infoBlock("см", 182),
+                      separatorVertical(),
+                      infoBlock("лет", 16),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ],
         ),
@@ -222,7 +278,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                                       100 /
                                       (appBarHeight - 82)) /
                                   100;
-                          return infoContainer();
+                          return appBar();
                         },
                       ),
                     ),
