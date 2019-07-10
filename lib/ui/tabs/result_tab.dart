@@ -8,9 +8,14 @@ class ResultTab extends StatefulWidget {
 class _ResultTabState extends State<ResultTab> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: EdgeInsets.only(top: 120),
-        alignment: Alignment.topCenter,
-        child: Text("а)"));
+    return ListView.builder(
+      itemCount: 20,
+      itemBuilder: (context, position) {
+        return ListTile(
+          title: Text('хуй'),
+          subtitle: Text('хуй хуй ?'),
+        );
+      },
+    );
   }
 }
