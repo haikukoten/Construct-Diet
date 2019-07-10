@@ -88,11 +88,11 @@ class MainPage extends StatefulWidget {
   _MainPageState createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage>
-    with SingleTickerProviderStateMixin {
+class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   TabController controllerTab;
   ScrollController controllerScroll;
-  double step = 100;
+  AnimationController controllerAnimation;
+  Animation<AlignmentGeometry> animationTitle;
   double appBarHeight = 150;
   bool isAnimateScroll = false;
 
@@ -107,6 +107,13 @@ class _MainPageState extends State<MainPage>
     super.initState();
     controllerTab = new TabController(length: 3, vsync: this);
     controllerScroll = ScrollController();
+    controllerAnimation = AnimationController(vsync: this);
+
+    animationTitle = Tween<AlignmentGeometry>(
+            begin: Alignment.centerLeft, end: Alignment.center)
+        .animate(new CurvedAnimation(
+            parent: controllerAnimation,
+            curve: new Interval(0.0, 1, curve: Curves.fastOutSlowIn)));
   }
 
   @override
@@ -120,7 +127,7 @@ class _MainPageState extends State<MainPage>
       isAnimateScroll = true;
       Future.delayed(const Duration(milliseconds: 0), () {}).then((s) {
         controllerScroll
-            .animateTo(step < 50 ? 68 : -appBarHeight,
+            .animateTo(controllerAnimation.value < 0.5 ? 68 : -appBarHeight,
                 curve: Curves.fastOutSlowIn,
                 duration: Duration(milliseconds: 300))
             .then((s) {
@@ -156,14 +163,19 @@ class _MainPageState extends State<MainPage>
                 Stack(
                   children: <Widget>[
                     Container(
-                      alignment: Alignment.center,
                       width: contentWidth - 70,
-                      child: Text(
-                        "Construct Diet",
-                        style: TextStyle(
-                          fontSize: 19,
-                          fontWeight: FontWeight.w500,
-                          color: Theme.of(context).textTheme.caption.color,
+                      child: AlignTransition(
+                        alignment: animationTitle,
+                        child: Text(
+                          "Construct Diet",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context)
+                                .primaryTextTheme
+                                .caption
+                                .color,
+                          ),
                         ),
                       ),
                     ),
@@ -198,15 +210,16 @@ class _MainPageState extends State<MainPage>
                     custom.SliverAppBar(
                       pinned: true,
                       expandedHeight: appBarHeight,
-                      floating: true,
                       backgroundColor: Colors.transparent,
                       elevation: 0,
                       flexibleSpace: LayoutBuilder(
                         builder:
                             (BuildContext context, BoxConstraints constraints) {
-                          step = ((constraints.maxHeight - 82) *
-                              100 /
-                              (appBarHeight - 82));
+                          controllerAnimation.value =
+                              ((constraints.maxHeight - 82) *
+                                      100 /
+                                      (appBarHeight - 82)) /
+                                  100;
                           return infoContainer();
                         },
                       ),
