@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/rendering.dart';
 
 import 'ui/tabs/result_tab.dart';
@@ -83,11 +85,16 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage>
     with SingleTickerProviderStateMixin {
   TabController controllerTab;
+  ScrollController controllerScroll;
+  double step = 100;
+  double appBarHeight = 150;
+  bool isAnimateScroll = false;
 
   @override
   void initState() {
     super.initState();
     controllerTab = new TabController(length: 3, vsync: this);
+    controllerScroll = ScrollController();
   }
 
   @override
@@ -102,10 +109,27 @@ class _MainPageState extends State<MainPage>
     SettingsTab(),
   ];
 
+  _onEndScroll(ScrollMetrics metrics) {
+    if (metrics.pixels != 0 && metrics.pixels < 68 && !isAnimateScroll) {
+      isAnimateScroll = true;
+      Future.delayed(const Duration(milliseconds: 0), () {}).then((s) {
+        controllerScroll
+            .animateTo(step < 50 ? 68 : -appBarHeight,
+                curve: Curves.fastOutSlowIn,
+                duration: Duration(milliseconds: 200))
+            .then((s) {
+          isAnimateScroll = false;
+        });
+      });
+    }
+  }
+
   Widget infoContainer(double step) {
+    final contentWidth = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
       child: Container(
+        padding: EdgeInsets.fromLTRB(18, 14, 18, 14),
         decoration: new BoxDecoration(
           color: Theme.of(context).cardColor,
           border: Border.all(color: Theme.of(context).cardTheme.color),
@@ -115,37 +139,29 @@ class _MainPageState extends State<MainPage>
               blurRadius: 3,
             ),
           ],
-          borderRadius: BorderRadius.all(Radius.circular(9)),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         child: Column(
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.fromLTRB(18, 6, 18, 6),
-              child: Row(
-                children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 2),
-                        child: Text(step.toString(),
-                            style: TextStyle(
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black87)),
+            Row(
+              children: <Widget>[
+                Stack(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.center,
+                      width: contentWidth - 70,
+                      child: Text(
+                        "Construct Diet",
+                        style: TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.w500,
+                          color: Theme.of(context).textTheme.caption.color,
+                        ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 3),
-                        child: Text(step.toString(),
-                            style: TextStyle(
-                                fontSize: 13.0,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black54)),
-                      )
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),
@@ -153,40 +169,46 @@ class _MainPageState extends State<MainPage>
     );
   }
 
-  double appBarHeight = 150;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: <Widget>[
           SafeArea(
-            child: NestedScrollView(
-              headerSliverBuilder:
-                  (BuildContext context, bool innerBoxIsScrolled) {
-                return <Widget>[
-                  custom.SliverAppBar(
-                    pinned: true,
-                    expandedHeight: appBarHeight,
-                    floating: true,
-                    backgroundColor: Colors.transparent,
-                    elevation: 0,
-                    flexibleSpace: LayoutBuilder(
-                      builder:
-                          (BuildContext context, BoxConstraints constraints) {
-                        double step = ((constraints.maxHeight - 84.0) *
-                            100 /
-                            (appBarHeight - 84.0));
-                        return infoContainer(step);
-                      },
-                    ),
-                  ),
-                ];
+            child: NotificationListener<ScrollNotification>(
+              onNotification: (scrollNotification) {
+                if (scrollNotification is ScrollEndNotification) {
+                  _onEndScroll(scrollNotification.metrics);
+                }
               },
-              body: TabBarView(
-                physics: NeverScrollableScrollPhysics(),
-                children: tabs,
-                controller: controllerTab,
+              child: NestedScrollView(
+                controller: controllerScroll,
+                headerSliverBuilder:
+                    (BuildContext context, bool innerBoxIsScrolled) {
+                  return <Widget>[
+                    custom.SliverAppBar(
+                      pinned: true,
+                      expandedHeight: appBarHeight,
+                      floating: true,
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      flexibleSpace: LayoutBuilder(
+                        builder:
+                            (BuildContext context, BoxConstraints constraints) {
+                          step = ((constraints.maxHeight - 82) *
+                              100 /
+                              (appBarHeight - 82));
+                          return infoContainer(step);
+                        },
+                      ),
+                    ),
+                  ];
+                },
+                body: TabBarView(
+                  physics: NeverScrollableScrollPhysics(),
+                  children: tabs,
+                  controller: controllerTab,
+                ),
               ),
             ),
           ),
@@ -199,7 +221,7 @@ class _MainPageState extends State<MainPage>
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withAlpha(15),
-                    blurRadius: 4,
+                    blurRadius: 3,
                   ),
                 ],
                 borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
