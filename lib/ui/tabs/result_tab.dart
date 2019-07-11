@@ -11,6 +11,7 @@ class _ResultTabState extends State<ResultTab> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
       physics: BouncingScrollPhysics(),
       child: new ConstrainedBox(
         constraints: new BoxConstraints(),

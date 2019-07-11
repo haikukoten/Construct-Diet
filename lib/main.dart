@@ -155,7 +155,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
   Widget appBar() {
     return Container(
-      margin: EdgeInsets.fromLTRB(0, 14, 0, 6),
+      margin: EdgeInsets.fromLTRB(16, 14, 16, 6),
       padding: EdgeInsets.fromLTRB(18, 14.5, 18, 14.5),
       decoration: new BoxDecoration(
         color: Theme.of(context).cardColor,
@@ -223,45 +223,42 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-            child: SafeArea(
-              child: NotificationListener<ScrollNotification>(
-                onNotification: (scrollNotification) {
-                  if (scrollNotification is ScrollEndNotification) {
-                    animateScrollInfoContainer(scrollNotification.metrics);
-                  }
-                  return true;
-                },
-                child: NestedScrollView(
-                  controller: controllerScroll,
-                  headerSliverBuilder:
-                      (BuildContext context, bool innerBoxIsScrolled) {
-                    return <Widget>[
-                      custom.SliverAppBar(
-                        pinned: true,
-                        expandedHeight: appBarHeight,
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                        flexibleSpace: LayoutBuilder(
-                          builder: (BuildContext context,
-                              BoxConstraints constraints) {
-                            controllerAnimation.value =
-                                ((constraints.maxHeight - 72) *
-                                        100 /
-                                        (appBarHeight - 72)) /
-                                    100;
-                            return appBar();
-                          },
-                        ),
+          SafeArea(
+            child: NotificationListener<ScrollNotification>(
+              onNotification: (scrollNotification) {
+                if (scrollNotification is ScrollEndNotification) {
+                  animateScrollInfoContainer(scrollNotification.metrics);
+                }
+                return true;
+              },
+              child: NestedScrollView(
+                controller: controllerScroll,
+                headerSliverBuilder:
+                    (BuildContext context, bool innerBoxIsScrolled) {
+                  return <Widget>[
+                    custom.SliverAppBar(
+                      pinned: true,
+                      expandedHeight: appBarHeight,
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      flexibleSpace: LayoutBuilder(
+                        builder:
+                            (BuildContext context, BoxConstraints constraints) {
+                          controllerAnimation.value =
+                              ((constraints.maxHeight - 72) *
+                                      100 /
+                                      (appBarHeight - 72)) /
+                                  100;
+                          return appBar();
+                        },
                       ),
-                    ];
-                  },
-                  body: TabBarView(
-                    physics: NeverScrollableScrollPhysics(),
-                    children: tabs,
-                    controller: controllerTab,
-                  ),
+                    ),
+                  ];
+                },
+                body: TabBarView(
+                  physics: NeverScrollableScrollPhysics(),
+                  children: tabs,
+                  controller: controllerTab,
                 ),
               ),
             ),
