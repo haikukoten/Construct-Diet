@@ -154,67 +154,66 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   }
 
   Widget appBar() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 14, 0, 16),
-      child: Container(
-        padding: EdgeInsets.fromLTRB(18, 14.5, 18, 14.5),
-        decoration: new BoxDecoration(
-          color: Theme.of(context).cardColor,
-          border: Border.all(color: Theme.of(context).cardTheme.color),
-          boxShadow: [
-            BoxShadow(
-              color: controllerAnimation.value == 0.0
-                  ? Colors.black.withAlpha(30)
-                  : Colors.black.withAlpha(15),
-              blurRadius: 2,
-            ),
-          ],
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-        child: Material(
-          color: Colors.transparent,
-          child: Stack(
-            children: <Widget>[
-              AlignTransition(
-                alignment: animationTitle,
-                child: Text(
-                  "Construct Diet",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).textTheme.caption.color,
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: FadeTransition(
-                  opacity: animationOpacity,
-                  child: Container(
-                    height: 40,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        infoBlock("лет", 16),
-                        separatorVertical(),
-                        infoBlock("кг", 65),
-                        separatorVertical(),
-                        infoBlock("см", 182),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.topRight,
-                child: Icon(
-                  MdiIcons.pencil,
-                  size: 18,
-                ),
-              ),
-            ],
+    return Container(
+      margin: EdgeInsets.fromLTRB(0, 14, 0, 6),
+      padding: EdgeInsets.fromLTRB(18, 14.5, 18, 14.5),
+      decoration: new BoxDecoration(
+        color: Theme.of(context).cardColor,
+        border: Border.all(color: Theme.of(context).dividerColor),
+        boxShadow: [
+          BoxShadow(
+            color: controllerAnimation.value == 0.0
+                ? Colors.black.withAlpha(30)
+                : Colors.black.withAlpha(15),
+            blurRadius: 2,
           ),
-        ),
+        ],
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      child: Stack(
+        children: <Widget>[
+          AlignTransition(
+            alignment: animationTitle,
+            child: Text(
+              "Construct Diet",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: Theme.of(context).textTheme.caption.color,
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: FadeTransition(
+              opacity: animationOpacity,
+              child: Container(
+                height: 40,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    infoBlock("лет", 16),
+                    separatorVertical(),
+                    infoBlock("кг", 65),
+                    separatorVertical(),
+                    infoBlock("см", 182),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: SizedBox(
+              width: 18,
+              height: 21,
+              child: Icon(
+                MdiIcons.pencil,
+                size: 18,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
