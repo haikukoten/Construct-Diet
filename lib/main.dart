@@ -68,7 +68,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   AnimationController controllerAnimation;
   Animation<AlignmentGeometry> animationTitle;
   Animation<double> animationOpacity;
-  double appBarHeight = 140;
+  double appBarHeight = 130;
   bool isAnimateScroll = false;
 
   final List<Widget> tabs = <Widget>[
@@ -248,9 +248,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                           builder: (BuildContext context,
                               BoxConstraints constraints) {
                             controllerAnimation.value =
-                                ((constraints.maxHeight - 82) *
+                                ((constraints.maxHeight - 72) *
                                         100 /
-                                        (appBarHeight - 82)) /
+                                        (appBarHeight - 72)) /
                                     100;
                             return appBar();
                           },
