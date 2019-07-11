@@ -39,32 +39,36 @@ class CardInformation extends StatelessWidget {
               size: 20,
               color: Theme.of(context).primaryColor,
             )),
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: description != null ? 15 : 15.5,
-              fontWeight: FontWeight.w600,
-              color: Theme.of(context).textTheme.caption.color,
+        Container(
+          width: MediaQuery.of(context).size.width - 140,
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: description != null ? 15 : 15.5,
+                fontWeight: FontWeight.w600,
+                color: Theme.of(context).textTheme.caption.color,
+              ),
             ),
-          ),
-          description != null
-              ? Padding(
-                  padding: EdgeInsets.only(top: 3.2),
-                  child: Text(
-                    description,
-                    style: TextStyle(
-                      fontSize: 12.2,
-                      color: Theme.of(context)
-                          .textTheme
-                          .caption
-                          .color
-                          .withAlpha(200),
+            description != null
+                ? Padding(
+                    padding: EdgeInsets.only(top: 3.2),
+                    child: Text(
+                      description,
+                      style: TextStyle(
+                        fontSize: 12.2,
+                        color: Theme.of(context)
+                            .textTheme
+                            .caption
+                            .color
+                            .withAlpha(200),
+                      ),
                     ),
-                  ),
-                )
-              : Container()
-        ]),
+                  )
+                : Container()
+          ]),
+        ),
       ],
     ));
   }
