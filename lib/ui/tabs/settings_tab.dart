@@ -1,5 +1,8 @@
+import 'package:construct_diet/ui/common/cards.dart' as custom;
+import 'package:construct_diet/ui/common/tab_body.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class SettingsTab extends StatefulWidget {
   @override
@@ -16,14 +19,13 @@ class _SettingsTabState extends State<SettingsTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.topCenter,
-      child: FlatButton(
-        child: Text("Сменить тему"),
-        onPressed: () {
-          changeTheme();
-        },
-      ),
+    return TabBody(
+      Column(children: [
+        custom.CardInformation("Construct Diet", "Версия: 1.0.0 (сборка 9)",
+            MdiIcons.featureSearch),
+        custom.CardPlug(
+            "Здесь ничего нет", "Раздел в разработке.", MdiIcons.help)
+      ]),
     );
   }
 }
