@@ -1,4 +1,3 @@
-import 'package:construct_diet/ui/common/custom_tab.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -145,7 +144,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             title,
             style: TextStyle(
               fontSize: 12,
-              color: Theme.of(context).textTheme.caption.color.withAlpha(200),
+              color: Theme.of(context).textTheme.caption.color,
             ),
           ),
         )
@@ -155,7 +154,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
   Widget appBar() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 14, 0, 16),
+      padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
       child: Container(
         padding: EdgeInsets.fromLTRB(18, 14.5, 18, 14.5),
         decoration: new BoxDecoration(
@@ -171,49 +170,39 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           ],
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
-        child: Material(
-          color: Colors.transparent,
-          child: Stack(
-            children: <Widget>[
-              AlignTransition(
-                alignment: animationTitle,
-                child: Text(
-                  "Construct Diet",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).textTheme.caption.color,
+        child: Stack(
+          children: <Widget>[
+            AlignTransition(
+              alignment: animationTitle,
+              child: Text(
+                "Construct Diet",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: Theme.of(context).textTheme.caption.color,
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: FadeTransition(
+                opacity: animationOpacity,
+                child: Container(
+                  height: 40,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      infoBlock("кг", 65),
+                      separatorVertical(),
+                      infoBlock("см", 182),
+                      separatorVertical(),
+                      infoBlock("лет", 16),
+                    ],
                   ),
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: FadeTransition(
-                  opacity: animationOpacity,
-                  child: Container(
-                    height: 40,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        infoBlock("лет", 16),
-                        separatorVertical(),
-                        infoBlock("кг", 65),
-                        separatorVertical(),
-                        infoBlock("см", 182),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.topRight,
-                child: Icon(
-                  MdiIcons.pencil,
-                  size: 18,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -224,96 +213,96 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-            child: SafeArea(
-              child: NotificationListener<ScrollNotification>(
-                onNotification: (scrollNotification) {
-                  if (scrollNotification is ScrollEndNotification) {
-                    animateScrollInfoContainer(scrollNotification.metrics);
-                  }
-                  return true;
-                },
-                child: NestedScrollView(
-                  controller: controllerScroll,
-                  headerSliverBuilder:
-                      (BuildContext context, bool innerBoxIsScrolled) {
-                    return <Widget>[
-                      custom.SliverAppBar(
-                        pinned: true,
-                        expandedHeight: appBarHeight,
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                        flexibleSpace: LayoutBuilder(
-                          builder: (BuildContext context,
-                              BoxConstraints constraints) {
-                            controllerAnimation.value =
-                                ((constraints.maxHeight - 82) *
-                                        100 /
-                                        (appBarHeight - 82)) /
-                                    100;
-                            return appBar();
-                          },
-                        ),
+          SafeArea(
+            child: NotificationListener<ScrollNotification>(
+              onNotification: (scrollNotification) {
+                if (scrollNotification is ScrollEndNotification) {
+                  animateScrollInfoContainer(scrollNotification.metrics);
+                }
+                return true;
+              },
+              child: NestedScrollView(
+                controller: controllerScroll,
+                headerSliverBuilder:
+                    (BuildContext context, bool innerBoxIsScrolled) {
+                  return <Widget>[
+                    custom.SliverAppBar(
+                      pinned: true,
+                      expandedHeight: appBarHeight,
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      flexibleSpace: LayoutBuilder(
+                        builder:
+                            (BuildContext context, BoxConstraints constraints) {
+                          controllerAnimation.value =
+                              ((constraints.maxHeight - 82) *
+                                      100 /
+                                      (appBarHeight - 82)) /
+                                  100;
+                          return appBar();
+                        },
                       ),
-                    ];
-                  },
-                  body: TabBarView(
-                    physics: NeverScrollableScrollPhysics(),
-                    children: tabs,
-                    controller: controllerTab,
+                    ),
+                  ];
+                },
+                body: TabBarView(
+                  physics: NeverScrollableScrollPhysics(),
+                  children: tabs,
+                  controller: controllerTab,
+                ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: 57,
+              decoration: BoxDecoration(
+                color: Theme.of(context).bottomAppBarColor,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withAlpha(15),
+                    blurRadius: 3,
                   ),
+                ],
+                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+              ),
+              child: Material(
+                clipBehavior: Clip.hardEdge,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                type: MaterialType.transparency,
+                child: Column(
+                  children: <Widget>[
+                    TabBar(
+                      labelPadding: EdgeInsets.all(4),
+                      labelColor: Theme.of(context).primaryColor,
+                      indicatorSize: TabBarIndicatorSize.label,
+                      unselectedLabelColor: Theme.of(context).primaryColorDark,
+                      indicator: MD2Indicator(
+                        indicatorHeight: 3,
+                        indicatorColor: Theme.of(context).primaryColor,
+                        indicatorSize: MD2IndicatorSize.full,
+                      ),
+                      tabs: <Tab>[
+                        Tab(
+                          icon: Icon(MdiIcons.fileDocumentBoxOutline),
+                        ),
+                        Tab(
+                          icon: Icon(Icons.favorite_border),
+                        ),
+                        Tab(
+                          icon: Icon(MdiIcons.settingsOutline),
+                        ),
+                      ],
+                      controller: controllerTab,
+                    ),
+                    Divider(height: 1)
+                  ],
                 ),
               ),
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: Container(
-        height: 61,
-        decoration: BoxDecoration(
-          color: Theme.of(context).bottomAppBarColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withAlpha(15),
-              blurRadius: 3,
-            ),
-          ],
-          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-        ),
-        child: Material(
-          clipBehavior: Clip.hardEdge,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-          type: MaterialType.transparency,
-          child: Column(
-            children: <Widget>[
-              TabBar(
-                labelPadding: EdgeInsets.all(6),
-                labelColor: Theme.of(context).primaryColor,
-                unselectedLabelColor: Theme.of(context).primaryColorDark,
-                indicator: MD2Indicator(
-                  indicatorHeight: 0,
-                  indicatorColor: Theme.of(context).primaryColor,
-                  indicatorSize: MD2IndicatorSize.full,
-                ),
-                tabs: <Tab>[
-                  Tab(
-                    child:
-                        TabContent("Главная", MdiIcons.fileDocumentBoxOutline),
-                  ),
-                  Tab(
-                    child: TabContent("Предпочтения", MdiIcons.heartOutline),
-                  ),
-                  Tab(
-                    child: TabContent("Настройки", MdiIcons.settingsOutline),
-                  ),
-                ],
-                controller: controllerTab,
-              ),
-              Divider(height: 1)
-            ],
-          ),
-        ),
       ),
     );
   }
