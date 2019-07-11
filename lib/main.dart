@@ -68,7 +68,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   AnimationController controllerAnimation;
   Animation<AlignmentGeometry> animationTitle;
   Animation<double> animationOpacity;
-  double appBarHeight = 130;
+  double appBarHeight = 128;
   bool isAnimateScroll = false;
 
   final List<Widget> tabs = <Widget>[
@@ -107,7 +107,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       isAnimateScroll = true;
       Future.delayed(const Duration(milliseconds: 0), () {}).then((s) {
         controllerScroll
-            .animateTo(controllerAnimation.value < 0.5 ? 58 : -appBarHeight,
+            .animateTo(controllerAnimation.value < 0.5 ? 56 : -appBarHeight,
                 curve: Curves.fastOutSlowIn,
                 duration: Duration(milliseconds: 300))
             .then((s) {
