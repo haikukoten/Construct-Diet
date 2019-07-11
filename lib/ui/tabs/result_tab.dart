@@ -16,9 +16,11 @@ class _ResultTabState extends State<ResultTab> {
       child: new ConstrainedBox(
         constraints: new BoxConstraints(),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          custom.CardInformation("Укажите свои параметры",
-              "Нажмите на карточку выше для редактирования", MdiIcons.creation),
-          custom.CardPlug("Диеты не найдены", "Нет необходимости в похудении",
+          custom.CardInformation(
+              "Укажите свои параметры",
+              "Нажмите на карточку выше для редактирования.",
+              MdiIcons.creation),
+          custom.CardPlug("Диеты не найдены", "Нет необходимости в похудении.",
               MdiIcons.magnify)
         ]),
       ),
