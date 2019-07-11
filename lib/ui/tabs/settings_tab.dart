@@ -1,4 +1,5 @@
 import 'package:construct_diet/ui/common/cards.dart' as custom;
+import 'package:construct_diet/ui/common/labels.dart';
 import 'package:construct_diet/ui/common/tab_body.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
@@ -21,10 +22,40 @@ class _SettingsTabState extends State<SettingsTab> {
   Widget build(BuildContext context) {
     return TabBody(
       Column(children: [
-        custom.CardInformation("Construct Diet", "Версия: 1.0.0 (сборка 9)",
-            MdiIcons.featureSearch),
-        custom.CardPlug(
-            "Здесь ничего нет", "Раздел в разработке.", MdiIcons.help)
+        custom.Card(InfoLabel("Construct Diet", "Версия: 1.0.0 (сборка 9)",
+            MdiIcons.featureSearch)),
+        custom.Card(TitleLabel(
+          "Разработчики",
+          Icons.code,
+          Row(
+            children: <Widget>[
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text(
+                  "Семён Бутенко",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Theme.of(context).textTheme.caption.color,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 3.2),
+                  child: Text(
+                    "Разработчик, дизайнер",
+                    style: TextStyle(
+                      fontSize: 12.2,
+                      color: Theme.of(context)
+                          .textTheme
+                          .caption
+                          .color
+                          .withAlpha(180),
+                    ),
+                  ),
+                ),
+              ]),
+            ],
+          ),
+        )),
       ]),
     );
   }
