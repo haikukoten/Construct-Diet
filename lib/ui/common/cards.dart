@@ -50,11 +50,11 @@ class CardInformation extends StatelessWidget {
           ),
           description != null
               ? Padding(
-                  padding: EdgeInsets.only(top: 3),
+                  padding: EdgeInsets.only(top: 3.2),
                   child: Text(
                     description,
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 12.2,
                       color: Theme.of(context)
                           .textTheme
                           .caption
@@ -80,7 +80,7 @@ class CardPlug extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(Container(
-      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+      padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
       child: Column(
         children: <Widget>[
           Container(
@@ -101,11 +101,11 @@ class CardPlug extends StatelessWidget {
             ),
             description != null
                 ? Padding(
-                    padding: EdgeInsets.only(top: 3),
+                    padding: EdgeInsets.only(top: 3.2),
                     child: Text(
                       description,
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 12.2,
                         color: Theme.of(context)
                             .textTheme
                             .caption

@@ -86,7 +86,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
     animationOpacity = Tween(begin: 0.0, end: 1.0).animate(new CurvedAnimation(
         parent: controllerAnimation,
-        curve: new Interval(0.5, 1, curve: Curves.easeInOutSine)));
+        curve: new Interval(0.8, 1, curve: Curves.easeInOutSine)));
 
     animationTitle = Tween<AlignmentGeometry>(
             begin: Alignment.centerLeft, end: Alignment.topCenter)
@@ -134,7 +134,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         Text(
           value.toString(),
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 15,
             fontWeight: FontWeight.w600,
             color: Theme.of(context).textTheme.caption.color,
           ),
@@ -144,7 +144,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           child: Text(
             title,
             style: TextStyle(
-              fontSize: 12,
+              fontSize: 11,
               color: Theme.of(context).textTheme.caption.color.withAlpha(200),
             ),
           ),
@@ -188,7 +188,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             child: FadeTransition(
               opacity: animationOpacity,
               child: Container(
-                height: 40,
+                height: 41,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
