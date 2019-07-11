@@ -6,8 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:md2_tab_indicator/md2_tab_indicator.dart';
 
-import 'ui/common/theme.dart' as custom;
 import 'ui/common/custom_appbar.dart' as custom;
+import 'ui/common/theme.dart' as custom;
 import 'ui/tabs/favorite_tab.dart';
 import 'ui/tabs/result_tab.dart';
 import 'ui/tabs/settings_tab.dart';
