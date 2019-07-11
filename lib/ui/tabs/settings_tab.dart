@@ -16,10 +16,7 @@ class _SettingsTabState extends State<SettingsTab> {
 
   @override
   Widget build(BuildContext context) {
-    final statusBarHeight = MediaQuery.of(context).padding.top;
-
     return Container(
-      padding: EdgeInsets.only(top: statusBarHeight + 120),
       alignment: Alignment.topCenter,
       child: FlatButton(
         child: Text("Сменить тему"),
