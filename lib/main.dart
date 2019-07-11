@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:md2_tab_indicator/md2_tab_indicator.dart';
 
+import 'ui/common/theme.dart' as custom;
 import 'ui/common/custom_appbar.dart' as custom;
 import 'ui/tabs/favorite_tab.dart';
 import 'ui/tabs/result_tab.dart';
@@ -38,49 +39,9 @@ class MyApp extends StatelessWidget {
                         ? Brightness.dark
                         : Brightness.light),
           );
-          return ThemeData(
-            brightness: brightness,
-            accentColor: Colors.grey,
-            splashColor: brightness == Brightness.light
-                ? Color(0x551A73E8)
-                : Color(0x558AB4F8),
-            highlightColor: brightness == Brightness.light
-                ? Color(0x221A73E8)
-                : Color(0x228AB4F8),
-            primaryColor: brightness == Brightness.light
-                ? Color(0xFF1A73E8)
-                : Color(0xFF8AB4F8),
-            primaryColorDark: brightness == Brightness.light
-                ? Color(0xFF5F6368)
-                : Color(0xFF9AA0A6),
-            cardColor: brightness == Brightness.light
-                ? Color(0xFFFFFFFF)
-                : Color(0xFF2E2F32),
-            bottomAppBarColor: brightness == Brightness.light
-                ? Colors.white
-                : Color(0xFF2E2F32),
-            scaffoldBackgroundColor: brightness == Brightness.light
-                ? Colors.white
-                : Color(0xFF202124),
-            cardTheme: CardTheme(
-              color: brightness == Brightness.light
-                  ? Color(0xFFEEEEEE)
-                  : Color(0xFF1D1E21),
-            ),
-            textTheme: TextTheme(
-              body1: TextStyle(color: Colors.white),
-              caption: TextStyle(
-                color: brightness == Brightness.light
-                    ? Color(0xFF3C4043)
-                    : Color(0xFFFFFFFF),
-              ),
-              button: TextStyle(
-                color: brightness == Brightness.light
-                    ? Color(0xFF1A73E8)
-                    : Color(0xFF8AB4F8),
-              ),
-            ),
-          );
+          return brightness == Brightness.light
+              ? custom.Theme.light
+              : custom.Theme.dark;
         },
         themedWidgetBuilder: (context, theme) {
           return MaterialApp(
