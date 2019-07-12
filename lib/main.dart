@@ -86,7 +86,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
     animationOpacity = Tween(begin: 0.0, end: 1.0).animate(new CurvedAnimation(
         parent: controllerAnimation,
-        curve: new Interval(0.8, 1, curve: Curves.easeInOutSine)));
+        curve: new Interval(0.7, 1, curve: Curves.easeInOutSine)));
 
     animationTitle = Tween<AlignmentGeometry>(
             begin: Alignment.centerLeft, end: Alignment.topCenter)
