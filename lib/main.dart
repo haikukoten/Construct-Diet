@@ -302,8 +302,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                     child: TabContent("Предпочтения", MdiIcons.heartOutline),
                   ),
                   Tab(
-                    child: TabContent("Настройки", MdiIcons.settingsOutline),
-                  ),
+                      child:
+                          TabContent("Другое", MdiIcons.cardBulletedOutline)),
                 ],
                 controller: controllerTab,
               ),
