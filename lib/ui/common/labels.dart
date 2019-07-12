@@ -10,7 +10,7 @@ class InfoLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(5),
+      padding: EdgeInsets.all(10),
       child: Row(
         children: <Widget>[
           icon != null
@@ -28,6 +28,9 @@ class InfoLabel extends StatelessWidget {
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 title,
+                strutStyle: StrutStyle(
+                  leading: 0,
+                ),
                 style: TextStyle(
                   fontSize: description != null ? 15 : 15.5,
                   fontWeight: FontWeight.w600,
@@ -68,7 +71,7 @@ class PlugLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(5, 13, 5, 13),
+      padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
       child: Column(
         children: <Widget>[
           icon != null
@@ -83,6 +86,9 @@ class PlugLabel extends StatelessWidget {
           Column(children: [
             Text(
               title,
+              strutStyle: StrutStyle(
+                leading: 0,
+              ),
               style: TextStyle(
                 fontSize: description != null ? 15 : 15.5,
                 fontWeight: FontWeight.w600,
@@ -125,7 +131,7 @@ class TitleLabel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
           child: Row(
             children: <Widget>[
               icon != null
@@ -133,7 +139,7 @@ class TitleLabel extends StatelessWidget {
                       margin: EdgeInsets.only(right: 15),
                       child: Icon(
                         icon,
-                        size: 19,
+                        size: 16.5,
                         color: Theme.of(context)
                             .textTheme
                             .caption
@@ -143,6 +149,9 @@ class TitleLabel extends StatelessWidget {
                   : Container(),
               Text(
                 title,
+                strutStyle: StrutStyle(
+                  leading: 0,
+                ),
                 style: TextStyle(
                   fontSize: 12.8,
                   color:
