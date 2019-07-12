@@ -27,34 +27,8 @@ class _SettingsTabState extends State<SettingsTab> {
         custom.Card(TitleLabel(
           "Разработчики",
           Icons.code,
-          Row(
-            children: <Widget>[
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(
-                  "Семён Бутенко",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    color: Theme.of(context).textTheme.caption.color,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 3.2),
-                  child: Text(
-                    "Разработчик, дизайнер",
-                    style: TextStyle(
-                      fontSize: 12.2,
-                      color: Theme.of(context)
-                          .textTheme
-                          .caption
-                          .color
-                          .withAlpha(180),
-                    ),
-                  ),
-                ),
-              ]),
-            ],
-          ),
+          Column(
+              children: [InfoLabel("Семён Бутенко", "Разработчик, дизайнер")]),
         )),
       ]),
     );
