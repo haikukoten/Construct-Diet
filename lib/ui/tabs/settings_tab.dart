@@ -11,11 +11,13 @@ class SettingsTab extends StatefulWidget {
 }
 
 class _SettingsTabState extends State<SettingsTab> {
-  void changeTheme() {
-    DynamicTheme.of(context).setBrightness(
-        Theme.of(context).brightness == Brightness.dark
-            ? Brightness.light
-            : Brightness.dark);
+  void changeTheme(bool isNight) {
+    DynamicTheme.of(context)
+        .setBrightness(isNight == true ? Brightness.dark : Brightness.light);
+  }
+
+  bool themeIsDark() {
+    return Theme.of(context).brightness == Brightness.dark;
   }
 
   @override
@@ -30,6 +32,24 @@ class _SettingsTabState extends State<SettingsTab> {
           child: Column(
               children: [InfoLabel("Семён Бутенко", "Разработчик, дизайнер.")]),
         )),
+        custom.Card(TitleLabel(
+          "Настройки",
+          icon: MdiIcons.settingsOutline,
+          child: Column(children: [
+            Divider(
+              height: 5,
+              color: Colors.transparent,
+            ),
+            InfoSwitchLabel(
+              "Перейти на тёмную сторону",
+              "Активировать тёмную тему.",
+              MdiIcons.weatherNight,
+              value: themeIsDark(),
+              onChanged: (isOn) {
+                changeTheme(Theme.of(context).brightness != Brightness.dark);
+              },
+            ),
+          ]),
         )),
       ]),
     );
