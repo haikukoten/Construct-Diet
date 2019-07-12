@@ -10,7 +10,7 @@ import 'ui/common/custom_appbar.dart' as custom;
 import 'ui/common/theme.dart' as custom;
 import 'ui/tabs/favorite_tab.dart';
 import 'ui/tabs/result_tab.dart';
-import 'ui/tabs/settings_tab.dart';
+import 'ui/tabs/more_tab.dart';
 
 void main() => runApp(MyApp());
 
@@ -74,7 +74,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   final List<Widget> tabs = <Widget>[
     ResultTab(),
     FavoritesTab(),
-    SettingsTab(),
+    MoreTab(),
   ];
 
   @override

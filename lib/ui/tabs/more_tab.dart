@@ -5,12 +5,12 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class SettingsTab extends StatefulWidget {
+class MoreTab extends StatefulWidget {
   @override
-  _SettingsTabState createState() => _SettingsTabState();
+  _MoreTabState createState() => _MoreTabState();
 }
 
-class _SettingsTabState extends State<SettingsTab> {
+class _MoreTabState extends State<MoreTab> {
   void changeTheme(bool isNight) {
     DynamicTheme.of(context)
         .setBrightness(isNight == true ? Brightness.dark : Brightness.light);
