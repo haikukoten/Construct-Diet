@@ -169,3 +169,114 @@ class TitleLabel extends StatelessWidget {
     );
   }
 }
+
+class InfoSwitchLabel extends StatefulWidget {
+  final String title;
+  final String description;
+  final IconData icon;
+  final bool value;
+  final ValueChanged<bool> onChanged;
+
+  InfoSwitchLabel(this.title, this.description, this.icon,
+      {this.value, this.onChanged});
+
+  @override
+  _InfoSwitchLabelState createState() => _InfoSwitchLabelState(
+      this.title, this.description, this.icon, this.value, this.onChanged);
+}
+
+class _InfoSwitchLabelState extends State<InfoSwitchLabel> {
+  String title;
+  String description;
+  IconData icon;
+  bool value;
+  ValueChanged<bool> onChanged;
+
+  _InfoSwitchLabelState(
+      this.title, this.description, this.icon, this.value, this.onChanged);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          highlightColor: Colors.grey.withAlpha(30),
+          splashColor: Colors.grey.withAlpha(30),
+          onTap: () {
+            setState(() {
+              value = !value;
+            });
+            onChanged(value);
+          },
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          child: Container(
+            padding: EdgeInsets.fromLTRB(10, 10, 0, 10),
+            child: Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    widget.icon != null
+                        ? Container(
+                            margin: EdgeInsets.only(right: 15),
+                            child: Icon(
+                              widget.icon,
+                              size: 20,
+                              color: Theme.of(context).primaryColor,
+                            ))
+                        : Container(),
+                    Container(
+                      width: MediaQuery.of(context).size.width - 164,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.title,
+                              style: TextStyle(
+                                fontSize:
+                                    widget.description != null ? 15 : 15.5,
+                                fontWeight: FontWeight.w600,
+                                color:
+                                    Theme.of(context).textTheme.caption.color,
+                              ),
+                            ),
+                            widget.description != null
+                                ? Padding(
+                                    padding: EdgeInsets.only(top: 3.2),
+                                    child: Text(
+                                      widget.description,
+                                      style: TextStyle(
+                                        fontSize: 12.2,
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .caption
+                                            .color
+                                            .withAlpha(180),
+                                      ),
+                                    ),
+                                  )
+                                : Container()
+                          ]),
+                    )
+                  ],
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: SizedBox(
+                    width: 55,
+                    height: 35,
+                    child: IgnorePointer(
+                        ignoring: true,
+                        child: Switch(value: value, onChanged: onChanged)),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

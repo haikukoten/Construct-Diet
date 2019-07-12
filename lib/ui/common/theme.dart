@@ -4,6 +4,7 @@ class Theme {
   static ThemeData light = ThemeData(
     brightness: Brightness.light,
     dividerColor: Color(0xFFEEEEEE),
+    toggleableActiveColor: Color(0xFF1A73E8),
     accentColor: Colors.grey,
     splashColor: Color(0x551A73E8),
     highlightColor: Color(0x221A73E8),
@@ -29,6 +30,7 @@ class Theme {
   static ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     accentColor: Colors.grey,
+    toggleableActiveColor: Color(0xFF8AB4F8),
     dividerColor: Color(0xFF1D1E21),
     splashColor: Color(0x558AB4F8),
     highlightColor: Color(0x228AB4F8),
