@@ -9,48 +9,51 @@ class InfoLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        icon != null
-            ? Container(
-                margin: EdgeInsets.only(right: 15),
-                child: Icon(
-                  icon,
-                  size: 20,
-                  color: Theme.of(context).primaryColor,
-                ))
-            : Container(),
-        Container(
-          width: MediaQuery.of(context).size.width - 140,
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: description != null ? 15 : 15.5,
-                fontWeight: FontWeight.w600,
-                color: Theme.of(context).textTheme.caption.color,
+    return Padding(
+      padding: EdgeInsets.all(5),
+      child: Row(
+        children: <Widget>[
+          icon != null
+              ? Container(
+                  margin: EdgeInsets.only(right: 15),
+                  child: Icon(
+                    icon,
+                    size: 20,
+                    color: Theme.of(context).primaryColor,
+                  ))
+              : Container(),
+          Container(
+            width: MediaQuery.of(context).size.width - 140,
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: description != null ? 15 : 15.5,
+                  fontWeight: FontWeight.w600,
+                  color: Theme.of(context).textTheme.caption.color,
+                ),
               ),
-            ),
-            description != null
-                ? Padding(
-                    padding: EdgeInsets.only(top: 3.2),
-                    child: Text(
-                      description,
-                      style: TextStyle(
-                        fontSize: 12.2,
-                        color: Theme.of(context)
-                            .textTheme
-                            .caption
-                            .color
-                            .withAlpha(180),
+              description != null
+                  ? Padding(
+                      padding: EdgeInsets.only(top: 3.2),
+                      child: Text(
+                        description,
+                        style: TextStyle(
+                          fontSize: 12.2,
+                          color: Theme.of(context)
+                              .textTheme
+                              .caption
+                              .color
+                              .withAlpha(180),
+                        ),
                       ),
-                    ),
-                  )
-                : Container()
-          ]),
-        ),
-      ],
+                    )
+                  : Container()
+            ]),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -65,7 +68,7 @@ class PlugLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+      padding: EdgeInsets.fromLTRB(5, 13, 5, 13),
       child: Column(
         children: <Widget>[
           icon != null
@@ -114,7 +117,7 @@ class TitleLabel extends StatelessWidget {
   final IconData icon;
   final Widget child;
 
-  TitleLabel(this.title, this.icon, this.child);
+  TitleLabel(this.title, {this.icon, this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +125,7 @@ class TitleLabel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(bottom: 10),
+          padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
           child: Row(
             children: <Widget>[
               icon != null
