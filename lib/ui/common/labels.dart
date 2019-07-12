@@ -11,13 +11,15 @@ class InfoLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        Container(
-            margin: EdgeInsets.only(right: 15),
-            child: Icon(
-              icon,
-              size: 20,
-              color: Theme.of(context).primaryColor,
-            )),
+        icon != null
+            ? Container(
+                margin: EdgeInsets.only(right: 15),
+                child: Icon(
+                  icon,
+                  size: 20,
+                  color: Theme.of(context).primaryColor,
+                ))
+            : Container(),
         Container(
           width: MediaQuery.of(context).size.width - 140,
           child:
@@ -66,13 +68,15 @@ class PlugLabel extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
       child: Column(
         children: <Widget>[
-          Container(
-              margin: EdgeInsets.only(bottom: 15),
-              child: Icon(
-                icon,
-                size: 40,
-                color: Theme.of(context).primaryColor,
-              )),
+          icon != null
+              ? Container(
+                  margin: EdgeInsets.only(bottom: 15),
+                  child: Icon(
+                    icon,
+                    size: 40,
+                    color: Theme.of(context).primaryColor,
+                  ))
+              : Container(),
           Column(children: [
             Text(
               title,
@@ -121,17 +125,19 @@ class TitleLabel extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 10),
           child: Row(
             children: <Widget>[
-              Container(
-                  margin: EdgeInsets.only(right: 14.4),
-                  child: Icon(
-                    icon,
-                    size: 20,
-                    color: Theme.of(context)
-                        .textTheme
-                        .caption
-                        .color
-                        .withAlpha(180),
-                  )),
+              icon != null
+                  ? Container(
+                      margin: EdgeInsets.only(right: 15),
+                      child: Icon(
+                        icon,
+                        size: 19,
+                        color: Theme.of(context)
+                            .textTheme
+                            .caption
+                            .color
+                            .withAlpha(180),
+                      ))
+                  : Container(),
               Text(
                 title,
                 style: TextStyle(
