@@ -26,9 +26,10 @@ class _SettingsTabState extends State<SettingsTab> {
             MdiIcons.featureSearch)),
         custom.Card(TitleLabel(
           "Разработчики",
-          Icons.code,
-          Column(
-              children: [InfoLabel("Семён Бутенко", "Разработчик, дизайнер")]),
+          icon: Icons.code,
+          child: Column(
+              children: [InfoLabel("Семён Бутенко", "Разработчик, дизайнер.")]),
+        )),
         )),
       ]),
     );
