@@ -91,7 +91,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     animationTitle = Tween<AlignmentGeometry>(
             begin: Alignment.centerLeft, end: Alignment.topCenter)
         .animate(CurvedAnimation(
-            parent: controllerAnimation, curve: Curves.easeInOutSine));
+            parent: controllerAnimation,
+            curve: Interval(0.2, 0.8, curve: Curves.easeInOutSine)));
   }
 
   @override
