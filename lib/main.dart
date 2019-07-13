@@ -283,8 +283,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                 ),
                 tabs: <Tab>[
                   Tab(
-                    child:
-                        TabContent("Главная", MdiIcons.fileDocumentBoxOutline),
+                    child: TabContent(
+                        "Результат", MdiIcons.fileDocumentBoxOutline),
                   ),
                   Tab(
                     child: TabContent("Предпочтения", MdiIcons.heartOutline),
