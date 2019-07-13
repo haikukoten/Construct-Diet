@@ -65,10 +65,8 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   TabController controllerTab;
   ScrollController controllerScroll;
-  AnimationController controllerAnimation;
-  Animation<AlignmentGeometry> animationTitle;
-  Animation<double> animationOpacity;
-  double appBarHeight = 128;
+  double step;
+  double appBarHeight = 122;
   bool isAnimateScroll = false;
 
   final List<Widget> tabs = <Widget>[
@@ -82,17 +80,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     super.initState();
     controllerTab = TabController(length: 3, vsync: this);
     controllerScroll = ScrollController();
-    controllerAnimation = AnimationController(vsync: this);
-
-    animationOpacity = Tween(begin: 0.0, end: 1.0).animate(new CurvedAnimation(
-        parent: controllerAnimation,
-        curve: new Interval(0.7, 1, curve: Curves.easeInOutSine)));
-
-    animationTitle = Tween<AlignmentGeometry>(
-            begin: Alignment.centerLeft, end: Alignment.topCenter)
-        .animate(CurvedAnimation(
-            parent: controllerAnimation,
-            curve: Interval(0.2, 0.8, curve: Curves.easeInOutSine)));
   }
 
   @override
@@ -102,13 +89,11 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   }
 
   animateScrollInfoContainer(ScrollMetrics metrics) {
-    if (controllerAnimation.value != 0 &&
-        controllerAnimation.value != 1 &&
-        !isAnimateScroll) {
+    if (step != 0 && step != 1 && !isAnimateScroll) {
       isAnimateScroll = true;
       Future.delayed(const Duration(milliseconds: 0), () {}).then((s) {
         controllerScroll
-            .animateTo(controllerAnimation.value < 0.5 ? 56 : -appBarHeight,
+            .animateTo(step < 0.7 ? 57 : -appBarHeight,
                 curve: Curves.fastOutSlowIn,
                 duration: Duration(milliseconds: 300))
             .then((s) {
@@ -155,66 +140,70 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   }
 
   Widget appBar() {
-    return Container(
-      margin: EdgeInsets.fromLTRB(16, 14, 16, 6),
-      padding: EdgeInsets.fromLTRB(18, 14.5, 18, 14.5),
-      decoration: new BoxDecoration(
-        color: Theme.of(context).cardColor,
-        border: Border.all(color: Theme.of(context).dividerColor),
-        boxShadow: [
-          BoxShadow(
-            color: controllerAnimation.value == 0.0
-                ? Colors.black.withAlpha(30)
-                : Colors.black.withAlpha(15),
-            blurRadius: 2,
-          ),
-        ],
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-      ),
-      child: Stack(
-        children: <Widget>[
-          AlignTransition(
-            alignment: animationTitle,
-            child: Text(
-              "Construct Diet",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                color: Theme.of(context).textTheme.caption.color,
+    return Padding(
+      padding: EdgeInsets.fromLTRB(16, 8, 16, 6),
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 400),
+        height: step > 0.7 ? appBarHeight : 50,
+        curve: Curves.fastOutSlowIn,
+        child: Material(
+          elevation: step > 0 ? 2 : 3,
+          shadowColor: Colors.black.withAlpha(150),
+          borderRadius: BorderRadius.all(Radius.circular(8.5)),
+          color: Theme.of(context).cardColor,
+          child: InkWell(
+            highlightColor: Colors.grey.withAlpha(30),
+            splashColor: Colors.grey.withAlpha(30),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            onTap: () {},
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(18, 14.5, 18, 14.5),
+              child: Stack(
+                children: <Widget>[
+                  Text(
+                    "Construct Diet",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).textTheme.caption.color,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: AnimatedOpacity(
+                      duration: Duration(milliseconds: 100),
+                      opacity: step > 0.9 ? 1 : 0,
+                      child: Container(
+                        height: 41,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            infoBlock("лет", 16),
+                            separatorVertical(),
+                            infoBlock("кг", 65),
+                            separatorVertical(),
+                            infoBlock("см", 182),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: SizedBox(
+                      width: 18,
+                      height: 21,
+                      child: Icon(
+                        MdiIcons.pencil,
+                        size: 18,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: FadeTransition(
-              opacity: animationOpacity,
-              child: Container(
-                height: 41,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    infoBlock("лет", 16),
-                    separatorVertical(),
-                    infoBlock("кг", 65),
-                    separatorVertical(),
-                    infoBlock("см", 182),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.topRight,
-            child: SizedBox(
-              width: 18,
-              height: 21,
-              child: Icon(
-                MdiIcons.pencil,
-                size: 18,
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -245,11 +234,10 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                       flexibleSpace: LayoutBuilder(
                         builder:
                             (BuildContext context, BoxConstraints constraints) {
-                          controllerAnimation.value =
-                              ((constraints.maxHeight - 72) *
-                                      100 /
-                                      (appBarHeight - 72)) /
-                                  100;
+                          step = ((constraints.maxHeight - 65) *
+                                  100 /
+                                  (appBarHeight - 65)) /
+                              100;
                           return appBar();
                         },
                       ),
