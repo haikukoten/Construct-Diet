@@ -147,7 +147,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         height: step > 0.6 ? appBarHeight : 50,
         curve: Curves.fastOutSlowIn,
         child: Material(
-          elevation: step > 0 ? 2 : 4,
+          elevation: step > 0 ? 2 : 3,
           shadowColor: Colors.black.withAlpha(150),
           borderRadius: BorderRadius.all(Radius.circular(8.5)),
           color: Theme.of(context).cardColor,
@@ -171,8 +171,11 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: AnimatedOpacity(
-                      duration: Duration(milliseconds: 100),
+                      duration: step > 0.8
+                          ? Duration(milliseconds: 400)
+                          : Duration(milliseconds: 0),
                       opacity: step > 0.8 ? 1 : 0,
+                      curve: Interval(0.5, 1),
                       child: Container(
                         height: 41,
                         child: Row(
