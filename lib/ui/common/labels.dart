@@ -164,7 +164,7 @@ class TitleLabel extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 4),
           child: child,
-        )
+        ),
       ],
     );
   }

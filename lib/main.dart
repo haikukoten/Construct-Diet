@@ -295,7 +295,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                 ],
                 controller: controllerTab,
               ),
-              Divider(height: 1)
+              Divider(height: 1),
             ],
           ),
         ),
