@@ -17,7 +17,6 @@ class _TabBodyState extends State<TabBody> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-      physics: BouncingScrollPhysics(),
       child: ConstrainedBox(constraints: BoxConstraints(), child: child),
     );
   }
