@@ -27,12 +27,6 @@ class _MoreTabState extends State<MoreTab> {
         custom.Card(InfoLabel("Construct Diet", "Версия: 1.0.0 (сборка 9)",
             MdiIcons.featureSearch)),
         custom.Card(TitleLabel(
-          "Разработчики",
-          icon: Icons.code,
-          child: Column(
-              children: [InfoLabel("Семён Бутенко", "Разработчик, дизайнер.")]),
-        )),
-        custom.Card(TitleLabel(
           "Настройки",
           icon: MdiIcons.settingsOutline,
           child: Column(children: [
@@ -50,6 +44,12 @@ class _MoreTabState extends State<MoreTab> {
               },
             ),
           ]),
+        )),
+        custom.Card(TitleLabel(
+          "Разработчики",
+          icon: Icons.code,
+          child: Column(
+              children: [InfoLabel("Семён Бутенко", "Разработчик, дизайнер.")]),
         )),
       ]),
     );
