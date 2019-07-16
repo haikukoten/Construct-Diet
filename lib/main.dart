@@ -1,5 +1,7 @@
 import 'package:construct_diet/ui/common/custom_tab.dart';
 import 'package:construct_diet/ui/common/labels.dart';
+import 'package:construct_diet/ui/common/page_transition.dart';
+import 'package:construct_diet/ui/screens/edit_page.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -159,6 +161,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               splashColor: Colors.grey.withAlpha(30),
               borderRadius: BorderRadius.all(Radius.circular(8.5)),
               onTap: () {
+                Navigator.push(
+                  context,
+                  TransitionPageRoute(widget: EditPage()),
                 );
               },
               child: Padding(
