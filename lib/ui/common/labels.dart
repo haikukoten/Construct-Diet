@@ -4,8 +4,9 @@ class InfoLabel extends StatelessWidget {
   final String title;
   final String description;
   final IconData icon;
+  final Color color;
 
-  InfoLabel(this.title, [this.description, this.icon]);
+  InfoLabel(this.title, {this.description, this.icon, this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,8 @@ class InfoLabel extends StatelessWidget {
                   child: Icon(
                     icon,
                     size: 20,
-                    color: Theme.of(context).primaryColor,
+                    color:
+                        color == null ? Theme.of(context).primaryColor : color,
                   ))
               : Container(),
           Container(
@@ -65,8 +67,9 @@ class PlugLabel extends StatelessWidget {
   final String title;
   final String description;
   final IconData icon;
+  final Color color;
 
-  PlugLabel(this.title, [this.description, this.icon]);
+  PlugLabel(this.title, {this.description, this.icon, this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +83,8 @@ class PlugLabel extends StatelessWidget {
                   child: Icon(
                     icon,
                     size: 40,
-                    color: Theme.of(context).primaryColor,
+                    color:
+                        color == null ? Theme.of(context).primaryColor : color,
                   ))
               : Container(),
           Column(children: [
@@ -174,26 +178,28 @@ class InfoSwitchLabel extends StatefulWidget {
   final String title;
   final String description;
   final IconData icon;
+  final Color color;
   final bool value;
   final ValueChanged<bool> onChanged;
 
-  InfoSwitchLabel(this.title, this.description, this.icon,
-      {this.value, this.onChanged});
+  InfoSwitchLabel(this.title,
+      {this.description, this.icon, this.color, this.value, this.onChanged});
 
   @override
-  _InfoSwitchLabelState createState() => _InfoSwitchLabelState(
-      this.title, this.description, this.icon, this.value, this.onChanged);
+  _InfoSwitchLabelState createState() => _InfoSwitchLabelState(this.title,
+      this.description, this.icon, this.color, this.value, this.onChanged);
 }
 
 class _InfoSwitchLabelState extends State<InfoSwitchLabel> {
   String title;
   String description;
   IconData icon;
+  Color color;
   bool value;
   ValueChanged<bool> onChanged;
 
-  _InfoSwitchLabelState(
-      this.title, this.description, this.icon, this.value, this.onChanged);
+  _InfoSwitchLabelState(this.title, this.description, this.icon, this.color,
+      this.value, this.onChanged);
 
   @override
   Widget build(BuildContext context) {
@@ -224,7 +230,9 @@ class _InfoSwitchLabelState extends State<InfoSwitchLabel> {
                             child: Icon(
                               widget.icon,
                               size: 20,
-                              color: Theme.of(context).primaryColor,
+                              color: color == null
+                                  ? Theme.of(context).primaryColor
+                                  : color,
                             ))
                         : Container(),
                     Container(

@@ -15,9 +15,11 @@ class _ResultTabState extends State<ResultTab> {
     return TabBody(
       Column(children: [
         custom.Card(InfoLabel("Укажите свои параметры",
-            "Нажмите на карточку выше для редактирования.", MdiIcons.creation)),
+            description: "Нажмите на карточку выше для редактирования.",
+            icon: MdiIcons.creation)),
         custom.Card(PlugLabel("Диеты не найдены",
-            "Нет необходимости в похудении.", MdiIcons.magnify)),
+            description: "Нет необходимости в похудении.",
+            icon: MdiIcons.magnify)),
       ]),
     );
   }

@@ -14,12 +14,12 @@ class _FavoritesTabState extends State<FavoritesTab> {
   Widget build(BuildContext context) {
     return TabBody(
       Column(children: [
-        custom.Card(InfoLabel(
-            "Подбирайте диеты под свой вкус",
-            "Выберите, какие продукты вы желаете видеть в диетах, а какие нужно отсеить из выдачи.",
-            MdiIcons.heart)),
-        custom.Card(PlugLabel(
-            "Здесь ничего нет", "Раздел в разработке.", MdiIcons.help))
+        custom.Card(InfoLabel("Подбирайте диеты под свой вкус",
+            description:
+                "Выберите, какие продукты вы желаете видеть в диетах, а какие нужно отсеить из выдачи.",
+            icon: MdiIcons.heart)),
+        custom.Card(PlugLabel("Здесь ничего нет",
+            description: "Раздел в разработке.", icon: MdiIcons.help))
       ]),
     );
   }

@@ -24,8 +24,9 @@ class _MoreTabState extends State<MoreTab> {
   Widget build(BuildContext context) {
     return TabBody(
       Column(children: [
-        custom.Card(InfoLabel("Construct Diet", "Версия: 1.0.0 (сборка 9)",
-            MdiIcons.featureSearch)),
+        custom.Card(InfoLabel("Construct Diet",
+            description: "Версия: 1.0.0 (сборка 9)",
+            icon: MdiIcons.featureSearch)),
         custom.Card(TitleLabel(
           "Настройки",
           icon: MdiIcons.settingsOutline,
@@ -36,8 +37,8 @@ class _MoreTabState extends State<MoreTab> {
             ),
             InfoSwitchLabel(
               "Перейти на тёмную сторону",
-              "Активация тёмной темы.",
-              MdiIcons.weatherNight,
+              description: "Активация тёмной темы.",
+              icon: MdiIcons.weatherNight,
               value: themeIsDark(),
               onChanged: (isOn) {
                 changeTheme(Theme.of(context).brightness != Brightness.dark);
