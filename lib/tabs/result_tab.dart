@@ -29,9 +29,11 @@ class _ResultTabState extends State<ResultTab> {
             ]),
           ),
         ),*/
-        custom.Card(PlugLabel("Диеты не найдены",
-            description: "Нет необходимости в похудении.",
-            icon: MdiIcons.magnify)),
+        custom.Card(
+          PlugLabel("Диеты не найдены",
+              description: "Нет необходимости в похудении.",
+              icon: MdiIcons.magnify),
+        ),
       ]),
     );
   }
