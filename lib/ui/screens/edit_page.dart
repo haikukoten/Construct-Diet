@@ -1,8 +1,6 @@
-import 'package:construct_diet/ui/common/cards.dart' as custom;
 import 'package:construct_diet/ui/common/labels.dart';
 import 'package:construct_diet/ui/common/screen_body.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class EditPage extends StatefulWidget {
   @override
@@ -93,25 +91,6 @@ class _EditPageState extends State<EditPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenBody(Column(
-      children: <Widget>[
-        appBar(),
-        custom.Card(
-          TitleLabel(
-            "Сведения о здоровье",
-            icon: Icons.info_outline,
-            child: Column(children: [
-              Divider(
-                height: 5,
-                color: Colors.transparent,
-              ),
-              InfoLabel("Индекс массы тела", description: "24.75"),
-              InfoLabel("Допустимый вес", description: "от 62 кг до 77 кг"),
-              InfoLabel("Избыточный вес", description: "3 кг")
-            ]),
-          ),
-        ),
-      ],
-    ));
+    return ScreenBody(appBar());
   }
 }
