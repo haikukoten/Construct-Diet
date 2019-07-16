@@ -94,7 +94,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       isAnimateScroll = true;
       Future.delayed(const Duration(milliseconds: 0), () {}).then((s) {
         controllerScroll
-            .animateTo(step < 0.7 ? 57 : -appBarHeight,
+            .animateTo(step < 0.6 ? 57 : -appBarHeight,
                 curve: Curves.fastOutSlowIn,
                 duration: Duration(milliseconds: 300))
             .then((s) {
