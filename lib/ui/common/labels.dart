@@ -26,36 +26,38 @@ class InfoLabel extends StatelessWidget {
               : Container(),
           Container(
             width: MediaQuery.of(context).size.width - 140,
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(
-                title,
-                strutStyle: StrutStyle(
-                  leading: 0,
-                ),
-                style: TextStyle(
-                  fontSize: description != null ? 15 : 15.5,
-                  fontWeight: FontWeight.w600,
-                  color: Theme.of(context).textTheme.caption.color,
-                ),
-              ),
-              description != null
-                  ? Padding(
-                      padding: EdgeInsets.only(top: 3.2),
-                      child: Text(
-                        description,
-                        style: TextStyle(
-                          fontSize: 12.2,
-                          color: Theme.of(context)
-                              .textTheme
-                              .caption
-                              .color
-                              .withAlpha(180),
-                        ),
-                      ),
-                    )
-                  : Container()
-            ]),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    title,
+                    strutStyle: StrutStyle(
+                      leading: 0,
+                    ),
+                    style: TextStyle(
+                      fontSize: description != null ? 15 : 15.5,
+                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).textTheme.caption.color,
+                    ),
+                  ),
+                  description != null
+                      ? Padding(
+                          padding: EdgeInsets.only(top: 3.2),
+                          child: Text(
+                            description,
+                            style: TextStyle(
+                              fontSize: 12.2,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .caption
+                                  .color
+                                  .withAlpha(180),
+                            ),
+                          ),
+                        )
+                      : Container()
+                ]),
           ),
         ],
       ),
@@ -239,6 +241,7 @@ class _InfoSwitchLabelState extends State<InfoSwitchLabel> {
                       width: MediaQuery.of(context).size.width - 164,
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               widget.title,
@@ -332,6 +335,7 @@ class ButtonLabel extends StatelessWidget {
                       width: MediaQuery.of(context).size.width - 140,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             title,
