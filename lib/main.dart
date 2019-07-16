@@ -69,7 +69,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   TabController controllerTab;
   ScrollController controllerScroll;
   double step;
-  double appBarHeight = 122;
+  double appBarHeight = 130;
   bool isAnimateScroll = false;
 
   final List<Widget> tabs = <Widget>[
@@ -144,7 +144,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
   Widget appBar() {
     return Padding(
-      padding: EdgeInsets.fromLTRB(16, 8, 16, 6),
+      padding: EdgeInsets.fromLTRB(17, 16, 17, 6),
       child: AnimatedContainer(
         duration: Duration(milliseconds: 400),
         height: step > 0.8 ? appBarHeight : 50,
@@ -248,9 +248,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                       flexibleSpace: LayoutBuilder(
                         builder:
                             (BuildContext context, BoxConstraints constraints) {
-                          step = ((constraints.maxHeight - 65) *
+                          step = ((constraints.maxHeight - 73) *
                                   100 /
-                                  (appBarHeight - 65)) /
+                                  (appBarHeight - 73)) /
                               100;
                           return appBar();
                         },

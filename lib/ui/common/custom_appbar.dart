@@ -10,20 +10,20 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-const double _kLeadingWidth = 65; // So the leading button is square.
+const double _kLeadingWidth = 73; // So the leading button is square.
 
-// Bottom justify the 65 child which may overflow the top.
+// Bottom justify the 73 child which may overflow the top.
 class _ToolbarContainerLayout extends SingleChildLayoutDelegate {
   const _ToolbarContainerLayout();
 
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
-    return constraints.tighten(height: 65);
+    return constraints.tighten(height: 73);
   }
 
   @override
   Size getSize(BoxConstraints constraints) {
-    return Size(constraints.maxWidth, 65);
+    return Size(constraints.maxWidth, 73);
   }
 
   @override
@@ -38,7 +38,7 @@ class _ToolbarContainerLayout extends SingleChildLayoutDelegate {
 // https://material.io/design/components/app-bars-top.html#specs
 // Mobile Landscape: 48dp
 // Mobile Portrait: 56dp
-// Tablet/Desktop: 65dp
+// Tablet/Desktop: 73dp
 
 /// A material design app bar.
 ///
@@ -189,7 +189,7 @@ class AppBar extends StatefulWidget implements PreferredSizeWidget {
         assert(toolbarOpacity != null),
         assert(bottomOpacity != null),
         preferredSize =
-            Size.fromHeight(65 + (bottom?.preferredSize?.height ?? 0.0)),
+            Size.fromHeight(73 + (bottom?.preferredSize?.height ?? 0.0)),
         super(key: key);
 
   /// A widget to display before the [title].
@@ -364,7 +364,7 @@ class AppBar extends StatefulWidget implements PreferredSizeWidget {
   /// bar is scrolled.
   final double bottomOpacity;
 
-  /// A size whose height is the sum of [65] and the [bottom] widget's
+  /// A size whose height is the sum of [73] and the [bottom] widget's
   /// preferred height.
   ///
   /// [Scaffold] uses this this size to set its app bar's height.
@@ -516,7 +516,7 @@ class _AppBarState extends State<AppBar> {
       middleSpacing: widget.titleSpacing,
     );
 
-    // If the toolbar is allocated less than 65 make it
+    // If the toolbar is allocated less than 73 make it
     // appear to scroll upwards within its shrinking container.
     Widget appBar = ClipRect(
       child: CustomSingleChildLayout(
@@ -536,7 +536,7 @@ class _AppBarState extends State<AppBar> {
         children: <Widget>[
           Flexible(
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxHeight: 65),
+              constraints: const BoxConstraints(maxHeight: 73),
               child: appBar,
             ),
           ),
@@ -708,11 +708,11 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   final double _bottomHeight;
 
   @override
-  double get minExtent => collapsedHeight ?? (topPadding + 65 + _bottomHeight);
+  double get minExtent => collapsedHeight ?? (topPadding + 73 + _bottomHeight);
 
   @override
   double get maxExtent =>
-      math.max(topPadding + (expandedHeight ?? 65 + _bottomHeight), minExtent);
+      math.max(topPadding + (expandedHeight ?? 73 + _bottomHeight), minExtent);
 
   @override
   final FloatingHeaderSnapConfiguration snapConfiguration;
@@ -734,7 +734,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     //    1   |    1     |        0       ||  1.0
     //    1   |    1     |        1       ||  fade
     final double toolbarOpacity = !pinned || (floating && bottom != null)
-        ? ((visibleMainHeight - _bottomHeight) / 65).clamp(0.0, 1.0)
+        ? ((visibleMainHeight - _bottomHeight) / 73).clamp(0.0, 1.0)
         : 1.0;
 
     final Widget appBar = FlexibleSpaceBar.createSettings(
