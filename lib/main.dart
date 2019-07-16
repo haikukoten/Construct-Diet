@@ -1,7 +1,7 @@
-import 'package:construct_diet/ui/common/custom_tab.dart';
-import 'package:construct_diet/ui/common/labels.dart';
-import 'package:construct_diet/ui/common/page_transition.dart';
-import 'package:construct_diet/ui/screens/edit_page.dart';
+import 'package:construct_diet/common/custom_tab.dart';
+import 'package:construct_diet/common/labels.dart';
+import 'package:construct_diet/common/page_transition.dart';
+import 'package:construct_diet/screens/edit_page.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -9,11 +9,11 @@ import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:md2_tab_indicator/md2_tab_indicator.dart';
 
-import 'ui/common/custom_appbar.dart' as custom;
-import 'ui/common/theme.dart' as custom;
-import 'ui/tabs/favorite_tab.dart';
-import 'ui/tabs/result_tab.dart';
-import 'ui/tabs/more_tab.dart';
+import 'common/custom_appbar.dart' as custom;
+import 'common/theme.dart' as custom;
+import 'tabs/favorite_tab.dart';
+import 'tabs/result_tab.dart';
+import 'tabs/more_tab.dart';
 
 void main() => runApp(MyApp());
 

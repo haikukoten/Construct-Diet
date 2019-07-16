@@ -1,5 +1,5 @@
-import 'package:construct_diet/ui/common/labels.dart';
-import 'package:construct_diet/ui/common/screen_body.dart';
+import 'package:construct_diet/common/labels.dart';
+import 'package:construct_diet/common/screen_body.dart';
 import 'package:flutter/material.dart';
 
 class EditPage extends StatefulWidget {

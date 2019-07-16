@@ -1,6 +1,6 @@
-import 'package:construct_diet/ui/common/cards.dart' as custom;
-import 'package:construct_diet/ui/common/labels.dart';
-import 'package:construct_diet/ui/common/tab_body.dart';
+import 'package:construct_diet/common/cards.dart' as custom;
+import 'package:construct_diet/common/labels.dart';
+import 'package:construct_diet/common/tab_body.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
