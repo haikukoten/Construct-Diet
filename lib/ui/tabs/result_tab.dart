@@ -14,9 +14,6 @@ class _ResultTabState extends State<ResultTab> {
   Widget build(BuildContext context) {
     return TabBody(
       Column(children: [
-        custom.Card(InfoLabel("Укажите свои параметры",
-            description: "Нажмите на карточку выше для редактирования.",
-            icon: MdiIcons.creation)),
         custom.Card(PlugLabel("Диеты не найдены",
             description: "Нет необходимости в похудении.",
             icon: MdiIcons.magnify)),
