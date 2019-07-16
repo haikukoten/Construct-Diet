@@ -96,7 +96,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       isAnimateScroll = true;
       Future.delayed(const Duration(milliseconds: 0), () {}).then((s) {
         controllerScroll
-            .animateTo(step < 0.6 ? 57 : -appBarHeight,
+            .animateTo(step < 0.8 ? 57 : -appBarHeight,
                 curve: Curves.fastOutSlowIn,
                 duration: Duration(milliseconds: 300))
             .then((s) {
@@ -147,7 +147,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       padding: EdgeInsets.fromLTRB(16, 8, 16, 6),
       child: AnimatedContainer(
         duration: Duration(milliseconds: 400),
-        height: step > 0.6 ? appBarHeight : 50,
+        height: step > 0.8 ? appBarHeight : 50,
         curve: Curves.fastOutSlowIn,
         child: Hero(
           tag: 'appbar',
@@ -193,15 +193,17 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                         ],
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: AnimatedOpacity(
-                        duration: step > 0.8
-                            ? Duration(milliseconds: 400)
-                            : Duration(milliseconds: 0),
-                        opacity: step > 0.8 ? 1 : 0,
-                        curve: Interval(0.5, 1),
-                        child: Container(
+                    Padding(
+                      padding: const EdgeInsets.only(top: 34),
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: AnimatedOpacity(
+                          duration: step > 0.99
+                              ? Duration(milliseconds: 400)
+                              : Duration(milliseconds: 0),
+                          opacity: step > 0.99 ? 1 : 0,
+                          curve: Interval(0.5, 1),
+                          child: Container(
                             height: 56,
                             child: InfoLabel('Избыточный вес',
                                 description: 'Необходимо сбросить 12 кг.',
