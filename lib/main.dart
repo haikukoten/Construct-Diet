@@ -1,4 +1,5 @@
 import 'package:construct_diet/ui/common/custom_tab.dart';
+import 'package:construct_diet/ui/common/labels.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -146,63 +147,65 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         duration: Duration(milliseconds: 400),
         height: step > 0.6 ? appBarHeight : 50,
         curve: Curves.fastOutSlowIn,
-        child: Material(
-          elevation: step > 0 ? 2 : 3,
-          shadowColor: Colors.black.withAlpha(150),
-          borderRadius: BorderRadius.all(Radius.circular(8.5)),
-          color: Theme.of(context).cardColor,
-          child: InkWell(
-            highlightColor: Colors.grey.withAlpha(30),
-            splashColor: Colors.grey.withAlpha(30),
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            onTap: () {},
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(18, 14.5, 18, 14.5),
-              child: Stack(
-                children: <Widget>[
-                  Text(
-                    "Construct Diet",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).textTheme.caption.color,
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: AnimatedOpacity(
-                      duration: step > 0.8
-                          ? Duration(milliseconds: 400)
-                          : Duration(milliseconds: 0),
-                      opacity: step > 0.8 ? 1 : 0,
-                      curve: Interval(0.5, 1),
-                      child: Container(
-                        height: 41,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            infoBlock("лет", 16),
-                            separatorVertical(),
-                            infoBlock("кг", 65),
-                            separatorVertical(),
-                            infoBlock("см", 182),
-                          ],
-                        ),
+        child: Hero(
+          tag: 'appbar',
+          child: Material(
+            elevation: step > 0 ? 2 : 3,
+            shadowColor: Colors.black.withAlpha(150),
+            borderRadius: BorderRadius.all(Radius.circular(8.5)),
+            color: Theme.of(context).cardColor,
+            child: InkWell(
+              highlightColor: Colors.grey.withAlpha(30),
+              splashColor: Colors.grey.withAlpha(30),
+              borderRadius: BorderRadius.all(Radius.circular(8.5)),
+              onTap: () {
+                );
+              },
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(10, 10, 10, 8),
+                child: Stack(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(7, 4.5, 7, 4.5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "Construct Diet",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: Theme.of(context).textTheme.caption.color,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 1),
+                            child: Icon(
+                              MdiIcons.pencil,
+                              size: 18,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: SizedBox(
-                      width: 18,
-                      height: 21,
-                      child: Icon(
-                        MdiIcons.pencil,
-                        size: 18,
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: AnimatedOpacity(
+                        duration: step > 0.8
+                            ? Duration(milliseconds: 400)
+                            : Duration(milliseconds: 0),
+                        opacity: step > 0.8 ? 1 : 0,
+                        curve: Interval(0.5, 1),
+                        child: Container(
+                            height: 56,
+                            child: InfoLabel('Избыточный вес',
+                                description: 'Необходимо сбросить 12 кг.',
+                                icon: MdiIcons.alertCircle,
+                                color: Colors.orange)),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
