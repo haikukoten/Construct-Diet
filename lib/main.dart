@@ -1,6 +1,7 @@
 import 'package:construct_diet/common/custom_tab.dart';
 import 'package:construct_diet/common/labels.dart';
 import 'package:construct_diet/common/page_transition.dart';
+import 'package:construct_diet/scoped_models/data_model.dart';
 import 'package:construct_diet/screens/edit_page.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
@@ -8,16 +9,20 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:md2_tab_indicator/md2_tab_indicator.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 import 'common/custom_appbar.dart' as custom;
-import 'common/theme.dart' as custom;
+import 'theme.dart' as custom;
 import 'tabs/favorite_tab.dart';
 import 'tabs/result_tab.dart';
 import 'tabs/more_tab.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(MyApp(model: DataModel()));
 
 class MyApp extends StatelessWidget {
+  final DataModel model;
+  MyApp({Key key, @required this.model}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -26,35 +31,38 @@ class MyApp extends StatelessWidget {
           systemNavigationBarColor: Colors.white,
           systemNavigationBarIconBrightness: Brightness.dark),
     );
-    return DynamicTheme(
-        defaultBrightness: Brightness.light,
-        data: (brightness) {
-          SystemChrome.setSystemUIOverlayStyle(
-            SystemUiOverlayStyle(
-                statusBarColor: Colors.white.withAlpha(0),
-                statusBarIconBrightness: brightness == Brightness.light
-                    ? Brightness.dark
-                    : Brightness.light,
-                systemNavigationBarColor: brightness == Brightness.light
-                    ? Colors.white
-                    : Color(0xFF2E2F32),
-                systemNavigationBarIconBrightness:
-                    brightness == Brightness.light
-                        ? Brightness.dark
-                        : Brightness.light),
-          );
-          return brightness == Brightness.light
-              ? custom.Theme.light
-              : custom.Theme.dark;
-        },
-        themedWidgetBuilder: (context, theme) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Construct Diet',
-            theme: theme,
-            home: MainPage(),
-          );
-        });
+    return ScopedModel<DataModel>(
+      model: model,
+      child: DynamicTheme(
+          defaultBrightness: Brightness.light,
+          data: (brightness) {
+            SystemChrome.setSystemUIOverlayStyle(
+              SystemUiOverlayStyle(
+                  statusBarColor: Colors.white.withAlpha(0),
+                  statusBarIconBrightness: brightness == Brightness.light
+                      ? Brightness.dark
+                      : Brightness.light,
+                  systemNavigationBarColor: brightness == Brightness.light
+                      ? Colors.white
+                      : Color(0xFF2E2F32),
+                  systemNavigationBarIconBrightness:
+                      brightness == Brightness.light
+                          ? Brightness.dark
+                          : Brightness.light),
+            );
+            return brightness == Brightness.light
+                ? custom.Theme.light
+                : custom.Theme.dark;
+          },
+          themedWidgetBuilder: (context, theme) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Construct Diet',
+              theme: theme,
+              home: MainPage(),
+            );
+          }),
+    );
   }
 }
 
