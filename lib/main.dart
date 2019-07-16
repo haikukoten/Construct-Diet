@@ -106,42 +106,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     }
   }
 
-  Widget separatorVertical() {
-    return Padding(
-      padding: EdgeInsets.only(left: 25, right: 25),
-      child: Container(
-        width: 1,
-        height: 25,
-        color: Theme.of(context).primaryColorDark.withAlpha(50),
-      ),
-    );
-  }
-
-  Widget infoBlock(String title, int value) {
-    return Column(
-      children: <Widget>[
-        Text(
-          value.toString(),
-          style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-            color: Theme.of(context).textTheme.caption.color,
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: 3),
-          child: Text(
-            title,
-            style: TextStyle(
-              fontSize: 11,
-              color: Theme.of(context).textTheme.caption.color.withAlpha(200),
-            ),
-          ),
-        )
-      ],
-    );
-  }
-
   Widget appBar() {
     return Padding(
       padding: EdgeInsets.fromLTRB(17, 16, 17, 6),
