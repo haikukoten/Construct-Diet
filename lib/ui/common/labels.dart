@@ -211,7 +211,7 @@ class _InfoSwitchLabelState extends State<InfoSwitchLabel> {
             onChanged(value);
           },
           borderRadius: BorderRadius.all(Radius.circular(5)),
-          child: Container(
+          child: Padding(
             padding: EdgeInsets.fromLTRB(10, 10, 0, 10),
             child: Stack(
               alignment: Alignment.center,
