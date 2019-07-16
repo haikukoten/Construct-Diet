@@ -161,10 +161,15 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               splashColor: Colors.grey.withAlpha(30),
               borderRadius: BorderRadius.all(Radius.circular(8.5)),
               onTap: () {
-                Navigator.push(
-                  context,
-                  TransitionPageRoute(widget: EditPage()),
-                );
+                if (step > 0.8)
+                  Navigator.push(
+                    context,
+                    TransitionPageRoute(widget: EditPage()),
+                  );
+                else
+                  controllerScroll.animateTo(0,
+                      curve: Curves.fastOutSlowIn,
+                      duration: Duration(milliseconds: 300));
               },
               child: Padding(
                 padding: EdgeInsets.fromLTRB(10, 10, 10, 8),
@@ -186,8 +191,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                           Padding(
                             padding: EdgeInsets.only(bottom: 1),
                             child: Icon(
-                              MdiIcons.pencil,
-                              size: 18,
+                              step > 0.8 ? MdiIcons.pencil : MdiIcons.arrowUp,
+                              size: step > 0.8 ? 18 : 21,
                             ),
                           ),
                         ],
