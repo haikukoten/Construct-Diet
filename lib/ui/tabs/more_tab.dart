@@ -46,12 +46,15 @@ class _MoreTabState extends State<MoreTab> {
             ),
           ]),
         )),
-        custom.Card(TitleLabel(
-          "Разработчики",
-          icon: Icons.code,
-          child: Column(
-              children: [InfoLabel("Семён Бутенко", "Разработчик, дизайнер.")]),
-        )),
+        custom.Card(
+          TitleLabel(
+            "Разработчики",
+            icon: Icons.code,
+            child: Column(children: [
+              InfoLabel("Семён Бутенко", description: "Разработчик, дизайнер.")
+            ]),
+          ),
+        ),
       ]),
     );
   }
