@@ -288,3 +288,94 @@ class _InfoSwitchLabelState extends State<InfoSwitchLabel> {
     );
   }
 }
+
+class ButtonLabel extends StatelessWidget {
+  final String title;
+  final String description;
+  final IconData icon;
+  final Color color;
+  final VoidCallback onPressed;
+
+  ButtonLabel(this.title,
+      {this.description, this.icon, this.color, this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(3, 5, 3, 5),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          highlightColor: Colors.grey.withAlpha(30),
+          splashColor: Colors.grey.withAlpha(30),
+          onTap: onPressed,
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Row(
+                  children: <Widget>[
+                    icon != null
+                        ? Container(
+                            margin: EdgeInsets.only(right: 15),
+                            child: Icon(
+                              icon,
+                              size: 20,
+                              color: color == null
+                                  ? Theme.of(context).primaryColor
+                                  : color,
+                            ))
+                        : Container(),
+                    Container(
+                      width: MediaQuery.of(context).size.width - 140,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            strutStyle: StrutStyle(
+                              leading: 0,
+                            ),
+                            style: TextStyle(
+                              fontSize: description != null ? 15 : 15.5,
+                              fontWeight: FontWeight.w600,
+                              color: Theme.of(context).textTheme.caption.color,
+                            ),
+                          ),
+                          description != null
+                              ? Padding(
+                                  padding: EdgeInsets.only(top: 3.2),
+                                  child: Text(
+                                    description,
+                                    style: TextStyle(
+                                      fontSize: 12.2,
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .caption
+                                          .color
+                                          .withAlpha(180),
+                                    ),
+                                  ),
+                                )
+                              : Container()
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Icon(
+                    Icons.chevron_right,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
