@@ -92,6 +92,7 @@ class PlugLabel extends StatelessWidget {
           Column(children: [
             Text(
               title,
+              textAlign: TextAlign.center,
               strutStyle: StrutStyle(
                 leading: 0,
               ),
@@ -106,6 +107,7 @@ class PlugLabel extends StatelessWidget {
                     padding: EdgeInsets.only(top: 3.2),
                     child: Text(
                       description,
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 12.2,
                         color: Theme.of(context)
