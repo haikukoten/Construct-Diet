@@ -5,16 +5,16 @@ class DataModel extends Model {
   bool get isSet => _isSet;
 
   int _genderIndex = 0;
-  int _ageIndex = 0;
-  int _heightIndex = 0;
-  int _weightIndex = 0;
-  int _wristIndex = 0;
+  int _ageIndex = 13;
+  int _heightIndex = 60;
+  int _weightIndex = 35;
+  int _wristIndex = 2;
 
   bool _isWoman = true;
-  int _age = 18;
-  int _height = 165;
-  int _weight = 80;
-  int _wrist;
+  int _age = 25;
+  int _height = 160;
+  int _weight = 65;
+  int _wrist = 15;
 
   int get genderIndex => _genderIndex;
   int get ageIndex => _ageIndex;
