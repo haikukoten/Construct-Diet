@@ -182,9 +182,19 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                           curve: Interval(0.5, 1),
                           child: Container(
                             height: 56,
-                            child: InfoLabel("Укажите свои параметры",
-                                description: "Нажмите для редактирования",
-                                icon: MdiIcons.creation),
+                            child: ScopedModelDescendant<DataModel>(
+                                builder: (context, child, model) {
+                              return !model.isSet
+                                  ? InfoLabel("Укажите свои параметры",
+                                      description: "Нажмите для редактирования",
+                                      icon: MdiIcons.creation)
+                                  : InfoLabel(
+                                      "Нормальный вес",
+                                      description: "Нажмите для редактирования",
+                                      icon: MdiIcons.checkCircle,
+                                      color: Colors.green,
+                                    );
+                            }),
                           ),
                         ),
                       ),
