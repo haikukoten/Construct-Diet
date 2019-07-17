@@ -15,8 +15,6 @@ class _EditPageState extends State<EditPage> {
   List<String> genderList = <String>['женский', 'мужской'];
   List<int> heightList = [for (int i = 100; i <= 250; i++) i];
   List<int> weightList = [for (int i = 30; i <= 300; i++) i];
-  List<int> wristWomanList = [null, for (int i = 14; i <= 18; i++) i];
-  List<int> wristManList = [null, for (int i = 17; i <= 21; i++) i];
 
   Widget buttonOpenPicker(String title, value, String postfix, int currentIndex,
       Function setter, List list) {
@@ -72,58 +70,34 @@ class _EditPageState extends State<EditPage> {
                               onSelectedItemChanged: (int index) {
                                 setState(() => setter(list[index], index));
                               },
-                              children: List<Widget>.generate(list.length,
-                                  (int index) {
-                                dynamic value = list[index];
-                                if (list[index] == 14 && index == 1) {
-                                  value = "меньше 15";
-                                }
-
-                                if (list[index] == 18 && index == 5) {
-                                  value = "больше 17";
-                                }
-
-                                if (list[index] == 17 && index == 1) {
-                                  value = "меньше 18";
-                                }
-
-                                if (list[index] == 21 && index == 5) {
-                                  value = "больше 20";
-                                }
-
-                                return Padding(
-                                  padding: EdgeInsets.only(
-                                      right: postfix != null
-                                          ? (MediaQuery.of(context).size.width /
-                                                  2 +
-                                              1.6)
-                                          : 0),
-                                  child: Align(
-                                    alignment: postfix != null
-                                        ? Alignment.centerRight
-                                        : Alignment.center,
-                                    child: list[index] != null
-                                        ? Text(
-                                            "$value",
-                                            style: TextStyle(
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w500,
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                            ),
-                                          )
-                                        : Text(
-                                            "?",
-                                            style: TextStyle(
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w500,
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                            ),
-                                          ),
-                                  ),
-                                );
-                              }),
+                              children: List<Widget>.generate(
+                                list.length,
+                                (int index) {
+                                  return Padding(
+                                    padding: EdgeInsets.only(
+                                        right: postfix != null
+                                            ? (MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2 +
+                                                1.6)
+                                            : 0),
+                                    child: Align(
+                                      alignment: postfix != null
+                                          ? Alignment.centerRight
+                                          : Alignment.center,
+                                      child: Text(
+                                        "${list[index]}",
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w500,
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                             postfix != null
                                 ? Padding(
@@ -244,13 +218,6 @@ class _EditPageState extends State<EditPage> {
                           model.heightIndex, model.setHeight, heightList),
                       buttonOpenPicker("Вес", model.weight, "кг",
                           model.weightIndex, model.setWeight, weightList),
-                      buttonOpenPicker(
-                          "Обхват запястья",
-                          model.wrist,
-                          "см",
-                          model.wristIndex,
-                          model.setWrist,
-                          model.isWoman ? wristWomanList : wristManList),
                     ],
                   );
                 }),
