@@ -11,7 +11,9 @@ class InfoLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(10),
+      padding: description != null
+          ? EdgeInsets.all(10)
+          : EdgeInsets.fromLTRB(10, 15, 10, 15),
       child: Row(
         children: <Widget>[
           icon != null
@@ -30,15 +32,18 @@ class InfoLabel extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    title,
-                    strutStyle: StrutStyle(
-                      leading: 0,
-                    ),
-                    style: TextStyle(
-                      fontSize: description != null ? 15 : 15.5,
-                      fontWeight: FontWeight.w600,
-                      color: Theme.of(context).textTheme.caption.color,
+                  Padding(
+                    padding: EdgeInsets.only(top: description != null ? 0 : 4),
+                    child: Text(
+                      title,
+                      strutStyle: StrutStyle(
+                        leading: 0,
+                      ),
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).textTheme.caption.color,
+                      ),
                     ),
                   ),
                   description != null
@@ -97,7 +102,7 @@ class PlugLabel extends StatelessWidget {
                 leading: 0,
               ),
               style: TextStyle(
-                fontSize: description != null ? 15 : 15.5,
+                fontSize: 15,
                 fontWeight: FontWeight.w600,
                 color: Theme.of(context).textTheme.caption.color,
               ),
@@ -248,8 +253,7 @@ class _InfoSwitchLabelState extends State<InfoSwitchLabel> {
                             Text(
                               widget.title,
                               style: TextStyle(
-                                fontSize:
-                                    widget.description != null ? 15 : 15.5,
+                                fontSize: 15,
                                 fontWeight: FontWeight.w600,
                                 color:
                                     Theme.of(context).textTheme.caption.color,
@@ -345,7 +349,47 @@ class ButtonLabel extends StatelessWidget {
                               leading: 0,
                             ),
                             style: TextStyle(
-                              fontSize: description != null ? 15 : 15.5,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              color: Theme.of(context).textTheme.caption.color,
+                            ),
+                          ),
+                          description != null
+                              ? Padding(
+                                  padding: EdgeInsets.only(top: 3.2),
+                                  child: Text(
+                                    description,
+                                    style: TextStyle(
+                                      fontSize: 12.2,
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .caption
+                                          .color
+                                          .withAlpha(180),
+                                    ),
+                                  ),
+                                )
+                              : Container()
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Icon(
+                    Icons.chevron_right,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
                               fontWeight: FontWeight.w600,
                               color: Theme.of(context).textTheme.caption.color,
                             ),
