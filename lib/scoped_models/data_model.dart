@@ -26,7 +26,26 @@ class DataModel extends Model {
   int get age => _age;
   int get height => _height;
   int get weight => _weight;
-  int get wrist => _wrist;
+  dynamic get wrist {
+    dynamic value = _wrist;
+    if (_wrist == 14 && isWoman) {
+      value = "Меньше 15";
+    }
+
+    if (_wrist == 18 && isWoman) {
+      value = "Больше 17";
+    }
+
+    if (_wrist == 17 && !isWoman) {
+      value = "Меньше 18";
+    }
+
+    if (_wrist == 21 && !isWoman) {
+      value = "Больше 20";
+    }
+
+    return value;
+  }
 
   void setGender(dynamic value, int index) {
     _isWoman = index == 0;
