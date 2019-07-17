@@ -390,6 +390,58 @@ class ButtonLabel extends StatelessWidget {
   }
 }
 
+class SelectFavoriteLabel extends StatelessWidget {
+  final String title;
+  final String description;
+  final IconData icon;
+  final Color color;
+  final VoidCallback onPressed;
+
+  SelectFavoriteLabel(this.title,
+      {this.description, this.icon, this.color, this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(3, 5, 3, 5),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          highlightColor: Colors.grey.withAlpha(30),
+          splashColor: Colors.grey.withAlpha(30),
+          onTap: onPressed,
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Row(
+                  children: <Widget>[
+                    icon != null
+                        ? Container(
+                            margin: EdgeInsets.only(right: 15),
+                            child: Icon(
+                              icon,
+                              size: 20,
+                              color: color == null
+                                  ? Theme.of(context).primaryColor
+                                  : color,
+                            ))
+                        : Container(),
+                    Container(
+                      width: MediaQuery.of(context).size.width - 140,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            title,
+                            strutStyle: StrutStyle(
+                              leading: 0,
+                            ),
+                            style: TextStyle(
+                              fontSize: 15,
                               fontWeight: FontWeight.w600,
                               color: Theme.of(context).textTheme.caption.color,
                             ),
