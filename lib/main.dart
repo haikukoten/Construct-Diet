@@ -86,6 +86,16 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     MoreTab(),
   ];
 
+  List<String> diagnosisList = <String>[
+    'Выраженный недостаток веса',
+    'Недостаточный вес',
+    'Нормальный вес',
+    'Избыточный вес',
+    'Первая степень ожирения',
+    'Вторая степень ожирения',
+    'Третья степень ожирения'
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -189,10 +199,14 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                                       description: "Нажмите для редактирования",
                                       icon: MdiIcons.creation)
                                   : InfoLabel(
-                                      "Нормальный вес",
+                                      diagnosisList[model.getStatus()],
                                       description: "Нажмите для редактирования",
-                                      icon: MdiIcons.checkCircle,
-                                      color: Colors.green,
+                                      icon: model.getStatus() == 2
+                                          ? MdiIcons.checkCircle
+                                          : MdiIcons.alertCircle,
+                                      color: model.getStatus() == 2
+                                          ? Colors.green
+                                          : Colors.orange,
                                     );
                             }),
                           ),
