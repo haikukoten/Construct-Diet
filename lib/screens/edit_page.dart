@@ -15,8 +15,8 @@ class _EditPageState extends State<EditPage> {
   List<String> genderList = <String>['женский', 'мужской'];
   List<int> heightList = [for (int i = 100; i <= 250; i++) i];
   List<int> weightList = [for (int i = 30; i <= 300; i++) i];
-  List<int> wristWomanList = [for (int i = 14; i <= 18; i++) i];
-  List<int> wristManList = [for (int i = 17; i <= 21; i++) i];
+  List<int> wristWomanList = [null, for (int i = 14; i <= 18; i++) i];
+  List<int> wristManList = [null, for (int i = 17; i <= 21; i++) i];
 
   Widget buttonOpenPicker(String title, value, String postfix, int currentIndex,
       Function setter, List list) {
@@ -31,7 +31,7 @@ class _EditPageState extends State<EditPage> {
             context: context,
             builder: (BuildContext context) {
               return Container(
-                height: 250,
+                height: 200,
                 decoration: BoxDecoration(
                   color: Theme.of(context).bottomAppBarColor,
                   boxShadow: [
@@ -49,34 +49,127 @@ class _EditPageState extends State<EditPage> {
                   child: Column(
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.all(15),
+                        padding: EdgeInsets.fromLTRB(0, 15, 0, 5),
                         child: Text(
                           title,
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 17,
                             fontWeight: FontWeight.w500,
                             color: Theme.of(context).textTheme.caption.color,
                           ),
                         ),
                       ),
                       Expanded(
-                        child: CupertinoPicker(
-                          scrollController: scrollController,
-                          itemExtent: 52,
-                          backgroundColor: Theme.of(context).bottomAppBarColor,
-                          onSelectedItemChanged: (int index) {
-                            setState(() => setter(list[index], index));
-                          },
-                          children:
-                              List<Widget>.generate(list.length, (int index) {
-                            return Center(
-                              child: Text(
-                                  "${list[index]} ${postfix == null ? "" : postfix}"),
-                            );
-                          }),
+                        child: Stack(
+                          children: <Widget>[
+                            CupertinoPicker(
+                              diameterRatio: 10,
+                              magnification: 0.7,
+                              scrollController: scrollController,
+                              itemExtent: 68,
+                              backgroundColor:
+                                  Theme.of(context).bottomAppBarColor,
+                              onSelectedItemChanged: (int index) {
+                                setState(() => setter(list[index], index));
+                              },
+                              children: List<Widget>.generate(list.length,
+                                  (int index) {
+                                dynamic value = list[index];
+                                if (list[index] == 14 && index == 1) {
+                                  value = "меньше 15";
+                                }
+
+                                if (list[index] == 18 && index == 5) {
+                                  value = "больше 17";
+                                }
+
+                                if (list[index] == 17 && index == 1) {
+                                  value = "меньше 18";
+                                }
+
+                                if (list[index] == 21 && index == 5) {
+                                  value = "больше 20";
+                                }
+
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                      right: postfix != null
+                                          ? (MediaQuery.of(context).size.width /
+                                                  2 +
+                                              1.6)
+                                          : 0),
+                                  child: Align(
+                                    alignment: postfix != null
+                                        ? Alignment.centerRight
+                                        : Alignment.center,
+                                    child: list[index] != null
+                                        ? Text(
+                                            "$value",
+                                            style: TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w500,
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                            ),
+                                          )
+                                        : Text(
+                                            "?",
+                                            style: TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w500,
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                            ),
+                                          ),
+                                  ),
+                                );
+                              }),
+                            ),
+                            postfix != null
+                                ? Padding(
+                                    padding: EdgeInsets.only(
+                                        left:
+                                            (MediaQuery.of(context).size.width /
+                                                    2) +
+                                                1.6),
+                                    child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          postfix,
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w500,
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                          ),
+                                        )),
+                                  )
+                                : Container(),
+                            IgnorePointer(
+                              ignoring: true,
+                              child: Center(
+                                child: Container(
+                                  height: 48.7,
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      top: BorderSide(
+                                          width: 1,
+                                          color: Theme.of(context).cardColor),
+                                      bottom: BorderSide(
+                                          width: 1,
+                                          color: Theme.of(context).cardColor),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Divider(height: 1),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                        child: Divider(height: 1),
+                      ),
                     ],
                   ),
                 ),
