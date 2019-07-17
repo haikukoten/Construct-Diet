@@ -1,3 +1,4 @@
+import 'package:construct_diet/common/buttons.dart' as custom;
 import 'package:construct_diet/common/labels.dart';
 import 'package:construct_diet/common/screen_body.dart';
 import 'package:construct_diet/scoped_models/data_model.dart';
@@ -171,21 +172,12 @@ class _EditPageState extends State<EditPage> {
                   padding: EdgeInsets.fromLTRB(3, 3, 15, 0),
                   child: Row(
                     children: <Widget>[
-                      SizedBox(
-                        width: 40,
-                        height: 40,
-                        child: InkWell(
-                          highlightColor: Colors.grey.withAlpha(50),
-                          splashColor: Colors.grey.withAlpha(50),
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
-                          child: Icon(
-                            Icons.arrow_back,
-                            size: 22,
-                          ),
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
+                      custom.IconButton(
+                        icon: Icon(
+                          Icons.arrow_back,
+                          size: 22,
                         ),
+                        onPressed: () => Navigator.pop(context),
                       ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(8, 0, 0, 0.5),
