@@ -128,16 +128,14 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     return Padding(
       padding: EdgeInsets.fromLTRB(12 + (step * 5), 16, 12 + (step * 5), 6),
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 400),
+        duration: Duration(milliseconds: 450),
         height: step > 0.8 ? appBarHeight : 50,
         curve: Curves.fastOutSlowIn,
         child: Hero(
           tag: 'appbar',
           child: Material(
-            elevation: step > 0 ? 2 : 3,
-            shadowColor: step > 0
-                ? Colors.black.withAlpha(150)
-                : Theme.of(context).dividerColor,
+            elevation: 3.5 - (step * 2),
+            shadowColor: Theme.of(context).dividerColor,
             borderRadius: BorderRadius.all(Radius.circular(8.5)),
             color: Theme.of(context).cardColor,
             child: InkWell(
