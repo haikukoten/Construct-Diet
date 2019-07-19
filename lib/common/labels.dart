@@ -416,7 +416,7 @@ class _SelectFavoriteLabelState extends State<SelectFavoriteLabel> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(13, 5, 13, 5),
+      padding: EdgeInsets.fromLTRB(13, 5, 8, 5),
       child: Material(
         color: Colors.transparent,
         child: Padding(
@@ -466,11 +466,7 @@ class _SelectFavoriteLabelState extends State<SelectFavoriteLabel> {
                     selectedIcon: Icon(
                       MdiIcons.thumbUp,
                       size: 18,
-                      color: Theme.of(context)
-                          .textTheme
-                          .caption
-                          .color
-                          .withAlpha(200),
+                      color: Colors.greenAccent,
                     ),
                     value: isLiked == 1,
                     onChanged: (isOn) {
@@ -500,11 +496,7 @@ class _SelectFavoriteLabelState extends State<SelectFavoriteLabel> {
                     selectedIcon: Icon(
                       MdiIcons.thumbDown,
                       size: 18,
-                      color: Theme.of(context)
-                          .textTheme
-                          .caption
-                          .color
-                          .withAlpha(200),
+                      color: Colors.redAccent,
                     ),
                     value: isLiked == 2,
                     onChanged: (isOn) {
