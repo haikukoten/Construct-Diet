@@ -466,7 +466,7 @@ class _SelectFavoriteLabelState extends State<SelectFavoriteLabel> {
                     selectedIcon: Icon(
                       MdiIcons.thumbUp,
                       size: 18,
-                      color: Colors.greenAccent,
+                      color: Theme.of(context).primaryColorLight,
                     ),
                     value: isLiked == 1,
                     onChanged: (isOn) {
@@ -496,7 +496,7 @@ class _SelectFavoriteLabelState extends State<SelectFavoriteLabel> {
                     selectedIcon: Icon(
                       MdiIcons.thumbDown,
                       size: 18,
-                      color: Colors.redAccent,
+                      color: Theme.of(context).errorColor,
                     ),
                     value: isLiked == 2,
                     onChanged: (isOn) {

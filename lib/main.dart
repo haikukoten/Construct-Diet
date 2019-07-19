@@ -211,8 +211,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                                           ? MdiIcons.checkCircle
                                           : MdiIcons.alertCircle,
                                       color: model.getStatus() == 2
-                                          ? Colors.green
-                                          : Colors.orange,
+                                          ? Theme.of(context).primaryColorLight
+                                          : Theme.of(context).backgroundColor,
                                     );
                             }),
                           ),

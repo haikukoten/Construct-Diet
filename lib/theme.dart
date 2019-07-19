@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 class Theme {
   static ThemeData light = ThemeData(
+    primaryColorLight: Colors.green,
+    backgroundColor: Colors.orange,
+    errorColor: Colors.red,
     brightness: Brightness.light,
     dividerColor: Color(0xFFEEEEEE),
     toggleableActiveColor: Color(0xFF1A73E8),
@@ -28,6 +31,9 @@ class Theme {
   );
 
   static ThemeData dark = ThemeData(
+    primaryColorLight: Colors.greenAccent,
+    backgroundColor: Colors.orangeAccent,
+    errorColor: Colors.redAccent,
     brightness: Brightness.dark,
     accentColor: Colors.grey,
     toggleableActiveColor: Color(0xFF8AB4F8),
