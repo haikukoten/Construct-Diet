@@ -187,7 +187,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 34),
+                      padding: EdgeInsets.only(top: 33),
                       child: Align(
                         alignment: Alignment.topCenter,
                         child: AnimatedOpacity(
