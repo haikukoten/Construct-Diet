@@ -41,7 +41,7 @@ class _MoreTabState extends State<MoreTab> {
               icon: MdiIcons.weatherNight,
               value: themeIsDark(),
               onChanged: (isOn) {
-                changeTheme(Theme.of(context).brightness != Brightness.dark);
+                changeTheme(isOn);
               },
             ),
           ]),
