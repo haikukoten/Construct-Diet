@@ -16,10 +16,6 @@ class _MoreTabState extends State<MoreTab> {
         .setBrightness(isNight == true ? Brightness.dark : Brightness.light);
   }
 
-  bool themeIsDark() {
-    return Theme.of(context).brightness == Brightness.dark;
-  }
-
   @override
   Widget build(BuildContext context) {
     return TabBody(
@@ -39,7 +35,7 @@ class _MoreTabState extends State<MoreTab> {
               "Перейти на тёмную сторону",
               description: "Активировать тёмную тему",
               icon: MdiIcons.weatherNight,
-              value: themeIsDark(),
+              value: Theme.of(context).brightness == Brightness.dark,
               onChanged: (isOn) {
                 changeTheme(isOn);
               },
