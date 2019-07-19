@@ -27,7 +27,9 @@ class InfoLabel extends StatelessWidget {
                   ))
               : Container(),
           Container(
-            width: MediaQuery.of(context).size.width - 140,
+            width: MediaQuery.of(context).size.width > 750
+                ? 750.0 - 140.0
+                : MediaQuery.of(context).size.width - 140,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -245,7 +247,9 @@ class _InfoSwitchLabelState extends State<InfoSwitchLabel> {
                             ))
                         : Container(),
                     Container(
-                      width: MediaQuery.of(context).size.width - 164,
+                      width: MediaQuery.of(context).size.width > 750
+                          ? 750.0 - 164.0
+                          : MediaQuery.of(context).size.width - 164,
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -338,7 +342,9 @@ class ButtonLabel extends StatelessWidget {
                             ))
                         : Container(),
                     Container(
-                      width: MediaQuery.of(context).size.width - 140,
+                      width: MediaQuery.of(context).size.width > 750
+                          ? 750.0 - 140.0
+                          : MediaQuery.of(context).size.width - 140,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,

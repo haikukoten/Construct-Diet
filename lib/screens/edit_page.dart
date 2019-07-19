@@ -30,6 +30,9 @@ class _EditPageState extends State<EditPage> {
             context: context,
             builder: (BuildContext context) {
               return Container(
+                constraints: MediaQuery.of(context).size.width > 780
+                    ? BoxConstraints(maxWidth: 500)
+                    : BoxConstraints(),
                 height: 200,
                 decoration: BoxDecoration(
                   color: Theme.of(context).bottomAppBarColor,
@@ -77,9 +80,14 @@ class _EditPageState extends State<EditPage> {
                                   return Padding(
                                     padding: EdgeInsets.only(
                                         right: postfix != null
-                                            ? (MediaQuery.of(context)
-                                                        .size
-                                                        .width /
+                                            ? ((MediaQuery.of(context)
+                                                                .size
+                                                                .width >
+                                                            770
+                                                        ? 500
+                                                        : MediaQuery.of(context)
+                                                            .size
+                                                            .width) /
                                                     2 +
                                                 1.6)
                                             : 0),
@@ -103,10 +111,16 @@ class _EditPageState extends State<EditPage> {
                             postfix != null
                                 ? Padding(
                                     padding: EdgeInsets.only(
-                                        left:
-                                            (MediaQuery.of(context).size.width /
-                                                    2) +
-                                                1.6),
+                                        left: ((MediaQuery.of(context)
+                                                            .size
+                                                            .width >
+                                                        780
+                                                    ? 500
+                                                    : MediaQuery.of(context)
+                                                        .size
+                                                        .width) /
+                                                2) +
+                                            1.6),
                                     child: Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text(

@@ -6,15 +6,21 @@ class ScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double statusBarHeight = MediaQuery.of(context).padding.top;
     return Scaffold(
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Padding(
-          padding: EdgeInsets.only(top: statusBarHeight),
-          child: SingleChildScrollView(
-            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-            child: ConstrainedBox(constraints: BoxConstraints(), child: child),
+          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+          child: Align(
+            alignment: Alignment.topCenter,
+            child: SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+              child: ConstrainedBox(
+                  constraints: MediaQuery.of(context).size.width > 780
+                      ? BoxConstraints(maxWidth: 730)
+                      : BoxConstraints(),
+                  child: child),
+            ),
           ),
         ),
       ),
