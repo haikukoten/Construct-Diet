@@ -10,7 +10,6 @@ class Card extends StatelessWidget {
     return Container(
       margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
       constraints: BoxConstraints(minHeight: 70),
-      padding: EdgeInsets.fromLTRB(8, 4.5, 8, 4.5),
       decoration: new BoxDecoration(
         color: Theme.of(context).cardColor,
         border: Border.all(color: Theme.of(context).dividerColor),

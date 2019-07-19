@@ -12,8 +12,8 @@ class InfoLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: description != null
-          ? EdgeInsets.all(10)
-          : EdgeInsets.fromLTRB(10, 15, 10, 15),
+          ? EdgeInsets.fromLTRB(18, 14.5, 18, 14.5)
+          : EdgeInsets.fromLTRB(18, 19.5, 18, 19.5),
       child: Row(
         children: <Widget>[
           icon != null
@@ -83,7 +83,7 @@ class PlugLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
+      padding: EdgeInsets.all(18),
       child: Column(
         children: <Widget>[
           icon != null
@@ -146,7 +146,7 @@ class TitleLabel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+          padding: EdgeInsets.fromLTRB(18, 12, 18, 0),
           child: Row(
             children: <Widget>[
               icon != null
@@ -215,7 +215,7 @@ class _InfoSwitchLabelState extends State<InfoSwitchLabel> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+      padding: EdgeInsets.fromLTRB(8, 5, 8, 0),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -315,7 +315,7 @@ class ButtonLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(3, 5, 3, 5),
+      padding: EdgeInsets.fromLTRB(8, 5, 8, 5),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -409,7 +409,7 @@ class SelectFavoriteLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(3, 5, 3, 5),
+      padding: EdgeInsets.fromLTRB(13, 5, 13, 5),
       child: Material(
         color: Colors.transparent,
         child: InkWell(

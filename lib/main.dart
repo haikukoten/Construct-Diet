@@ -160,11 +160,11 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                 }
               },
               child: Padding(
-                padding: EdgeInsets.fromLTRB(10, 10, 10, 8),
+                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                 child: Stack(
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.fromLTRB(7, 4.5, 7, 4.5),
+                      padding: EdgeInsets.fromLTRB(18, 4.5, 18, 4.5),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
@@ -197,7 +197,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                           opacity: step > 0.99 ? 1 : 0,
                           curve: Interval(0.5, 1),
                           child: Container(
-                            height: 56,
+                            height: 65,
                             child: ScopedModelDescendant<DataModel>(
                                 builder: (context, child, model) {
                               return !model.isSet

@@ -179,11 +179,11 @@ class _EditPageState extends State<EditPage> {
           borderRadius: BorderRadius.all(Radius.circular(8.5)),
           color: Theme.of(context).cardColor,
           child: Padding(
-            padding: EdgeInsets.fromLTRB(5, 2, 5, 2),
+            padding: EdgeInsets.fromLTRB(0, 2, 0, 2),
             child: Column(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.fromLTRB(3, 3, 15, 0),
+                  padding: EdgeInsets.fromLTRB(8, 3, 15, 0),
                   child: Row(
                     children: <Widget>[
                       custom.IconButton(
