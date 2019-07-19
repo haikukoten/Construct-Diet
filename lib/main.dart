@@ -126,7 +126,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
   Widget appBar() {
     return Padding(
-      padding: EdgeInsets.fromLTRB(17, 16, 17, 6),
+      padding: EdgeInsets.fromLTRB(12 + (step * 5), 16, 12 + (step * 5), 6),
       child: AnimatedContainer(
         duration: Duration(milliseconds: 400),
         height: step > 0.8 ? appBarHeight : 50,
@@ -135,7 +135,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           tag: 'appbar',
           child: Material(
             elevation: step > 0 ? 2 : 3,
-            shadowColor: Colors.black.withAlpha(150),
+            shadowColor: step > 0
+                ? Colors.black.withAlpha(150)
+                : Theme.of(context).dividerColor,
             borderRadius: BorderRadius.all(Radius.circular(8.5)),
             color: Theme.of(context).cardColor,
             child: InkWell(
