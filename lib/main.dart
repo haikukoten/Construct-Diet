@@ -148,10 +148,16 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                     context,
                     TransitionPageRoute(widget: EditPage()),
                   );
-                else
-                  controllerScroll.animateTo(0,
-                      curve: Curves.fastOutSlowIn,
-                      duration: Duration(milliseconds: 300));
+                else if (!isAnimateScroll) {
+                  isAnimateScroll = true;
+                  controllerScroll
+                      .animateTo(0,
+                          curve: Curves.fastOutSlowIn,
+                          duration: Duration(milliseconds: 300))
+                      .then((s) {
+                    isAnimateScroll = false;
+                  });
+                }
               },
               child: Padding(
                 padding: EdgeInsets.fromLTRB(10, 10, 10, 8),
