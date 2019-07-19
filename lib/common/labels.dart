@@ -1,3 +1,6 @@
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+import 'buttons.dart' as custom;
 import 'package:flutter/material.dart';
 
 class InfoLabel extends StatelessWidget {
@@ -197,20 +200,12 @@ class InfoSwitchLabel extends StatefulWidget {
       {this.description, this.icon, this.color, this.value, this.onChanged});
 
   @override
-  _InfoSwitchLabelState createState() => _InfoSwitchLabelState(this.title,
-      this.description, this.icon, this.color, this.value, this.onChanged);
+  _InfoSwitchLabelState createState() => _InfoSwitchLabelState(this.value);
 }
 
 class _InfoSwitchLabelState extends State<InfoSwitchLabel> {
-  String title;
-  String description;
-  IconData icon;
-  Color color;
   bool value;
-  ValueChanged<bool> onChanged;
-
-  _InfoSwitchLabelState(this.title, this.description, this.icon, this.color,
-      this.value, this.onChanged);
+  _InfoSwitchLabelState(this.value);
 
   @override
   Widget build(BuildContext context) {
@@ -225,7 +220,7 @@ class _InfoSwitchLabelState extends State<InfoSwitchLabel> {
             setState(() {
               value = !value;
             });
-            onChanged(value);
+            widget.onChanged(value);
           },
           borderRadius: BorderRadius.all(Radius.circular(5)),
           child: Padding(
@@ -241,9 +236,9 @@ class _InfoSwitchLabelState extends State<InfoSwitchLabel> {
                             child: Icon(
                               widget.icon,
                               size: 20,
-                              color: color == null
+                              color: widget.color == null
                                   ? Theme.of(context).primaryColor
-                                  : color,
+                                  : widget.color,
                             ))
                         : Container(),
                     Container(
@@ -290,7 +285,8 @@ class _InfoSwitchLabelState extends State<InfoSwitchLabel> {
                     height: 35,
                     child: IgnorePointer(
                         ignoring: true,
-                        child: Switch(value: value, onChanged: onChanged)),
+                        child:
+                            Switch(value: value, onChanged: widget.onChanged)),
                   ),
                 )
               ],
@@ -396,15 +392,26 @@ class ButtonLabel extends StatelessWidget {
   }
 }
 
-class SelectFavoriteLabel extends StatelessWidget {
+class SelectFavoriteLabel extends StatefulWidget {
   final String title;
-  final String description;
   final IconData icon;
-  final Color color;
-  final VoidCallback onPressed;
+  final int isLiked;
+  final ValueChanged<int> onChanged;
 
-  SelectFavoriteLabel(this.title,
-      {this.description, this.icon, this.color, this.onPressed});
+  SelectFavoriteLabel(this.title, {this.icon, this.isLiked, this.onChanged});
+
+  @override
+  _SelectFavoriteLabelState createState() => _SelectFavoriteLabelState();
+}
+
+class _SelectFavoriteLabelState extends State<SelectFavoriteLabel> {
+  int isLiked;
+
+  @override
+  void initState() {
+    super.initState();
+    isLiked = widget.isLiked;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -412,75 +419,111 @@ class SelectFavoriteLabel extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(13, 5, 13, 5),
       child: Material(
         color: Colors.transparent,
-        child: InkWell(
-          highlightColor: Colors.grey.withAlpha(30),
-          splashColor: Colors.grey.withAlpha(30),
-          onTap: onPressed,
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          child: Padding(
-            padding: EdgeInsets.all(10),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Row(
-                  children: <Widget>[
-                    icon != null
-                        ? Container(
-                            margin: EdgeInsets.only(right: 15),
-                            child: Icon(
-                              icon,
-                              size: 20,
-                              color: color == null
-                                  ? Theme.of(context).primaryColor
-                                  : color,
-                            ))
-                        : Container(),
-                    Container(
-                      width: MediaQuery.of(context).size.width - 140,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            title,
-                            strutStyle: StrutStyle(
-                              leading: 0,
-                            ),
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Theme.of(context).textTheme.caption.color,
-                            ),
-                          ),
-                          description != null
-                              ? Padding(
-                                  padding: EdgeInsets.only(top: 3.2),
-                                  child: Text(
-                                    description,
-                                    style: TextStyle(
-                                      fontSize: 12.2,
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .caption
-                                          .color
-                                          .withAlpha(180),
-                                    ),
-                                  ),
-                                )
-                              : Container()
-                        ],
+        child: Padding(
+          padding: EdgeInsets.all(5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: <Widget>[
+                  Container(
+                      margin: EdgeInsets.only(right: 15),
+                      child: Icon(
+                        widget.icon,
+                        size: 20,
+                        color: Theme.of(context).primaryColor,
+                      )),
+                  Container(
+                    width: MediaQuery.of(context).size.width > 750
+                        ? 750.0 - 185.0
+                        : MediaQuery.of(context).size.width - 185,
+                    child: Text(
+                      widget.title,
+                      strutStyle: StrutStyle(
+                        leading: 0,
+                      ),
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).textTheme.caption.color,
                       ),
                     ),
-                  ],
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Icon(
-                    Icons.chevron_right,
                   ),
-                )
-              ],
-            ),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  custom.IconSwitch(
+                    icon: Icon(
+                      MdiIcons.thumbUpOutline,
+                      size: 18,
+                      color: Theme.of(context)
+                          .textTheme
+                          .caption
+                          .color
+                          .withAlpha(200),
+                    ),
+                    selectedIcon: Icon(
+                      MdiIcons.thumbUp,
+                      size: 18,
+                      color: Theme.of(context)
+                          .textTheme
+                          .caption
+                          .color
+                          .withAlpha(200),
+                    ),
+                    value: isLiked == 1,
+                    onChanged: (isOn) {
+                      if (isOn == true) {
+                        setState(() {
+                          isLiked = 1;
+                        });
+                        widget.onChanged(isLiked);
+                      } else if (isLiked == 1) {
+                        setState(() {
+                          isLiked = 0;
+                        });
+                        widget.onChanged(isLiked);
+                      }
+                    },
+                  ),
+                  custom.IconSwitch(
+                    icon: Icon(
+                      MdiIcons.thumbDownOutline,
+                      size: 18,
+                      color: Theme.of(context)
+                          .textTheme
+                          .caption
+                          .color
+                          .withAlpha(200),
+                    ),
+                    selectedIcon: Icon(
+                      MdiIcons.thumbDown,
+                      size: 18,
+                      color: Theme.of(context)
+                          .textTheme
+                          .caption
+                          .color
+                          .withAlpha(200),
+                    ),
+                    value: isLiked == 2,
+                    onChanged: (isOn) {
+                      if (isOn == true) {
+                        setState(() {
+                          isLiked = 2;
+                        });
+                        widget.onChanged(isLiked);
+                      } else if (isLiked == 2) {
+                        setState(() {
+                          isLiked = 0;
+                        });
+                        widget.onChanged(isLiked);
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
