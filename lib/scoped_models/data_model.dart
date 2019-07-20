@@ -119,13 +119,19 @@ class DataModel extends Model {
   ];
 
   generateDietWidgetList() {
-    if (!isSet || overweight < 4) {
+    if (!isSet || overweight < 7) {
       _widgetGoodDiet = null;
-      _widgetDietList = null;
+      _widgetDietList = [];
       return;
     }
 
     _sortedDietList = _getDiets();
+    if (_sortedDietList == null) {
+      _widgetGoodDiet = null;
+      _widgetDietList = [];
+      return;
+    }
+
     _widgetDietList = List<Widget>.generate(
       _sortedDietList.length,
       (int i) {
@@ -140,17 +146,19 @@ class DataModel extends Model {
                 : Divider(
                     height: 0,
                   ),
-            InfoLabel(
+            DietLabel(
               diet.name,
               description: diet.description,
+              icons: diet.icons,
             ),
           ],
         );
       },
     );
-    if (_sortedDietList.length == 0) {
+    if (_widgetDietList.length == 0) {
       _widgetGoodDiet = null;
-      _sortedDietList = null;
+      _widgetDietList = [];
+      return;
     }
     var diet = _sortedDietList[0];
     _widgetGoodDiet = Column(
@@ -167,7 +175,7 @@ class DataModel extends Model {
   Widget _widgetGoodDiet;
   Widget get widgetGoodDiet => _widgetGoodDiet;
 
-  List<Widget> _widgetDietList;
+  List<Widget> _widgetDietList = List<Widget>();
   List<Widget> get widgetDietList => _widgetDietList;
 
   List<Diet> _sortedDietList;
@@ -187,8 +195,13 @@ class DataModel extends Model {
       list.add(diet);
     }
 
-    list.sort((Diet a, Diet b) =>
-        a.duration > b.duration || a.efficiency < b.efficiency ? 1 : -1);
+    if (list.length == 0) return null;
+
+    if (list[0].efficiency > overweight)
+      list.sort((Diet a, Diet b) =>
+          a.duration > b.duration || a.efficiency > b.efficiency ? 1 : -1);
+    else
+      list.sort((Diet a, Diet b) => a.efficiency < b.efficiency ? 1 : -1);
 
     list.sort((Diet a, Diet b) => b.positiveIndex.compareTo(a.positiveIndex));
 
