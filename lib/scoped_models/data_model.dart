@@ -200,7 +200,9 @@ class DataModel extends Model {
 
     if (list.length == 0) return null;
 
-    list.sort((Diet a, Diet b) => a.efficiency < b.efficiency ? 1 : -1);
+    list.sort((Diet a, Diet b) =>
+        a.duration > b.duration || a.efficiency > b.efficiency ? 1 : -1);
+
     list.sort((Diet a, Diet b) => b.positiveIndex.compareTo(a.positiveIndex));
 
     return list;
