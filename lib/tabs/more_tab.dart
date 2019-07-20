@@ -11,6 +11,9 @@ class MoreTab extends StatefulWidget {
 }
 
 class _MoreTabState extends State<MoreTab> {
+  String version = "1.0.0";
+  String buildNumber = "9";
+
   void changeTheme(bool isNight) {
     DynamicTheme.of(context)
         .setBrightness(isNight == true ? Brightness.dark : Brightness.light);
@@ -21,7 +24,7 @@ class _MoreTabState extends State<MoreTab> {
     return TabBody(
       Column(children: [
         custom.Card(InfoLabel("Construct Diet",
-            description: "Версия: 1.0.0 (сборка 9)",
+            description: "Версия: $version (сборка $buildNumber)",
             icon: MdiIcons.featureSearch)),
         custom.Card(TitleLabel(
           "Настройки",
