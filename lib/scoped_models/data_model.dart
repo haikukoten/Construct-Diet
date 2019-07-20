@@ -1,3 +1,6 @@
+import 'package:construct_diet/common/diet.dart';
+import 'package:construct_diet/common/labels.dart';
+import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class DataModel extends Model {
@@ -91,4 +94,126 @@ class DataModel extends Model {
 
     notifyListeners();
   }
+
+  List<Diet> dietList = [
+    Diet('Греческая', [1, 2, 4, 7, 8, 10], 14, 7, 830),
+    Diet('Болгарская', [1, 3, 5, 8, 10], 14, 10, 580),
+    Diet('Безуглеводная', [1, 2, 8], 14, 8, 740),
+    Diet('Белковая', [1, 2, 3, 4, 5, 7, 8, 10], 14, 10, 700),
+    Diet('Французская', [1, 2, 3, 4, 7, 10], 14, 8, 552),
+    Diet('Гречневая', [3, 5, 8], 14, 12, 970),
+    Diet('Китайская', [1, 2, 4, 10], 14, 10, 570),
+    Diet('Бразильская', [1, 2, 3, 4], 14, 9, 550),
+    Diet('Макробиотическая', [2, 3, 4, 7], 14, 7, 710),
+    Diet('Бобовая', [1, 2, 3, 4, 7, 8], 14, 8, 660),
+    Diet('Яичная', [1, 2, 3, 4, 9], 14, 7, 880),
+    Diet('Азиатская ', [1, 2, 3, 4, 7, 8, 10], 14, 8, 1060),
+    Diet('Японская', [1, 2, 3, 4, 7, 8], 13, 8, 695),
+    Diet('Итальянская', [1, 3, 4, 7, 8, 9], 12, 6, 810),
+    Diet('Капустная', [1, 2, 3, 4, 8], 10, 10, 771),
+    Diet('Кабачковая', [1, 2, 3, 4, 8, 9], 10, 6, 620),
+    Diet('Витаминно-белковая', [1, 2, 3, 4, 8, 9, 10], 10, 7, 1000),
+    Diet('Финиковая', [3, 5, 8, 10], 10, 8, 850),
+    Diet('Яблочная', [3, 7], 7, 7, 675),
+    Diet('Кефирно-яблочная', [3, 8], 7, 6, 673)
+  ];
+
+  generateDietWidgetList() {
+    if (!isSet) return;
+
+    _sortedDietList = _getDiets();
+    _widgetDietList = List<Widget>.generate(
+      _sortedDietList.length,
+      (int i) {
+        if (i == 0) return Container();
+        var diet = _sortedDietList[i];
+        return Column(
+          children: <Widget>[
+            i == 1
+                ? Container(
+                    height: 0,
+                  )
+                : Divider(
+                    height: 0,
+                  ),
+            InfoLabel(
+              diet.name,
+              description: diet.description,
+            ),
+          ],
+        );
+      },
+    );
+    /*if (_sortedDietList.length == 0) {
+      _widgetGoodDiet = null;
+      _sortedDietList = null;
+    }*/
+    var diet = _sortedDietList[0];
+    _widgetGoodDiet = Column(
+      children: <Widget>[
+        DietLabel(
+          diet.name,
+          description: diet.description,
+          icons: diet.icons,
+        ),
+      ],
+    );
+  }
+
+  Widget _widgetGoodDiet;
+  Widget get widgetGoodDiet => _widgetGoodDiet;
+
+  List<Widget> _widgetDietList;
+  List<Widget> get widgetDietList => _widgetDietList;
+
+  List<Diet> _sortedDietList;
+
+  List<Diet> _getDiets() {
+    if (!isSet) return null;
+
+    List<Diet> list = List.from(dietList);
+    for (Diet diet in dietList) {
+      list.remove(diet);
+      if (diet.efficiency < overweight && diet.efficiency < 8) continue;
+
+      if (sortNegative.toSet().intersection(diet.category.toSet()).length != 0)
+        continue;
+
+      if (sortPositive != null)
+        diet.positiveIndex =
+            sortPositive.toSet().intersection(diet.category.toSet()).length;
+      list.add(diet);
+    }
+
+    list.sort((Diet a, Diet b) =>
+        a.duration > b.duration || a.efficiency < b.efficiency ? 1 : -1);
+    list.sort((Diet a, Diet b) => b.positiveIndex.compareTo(a.positiveIndex));
+
+    return list;
+  }
+
+  int getPositiveOrNegative(int id) {
+    if (sortPositive.contains(id)) return 1;
+    if (sortNegative.contains(id)) return 2;
+    return 0;
+  }
+
+  void addFavorite(int id, int value) {
+    if (sortPositive.contains(id) || sortNegative.contains(id)) {
+      sortPositive.remove(id);
+      sortNegative.remove(id);
+    }
+
+    switch (value) {
+      case 1:
+        sortPositive.add(id);
+        break;
+      case 2:
+        sortNegative.add(id);
+        break;
+    }
+  }
+
+  List<int> sortPositive = List<int>();
+  List<int> sortNegative = List<int>();
 }
