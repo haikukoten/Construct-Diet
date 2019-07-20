@@ -160,6 +160,9 @@ class DataModel extends Model {
       _widgetDietList = [];
       return;
     }
+
+    if (_widgetDietList.length == 1) _widgetDietList = [];
+
     var diet = _sortedDietList[0];
     _widgetGoodDiet = Column(
       children: <Widget>[
@@ -197,12 +200,7 @@ class DataModel extends Model {
 
     if (list.length == 0) return null;
 
-    if (list[0].efficiency > overweight)
-      list.sort((Diet a, Diet b) =>
-          a.duration > b.duration || a.efficiency > b.efficiency ? 1 : -1);
-    else
-      list.sort((Diet a, Diet b) => a.efficiency < b.efficiency ? 1 : -1);
-
+    list.sort((Diet a, Diet b) => a.efficiency < b.efficiency ? 1 : -1);
     list.sort((Diet a, Diet b) => b.positiveIndex.compareTo(a.positiveIndex));
 
     return list;
