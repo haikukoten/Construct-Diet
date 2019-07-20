@@ -546,43 +546,60 @@ class DietLabel extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Container(
-            width: MediaQuery.of(context).size.width > 750
-                ? 750.0 - 140.0
-                : MediaQuery.of(context).size.width - 180,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: description != null ? 0 : 4),
-                  child: Text(
-                    title,
-                    strutStyle: StrutStyle(
-                      leading: 0,
-                    ),
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Theme.of(context).textTheme.caption.color,
-                    ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: description != null ? 0 : 4),
+                child: Text(
+                  title,
+                  strutStyle: StrutStyle(
+                    leading: 0,
+                  ),
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Theme.of(context).textTheme.caption.color,
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 3.2),
-                  child: Text(
-                    description,
-                    style: TextStyle(
-                      fontSize: 12.2,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 3.2),
+                child: Text(
+                  description,
+                  style: TextStyle(
+                    fontSize: 12.2,
+                    color: Theme.of(context)
+                        .textTheme
+                        .caption
+                        .color
+                        .withAlpha(180),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 14.5),
+            child: Row(
+              children: List<Widget>.generate(
+                icons.length,
+                (i) {
+                  return Padding(
+                    padding: EdgeInsets.all(3),
+                    child: Icon(
+                      icons[i],
+                      size: 12.2,
                       color: Theme.of(context)
                           .textTheme
                           .caption
                           .color
-                          .withAlpha(180),
+                          .withAlpha(200),
                     ),
-                  ),
-                ),
-              ],
+                  );
+                },
+              ),
             ),
           ),
         ],
