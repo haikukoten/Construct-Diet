@@ -119,7 +119,7 @@ class DataModel extends Model {
   ];
 
   generateDietWidgetList() {
-    if (!isSet) return;
+    if (!isSet || _overweight == 0) return;
 
     _sortedDietList = _getDiets();
     _widgetDietList = List<Widget>.generate(
@@ -169,8 +169,6 @@ class DataModel extends Model {
   List<Diet> _sortedDietList;
 
   List<Diet> _getDiets() {
-    if (!isSet) return null;
-
     List<Diet> list = List.from(dietList);
     for (Diet diet in dietList) {
       list.remove(diet);
