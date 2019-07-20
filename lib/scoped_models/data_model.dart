@@ -119,7 +119,11 @@ class DataModel extends Model {
   ];
 
   generateDietWidgetList() {
-    if (!isSet || _overweight == 0) return;
+    if (!isSet || overweight < 4) {
+      _widgetGoodDiet = null;
+      _widgetDietList = null;
+      return;
+    }
 
     _sortedDietList = _getDiets();
     _widgetDietList = List<Widget>.generate(
