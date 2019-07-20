@@ -60,7 +60,7 @@ class _ResultTabState extends State<ResultTab> {
                       child: model.widgetGoodDiet,
                     ),
             ),
-            model.widgetDietList != null
+            model.widgetDietList.length != 0
                 ? custom.Card(TitleLabel(
                     "Диеты",
                     icon: MdiIcons.cards,
