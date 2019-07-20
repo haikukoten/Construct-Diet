@@ -461,7 +461,7 @@ class _SelectFavoriteLabelState extends State<SelectFavoriteLabel> {
                           .textTheme
                           .caption
                           .color
-                          .withAlpha(200),
+                          .withAlpha(150),
                     ),
                     selectedIcon: Icon(
                       MdiIcons.thumbUp,
@@ -491,7 +491,7 @@ class _SelectFavoriteLabelState extends State<SelectFavoriteLabel> {
                           .textTheme
                           .caption
                           .color
-                          .withAlpha(200),
+                          .withAlpha(150),
                     ),
                     selectedIcon: Icon(
                       MdiIcons.thumbDown,
