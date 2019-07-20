@@ -67,7 +67,7 @@ class DataModel extends Model {
     if (imt >= 25 && imt < 30) return 3;
     if (imt >= 30 && imt < 35) return 4;
     if (imt >= 35 && imt <= 40) return 5;
-    if (imt > 40) return 6;
+    if (imt >= 40) return 6;
   }
 
   void save() {
