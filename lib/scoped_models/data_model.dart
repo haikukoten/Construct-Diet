@@ -66,11 +66,11 @@ class DataModel extends Model {
   getStatus() {
     if (imt < 16) return 0;
     if (imt >= 16 && imt < 18.5) return 1;
-    if (imt >= 18.5 && imt < 25) return 2;
-    if (imt >= 25 && imt < 30) return 3;
-    if (imt >= 30 && imt < 35) return 4;
-    if (imt >= 35 && imt <= 40) return 5;
-    if (imt >= 40) return 6;
+    if (imt >= 18.5 && imt < 24.9) return 2;
+    if (imt >= 24.9 && imt < 29.9) return 3;
+    if (imt >= 29.9 && imt < 34.9) return 4;
+    if (imt >= 34.9 && imt <= 39.9) return 5;
+    if (imt >= 39.9) return 6;
   }
 
   void save() {
@@ -144,10 +144,10 @@ class DataModel extends Model {
         );
       },
     );
-    /*if (_sortedDietList.length == 0) {
+    if (_sortedDietList.length == 0) {
       _widgetGoodDiet = null;
       _sortedDietList = null;
-    }*/
+    }
     var diet = _sortedDietList[0];
     _widgetGoodDiet = Column(
       children: <Widget>[
@@ -172,7 +172,7 @@ class DataModel extends Model {
     List<Diet> list = List.from(dietList);
     for (Diet diet in dietList) {
       list.remove(diet);
-      if (diet.efficiency < overweight && diet.efficiency < 8) continue;
+      if ((diet.efficiency < overweight) && diet.efficiency < 8) continue;
 
       if (sortNegative.toSet().intersection(diet.category.toSet()).length != 0)
         continue;
@@ -185,6 +185,7 @@ class DataModel extends Model {
 
     list.sort((Diet a, Diet b) =>
         a.duration > b.duration || a.efficiency < b.efficiency ? 1 : -1);
+
     list.sort((Diet a, Diet b) => b.positiveIndex.compareTo(a.positiveIndex));
 
     return list;
