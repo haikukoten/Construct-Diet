@@ -86,12 +86,12 @@ class PlugLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(18),
+      padding: EdgeInsets.fromLTRB(18, 21, 18, 21),
       child: Column(
         children: <Widget>[
           icon != null
               ? Container(
-                  margin: EdgeInsets.only(bottom: 15),
+                  margin: EdgeInsets.only(bottom: 16),
                   child: Icon(
                     icon,
                     size: 40,
@@ -140,8 +140,9 @@ class TitleLabel extends StatelessWidget {
   final String title;
   final IconData icon;
   final Widget child;
+  final double paddingTop;
 
-  TitleLabel(this.title, {this.icon, this.child});
+  TitleLabel(this.title, {this.icon, this.child, this.paddingTop = 14});
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +150,7 @@ class TitleLabel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.fromLTRB(18, 12, 18, 0),
+          padding: EdgeInsets.fromLTRB(18, paddingTop, 18, 0),
           child: Row(
             children: <Widget>[
               icon != null
@@ -165,15 +166,21 @@ class TitleLabel extends StatelessWidget {
                             .withAlpha(180),
                       ))
                   : Container(),
-              Text(
-                title,
-                strutStyle: StrutStyle(
-                  leading: 0,
-                ),
-                style: TextStyle(
-                  fontSize: 12.8,
-                  color:
-                      Theme.of(context).textTheme.caption.color.withAlpha(180),
+              Padding(
+                padding: EdgeInsets.only(top: 0.2),
+                child: Text(
+                  title,
+                  strutStyle: StrutStyle(
+                    leading: 0,
+                  ),
+                  style: TextStyle(
+                    fontSize: 12.8,
+                    color: Theme.of(context)
+                        .textTheme
+                        .caption
+                        .color
+                        .withAlpha(180),
+                  ),
                 ),
               ),
             ],
@@ -210,7 +217,7 @@ class _InfoSwitchLabelState extends State<InfoSwitchLabel> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(8, 5, 8, 0),
+      padding: EdgeInsets.fromLTRB(8, 5, 8, 3),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -518,6 +525,67 @@ class _SelectFavoriteLabelState extends State<SelectFavoriteLabel> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class DietLabel extends StatelessWidget {
+  final String title;
+  final String description;
+  final List<IconData> icons;
+
+  DietLabel(this.title, {this.description, this.icons});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: description != null
+          ? EdgeInsets.fromLTRB(18, 14.5, 18, 14.5)
+          : EdgeInsets.fromLTRB(18, 19.5, 18, 19.5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Container(
+            width: MediaQuery.of(context).size.width > 750
+                ? 750.0 - 140.0
+                : MediaQuery.of(context).size.width - 180,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: description != null ? 0 : 4),
+                  child: Text(
+                    title,
+                    strutStyle: StrutStyle(
+                      leading: 0,
+                    ),
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).textTheme.caption.color,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 3.2),
+                  child: Text(
+                    description,
+                    style: TextStyle(
+                      fontSize: 12.2,
+                      color: Theme.of(context)
+                          .textTheme
+                          .caption
+                          .color
+                          .withAlpha(180),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
