@@ -14,44 +14,61 @@ class ResultTab extends StatefulWidget {
 class _ResultTabState extends State<ResultTab> {
   @override
   Widget build(BuildContext context) {
+    ScopedModel.of<DataModel>(context, rebuildOnChange: true)
+        .generateDietWidgetList();
     return TabBody(
       ScopedModelDescendant<DataModel>(builder: (context, child, model) {
-        return Column(children: [
-          model.isSet
-              ? custom.Card(
-                  TitleLabel(
-                    "Сведения о здоровье",
-                    icon: Icons.info_outline,
-                    child: Column(children: [
-                      Divider(
-                        height: 5,
-                        color: Colors.transparent,
-                      ),
-                      Column(
-                        children: <Widget>[
-                          InfoLabel("Индекс массы тела",
-                              description: model.imt.toStringAsFixed(2)),
-                          InfoLabel("Допустимый вес",
-                              description:
-                                  "от ${model.minWeight} кг до ${model.maxWeight} кг (идеально – ${model.idealWeight} кг)"),
-                          InfoLabel("Избыточный вес",
-                              description: model.overweight == 0
-                                  ? 'Отсутствует'
-                                  : (model.overweight.toString() + "кг"))
-                        ],
-                      ),
-                    ]),
-                  ),
-                )
-              : Container(),
-          custom.Card(
-            PlugLabel("Диеты не найдены",
-                description: model.overweight < 4
-                    ? "Нет необходимости в похудении."
-                    : "Попробуйте изменить фильтр по предпочтениям.",
-                icon: MdiIcons.magnify),
-          ),
-        ]);
+        return Column(
+          children: [
+            model.isSet
+                ? custom.Card(
+                    TitleLabel(
+                      "Сведения о здоровье",
+                      icon: Icons.info_outline,
+                      child: Column(children: [
+                        Divider(
+                          height: 5,
+                          color: Colors.transparent,
+                        ),
+                        Column(
+                          children: <Widget>[
+                            InfoLabel("Индекс массы тела",
+                                description: model.imt.toStringAsFixed(2)),
+                            InfoLabel("Допустимый вес",
+                                description:
+                                    "от ${model.minWeight} кг до ${model.maxWeight} кг (идеально – ${model.idealWeight} кг)"),
+                            InfoLabel("Избыточный вес",
+                                description: model.overweight == 0
+                                    ? 'Отсутствует'
+                                    : (model.overweight.toString() + "кг"))
+                          ],
+                        ),
+                      ]),
+                    ),
+                  )
+                : Container(),
+            custom.Card(
+              model.widgetGoodDiet == null
+                  ? PlugLabel("Диеты не найдены",
+                      description: model.overweight < 4
+                          ? "Нет необходимости в похудении."
+                          : "Попробуйте изменить фильтр по предпочтениям.",
+                      icon: MdiIcons.cards)
+                  : TitleLabel(
+                      "Самая подходящая диета",
+                      icon: MdiIcons.crown,
+                      child: model.widgetGoodDiet,
+                    ),
+            ),
+            model.widgetDietList.length != 0
+                ? custom.Card(TitleLabel(
+                    "Диеты",
+                    icon: MdiIcons.cards,
+                    child: Column(children: model.widgetDietList),
+                  ))
+                : Container(),
+          ],
+        );
       }),
     );
   }
