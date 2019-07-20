@@ -1,8 +1,10 @@
 import 'package:construct_diet/common/cards.dart' as custom;
 import 'package:construct_diet/common/labels.dart';
 import 'package:construct_diet/common/tab_body.dart';
+import 'package:construct_diet/scoped_models/data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class FavoritesTab extends StatefulWidget {
   @override
@@ -13,9 +15,8 @@ class FavoriteFood {
   final int id;
   final String name;
   final IconData icon;
-  int isLiked;
 
-  FavoriteFood(this.id, this.name, this.icon, [this.isLiked = 0]);
+  FavoriteFood(this.id, this.name, this.icon);
 }
 
 class _FavoritesTabState extends State<FavoritesTab> {
@@ -33,37 +34,41 @@ class _FavoritesTabState extends State<FavoritesTab> {
 
   @override
   Widget build(BuildContext context) {
-    return TabBody(
-      Column(children: [
-        custom.Card(InfoLabel("Подбирайте диеты под свой вкус",
-            description:
-                "Выберите, какие продукты вы желаете видеть в диетах, а какие нужно отсеить из выдачи.",
-            icon: MdiIcons.heart)),
-        custom.Card(Column(
-          children: List<Widget>.generate(foodList.length, (int i) {
-            FavoriteFood food = foodList[i];
-            return Column(
-              children: <Widget>[
-                i == 0
-                    ? Container(
-                        height: 1,
-                      )
-                    : Divider(
-                        height: 0,
-                      ),
-                SelectFavoriteLabel(
-                  food.name,
-                  icon: food.icon,
-                  isLiked: food.isLiked,
-                  onChanged: (value) {
-                    print(value);
-                  },
-                ),
-              ],
-            );
-          }),
-        ))
-      ]),
-    );
+    return ScopedModelDescendant<DataModel>(builder: (context, child, model) {
+      return TabBody(
+        Column(children: [
+          custom.Card(InfoLabel("Подбирайте диеты под свой вкус",
+              description:
+                  "Выберите, какие продукты вы желаете видеть в диетах, а какие нужно отсеить из выдачи.",
+              icon: MdiIcons.heart)),
+          custom.Card(Column(
+            children: List<Widget>.generate(foodList.length, (int i) {
+              FavoriteFood food = foodList[i];
+              return Column(
+                children: <Widget>[
+                  i == 0
+                      ? Container(
+                          height: 1,
+                        )
+                      : Divider(
+                          height: 0,
+                        ),
+                  SelectFavoriteLabel(
+                    food.name,
+                    icon: food.icon,
+                    isLiked: model.getPositiveOrNegative(food.id),
+                    onChanged: (value) {
+                      setState(() {
+                        model.addFavorite(food.id, value);
+                      });
+                    },
+                  ),
+                ],
+              );
+            }),
+          ))
+        ]),
+      );
+    });
   }
 }
