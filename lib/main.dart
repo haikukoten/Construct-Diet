@@ -1,3 +1,4 @@
+import 'package:construct_diet/common/clear_behavior.dart';
 import 'package:construct_diet/common/custom_tab.dart';
 import 'package:construct_diet/common/labels.dart';
 import 'package:construct_diet/common/page_transition.dart';
@@ -56,6 +57,12 @@ class MyApp extends StatelessWidget {
           },
           themedWidgetBuilder: (context, theme) {
             return MaterialApp(
+              builder: (context, child) {
+                return ScrollConfiguration(
+                  behavior: ClearBehavior(),
+                  child: child,
+                );
+              },
               debugShowCheckedModeBanner: false,
               title: 'Construct Diet',
               theme: theme,
