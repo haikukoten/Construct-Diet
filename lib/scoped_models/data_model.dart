@@ -146,11 +146,7 @@ class DataModel extends Model {
                 : Divider(
                     height: 0,
                   ),
-            DietLabel(
-              diet.name,
-              description: diet.description,
-              icons: diet.icons,
-            ),
+            DietLabel(diet),
           ],
         );
       },
@@ -166,11 +162,7 @@ class DataModel extends Model {
     var diet = _sortedDietList[0];
     _widgetGoodDiet = Column(
       children: <Widget>[
-        DietLabel(
-          diet.name,
-          description: diet.description,
-          icons: diet.icons,
-        ),
+        DietLabel(diet),
       ],
     );
   }

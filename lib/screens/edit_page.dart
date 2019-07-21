@@ -172,7 +172,7 @@ class _EditPageState extends State<EditPage> {
 
   Widget appBar() {
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, 8, 0, 10),
+      padding: EdgeInsets.fromLTRB(4, 12, 4, 14),
       child: Hero(
         tag: 'appbar',
         child: Material(
