@@ -119,7 +119,7 @@ class DataModel extends Model {
   ];
 
   generateDietWidgetList() {
-    if (!isSet || overweight < 7) {
+    if (!isSet || overweight < 4) {
       _widgetGoodDiet = null;
       _widgetDietList = [];
       return;
@@ -178,24 +178,46 @@ class DataModel extends Model {
   List<Diet> _getDiets() {
     List<Diet> list = List.from(dietList);
     for (Diet diet in dietList) {
-      list.remove(diet);
-      if ((diet.efficiency < overweight) && diet.efficiency < 8) continue;
+      if ((diet.efficiency < overweight) && diet.efficiency < 8) {
+        list.remove(diet);
+        continue;
+      }
 
       if (sortNegative.toSet().intersection(diet.category.toSet()).length != 0)
         continue;
 
+      diet.positiveIndex = (diet.efficiency - overweight) - diet.duration;
+      if (diet.positiveIndex > 0) diet.positiveIndex *= -1;
+
       if (sortPositive != null)
-        diet.positiveIndex =
-            sortPositive.toSet().intersection(diet.category.toSet()).length;
-      list.add(diet);
+        diet.positiveIndex +=
+            sortPositive.toSet().intersection(diet.category.toSet()).length *
+                10;
     }
 
     if (list.length == 0) return null;
 
     list.sort((Diet a, Diet b) =>
         a.duration > b.duration || a.efficiency > b.efficiency ? 1 : -1);
-
     list.sort((Diet a, Diet b) => b.positiveIndex.compareTo(a.positiveIndex));
+
+    int minIndex = list[list.length - 1].positiveIndex;
+
+    for (int i = 0; i < list.length; i++) {
+      list[i].positiveIndex += -minIndex - i;
+    }
+
+    minIndex = list[list.length - 1].positiveIndex;
+
+    for (int i = 0; i < list.length; i++) {
+      list[i].positiveIndex += -minIndex;
+    }
+
+    int maxIndex = list[0].positiveIndex + -minIndex;
+
+    for (Diet diet in list) {
+      diet.positiveIndex = (diet.positiveIndex * (1 / maxIndex) * 100).floor();
+    }
 
     return list;
   }

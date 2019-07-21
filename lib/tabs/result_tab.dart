@@ -50,7 +50,7 @@ class _ResultTabState extends State<ResultTab> {
             custom.Card(
               model.widgetGoodDiet == null
                   ? PlugLabel("Диеты не найдены",
-                      description: model.overweight < 7
+                      description: model.overweight < 4
                           ? "Нет необходимости в похудении."
                           : "Попробуйте изменить фильтр по предпочтениям.",
                       icon: MdiIcons.cards)
