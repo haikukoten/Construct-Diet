@@ -1,3 +1,4 @@
+import 'package:construct_diet/common/diet.dart';
 import 'package:construct_diet/common/page_transition.dart';
 import 'package:construct_diet/screens/diet_info_page.dart';
 import 'package:flutter/material.dart';
@@ -100,11 +101,9 @@ class ButtonLabel extends StatelessWidget {
 }
 
 class DietLabel extends StatelessWidget {
-  final String title;
-  final String description;
-  final List<IconData> icons;
+  final Diet diet;
 
-  DietLabel(this.title, {this.description, this.icons});
+  DietLabel(this.diet);
 
   @override
   Widget build(BuildContext context) {
@@ -118,12 +117,12 @@ class DietLabel extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              TransitionPageRoute(widget: DietInfoPage(title, description)),
+              TransitionPageRoute(widget: DietInfoPage(diet)),
             );
           },
           borderRadius: BorderRadius.all(Radius.circular(5)),
           child: Padding(
-            padding: EdgeInsets.fromLTRB(10, 6.5, 2, 6.5),
+            padding: EdgeInsets.fromLTRB(10, 8.5, 2, 8.5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -131,28 +130,21 @@ class DietLabel extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding:
-                          EdgeInsets.only(top: description != null ? 0 : 4),
-                      child: Hero(
-                        tag: "title_diet",
-                        child: Text(
-                          title,
-                          strutStyle: StrutStyle(
-                            leading: 0,
-                          ),
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: Theme.of(context).textTheme.caption.color,
-                          ),
-                        ),
+                    Text(
+                      diet.name,
+                      strutStyle: StrutStyle(
+                        leading: 0,
+                      ),
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).textTheme.caption.color,
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 3.2),
                       child: Text(
-                        description,
+                        diet.description,
                         style: TextStyle(
                           fontSize: 12.2,
                           color: Theme.of(context)
@@ -169,12 +161,12 @@ class DietLabel extends StatelessWidget {
                   padding: EdgeInsets.only(bottom: 14.5),
                   child: Row(
                     children: List<Widget>.generate(
-                      icons.length,
+                      diet.icons.length,
                       (i) {
                         return Padding(
                           padding: EdgeInsets.all(3),
                           child: Icon(
-                            icons[i],
+                            diet.icons[i],
                             size: 12.2,
                             color: Theme.of(context)
                                 .textTheme
@@ -211,10 +203,16 @@ class InfoLabel extends StatelessWidget {
           ? EdgeInsets.fromLTRB(18, 14.5, 18, 14.5)
           : EdgeInsets.fromLTRB(18, 19.5, 18, 19.5),
       child: Row(
+        crossAxisAlignment: description.contains("\n")
+            ? CrossAxisAlignment.start
+            : CrossAxisAlignment.center,
         children: <Widget>[
           icon != null
               ? Container(
-                  margin: EdgeInsets.only(right: 15),
+                  margin: EdgeInsets.only(
+                    right: 15,
+                    top: description.contains("\n") ? 5 : 0,
+                  ),
                   child: Icon(
                     icon,
                     size: 20,
@@ -361,8 +359,10 @@ class TitleLabel extends StatelessWidget {
   final IconData icon;
   final Widget child;
   final double paddingTop;
+  final double paddingBottom;
 
-  TitleLabel(this.title, {this.icon, this.child, this.paddingTop = 14});
+  TitleLabel(this.title,
+      {this.icon, this.child, this.paddingTop = 14, this.paddingBottom = 2});
 
   @override
   Widget build(BuildContext context) {
@@ -407,7 +407,7 @@ class TitleLabel extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 4),
+          padding: EdgeInsets.only(bottom: paddingBottom),
           child: child,
         ),
       ],
@@ -512,6 +512,12 @@ class _InfoSwitchLabelState extends State<InfoSwitchLabel> {
 
 class _SelectFavoriteLabelState extends State<SelectFavoriteLabel> {
   int isLiked;
+
+  @override
+  void initState() {
+    super.initState();
+    isLiked = widget.isLiked;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -620,11 +626,5 @@ class _SelectFavoriteLabelState extends State<SelectFavoriteLabel> {
         ),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    isLiked = widget.isLiked;
   }
 }
