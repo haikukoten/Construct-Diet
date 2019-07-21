@@ -164,8 +164,7 @@ class _EditPageState extends State<EditPage> {
                 ),
               );
             });
-        ScopedModel.of<DataModel>(context, rebuildOnChange: true)
-            .generateDietWidgetList();
+        ScopedModel.of<DataModel>(context).generateDietWidgetList();
       },
     );
   }
