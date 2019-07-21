@@ -227,10 +227,8 @@ class DataModel extends Model {
   List<Diet> _getDiets() {
     List<Diet> list = List.from(dietList);
     for (Diet diet in dietList) {
-      if ((diet.efficiency < overweight) && diet.efficiency < 8) {
-        list.remove(diet);
-        continue;
-      }
+      list.remove(diet);
+      if ((diet.efficiency < overweight) && diet.efficiency < 8) continue;
 
       if (sortNegative.toSet().intersection(diet.category.toSet()).length != 0)
         continue;
@@ -242,9 +240,12 @@ class DataModel extends Model {
         diet.positiveIndex +=
             sortPositive.toSet().intersection(diet.category.toSet()).length *
                 10;
+
+      list.add(diet);
     }
 
     if (list.length == 0) return null;
+    if (list.length == 1) return list;
 
     list.sort((Diet a, Diet b) =>
         a.duration > b.duration || a.efficiency > b.efficiency ? 1 : -1);
