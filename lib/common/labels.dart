@@ -47,8 +47,8 @@ class ButtonLabel extends StatelessWidget {
                         : Container(),
                     Container(
                       width: MediaQuery.of(context).size.width > 750
-                          ? 750.0 - 140.0
-                          : MediaQuery.of(context).size.width - 140,
+                          ? 750.0 - 170.0
+                          : MediaQuery.of(context).size.width - 170,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -266,7 +266,7 @@ class InfoLabel extends StatelessWidget {
   }
 }
 
-class InfoSwitchLabel extends StatefulWidget {
+class SwitchLabel extends StatefulWidget {
   final String title;
   final String description;
   final IconData icon;
@@ -274,11 +274,11 @@ class InfoSwitchLabel extends StatefulWidget {
   final bool value;
   final ValueChanged<bool> onChanged;
 
-  InfoSwitchLabel(this.title,
+  SwitchLabel(this.title,
       {this.description, this.icon, this.color, this.value, this.onChanged});
 
   @override
-  _InfoSwitchLabelState createState() => _InfoSwitchLabelState(this.value);
+  _SwitchLabelState createState() => _SwitchLabelState(this.value);
 }
 
 class PlugLabel extends StatelessWidget {
@@ -415,14 +415,14 @@ class TitleLabel extends StatelessWidget {
   }
 }
 
-class _InfoSwitchLabelState extends State<InfoSwitchLabel> {
+class _SwitchLabelState extends State<SwitchLabel> {
   bool value;
-  _InfoSwitchLabelState(this.value);
+  _SwitchLabelState(this.value);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(8, 5, 8, 3),
+      padding: EdgeInsets.fromLTRB(8, 5, 8, 5),
       child: Material(
         color: Colors.transparent,
         child: InkWell(

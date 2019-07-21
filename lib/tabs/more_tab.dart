@@ -34,7 +34,7 @@ class _MoreTabState extends State<MoreTab> {
               height: 5,
               color: Colors.transparent,
             ),
-            InfoSwitchLabel(
+            SwitchLabel(
               "Перейти на тёмную сторону",
               description: "Активировать тёмную тему",
               icon: MdiIcons.weatherNight,
