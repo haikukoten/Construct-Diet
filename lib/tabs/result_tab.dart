@@ -63,7 +63,8 @@ class _ResultTabState extends State<ResultTab> {
             model.widgetDietList.length != 0
                 ? custom.Card(TitleLabel(
                     "Диеты",
-                    icon: MdiIcons.cards,
+                    icon: MdiIcons.cardsOutline,
+                    paddingBottom: 0,
                     child: Column(children: model.widgetDietList),
                   ))
                 : Container(),
