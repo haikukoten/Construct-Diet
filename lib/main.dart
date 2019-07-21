@@ -108,6 +108,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     super.initState();
     controllerTab = TabController(length: 3, vsync: this);
     controllerScroll = ScrollController();
+
+    ScopedModel.of<DataModel>(context).loadToStorage();
   }
 
   @override

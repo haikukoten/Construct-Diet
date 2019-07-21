@@ -163,8 +163,7 @@ class _EditPageState extends State<EditPage> {
                   ),
                 ),
               );
-            });
-        ScopedModel.of<DataModel>(context).generateDietWidgetList();
+            }).then((s) => ScopedModel.of<DataModel>(context).save());
       },
     );
   }

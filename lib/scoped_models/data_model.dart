@@ -2,6 +2,7 @@ import 'package:construct_diet/common/diet.dart';
 import 'package:construct_diet/common/labels.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DataModel extends Model {
   bool _isSet = false;
@@ -42,25 +43,21 @@ class DataModel extends Model {
   void setGender(dynamic value, int index) {
     _isWoman = index == 0;
     _genderIndex = index;
-    save();
   }
 
   void setAge(int value, int index) {
     _age = value;
     _ageIndex = index;
-    save();
   }
 
   void setHeight(int value, int index) {
     _height = value;
     _heightIndex = index;
-    save();
   }
 
   void setWeight(int value, int index) {
     _weight = value;
     _weightIndex = index;
-    save();
   }
 
   getStatus() {
@@ -78,21 +75,73 @@ class DataModel extends Model {
     int heightft = ((height * 0.3937008) / 12).floor();
     double heightinch = ((height * 0.3937008) % 12);
 
-    _idealWeight = isWoman
-        ? (45.5 + ((((heightft * 12) + heightinch) - 60) * 2.3)).floor()
-        : (50 + ((((heightft * 12) + heightinch) - 60) * 2.3)).floor();
-
-    var inchConv = ((heightft * 12) + heightinch) / 39.373533;
+    double inchConv = ((heightft * 12) + heightinch) / 39.373533;
     _minWeight = (inchConv * inchConv * 18.5).floor() + 1;
     _maxWeight = (inchConv * inchConv * 25).floor();
 
-    var heightm = height * 0.01;
+    double heightm = height * 0.01;
     _imt = weight / (heightm * heightm);
+
+    _idealWeight = isWoman
+        ? (45.5 + ((((heightft * 12) + heightinch) - 60) * 2.3)).floor()
+        : (50 + ((((heightft * 12) + heightinch) - 60) * 2.3)).floor();
 
     _overweight = weight - idealWeight;
     if (_overweight < 0) _overweight = 0;
 
     notifyListeners();
+    generateDietWidgetList();
+    saveToStorage();
+  }
+
+  void saveToStorage() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    prefs.setInt('genderIndex', _genderIndex);
+    prefs.setInt('ageIndex', _ageIndex);
+    prefs.setInt('heightIndex', _heightIndex);
+    prefs.setInt('weightIndex', _weightIndex);
+
+    prefs.setBool('isWoman', _isWoman);
+    prefs.setInt('age', _age);
+    prefs.setInt('height', _height);
+    prefs.setInt('weight', _weight);
+
+    prefs.setString('sortPositive', sortPositive.join(","));
+    prefs.setString('sortNegative', sortNegative.join(","));
+  }
+
+  void loadToStorage() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    _genderIndex = prefs.getInt('genderIndex');
+    if (_genderIndex == null) return;
+    _ageIndex = prefs.getInt('ageIndex');
+    _heightIndex = prefs.getInt('heightIndex');
+    _weightIndex = prefs.getInt('weightIndex');
+
+    _isWoman = prefs.getBool('isWoman');
+    _age = prefs.getInt('age');
+    _height = prefs.getInt('height');
+    _weight = prefs.getInt('weight');
+
+    sortPositive = prefs
+        .getString('sortPositive')
+        .split(",")
+        .map((i) => int.tryParse(i))
+        .toList();
+    sortNegative = prefs
+        .getString('sortNegative')
+        .split(",")
+        .map((i) => int.tryParse(i))
+        .toList();
+
+    save();
+  }
+
+  Future<void> clearStorage() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.clear();
   }
 
   List<Diet> dietList = [
@@ -242,6 +291,7 @@ class DataModel extends Model {
         sortNegative.add(id);
         break;
     }
+    save();
   }
 
   List<int> sortPositive = List<int>();
