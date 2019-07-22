@@ -6,7 +6,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class DataModel extends Model {
   bool _isSet = false;
+  bool _isOpenedDiet = false;
   bool get isSet => _isSet;
+  bool get isOpenedDiet => _isOpenedDiet;
 
   int _genderIndex = 0;
   int _ageIndex = 13;
@@ -98,6 +100,7 @@ class DataModel extends Model {
     final prefs = await SharedPreferences.getInstance();
 
     prefs.setBool('isSet', _isSet);
+    prefs.setBool('isOpenedDiet', _isOpenedDiet);
 
     prefs.setInt('genderIndex', _genderIndex);
     prefs.setInt('ageIndex', _ageIndex);
@@ -119,6 +122,7 @@ class DataModel extends Model {
     if (prefs.getBool('isSet') == null) return;
 
     _isSet = prefs.getBool('isSet');
+    _isOpenedDiet = prefs.getBool('isOpenedDiet');
 
     _genderIndex = prefs.getInt('genderIndex');
     _ageIndex = prefs.getInt('ageIndex');
@@ -147,6 +151,13 @@ class DataModel extends Model {
   Future<void> clearStorage() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.clear();
+  }
+
+  void closeTip() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    _isOpenedDiet = true;
+    prefs.setBool('isOpenedDiet', _isOpenedDiet);
   }
 
   List<Diet> dietList = [

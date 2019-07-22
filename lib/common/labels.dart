@@ -1,8 +1,10 @@
 import 'package:construct_diet/common/diet.dart';
 import 'package:construct_diet/common/page_transition.dart';
+import 'package:construct_diet/scoped_models/data_model.dart';
 import 'package:construct_diet/screens/diet_info_page.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 import 'buttons.dart' as custom;
 
@@ -115,6 +117,7 @@ class DietLabel extends StatelessWidget {
           highlightColor: Colors.grey.withAlpha(30),
           splashColor: Colors.grey.withAlpha(30),
           onTap: () {
+            ScopedModel.of<DataModel>(context).closeTip();
             Navigator.push(
               context,
               TransitionPageRoute(widget: DietInfoPage(diet)),
