@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class IconButton extends StatelessWidget {
   final double width;
   final double height;
   final IconData icon;
+  final Size iconSize;
   final GestureTapCallback onPressed;
 
   IconButton(
       {this.width = 40,
       this.height = 40,
       this.icon,
+      this.iconSize,
       this.onPressed});
 
   @override
@@ -28,6 +31,15 @@ class IconButton extends StatelessWidget {
         ),
         onTap: onPressed,
       ),
+    );
+  }
+
+  factory IconButton.url(IconData icon, String url) {
+    return IconButton(
+      icon: icon,
+      onPressed: () {
+        launch(url);
+      },
     );
   }
 }
