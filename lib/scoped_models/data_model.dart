@@ -97,6 +97,8 @@ class DataModel extends Model {
   void saveToStorage() async {
     final prefs = await SharedPreferences.getInstance();
 
+    prefs.setBool('isSet', _isSet);
+
     prefs.setInt('genderIndex', _genderIndex);
     prefs.setInt('ageIndex', _ageIndex);
     prefs.setInt('heightIndex', _heightIndex);
@@ -114,8 +116,11 @@ class DataModel extends Model {
   void loadToStorage() async {
     final prefs = await SharedPreferences.getInstance();
 
+    if (prefs.getBool('isSet') == null) return;
+
+    _isSet = prefs.getBool('isSet');
+
     _genderIndex = prefs.getInt('genderIndex');
-    if (_genderIndex == null) return;
     _ageIndex = prefs.getInt('ageIndex');
     _heightIndex = prefs.getInt('heightIndex');
     _weightIndex = prefs.getInt('weightIndex');
