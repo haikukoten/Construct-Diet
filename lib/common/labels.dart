@@ -387,7 +387,7 @@ class TitleLabel extends StatelessWidget {
                       ))
                   : Container(),
               Padding(
-                padding: EdgeInsets.only(top: 0.2),
+                padding: EdgeInsets.only(top: 0.5),
                 child: Text(
                   title,
                   strutStyle: StrutStyle(
