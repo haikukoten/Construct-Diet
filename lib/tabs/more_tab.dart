@@ -49,11 +49,15 @@ class _MoreTabState extends State<MoreTab> {
                 },
               ),
               Divider(height: 5),
-              ButtonLabel("Сбросить настройки",
-                  description: "После сброса запустите приложение снова.",
-                  icon: Icons.settings_backup_restore,
-                  onPressed: () =>
-                      ScopedModel.of<DataModel>(context).clearStorage())
+              ButtonLabel(
+                "Сбросить настройки",
+                description: "После сброса запустите приложение снова.",
+                icon: Icons.settings_backup_restore,
+                onPressed: () => ScopedModel.of<DataModel>(context)
+                    .clearStorage()
+                    .then((s) => SystemChannels.platform
+                        .invokeMethod('SystemNavigator.pop')),
+              )
             ]),
           )),
           custom.Card(
