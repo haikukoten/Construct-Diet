@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 class IconButton extends StatelessWidget {
   final double width;
   final double height;
-  final Icon icon;
+  final IconData icon;
   final GestureTapCallback onPressed;
 
-  IconButton({this.width = 40, this.height = 40, this.icon, this.onPressed});
+  IconButton(
+      {this.width = 40,
+      this.height = 40,
+      this.icon,
+      this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +21,11 @@ class IconButton extends StatelessWidget {
         highlightColor: Colors.grey.withAlpha(50),
         splashColor: Colors.grey.withAlpha(50),
         borderRadius: BorderRadius.all(Radius.circular(50)),
-        child: icon,
+        child: Icon(
+          icon,
+          size: 20,
+          color: Theme.of(context).textTheme.caption.color,
+        ),
         onTap: onPressed,
       ),
     );

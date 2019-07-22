@@ -187,10 +187,7 @@ class _EditPageState extends State<EditPage> {
                   child: Row(
                     children: <Widget>[
                       custom.IconButton(
-                        icon: Icon(
-                          Icons.arrow_back,
-                          size: 22,
-                        ),
+                        icon: Icons.arrow_back,
                         onPressed: () => Navigator.pop(context),
                       ),
                       Padding(
