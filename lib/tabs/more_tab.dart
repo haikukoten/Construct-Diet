@@ -7,6 +7,7 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:package_info/package_info.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class MoreTab extends StatefulWidget {
@@ -17,6 +18,15 @@ class MoreTab extends StatefulWidget {
 class _MoreTabState extends State<MoreTab> {
   String version = "1.0.0";
   String buildNumber = "9";
+
+  @override
+  void initState() {
+    super.initState();
+    PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
+      version = packageInfo.version;
+      buildNumber = packageInfo.buildNumber;
+    });
+  }
 
   void changeTheme(bool isNight) {
     DynamicTheme.of(context)
