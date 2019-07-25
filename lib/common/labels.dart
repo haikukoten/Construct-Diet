@@ -42,10 +42,9 @@ class ButtonLabel extends StatelessWidget {
                             child: Icon(
                               icon,
                               size: 20,
-                              color: color == null
-                                  ? Theme.of(context).primaryColor
-                                  : color,
-                            ))
+                              color: color ?? Theme.of(context).primaryColor,
+                            ),
+                          )
                         : Container(),
                     Container(
                       width: MediaQuery.of(context).size.width > 750
@@ -219,8 +218,7 @@ class InfoLabel extends StatelessWidget {
                   child: Icon(
                     icon,
                     size: 20,
-                    color:
-                        color == null ? Theme.of(context).primaryColor : color,
+                    color: color ?? Theme.of(context).primaryColor,
                   ))
               : Container(),
           Container(
@@ -304,8 +302,7 @@ class PlugLabel extends StatelessWidget {
                   child: Icon(
                     icon,
                     size: 40,
-                    color:
-                        color == null ? Theme.of(context).primaryColor : color,
+                    color: color ?? Theme.of(context).primaryColor,
                   ))
               : Container(),
           Column(children: [
@@ -451,9 +448,8 @@ class _SwitchLabelState extends State<SwitchLabel> {
                             child: Icon(
                               widget.icon,
                               size: 20,
-                              color: widget.color == null
-                                  ? Theme.of(context).primaryColor
-                                  : widget.color,
+                              color: widget.color ??
+                                  Theme.of(context).primaryColor,
                             ))
                         : Container(),
                     Container(

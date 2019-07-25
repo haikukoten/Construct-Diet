@@ -16,10 +16,11 @@ class ScreenBody extends StatelessWidget {
             child: SingleChildScrollView(
               padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
               child: ConstrainedBox(
-                  constraints: MediaQuery.of(context).size.width > 780
-                      ? BoxConstraints(maxWidth: 730)
-                      : BoxConstraints(),
-                  child: child),
+                constraints: MediaQuery.of(context).size.width > 780
+                    ? BoxConstraints(maxWidth: 730)
+                    : BoxConstraints(),
+                child: child,
+              ),
             ),
           ),
         ),

@@ -12,9 +12,7 @@ class TransitionPageRoute extends PageRouteBuilder {
             return FadeTransition(
                 opacity:
                     animation1.drive(Tween<double>(begin: 0.0, end: 1.0).chain(
-                  CurveTween(
-                    curve: Interval(0.0, 0.5),
-                  ),
+                  CurveTween(curve: Interval(0.0, 0.5)),
                 )),
                 child: child);
           },

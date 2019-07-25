@@ -13,10 +13,10 @@ import 'package:md2_tab_indicator/md2_tab_indicator.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'common/custom_appbar.dart' as custom;
-import 'theme.dart' as custom;
 import 'tabs/favorite_tab.dart';
-import 'tabs/result_tab.dart';
 import 'tabs/more_tab.dart';
+import 'tabs/result_tab.dart';
+import 'theme.dart' as custom;
 
 void main() => runApp(MyApp(model: DataModel()));
 

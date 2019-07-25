@@ -24,7 +24,7 @@ class _EditPageState extends State<EditPage> {
     return ButtonLabel(
       title,
       description:
-          "${value == null ? "Не указано" : value} ${postfix == null ? "" : (value == null ? "" : postfix)}",
+          "${value ?? "Не указано"} ${postfix == null ? "" : (value == null ? "" : postfix)}",
       onPressed: () async {
         await showCupertinoModalPopup<void>(
             context: context,

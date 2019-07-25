@@ -8,14 +8,15 @@ class TabContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            child: Icon(icon),
-            margin: const EdgeInsets.only(bottom: 4),
-          ),
-          Text(title),
-        ]);
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Container(
+          child: Icon(icon),
+          margin: EdgeInsets.only(bottom: 4),
+        ),
+        Text(title),
+      ],
+    );
   }
 }
