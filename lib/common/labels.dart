@@ -415,6 +415,38 @@ class TitleLabel extends StatelessWidget {
   }
 }
 
+class DisplayLabel extends StatelessWidget {
+  final String title;
+  final Widget child;
+
+  DisplayLabel(
+    this.title, {
+    this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(top: 15),
+      child: Column(
+        children: <Widget>[
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 17,
+              color: Theme.of(context).textTheme.caption.color,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 5),
+            child: child,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _SwitchLabelState extends State<SwitchLabel> {
   bool value;
   _SwitchLabelState(this.value);
