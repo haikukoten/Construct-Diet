@@ -48,118 +48,108 @@ class _EditPageState extends State<EditPage> {
                   clipBehavior: Clip.hardEdge,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                   type: MaterialType.transparency,
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 15, 0, 5),
-                        child: Text(
-                          title,
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                            color: Theme.of(context).textTheme.caption.color,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Stack(
-                          children: <Widget>[
-                            CupertinoPicker(
-                              diameterRatio: 10,
-                              magnification: 0.7,
-                              scrollController: scrollController,
-                              itemExtent: 68,
-                              backgroundColor:
-                                  Theme.of(context).bottomAppBarColor,
-                              onSelectedItemChanged: (int index) {
-                                setState(() => setter(list[index], index));
-                              },
-                              children: List<Widget>.generate(
-                                list.length,
-                                (int index) {
-                                  return Padding(
-                                    padding: EdgeInsets.only(
-                                        right: postfix != null
-                                            ? ((MediaQuery.of(context)
-                                                                .size
-                                                                .width >
-                                                            770
-                                                        ? 500
-                                                        : MediaQuery.of(context)
-                                                            .size
-                                                            .width) /
-                                                    2 +
-                                                1.6)
-                                            : 0),
-                                    child: Align(
-                                      alignment: postfix != null
-                                          ? Alignment.centerRight
-                                          : Alignment.center,
-                                      child: Text(
-                                        "${list[index]}",
-                                        style: TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w500,
-                                          color: Theme.of(context).primaryColor,
-                                        ),
+                  child: DisplayLabel(
+                    title,
+                    child: SizedBox(
+                      height: 154,
+                      child: Stack(
+                        children: <Widget>[
+                          CupertinoPicker(
+                            diameterRatio:
+                                Theme.of(context).platform == TargetPlatform.iOS
+                                    ? 1.3
+                                    : 10,
+                            magnification: 0.7,
+                            scrollController: scrollController,
+                            itemExtent: 68,
+                            backgroundColor:
+                                Theme.of(context).bottomAppBarColor,
+                            onSelectedItemChanged: (int index) {
+                              setState(() => setter(list[index], index));
+                            },
+                            children: List<Widget>.generate(
+                              list.length,
+                              (int index) {
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                      right: postfix != null
+                                          ? ((MediaQuery.of(context)
+                                                              .size
+                                                              .width >
+                                                          770
+                                                      ? 500
+                                                      : MediaQuery.of(context)
+                                                          .size
+                                                          .width) /
+                                                  2 +
+                                              1.6)
+                                          : 0),
+                                  child: Align(
+                                    alignment: postfix != null
+                                        ? Alignment.centerRight
+                                        : Alignment.center,
+                                    child: Text(
+                                      "${list[index]}",
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        color: Theme.of(context).primaryColor,
                                       ),
                                     ),
-                                  );
-                                },
-                              ),
+                                  ),
+                                );
+                              },
                             ),
-                            postfix != null
-                                ? Padding(
-                                    padding: EdgeInsets.only(
-                                        left: ((MediaQuery.of(context)
-                                                            .size
-                                                            .width >
-                                                        780
-                                                    ? 500
-                                                    : MediaQuery.of(context)
-                                                        .size
-                                                        .width) /
-                                                2) +
-                                            1.6),
-                                    child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          postfix,
-                                          style: TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w500,
-                                            color:
-                                                Theme.of(context).primaryColor,
-                                          ),
-                                        )),
-                                  )
-                                : Container(),
-                            IgnorePointer(
-                              ignoring: true,
-                              child: Center(
-                                child: Container(
-                                  height: 48.7,
-                                  decoration: BoxDecoration(
-                                    border: Border(
-                                      top: BorderSide(
-                                          width: 1,
-                                          color: Theme.of(context).cardColor),
-                                      bottom: BorderSide(
-                                          width: 1,
-                                          color: Theme.of(context).cardColor),
-                                    ),
+                          ),
+                          postfix != null
+                              ? Padding(
+                                  padding: EdgeInsets.only(
+                                      left:
+                                          ((MediaQuery.of(context).size.width >
+                                                          780
+                                                      ? 500
+                                                      : MediaQuery.of(context)
+                                                          .size
+                                                          .width) /
+                                                  2) +
+                                              1.6),
+                                  child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        postfix,
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                      )),
+                                )
+                              : Container(),
+                          IgnorePointer(
+                            ignoring: true,
+                            child: Center(
+                              child: Container(
+                                height: 48.7,
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    top: BorderSide(
+                                        width: 1,
+                                        color: Theme.of(context).platform ==
+                                                TargetPlatform.iOS
+                                            ? Theme.of(context).cardTheme.color
+                                            : Theme.of(context).cardColor),
+                                    bottom: BorderSide(
+                                        width: 1,
+                                        color: Theme.of(context).platform ==
+                                                TargetPlatform.iOS
+                                            ? Theme.of(context).cardTheme.color
+                                            : Theme.of(context).cardColor),
                                   ),
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                        child: Divider(height: 1),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               );
@@ -170,7 +160,7 @@ class _EditPageState extends State<EditPage> {
 
   Widget appBar() {
     return Padding(
-      padding: EdgeInsets.fromLTRB(4, 12, 4, 14),
+      padding: EdgeInsets.fromLTRB(12, 12, 12, 14),
       child: Hero(
         tag: 'appbar',
         child: Material(
@@ -187,7 +177,13 @@ class _EditPageState extends State<EditPage> {
                   child: Row(
                     children: <Widget>[
                       custom.IconButton(
-                        icon: Icons.arrow_back,
+                        icon: Theme.of(context).platform == TargetPlatform.iOS
+                            ? Icons.arrow_back_ios
+                            : Icons.arrow_back,
+                        iconSize:
+                            Theme.of(context).platform == TargetPlatform.iOS
+                                ? 18
+                                : 22,
                         onPressed: () => Navigator.pop(context),
                       ),
                       Padding(
@@ -196,7 +192,6 @@ class _EditPageState extends State<EditPage> {
                           "Параметры тела",
                           style: TextStyle(
                             fontSize: 18,
-                            fontWeight: FontWeight.w500,
                             color: Theme.of(context).textTheme.caption.color,
                           ),
                         ),
