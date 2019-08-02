@@ -3,7 +3,9 @@ import 'package:construct_diet/common/cards.dart' as custom;
 import 'package:construct_diet/common/labels.dart';
 import 'package:construct_diet/common/tab_body.dart';
 import 'package:construct_diet/scoped_models/data_model.dart';
+import 'package:construct_diet/theme.dart' as custom;
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -29,8 +31,27 @@ class _MoreTabState extends State<MoreTab> {
   }
 
   void changeTheme(bool isNight) {
-    DynamicTheme.of(context)
-        .setBrightness(isNight == true ? Brightness.dark : Brightness.light);
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+          statusBarColor: Colors.white.withAlpha(0),
+          statusBarIconBrightness:
+              !isNight ? Brightness.dark : Brightness.light,
+          systemNavigationBarColor: !isNight ? Colors.white : Color(0xFF2E2F32),
+          systemNavigationBarIconBrightness:
+              !isNight ? Brightness.dark : Brightness.light),
+    );
+    DynamicTheme.of(context).setThemeData(isNight
+        ? custom.Theme.dark.copyWith(platform: Theme.of(context).platform)
+        : custom.Theme.light.copyWith(platform: Theme.of(context).platform));
+  }
+
+  void changePlatform(bool isIOS) {
+    DynamicTheme.of(context).setThemeData(
+        Theme.of(context).brightness == Brightness.dark
+            ? custom.Theme.dark.copyWith(
+                platform: isIOS ? TargetPlatform.iOS : TargetPlatform.android)
+            : custom.Theme.light.copyWith(
+                platform: isIOS ? TargetPlatform.iOS : TargetPlatform.android));
   }
 
   @override
@@ -38,9 +59,49 @@ class _MoreTabState extends State<MoreTab> {
     return TabBody(
       Column(
         children: [
-          custom.Card(InfoLabel("Construct Diet",
-              description: "Версия: $version (сборка $buildNumber)",
-              icon: MdiIcons.featureSearch)),
+          custom.Card(
+            GestureDetector(
+              onLongPress: () {
+                showCupertinoModalPopup<void>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Container(
+                        height: 128,
+                        margin: EdgeInsets.fromLTRB(8, 8, 8, 4),
+                        child: custom.Card(
+                          DisplayLabel(
+                            "Меню разработчика",
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 4),
+                              child: Column(
+                                children: <Widget>[
+                                  SwitchLabel(
+                                    "Использовать интерфейс для iOS",
+                                    description:
+                                        "Влияет на внешность компонентов",
+                                    icon: Icons.phone_iphone,
+                                    value: Theme.of(context).platform ==
+                                        TargetPlatform.iOS,
+                                    onChanged: (isOn) {
+                                      changePlatform(isOn);
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    });
+              },
+              child: Material(
+                color: Colors.transparent,
+                child: InfoLabel("Construct Diet",
+                    description: "Версия: $version (сборка $buildNumber)",
+                    icon: MdiIcons.featureSearch),
+              ),
+            ),
+          ),
           custom.Card(TitleLabel(
             "Настройки",
             icon: MdiIcons.settingsOutline,
@@ -108,7 +169,6 @@ class _MoreTabState extends State<MoreTab> {
               "с любовью, команда oneLab.",
               style: TextStyle(
                 fontSize: 12.2,
-                fontWeight: FontWeight.w400,
                 color: Colors.grey[400],
               ),
             ),
