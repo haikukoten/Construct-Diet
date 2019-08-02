@@ -31,3 +31,64 @@ flutter_icons:
 
 flutter:
   uses-material-design: true
+  fonts:
+  - family: SFUIDisplay-Black
+    fonts:
+      - asset: fonts/SFUIDisplay-Black.ttf
+  
+  - family: SFUIDisplay-Bold
+    fonts:
+      - asset: fonts/SFUIDisplay-Bold.ttf
+  
+  - family: SFUIDisplay-Heavy
+    fonts:
+      - asset: fonts/SFUIDisplay-Heavy.ttf
+  
+  - family: SFUIDisplay-Light
+    fonts:
+      - asset: fonts/SFUIDisplay-Light.ttf
+  
+  - family: SFUIDisplay-Medium
+    fonts:
+      - asset: fonts/SFUIDisplay-Medium.ttf
+  
+  - family: SFUIDisplay-Regular
+    fonts:
+      - asset: fonts/SFUIDisplay-Regular.ttf
+  
+  - family: SFUIDisplay-Semibold
+    fonts:
+      - asset: fonts/SFUIDisplay-Semibold.ttf
+  
+  - family: SFUIDisplay-Thin
+    fonts:
+      - asset: fonts/SFUIDisplay-Thin.ttf
+  
+  - family: SFUIDisplay-Ultralight
+    fonts:
+      - asset: fonts/SFUIDisplay-Ultralight.ttf
+  
+  - family: SFUIText-Bold
+    fonts:
+      - asset: fonts/SFUIText-Bold.ttf
+  
+  - family: SFUIText-Heavy
+    fonts:
+      - asset: fonts/SFUIText-Heavy.ttf
+  
+  - family: SFUIText-Light
+    fonts:
+      - asset: fonts/SFUIText-Light.ttf
+  
+  - family: SFUIText-Medium
+    fonts:
+      - asset: fonts/SFUIText-Medium.ttf
+  
+  - family: SFUIText-Regular
+    fonts:
+      - asset: fonts/SFUIText-Regular.ttf
+  
+  - family: SFUIText-Semibold
+    fonts:
+      - asset: fonts/SFUIText-Semibold.ttf
+
