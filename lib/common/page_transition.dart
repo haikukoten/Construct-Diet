@@ -10,10 +10,13 @@ class TransitionPageRoute extends PageRouteBuilder {
           },
           transitionsBuilder: (context, animation1, animation2, child) {
             return FadeTransition(
-                opacity:
-                    animation1.drive(Tween<double>(begin: 0.0, end: 1.0).chain(
-                  CurveTween(curve: Interval(0.0, 0.5)),
-                )),
+                opacity: animation1.drive(
+                  Tween<double>(begin: 0.0, end: 1.0).chain(
+                    CurveTween(
+                      curve: Interval(0.0, 0.5),
+                    ),
+                  ),
+                ),
                 child: child);
           },
           transitionDuration: Duration(milliseconds: 400),

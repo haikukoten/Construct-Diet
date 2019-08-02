@@ -1,9 +1,14 @@
 import 'package:construct_diet/common/clear_behavior.dart';
+import 'package:construct_diet/common/custom_appbar.dart' as custom;
 import 'package:construct_diet/common/custom_tab.dart';
 import 'package:construct_diet/common/labels.dart';
 import 'package:construct_diet/common/page_transition.dart';
 import 'package:construct_diet/scoped_models/data_model.dart';
 import 'package:construct_diet/screens/edit_page.dart';
+import 'package:construct_diet/tabs/favorite_tab.dart';
+import 'package:construct_diet/tabs/more_tab.dart';
+import 'package:construct_diet/tabs/result_tab.dart';
+import 'package:construct_diet/theme.dart' as custom;
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -11,12 +16,6 @@ import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:md2_tab_indicator/md2_tab_indicator.dart';
 import 'package:scoped_model/scoped_model.dart';
-
-import 'common/custom_appbar.dart' as custom;
-import 'tabs/favorite_tab.dart';
-import 'tabs/more_tab.dart';
-import 'tabs/result_tab.dart';
-import 'theme.dart' as custom;
 
 void main() => runApp(MyApp(model: DataModel()));
 
@@ -163,7 +162,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                       .animateTo(0,
                           curve: Curves.fastOutSlowIn,
                           duration: Duration(milliseconds: 300))
-                      .then((s) {
+                      .then((_) {
                     isAnimateScroll = false;
                   });
                 }
