@@ -5,14 +5,14 @@ class IconButton extends StatelessWidget {
   final double width;
   final double height;
   final IconData icon;
-  final Size iconSize;
+  final double iconSize;
   final GestureTapCallback onPressed;
 
   IconButton(
       {this.width = 40,
       this.height = 40,
       this.icon,
-      this.iconSize,
+      this.iconSize = 20,
       this.onPressed});
 
   @override
@@ -26,7 +26,7 @@ class IconButton extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(50)),
         child: Icon(
           icon,
-          size: 20,
+          size: iconSize,
           color: Theme.of(context).textTheme.caption.color,
         ),
         onTap: onPressed,
