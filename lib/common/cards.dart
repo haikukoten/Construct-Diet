@@ -30,41 +30,42 @@ class Tip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Container(
-          padding: EdgeInsets.fromLTRB(10, 9, 10, 9),
-          margin: EdgeInsets.only(bottom: 18),
-          constraints: BoxConstraints(maxWidth: 230),
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
-            border: Border.all(color: Theme.of(context).primaryColor),
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-          ),
-          child: Material(
-            color: Colors.transparent,
-            child: Center(child: child),
-          ),
-        ),
-        Positioned(
-          bottom: 0,
-          left: 90,
-          child: SizedBox(
-            width: 15,
-            height: 15,
+    return IgnorePointer(
+      ignoring: true,
+      child: Stack(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 9, horizontal: 12),
+            constraints: BoxConstraints(maxWidth: 253),
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              border: Border.all(color: Theme.of(context).primaryColor),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
             child: Material(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50.0),
-                  side: BorderSide(
-                      width: 3,
-                      color: Theme.of(context)
-                          .scaffoldBackgroundColor
-                          .withAlpha(200))),
-              color: Theme.of(context).primaryColor.withAlpha(250),
+              color: Colors.transparent,
+              child: Center(child: child),
             ),
           ),
-        ),
-      ],
+          Positioned(
+            bottom: 0,
+            left: 127,
+            child: SizedBox(
+              width: 10,
+              height: 10,
+              child: Transform(
+                transform: Matrix4.diagonal3Values(0.8, 1.2, 0)..rotateZ(0.8),
+                child: Material(
+                  shape: ContinuousRectangleBorder(
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  color: Theme.of(context).primaryColor.withAlpha(250),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

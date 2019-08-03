@@ -78,7 +78,7 @@ class _ResultTabState extends State<ResultTab> {
                   model.widgetGoodDiet != null,
               child: Positioned(
                 top: 240,
-                right: 0,
+                right: MediaQuery.of(context).size.width > 700 ? 150 : 5,
                 child: custom.Tip(
                   Text("Нажмите на диету, чтобы показать больше информации."),
                 ),
