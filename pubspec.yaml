@@ -1,7 +1,6 @@
 name: construct_diet
 description: Construct Diet
-version: 1.0.0+9
-
+version: 1.1.0+10
 environment:
   sdk: ">=2.2.2 <3.0.0"
 
