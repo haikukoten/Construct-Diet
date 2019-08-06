@@ -40,18 +40,27 @@ class _MoreTabState extends State<MoreTab> {
           systemNavigationBarIconBrightness:
               !isNight ? Brightness.dark : Brightness.light),
     );
-    DynamicTheme.of(context).setThemeData(isNight
-        ? custom.Theme.dark.copyWith(platform: Theme.of(context).platform)
-        : custom.Theme.light.copyWith(platform: Theme.of(context).platform));
+    if (Theme.of(context).platform == TargetPlatform.iOS) {
+      DynamicTheme.of(context)
+          .setThemeData(isNight ? custom.ThemeIOS.dark : custom.ThemeIOS.light);
+    } else {
+      DynamicTheme.of(context).setThemeData(
+          isNight ? custom.ThemeAndroid.dark : custom.ThemeAndroid.light);
+    }
   }
 
   void changePlatform(bool isIOS) {
-    DynamicTheme.of(context).setThemeData(
-        Theme.of(context).brightness == Brightness.dark
-            ? custom.Theme.dark.copyWith(
-                platform: isIOS ? TargetPlatform.iOS : TargetPlatform.android)
-            : custom.Theme.light.copyWith(
-                platform: isIOS ? TargetPlatform.iOS : TargetPlatform.android));
+    if (isIOS) {
+      DynamicTheme.of(context).setThemeData(
+          Theme.of(context).brightness == Brightness.dark
+              ? custom.ThemeIOS.dark
+              : custom.ThemeIOS.light);
+    } else {
+      DynamicTheme.of(context).setThemeData(
+          Theme.of(context).brightness == Brightness.dark
+              ? custom.ThemeAndroid.dark
+              : custom.ThemeAndroid.light);
+    }
   }
 
   @override
@@ -165,11 +174,11 @@ class _MoreTabState extends State<MoreTab> {
           ),
           Padding(
             padding: EdgeInsets.all(12),
-            child: Text(
-              "с любовью, команда oneLab.",
-              style: TextStyle(
-                fontSize: 12.2,
-                color: Colors.grey[400],
+            child: Opacity(
+              opacity: 0.8,
+              child: Text(
+                "с любовью, команда oneLab.",
+                style: Theme.of(context).textTheme.subtitle,
               ),
             ),
           ),
