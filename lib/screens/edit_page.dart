@@ -90,10 +90,7 @@ class _EditPageState extends State<EditPage> {
                                         : Alignment.center,
                                     child: Text(
                                       "${list[index]}",
-                                      style: TextStyle(
-                                        fontSize: 17,
-                                        color: Theme.of(context).primaryColor,
-                                      ),
+                                      style: Theme.of(context).textTheme.button,
                                     ),
                                   ),
                                 );
@@ -116,32 +113,36 @@ class _EditPageState extends State<EditPage> {
                                       alignment: Alignment.centerLeft,
                                       child: Text(
                                         postfix,
-                                        style: TextStyle(
-                                          fontSize: 17,
-                                          color: Theme.of(context).primaryColor,
-                                        ),
+                                        style:
+                                            Theme.of(context).textTheme.button,
                                       )),
                                 )
                               : Container(),
                           IgnorePointer(
                             ignoring: true,
                             child: Center(
-                              child: Container(
-                                height: 48.7,
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                    top: BorderSide(
-                                        width: 1,
-                                        color: Theme.of(context).platform ==
-                                                TargetPlatform.iOS
-                                            ? Theme.of(context).cardTheme.color
-                                            : Theme.of(context).cardColor),
-                                    bottom: BorderSide(
-                                        width: 1,
-                                        color: Theme.of(context).platform ==
-                                                TargetPlatform.iOS
-                                            ? Theme.of(context).cardTheme.color
-                                            : Theme.of(context).cardColor),
+                              child: Opacity(
+                                opacity: Theme.of(context).platform ==
+                                        TargetPlatform.iOS
+                                    ? 0.8
+                                    : 1,
+                                child: Container(
+                                  height: 48.7,
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      top: BorderSide(
+                                          width: 1,
+                                          color: Theme.of(context).platform ==
+                                                  TargetPlatform.iOS
+                                              ? Theme.of(context).dividerColor
+                                              : Theme.of(context).cardColor),
+                                      bottom: BorderSide(
+                                          width: 1,
+                                          color: Theme.of(context).platform ==
+                                                  TargetPlatform.iOS
+                                              ? Theme.of(context).dividerColor
+                                              : Theme.of(context).cardColor),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -190,10 +191,7 @@ class _EditPageState extends State<EditPage> {
                         padding: EdgeInsets.fromLTRB(8, 0, 0, 0.5),
                         child: Text(
                           "Параметры тела",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Theme.of(context).textTheme.caption.color,
-                          ),
+                          style: Theme.of(context).textTheme.caption,
                         ),
                       ),
                     ],

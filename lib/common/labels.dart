@@ -2,6 +2,7 @@ import 'package:construct_diet/common/diet.dart';
 import 'package:construct_diet/common/page_transition.dart';
 import 'package:construct_diet/scoped_models/data_model.dart';
 import 'package:construct_diet/screens/diet_info_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -48,36 +49,23 @@ class ButtonLabel extends StatelessWidget {
                         : Container(),
                     Container(
                       width: MediaQuery.of(context).size.width > 750
-                          ? 750.0 - 170.0
-                          : MediaQuery.of(context).size.width - 170,
+                          ? 750.0 - 150.0
+                          : MediaQuery.of(context).size.width - 150,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            title,
-                            strutStyle: StrutStyle(
-                              leading: 0,
-                            ),
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Theme.of(context).textTheme.caption.color,
-                            ),
-                          ),
+                          Text(title,
+                              strutStyle: StrutStyle(
+                                leading: 0,
+                              ),
+                              style: Theme.of(context).textTheme.title),
                           description != null
                               ? Padding(
                                   padding: EdgeInsets.only(top: 3.2),
                                   child: Text(
                                     description,
-                                    style: TextStyle(
-                                      fontSize: 12.2,
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .caption
-                                          .color
-                                          .withAlpha(180),
-                                    ),
+                                    style: Theme.of(context).textTheme.subtitle,
                                   ),
                                 )
                               : Container()
@@ -119,7 +107,9 @@ class DietLabel extends StatelessWidget {
             ScopedModel.of<DataModel>(context).closeTip();
             Navigator.push(
               context,
-              TransitionPageRoute(widget: DietInfoPage(diet)),
+              Theme.of(context).platform == TargetPlatform.iOS
+                  ? CupertinoPageRoute(builder: (_) => DietInfoPage(diet))
+                  : TransitionPageRoute(widget: DietInfoPage(diet)),
             );
           },
           borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -137,24 +127,13 @@ class DietLabel extends StatelessWidget {
                       strutStyle: StrutStyle(
                         leading: 0,
                       ),
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: Theme.of(context).textTheme.caption.color,
-                      ),
+                      style: Theme.of(context).textTheme.title,
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 3.2),
                       child: Text(
                         diet.description,
-                        style: TextStyle(
-                          fontSize: 12.2,
-                          color: Theme.of(context)
-                              .textTheme
-                              .caption
-                              .color
-                              .withAlpha(180),
-                        ),
+                        style: Theme.of(context).textTheme.subtitle,
                       ),
                     ),
                   ],
@@ -236,11 +215,7 @@ class InfoLabel extends StatelessWidget {
                       strutStyle: StrutStyle(
                         leading: 0,
                       ),
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: Theme.of(context).textTheme.caption.color,
-                      ),
+                      style: Theme.of(context).textTheme.title,
                     ),
                   ),
                   description != null
@@ -248,14 +223,7 @@ class InfoLabel extends StatelessWidget {
                           padding: EdgeInsets.only(top: 3.2),
                           child: Text(
                             description,
-                            style: TextStyle(
-                              fontSize: 12.2,
-                              color: Theme.of(context)
-                                  .textTheme
-                                  .caption
-                                  .color
-                                  .withAlpha(180),
-                            ),
+                            style: Theme.of(context).textTheme.subtitle,
                           ),
                         )
                       : Container()
@@ -312,11 +280,7 @@ class PlugLabel extends StatelessWidget {
               strutStyle: StrutStyle(
                 leading: 0,
               ),
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-                color: Theme.of(context).textTheme.caption.color,
-              ),
+              style: Theme.of(context).textTheme.title,
             ),
             description != null
                 ? Padding(
@@ -324,14 +288,7 @@ class PlugLabel extends StatelessWidget {
                     child: Text(
                       description,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 12.2,
-                        color: Theme.of(context)
-                            .textTheme
-                            .caption
-                            .color
-                            .withAlpha(180),
-                      ),
+                      style: Theme.of(context).textTheme.subtitle,
                     ),
                   )
                 : Container()
@@ -378,29 +335,21 @@ class TitleLabel extends StatelessWidget {
                       margin: EdgeInsets.only(right: 15),
                       child: Icon(
                         icon,
-                        size: 16.5,
+                        size: 18,
                         color: Theme.of(context)
                             .textTheme
-                            .caption
+                            .subhead
                             .color
                             .withAlpha(180),
                       ))
                   : Container(),
-              Padding(
-                padding: EdgeInsets.only(top: 0.5),
+              Center(
                 child: Text(
                   title,
                   strutStyle: StrutStyle(
                     leading: 0,
                   ),
-                  style: TextStyle(
-                    fontSize: 12.8,
-                    color: Theme.of(context)
-                        .textTheme
-                        .caption
-                        .color
-                        .withAlpha(180),
-                  ),
+                  style: Theme.of(context).textTheme.subhead,
                 ),
               ),
             ],
@@ -432,10 +381,7 @@ class DisplayLabel extends StatelessWidget {
         children: <Widget>[
           Text(
             title,
-            style: TextStyle(
-              fontSize: 17,
-              color: Theme.of(context).textTheme.caption.color,
-            ),
+            style: Theme.of(context).textTheme.body1,
           ),
           Container(
             padding: EdgeInsets.symmetric(vertical: 5),
@@ -494,26 +440,15 @@ class _SwitchLabelState extends State<SwitchLabel> {
                           children: [
                             Text(
                               widget.title,
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color:
-                                    Theme.of(context).textTheme.caption.color,
-                              ),
+                              style: Theme.of(context).textTheme.title,
                             ),
                             widget.description != null
                                 ? Padding(
                                     padding: EdgeInsets.only(top: 3.2),
                                     child: Text(
                                       widget.description,
-                                      style: TextStyle(
-                                        fontSize: 12.2,
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .caption
-                                            .color
-                                            .withAlpha(180),
-                                      ),
+                                      style:
+                                          Theme.of(context).textTheme.subtitle,
                                     ),
                                   )
                                 : Container()
@@ -574,17 +509,11 @@ class _SelectFavoriteLabelState extends State<SelectFavoriteLabel> {
                     width: MediaQuery.of(context).size.width > 750
                         ? 750.0 - 185.0
                         : MediaQuery.of(context).size.width - 185,
-                    child: Text(
-                      widget.title,
-                      strutStyle: StrutStyle(
-                        leading: 0,
-                      ),
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: Theme.of(context).textTheme.caption.color,
-                      ),
-                    ),
+                    child: Text(widget.title,
+                        strutStyle: StrutStyle(
+                          leading: 0,
+                        ),
+                        style: Theme.of(context).textTheme.title),
                   ),
                 ],
               ),

@@ -26,14 +26,20 @@ class DietInfoPage extends StatelessWidget {
 
   Widget appBar(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, 8, 0, 10),
+      padding: Theme.of(context).platform == TargetPlatform.iOS
+          ? EdgeInsets.fromLTRB(0, 8, 0, 10)
+          : EdgeInsets.all(12),
       child: Hero(
-        tag: 'appbar',
+        tag: Theme.of(context).platform == TargetPlatform.iOS ? 's' : 'appbar',
         child: Material(
           elevation: 2,
-          shadowColor: Colors.black.withAlpha(100),
+          shadowColor: Theme.of(context).platform == TargetPlatform.iOS
+              ? Colors.transparent
+              : Colors.black.withAlpha(100),
           borderRadius: BorderRadius.all(Radius.circular(8.5)),
-          color: Theme.of(context).cardColor,
+          color: Theme.of(context).platform == TargetPlatform.iOS
+              ? Colors.transparent
+              : Theme.of(context).cardColor,
           child: Padding(
             padding: EdgeInsets.fromLTRB(0, 2, 0, 2),
             child: Column(
@@ -44,18 +50,20 @@ class DietInfoPage extends StatelessWidget {
                   child: Row(
                     children: <Widget>[
                       custom.IconButton(
-                        icon: Icons.arrow_back,
+                        icon: Theme.of(context).platform == TargetPlatform.iOS
+                            ? Icons.arrow_back_ios
+                            : Icons.arrow_back,
+                        iconSize:
+                            Theme.of(context).platform == TargetPlatform.iOS
+                                ? 18
+                                : 22,
                         onPressed: () => Navigator.pop(context),
                       ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(8, 0, 0, 0.5),
                         child: Text(
                           diet.name + " диета",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                            color: Theme.of(context).textTheme.caption.color,
-                          ),
+                          style: Theme.of(context).textTheme.caption,
                         ),
                       ),
                     ],

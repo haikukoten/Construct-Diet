@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:construct_diet/common/clear_behavior.dart';
 import 'package:construct_diet/common/custom_appbar.dart' as custom;
 import 'package:construct_diet/common/custom_tab.dart';
@@ -50,9 +52,15 @@ class MyApp extends StatelessWidget {
                           ? Brightness.dark
                           : Brightness.light),
             );
-            return brightness == Brightness.light
-                ? custom.Theme.light
-                : custom.Theme.dark;
+            if (Platform.isIOS) {
+              return brightness == Brightness.light
+                  ? custom.ThemeIOS.light
+                  : custom.ThemeIOS.dark;
+            } else {
+              return brightness == Brightness.light
+                  ? custom.ThemeAndroid.light
+                  : custom.ThemeAndroid.dark;
+            }
           },
           themedWidgetBuilder: (context, theme) {
             return MaterialApp(
@@ -178,11 +186,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                         children: <Widget>[
                           Text(
                             "Construct Diet",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: Theme.of(context).textTheme.caption.color,
-                            ),
+                            style: Theme.of(context).textTheme.caption,
                           ),
                           Padding(
                             padding: EdgeInsets.only(bottom: 1),
