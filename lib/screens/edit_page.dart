@@ -15,7 +15,7 @@ class _EditPageState extends State<EditPage> {
   List<int> ageList = [for (int i = 12; i <= 100; i++) i];
   List<String> genderList = <String>['женский', 'мужской'];
   List<int> heightList = [for (int i = 100; i <= 250; i++) i];
-  List<int> weightList = [for (int i = 30; i <= 300; i++) i];
+  List<int> weightList = [for (int i = 30; i <= 250; i++) i];
 
   Widget buttonOpenPicker(String title, value, String postfix, int currentIndex,
       Function setter, List list) {
