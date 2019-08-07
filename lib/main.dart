@@ -45,8 +45,8 @@ class MyApp extends StatelessWidget {
                       ? Brightness.dark
                       : Brightness.light,
                   systemNavigationBarColor: brightness == Brightness.light
-                      ? Colors.white
-                      : Color(0xFF2E2F32),
+                      ? Colors.white.withAlpha(150)
+                      : Color(0xFF2E2F32).withAlpha(150),
                   systemNavigationBarIconBrightness:
                       brightness == Brightness.light
                           ? Brightness.dark
@@ -93,6 +93,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   double step;
   double appBarHeight = 130;
   bool isAnimateScroll = false;
+  bool waitAnimation = false;
 
   final List<Widget> tabs = <Widget>[
     ResultTab(),
@@ -165,12 +166,18 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                     TransitionPageRoute(widget: EditPage()),
                   );
                 else if (!isAnimateScroll) {
+                  setState(() {
+                    waitAnimation = true;
+                  });
                   isAnimateScroll = true;
                   controllerScroll
                       .animateTo(0,
                           curve: Curves.fastOutSlowIn,
                           duration: Duration(milliseconds: 300))
                       .then((_) {
+                    setState(() {
+                      waitAnimation = false;
+                    });
                     isAnimateScroll = false;
                   });
                 }
@@ -244,55 +251,58 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Center(
-            child: ConstrainedBox(
-              constraints: MediaQuery.of(context).size.width > 700
-                  ? BoxConstraints(maxWidth: 750)
-                  : BoxConstraints(),
-              child: SafeArea(
-                child: NotificationListener<ScrollNotification>(
-                  onNotification: (scrollNotification) {
-                    if (scrollNotification is ScrollEndNotification) {
-                      animateScrollInfoContainer(scrollNotification.metrics);
-                    }
-                    return true;
-                  },
-                  child: NestedScrollView(
-                    controller: controllerScroll,
-                    headerSliverBuilder:
-                        (BuildContext context, bool innerBoxIsScrolled) {
-                      return <Widget>[
-                        custom.SliverAppBar(
-                          pinned: true,
-                          expandedHeight: appBarHeight,
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                          flexibleSpace: LayoutBuilder(
-                            builder: (BuildContext context,
-                                BoxConstraints constraints) {
-                              step = ((constraints.maxHeight - 73) *
-                                      100 /
-                                      (appBarHeight - 73)) /
-                                  100;
-                              return appBar();
-                            },
-                          ),
-                        ),
-                      ];
+      body: IgnorePointer(
+        ignoring: waitAnimation,
+        child: Stack(
+          children: <Widget>[
+            Center(
+              child: ConstrainedBox(
+                constraints: MediaQuery.of(context).size.width > 700
+                    ? BoxConstraints(maxWidth: 750)
+                    : BoxConstraints(),
+                child: SafeArea(
+                  child: NotificationListener<ScrollNotification>(
+                    onNotification: (scrollNotification) {
+                      if (scrollNotification is ScrollEndNotification) {
+                        animateScrollInfoContainer(scrollNotification.metrics);
+                      }
+                      return true;
                     },
-                    body: TabBarView(
-                      physics: NeverScrollableScrollPhysics(),
-                      children: tabs,
-                      controller: controllerTab,
+                    child: NestedScrollView(
+                      controller: controllerScroll,
+                      headerSliverBuilder:
+                          (BuildContext context, bool innerBoxIsScrolled) {
+                        return <Widget>[
+                          custom.SliverAppBar(
+                            pinned: true,
+                            expandedHeight: appBarHeight,
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                            flexibleSpace: LayoutBuilder(
+                              builder: (BuildContext context,
+                                  BoxConstraints constraints) {
+                                step = ((constraints.maxHeight - 73) *
+                                        100 /
+                                        (appBarHeight - 73)) /
+                                    100;
+                                return appBar();
+                              },
+                            ),
+                          ),
+                        ];
+                      },
+                      body: TabBarView(
+                        physics: NeverScrollableScrollPhysics(),
+                        children: tabs,
+                        controller: controllerTab,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       bottomNavigationBar: Center(
         heightFactor: 1,
