@@ -18,8 +18,8 @@ class MoreTab extends StatefulWidget {
 }
 
 class _MoreTabState extends State<MoreTab> {
-  String version = "1.0.0";
-  String buildNumber = "9";
+  String version = "1.1.0";
+  String buildNumber = "10";
 
   @override
   void initState() {
