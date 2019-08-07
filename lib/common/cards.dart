@@ -24,9 +24,9 @@ class Card extends StatelessWidget {
 }
 
 class Tip extends StatelessWidget {
-  final Widget child;
+  final String value;
 
-  Tip(this.child);
+  Tip(this.value);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,14 @@ class Tip extends StatelessWidget {
             ),
             child: Material(
               color: Colors.transparent,
-              child: Center(child: child),
+              child: Center(
+                  child: Text(
+                value,
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle
+                    .copyWith(color: Colors.white, fontSize: 14),
+              )),
             ),
           ),
           Positioned(
