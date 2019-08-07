@@ -300,49 +300,74 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           height: 61,
           alignment: Alignment.center,
           constraints: MediaQuery.of(context).size.width > 780
-              ? BoxConstraints(maxWidth: 765)
+              ? BoxConstraints(
+                  maxWidth: Theme.of(context).platform == TargetPlatform.iOS
+                      ? double.infinity
+                      : 765)
               : BoxConstraints(),
           decoration: BoxDecoration(
             color: Theme.of(context).bottomAppBarColor,
+            border: Theme.of(context).platform == TargetPlatform.iOS
+                ? Border.all(width: 0.5, color: Theme.of(context).dividerColor)
+                : Border(),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withAlpha(15),
+                color: Theme.of(context).platform == TargetPlatform.iOS
+                    ? Colors.transparent
+                    : Colors.black.withAlpha(15),
                 blurRadius: 3,
               ),
             ],
-            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+            borderRadius: BorderRadius.vertical(
+                top: Theme.of(context).platform == TargetPlatform.iOS
+                    ? Radius.zero
+                    : Radius.circular(16)),
           ),
           child: Material(
             clipBehavior: Clip.hardEdge,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+            borderRadius: BorderRadius.vertical(
+                top: Theme.of(context).platform == TargetPlatform.iOS
+                    ? Radius.zero
+                    : Radius.circular(16)),
             type: MaterialType.transparency,
-            child: Column(
-              children: <Widget>[
-                TabBar(
-                  labelPadding: EdgeInsets.all(6),
-                  labelColor: Theme.of(context).primaryColor,
-                  unselectedLabelColor: Theme.of(context).primaryColorDark,
-                  indicator: MD2Indicator(
-                    indicatorHeight: 0,
-                    indicatorColor: Theme.of(context).primaryColor,
-                    indicatorSize: MD2IndicatorSize.full,
-                  ),
-                  tabs: <Tab>[
-                    Tab(
-                      child: TabContent(
-                          "Результат", MdiIcons.fileDocumentBoxOutline),
+            child: ConstrainedBox(
+              constraints: MediaQuery.of(context).size.width > 780
+                  ? BoxConstraints(
+                      maxWidth: Theme.of(context).platform != TargetPlatform.iOS
+                          ? double.infinity
+                          : 765)
+                  : BoxConstraints(),
+              child: Column(
+                children: <Widget>[
+                  TabBar(
+                    labelPadding: EdgeInsets.all(6),
+                    labelColor: Theme.of(context).primaryColor,
+                    unselectedLabelColor: Theme.of(context).primaryColorDark,
+                    indicator: MD2Indicator(
+                      indicatorHeight: 0,
+                      indicatorColor: Theme.of(context).primaryColor,
+                      indicatorSize: MD2IndicatorSize.full,
                     ),
-                    Tab(
-                      child: TabContent("Предпочтения", MdiIcons.heartOutline),
-                    ),
-                    Tab(
+                    tabs: <Tab>[
+                      Tab(
+                        child: TabContent(
+                            "Результат", MdiIcons.fileDocumentBoxOutline),
+                      ),
+                      Tab(
                         child:
-                            TabContent("Другое", MdiIcons.cardBulletedOutline)),
-                  ],
-                  controller: controllerTab,
-                ),
-                Divider(height: 1),
-              ],
+                            TabContent("Предпочтения", MdiIcons.heartOutline),
+                      ),
+                      Tab(
+                          child: TabContent(
+                              "Другое", MdiIcons.cardBulletedOutline)),
+                    ],
+                    controller: controllerTab,
+                  ),
+                  Theme.of(context).platform == TargetPlatform.iOS
+                      ? Container()
+                      : Divider(height: 1),
+                ],
+              ),
             ),
           ),
         ),

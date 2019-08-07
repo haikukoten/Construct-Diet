@@ -458,13 +458,19 @@ class _SwitchLabelState extends State<SwitchLabel> {
                 ),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: SizedBox(
-                    width: 55,
-                    height: 35,
-                    child: IgnorePointer(
-                        ignoring: true,
-                        child:
-                            Switch(value: value, onChanged: widget.onChanged)),
+                  child: IgnorePointer(
+                    ignoring: true,
+                    child: Theme.of(context).platform == TargetPlatform.iOS
+                        ? SizedBox(
+                            width: 65,
+                            height: 35,
+                            child: CupertinoSwitch(
+                                value: value, onChanged: widget.onChanged))
+                        : SizedBox(
+                            width: 55,
+                            height: 35,
+                            child: Switch(
+                                value: value, onChanged: widget.onChanged)),
                   ),
                 )
               ],

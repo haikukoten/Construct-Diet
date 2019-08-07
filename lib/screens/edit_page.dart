@@ -188,7 +188,7 @@ class _EditPageState extends State<EditPage> {
                         onPressed: () => Navigator.pop(context),
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(8, 0, 0, 0.5),
+                        padding: EdgeInsets.fromLTRB(5, 1, 0, 0.5),
                         child: Text(
                           "Параметры тела",
                           style: Theme.of(context).textTheme.caption,

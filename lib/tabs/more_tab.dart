@@ -75,7 +75,10 @@ class _MoreTabState extends State<MoreTab> {
                     context: context,
                     builder: (BuildContext context) {
                       return Container(
-                        height: 128,
+                        constraints: MediaQuery.of(context).size.width > 780
+                            ? BoxConstraints(maxWidth: 500)
+                            : BoxConstraints(),
+                        height: 126,
                         margin: EdgeInsets.fromLTRB(8, 8, 8, 4),
                         child: custom.Card(
                           DisplayLabel(
@@ -159,7 +162,7 @@ class _MoreTabState extends State<MoreTab> {
               child: Opacity(
                 opacity: 0.8,
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(5, 10, 5, 5),
+                  padding: EdgeInsets.fromLTRB(7, 10, 5, 5),
                   child: Row(children: [
                     custom.IconButton.url(
                         MdiIcons.vkCircle, "https://vk.com/onelab"),

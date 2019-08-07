@@ -60,7 +60,7 @@ class DietInfoPage extends StatelessWidget {
                         onPressed: () => Navigator.pop(context),
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(8, 0, 0, 0.5),
+                        padding: EdgeInsets.fromLTRB(5, 0, 0, 0.5),
                         child: Text(
                           diet.name + " диета",
                           style: Theme.of(context).textTheme.caption,
