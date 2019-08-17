@@ -1,5 +1,3 @@
-import 'dart:ui' as ui;
-
 import 'package:construct_diet/common/cards.dart' as custom;
 import 'package:construct_diet/common/labels.dart';
 import 'package:construct_diet/common/tab_body.dart';
