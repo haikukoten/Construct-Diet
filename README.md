@@ -25,7 +25,7 @@ Construct Diet — это приложение, с помощью которог
 ### Язык интерфейса
 
 * Русский
-* Английский ([injective](https://github.com/injective), [salex-rekt](https://github.com/salex-rekt))
+* Английский ([ingective](https://github.com/ingective), [salex-rekt](https://github.com/salex-rekt))
 
 ### Лицензия
 
