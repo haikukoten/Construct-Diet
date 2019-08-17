@@ -89,9 +89,10 @@ class _MoreTabState extends State<MoreTab> {
                               child: Column(
                                 children: <Widget>[
                                   SwitchLabel(
-                                    Vocabluary.getWord('Use the interface for iOS'),
-                                    description:
-                                        Vocabluary.getWord('Affects the appearance of components'),
+                                    Vocabluary.getWord(
+                                        'Use the interface for iOS'),
+                                    description: Vocabluary.getWord(
+                                        'Affects the appearance of components'),
                                     icon: Icons.phone_iphone,
                                     value: Theme.of(context).platform ==
                                         TargetPlatform.iOS,
@@ -110,7 +111,10 @@ class _MoreTabState extends State<MoreTab> {
               child: Material(
                 color: Colors.transparent,
                 child: InfoLabel("Construct Diet",
-                    description: Vocabluary.getWord('Version') + ': $version (' + Vocabluary.getWord('Build') + ' $buildNumber)',
+                    description: Vocabluary.getWord('Version') +
+                        ': $version (' +
+                        Vocabluary.getWord('Build') +
+                        ' $buildNumber)',
                     icon: MdiIcons.featureSearch),
               ),
             ),
@@ -135,7 +139,8 @@ class _MoreTabState extends State<MoreTab> {
               Divider(height: 5),
               ButtonLabel(
                 Vocabluary.getWord('Reset the settings'),
-                description: Vocabluary.getWord('After the reset, start the app again.'),
+                description:
+                    Vocabluary.getWord('After the reset, start the app again.'),
                 icon: Icons.settings_backup_restore,
                 onPressed: () => ScopedModel.of<DataModel>(context)
                     .clearStorage()
@@ -181,7 +186,7 @@ class _MoreTabState extends State<MoreTab> {
             child: Opacity(
               opacity: 0.8,
               child: Text(
-                Vocabluary.getWord('best regards, team onelab'),
+                Vocabluary.getWord('best regards, team oneLab'),
                 style: Theme.of(context).textTheme.subtitle,
               ),
             ),
