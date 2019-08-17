@@ -142,8 +142,12 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   }
 
   Widget appBar() {
+    double padding = MediaQuery.of(context).size.width > 700
+        ? MediaQuery.of(context).size.width - 779
+        : 12;
     return Padding(
-      padding: EdgeInsets.fromLTRB(12 + (step * 5), 16, 12 + (step * 5), 6),
+      padding: EdgeInsets.fromLTRB(
+          padding + (step * 5), 16, padding + (step * 5), 6),
       child: AnimatedContainer(
         duration: Duration(milliseconds: 450),
         height: step > 0.8 ? appBarHeight : 50,
@@ -256,46 +260,41 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         child: Stack(
           children: <Widget>[
             Center(
-              child: ConstrainedBox(
-                constraints: MediaQuery.of(context).size.width > 700
-                    ? BoxConstraints(maxWidth: 750)
-                    : BoxConstraints(),
-                child: SafeArea(
-                  child: NotificationListener<ScrollNotification>(
-                    onNotification: (scrollNotification) {
-                      if (scrollNotification is ScrollEndNotification) {
-                        animateScrollInfoContainer(scrollNotification.metrics);
-                      }
-                      return true;
-                    },
-                    child: NestedScrollView(
-                      controller: controllerScroll,
-                      headerSliverBuilder:
-                          (BuildContext context, bool innerBoxIsScrolled) {
-                        return <Widget>[
-                          custom.SliverAppBar(
-                            pinned: true,
-                            expandedHeight: appBarHeight,
-                            backgroundColor: Colors.transparent,
-                            elevation: 0,
-                            flexibleSpace: LayoutBuilder(
-                              builder: (BuildContext context,
-                                  BoxConstraints constraints) {
-                                step = ((constraints.maxHeight - 73) *
-                                        100 /
-                                        (appBarHeight - 73)) /
-                                    100;
-                                return appBar();
-                              },
-                            ),
+              child: SafeArea(
+                child: NotificationListener<ScrollNotification>(
+                  onNotification: (scrollNotification) {
+                    if (scrollNotification is ScrollEndNotification) {
+                      animateScrollInfoContainer(scrollNotification.metrics);
+                    }
+                    return true;
+                  },
+                  child: NestedScrollView(
+                    controller: controllerScroll,
+                    headerSliverBuilder:
+                        (BuildContext context, bool innerBoxIsScrolled) {
+                      return <Widget>[
+                        custom.SliverAppBar(
+                          pinned: true,
+                          expandedHeight: appBarHeight,
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                          flexibleSpace: LayoutBuilder(
+                            builder: (BuildContext context,
+                                BoxConstraints constraints) {
+                              step = ((constraints.maxHeight - 73) *
+                                      100 /
+                                      (appBarHeight - 73)) /
+                                  100;
+                              return appBar();
+                            },
                           ),
-                        ];
-                      },
-                      body: TabBarView(
-                        physics: NeverScrollableScrollPhysics(),
-                        children: tabs,
-                        controller: controllerTab,
-                      ),
+                        ),
+                      ];
+                    },
+                    body: TabBarView(
+                      physics: NeverScrollableScrollPhysics(),
+                      children: tabs,
+                      controller: controllerTab,
                     ),
                   ),
                 ),

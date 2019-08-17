@@ -15,8 +15,11 @@ class _TabBodyState extends State<TabBody> {
 
   @override
   Widget build(BuildContext context) {
+    double padding = MediaQuery.of(context).size.width > 700
+        ? MediaQuery.of(context).size.width * 0.05
+        : 16;
     return SingleChildScrollView(
-      padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+      padding: EdgeInsets.fromLTRB(padding, 0, padding, 0),
       child: ConstrainedBox(constraints: BoxConstraints(), child: child),
     );
   }
