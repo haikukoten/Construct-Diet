@@ -37,13 +37,23 @@ class _ResultTabState extends State<ResultTab> {
                               children: <Widget>[
                                 InfoLabel(Vocabluary.getWord('Body mass index'),
                                     description: model.imt.toStringAsFixed(2)),
-                                InfoLabel(Vocabluary.getWord('Allowable weight'),
+                                InfoLabel(
+                                    Vocabluary.getWord('Allowable weight'),
                                     description:
-                                        Vocabluary.getWord('LeftWModel') + '${model.minWeight}' + Vocabluary.getWord('MiddleWModel') +'${model.maxWeight}' + Vocabluary.getWord('MiddleRightWModel') + '${model.idealWeight}' + Vocabluary.getWord('RightWModel')),
+                                        Vocabluary.getWord('LeftWModel') +
+                                            '${model.minWeight}' +
+                                            Vocabluary.getWord('MiddleWModel') +
+                                            '${model.maxWeight}' +
+                                            Vocabluary.getWord(
+                                                'MiddleRightWModel') +
+                                            '${model.idealWeight}' +
+                                            Vocabluary.getWord('RightWModel')),
                                 InfoLabel(Vocabluary.getWord('Overweight'),
                                     description: model.overweight == 0
                                         ? Vocabluary.getWord('Missing')
-                                        : (model.overweight.toString() + ' ' + Vocabluary.getWord('kg')))
+                                        : (model.overweight.toString() +
+                                            ' ' +
+                                            Vocabluary.getWord('kg')))
                               ],
                             ),
                           ]),
@@ -55,7 +65,8 @@ class _ResultTabState extends State<ResultTab> {
                       ? PlugLabel(Vocabluary.getWord('Diets not found'),
                           description: model.overweight < 4
                               ? Vocabluary.getWord('No need to lose weight')
-                              : Vocabluary.getWord('Try changing the filter by preferences'),
+                              : Vocabluary.getWord(
+                                  'Try changing the filter by preferences'),
                           icon: MdiIcons.cards)
                       : TitleLabel(
                           Vocabluary.getWord('The most appropriate diet'),
@@ -80,8 +91,8 @@ class _ResultTabState extends State<ResultTab> {
               child: Positioned(
                 top: 240,
                 right: MediaQuery.of(context).size.width > 700 ? 150 : 5,
-                child: custom.Tip(
-                    Vocabluary.getWord('Click on the diet to show more information')),
+                child: custom.Tip(Vocabluary.getWord(
+                    'Click on the diet to show more information')),
               ),
             ),
           ],

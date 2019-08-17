@@ -1,14 +1,8 @@
-
-
-class Vocabluary
-{
+class Vocabluary {
   // Vars
   static String _appLanguage = 'en';
-  static List<String> _appLanguages = <String>[
-    'ru',
-    'en'
-  ];
-  
+  static List<String> _appLanguages = <String>['ru', 'en'];
+
   static Map<String, Map<String, String>> _wordManager = {
     'en': {
       /** main **/
@@ -20,7 +14,7 @@ class Vocabluary
       'First degree of obesity': 'First degree of obesity',
       'Second degree of obesity': 'Second degree of obesity',
       'Third degree of obesity': 'Third degree of obesity',
-      
+
       /* InfoLabel */
       'Indicate your parameters': 'Indicate your parameters',
       'Click to edit': 'Click to edit',
@@ -29,7 +23,7 @@ class Vocabluary
       'Result': 'Result',
       'Preferences': 'Preferences',
       'Another': 'Another',
-      
+
       /** favorite_tab **/
       /* foodList */
       'Meat products': 'Meat products',
@@ -44,13 +38,15 @@ class Vocabluary
 
       /* InfoLabel */
       'Choose diets to suit your taste': 'Choose diets to suit your taste',
-      'Choose which foods you want to see in your diets and which to remove from the diet.': 'Choose which foods you want to see in your diets and which to remove from the diet.',
+      'Choose which foods you want to see in your diets and which to remove from the diet.':
+          'Choose which foods you want to see in your diets and which to remove from the diet.',
 
       /** more_tab **/
       /* Developer edge menu */
       'Developer\'s menu': 'Developer\'s menu',
       'Use the interface for iOS': 'Use the interface for iOS',
-      'Affects the appearance of components': 'Affects the appearance of components',
+      'Affects the appearance of components':
+          'Affects the appearance of components',
 
       /* InfoLabel */
       'Version': 'Version',
@@ -65,7 +61,8 @@ class Vocabluary
 
       /* Refresh Setting Card */
       'Reset the settings': 'Reset the settings',
-      'After the reset, start the app again.': 'After the reset, start the app again.',
+      'After the reset, start the app again.':
+          'After the reset, start the app again.',
 
       /* Dev Card */
       'Developers': 'Developers',
@@ -98,23 +95,26 @@ class Vocabluary
       /* Diets bli */
       'Diets not found': 'Diets not found',
       'No need to lose weight': 'No need to lose weight',
-      'Try changing the filter by preferences': 'Try changing the filter by preferences',
+      'Try changing the filter by preferences':
+          'Try changing the filter by preferences',
       'The most appropriate diet': 'The most appropriate diet',
       'Diets': 'Diets',
-      'Click on the diet to show more information': 'Click on the diet to show more information',
-    
+      'Click on the diet to show more information':
+          'Click on the diet to show more information',
+
       /** diet_info_page **/
-      
+
       /* Match */
-      'Match your preferences': 'Match your preferences', /* ??????? */
+      'Match your preferences': 'Match your preferences',
+      /* ??????? */
       'Effectiveness of diet': 'Effectiveness of diet',
       'kg in': 'kg in',
       'days': 'days',
-      
+
       /* Clorie */
       'Calorie diet': 'Calorie diet',
       'kcal': 'kcal',
-      
+
       /* FoodStruct */
       'Nutrition structure': 'Nutrition structure',
 
@@ -202,8 +202,9 @@ class Vocabluary
 
       /* InfoLabel */
       'Choose diets to suit your taste': 'Подбирайте диеты под свой вкус',
-      'Choose which foods you want to see in your diets and which to remove from the diet.': 'Выберите, какие продукты вы желаете видеть в диетах, а какие нужно отсеить из выдачи.',
-      
+      'Choose which foods you want to see in your diets and which to remove from the diet.':
+          'Выберите, какие продукты вы желаете видеть в диетах, а какие нужно отсеить из выдачи.',
+
       /** more_tab **/
       /* Developer edge menu */
       'Developer\'s menu': 'Меню разработчика',
@@ -223,7 +224,8 @@ class Vocabluary
 
       /* Refresh Setting Card */
       'Reset the settings': 'Сбросить настройки',
-      'After the reset, start the app again.': 'После сброса запустите приложение снова.',
+      'After the reset, start the app again.':
+          'После сброса запустите приложение снова.',
 
       /* Dev Card */
       'Developers': 'Разработчики',
@@ -252,19 +254,22 @@ class Vocabluary
 
       /* index */
       'Body mass index': 'Индекс массы тела',
-      
+
       /* Diets bli */
       'Diets not found': 'Диеты не найдены',
       'No need to lose weight': 'Нет необходимости в похудении',
-      'Try changing the filter by preferences': 'Попробуйте изменить фильтр по предпочтениям',
+      'Try changing the filter by preferences':
+          'Попробуйте изменить фильтр по предпочтениям',
       'The most appropriate diet': 'Самая подходящая диета',
       'Diets': 'Диеты',
-      'Click on the diet to show more information': 'Нажмите на диету, чтобы показать больше информации',
+      'Click on the diet to show more information':
+          'Нажмите на диету, чтобы показать больше информации',
 
       /** diet_info_page **/
 
       /* Match */
-      'Match your preferences': 'Совпадение с вашими параметрами и предпочтениями',
+      'Match your preferences':
+          'Совпадение с вашими параметрами и предпочтениями',
       'Effectiveness of diet': 'Эффективность диеты',
       'kg in': 'кг за',
       'days': 'дней',
@@ -329,8 +334,7 @@ class Vocabluary
   };
 
   // Functions
-  static bool _checkLanguage(String language)
-  {
+  static bool _checkLanguage(String language) {
     for (int i = 0; i < _appLanguages.length; i++) {
       if (_appLanguages[i] == language) {
         return true;
@@ -339,22 +343,17 @@ class Vocabluary
     return false;
   }
 
-  static String getWord(String wordID)
-  {
+  static String getWord(String wordID) {
     return _wordManager[_appLanguage][wordID];
   }
 
-  static bool setLanguage(String lang)
-  {
-    if (lang != null)
-    {
-      if (_checkLanguage(lang))
-      {
+  static bool setLanguage(String lang) {
+    if (lang != null) {
+      if (_checkLanguage(lang)) {
         _appLanguage = lang;
         return true;
       }
     }
     return false;
   }
-
 }
