@@ -73,7 +73,7 @@ class Vocabluary {
       'We\'re on social media': 'We\'re on social media',
 
       /* Button */
-      'best regards, team onelab': 'best regards, team onelab',
+      'best regards, team oneLab': 'best regards, team oneLab',
 
       /** result_tab **/
       'Health information': 'Health information',
@@ -236,7 +236,7 @@ class Vocabluary {
       'We\'re on social media': 'Мы в социальных сетях',
 
       /* Button */
-      'best regards, team onelab': 'с любовью, команда onelab',
+      'best regards, team oneLab': 'с любовью, команда oneLab',
 
       /** result_tab **/
       'Health information': 'Сведения о здоровье',
