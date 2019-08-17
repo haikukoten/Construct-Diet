@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:construct_diet/common/clear_behavior.dart';
 import 'package:construct_diet/common/custom_appbar.dart' as custom;
 import 'package:construct_diet/common/custom_tab.dart';
+import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:construct_diet/common/labels.dart';
 import 'package:construct_diet/common/page_transition.dart';
 import 'package:construct_diet/scoped_models/data_model.dart';
@@ -102,13 +103,13 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   ];
 
   List<String> diagnosisList = <String>[
-    'Выраженный недостаток веса',
-    'Недостаточный вес',
-    'Нормальный вес',
-    'Избыточный вес',
-    'Первая степень ожирения',
-    'Вторая степень ожирения',
-    'Третья степень ожирения'
+    Vocabluary.getWord('Expressed lack of weight'),
+    Vocabluary.getWord('Underweight'),
+    Vocabluary.getWord('Normal weight'),
+    Vocabluary.getWord('Overweight'),
+    Vocabluary.getWord('First degree of obesity'),
+    Vocabluary.getWord('Second degree of obesity'),
+    Vocabluary.getWord('Third degree of obesity')
   ];
 
   @override
@@ -224,12 +225,12 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                             child: ScopedModelDescendant<DataModel>(
                                 builder: (context, child, model) {
                               return !model.isSet
-                                  ? InfoLabel("Укажите свои параметры",
-                                      description: "Нажмите для редактирования",
+                                  ? InfoLabel(Vocabluary.getWord('Indicate your parameters'),
+                                      description: Vocabluary.getWord('Click to edit'),
                                       icon: MdiIcons.creation)
                                   : InfoLabel(
                                       diagnosisList[model.getStatus()],
-                                      description: "Нажмите для редактирования",
+                                      description: Vocabluary.getWord('Click to edit'),
                                       icon: model.getStatus() == 2
                                           ? MdiIcons.checkCircle
                                           : MdiIcons.alertCircle,
@@ -360,15 +361,15 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                     tabs: <Tab>[
                       Tab(
                         child: TabContent(
-                            "Результат", MdiIcons.fileDocumentBoxOutline),
+                          Vocabluary.getWord('Result'), MdiIcons.fileDocumentBoxOutline),
                       ),
                       Tab(
-                        child:
-                            TabContent("Предпочтения", MdiIcons.heartOutline),
+                        child: TabContent(
+                          Vocabluary.getWord('Preferences'), MdiIcons.heartOutline),
                       ),
                       Tab(
-                          child: TabContent(
-                              "Другое", MdiIcons.cardBulletedOutline)),
+                        child: TabContent(
+                          Vocabluary.getWord('Another'), MdiIcons.cardBulletedOutline)),
                     ],
                     controller: controllerTab,
                   ),

@@ -2,6 +2,7 @@ import 'package:construct_diet/common/buttons.dart' as custom;
 import 'package:construct_diet/common/cards.dart' as custom;
 import 'package:construct_diet/common/labels.dart';
 import 'package:construct_diet/common/tab_body.dart';
+import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:construct_diet/scoped_models/data_model.dart';
 import 'package:construct_diet/theme.dart' as custom;
 import 'package:dynamic_theme/dynamic_theme.dart';
@@ -82,15 +83,15 @@ class _MoreTabState extends State<MoreTab> {
                         margin: EdgeInsets.fromLTRB(8, 8, 8, 4),
                         child: custom.Card(
                           DisplayLabel(
-                            "Меню разработчика",
+                            Vocabluary.getWord('Developer\'s menu'),
                             child: Padding(
                               padding: EdgeInsets.only(top: 4),
                               child: Column(
                                 children: <Widget>[
                                   SwitchLabel(
-                                    "Использовать интерфейс для iOS",
+                                    Vocabluary.getWord('Use the interface for iOS'),
                                     description:
-                                        "Влияет на внешность компонентов",
+                                        Vocabluary.getWord('Affects the appearance of components'),
                                     icon: Icons.phone_iphone,
                                     value: Theme.of(context).platform ==
                                         TargetPlatform.iOS,
@@ -109,13 +110,13 @@ class _MoreTabState extends State<MoreTab> {
               child: Material(
                 color: Colors.transparent,
                 child: InfoLabel("Construct Diet",
-                    description: "Версия: $version (сборка $buildNumber)",
+                    description: Vocabluary.getWord('Version') + ': $version (' + Vocabluary.getWord('Build') + ' $buildNumber)',
                     icon: MdiIcons.featureSearch),
               ),
             ),
           ),
           custom.Card(TitleLabel(
-            "Настройки",
+            Vocabluary.getWord('Settings'),
             icon: MdiIcons.settingsOutline,
             child: Column(children: [
               Divider(
@@ -123,8 +124,8 @@ class _MoreTabState extends State<MoreTab> {
                 color: Colors.transparent,
               ),
               SwitchLabel(
-                "Перейти на тёмную сторону",
-                description: "Активировать тёмную тему",
+                Vocabluary.getWord('Go to the dark side'),
+                description: Vocabluary.getWord('Activate a dark theme'),
                 icon: MdiIcons.weatherNight,
                 value: Theme.of(context).brightness == Brightness.dark,
                 onChanged: (isOn) {
@@ -133,8 +134,8 @@ class _MoreTabState extends State<MoreTab> {
               ),
               Divider(height: 5),
               ButtonLabel(
-                "Сбросить настройки",
-                description: "После сброса запустите приложение снова.",
+                Vocabluary.getWord('Reset the settings'),
+                description: Vocabluary.getWord('After the reset, start the app again.'),
                 icon: Icons.settings_backup_restore,
                 onPressed: () => ScopedModel.of<DataModel>(context)
                     .clearStorage()
@@ -145,19 +146,19 @@ class _MoreTabState extends State<MoreTab> {
           )),
           custom.Card(
             TitleLabel(
-              "Разработчики",
+              Vocabluary.getWord('Developers'),
               icon: Icons.code,
               child: Column(
                 children: [
-                  InfoLabel("Семён Бутенко",
-                      description: "Разработчик, дизайнер.")
+                  InfoLabel(Vocabluary.getWord('Semyon Butenko'),
+                      description: Vocabluary.getWord('Lead developer, designer')),
                 ],
               ),
             ),
           ),
           custom.Card(
             TitleLabel(
-              "Мы в социальных сетях",
+              Vocabluary.getWord('We\'re on social media'),
               icon: MdiIcons.accountMultipleOutline,
               child: Opacity(
                 opacity: 0.8,
@@ -180,7 +181,7 @@ class _MoreTabState extends State<MoreTab> {
             child: Opacity(
               opacity: 0.8,
               child: Text(
-                "с любовью, команда oneLab.",
+                Vocabluary.getWord('best regards, team onelab'),
                 style: Theme.of(context).textTheme.subtitle,
               ),
             ),

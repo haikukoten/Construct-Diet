@@ -1,6 +1,9 @@
+import 'dart:ui' as ui;
+
 import 'package:construct_diet/common/cards.dart' as custom;
 import 'package:construct_diet/common/labels.dart';
 import 'package:construct_diet/common/tab_body.dart';
+import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:construct_diet/scoped_models/data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -25,7 +28,7 @@ class _ResultTabState extends State<ResultTab> {
                 model.isSet
                     ? custom.Card(
                         TitleLabel(
-                          "Сведения о здоровье",
+                          Vocabluary.getWord('Health information'),
                           icon: Icons.info_outline,
                           child: Column(children: [
                             Divider(
@@ -34,15 +37,15 @@ class _ResultTabState extends State<ResultTab> {
                             ),
                             Column(
                               children: <Widget>[
-                                InfoLabel("Индекс массы тела",
+                                InfoLabel(Vocabluary.getWord('Body mass index'),
                                     description: model.imt.toStringAsFixed(2)),
-                                InfoLabel("Допустимый вес",
+                                InfoLabel(Vocabluary.getWord('Allowable weight'),
                                     description:
-                                        "от ${model.minWeight} кг до ${model.maxWeight} кг (идеально – ${model.idealWeight} кг)"),
-                                InfoLabel("Избыточный вес",
+                                        Vocabluary.getWord('LeftWModel') + '${model.minWeight}' + Vocabluary.getWord('MiddleWModel') +'${model.maxWeight}' + Vocabluary.getWord('MiddleRightWModel') + '${model.idealWeight}' + Vocabluary.getWord('RightWModel')),
+                                InfoLabel(Vocabluary.getWord('Overweight'),
                                     description: model.overweight == 0
-                                        ? 'Отсутствует'
-                                        : (model.overweight.toString() + "кг"))
+                                        ? Vocabluary.getWord('Missing')
+                                        : (model.overweight.toString() + ' ' + Vocabluary.getWord('kg')))
                               ],
                             ),
                           ]),
@@ -51,20 +54,20 @@ class _ResultTabState extends State<ResultTab> {
                     : Container(),
                 custom.Card(
                   model.widgetGoodDiet == null
-                      ? PlugLabel("Диеты не найдены",
+                      ? PlugLabel(Vocabluary.getWord('Diets not found'),
                           description: model.overweight < 4
-                              ? "Нет необходимости в похудении."
-                              : "Попробуйте изменить фильтр по предпочтениям.",
+                              ? Vocabluary.getWord('No need to lose weight')
+                              : Vocabluary.getWord('Try changing the filter by preferences'),
                           icon: MdiIcons.cards)
                       : TitleLabel(
-                          "Самая подходящая диета",
+                          Vocabluary.getWord('The most appropriate diet'),
                           icon: MdiIcons.crown,
                           child: model.widgetGoodDiet,
                         ),
                 ),
                 model.widgetDietList.length != 0
                     ? custom.Card(TitleLabel(
-                        "Диеты",
+                        Vocabluary.getWord('Diets'),
                         icon: MdiIcons.cardsOutline,
                         paddingBottom: 0,
                         child: Column(children: model.widgetDietList),
@@ -80,7 +83,7 @@ class _ResultTabState extends State<ResultTab> {
                 top: 240,
                 right: MediaQuery.of(context).size.width > 700 ? 150 : 5,
                 child: custom.Tip(
-                    "Нажмите на диету, чтобы показать больше информации."),
+                    Vocabluary.getWord('Click on the diet to show more information')),
               ),
             ),
           ],

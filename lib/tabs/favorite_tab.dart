@@ -1,6 +1,7 @@
 import 'package:construct_diet/common/cards.dart' as custom;
 import 'package:construct_diet/common/labels.dart';
 import 'package:construct_diet/common/tab_body.dart';
+import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:construct_diet/scoped_models/data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -21,15 +22,15 @@ class FavoriteFood {
 
 class _FavoritesTabState extends State<FavoritesTab> {
   List<FavoriteFood> foodList = <FavoriteFood>[
-    FavoriteFood(1, 'Мясные продукты', MdiIcons.sausage),
-    FavoriteFood(2, 'Рыбные продукты', MdiIcons.fish),
-    FavoriteFood(3, 'Фрукты', MdiIcons.foodApple),
-    FavoriteFood(4, 'Овощи', MdiIcons.corn),
-    FavoriteFood(5, 'Крупы', MdiIcons.rice),
-    FavoriteFood(9, 'Цитрусовые', MdiIcons.circleSlice8),
-    FavoriteFood(7, 'Глютен', MdiIcons.barley),
-    FavoriteFood(8, 'Лактоза', MdiIcons.beer),
-    FavoriteFood(10, 'Глюкоза', MdiIcons.candycane)
+    FavoriteFood(1, Vocabluary.getWord('Meat products'), MdiIcons.sausage),
+    FavoriteFood(2, Vocabluary.getWord('Fish products'), MdiIcons.fish),
+    FavoriteFood(3, Vocabluary.getWord('Fruit'), MdiIcons.foodApple),
+    FavoriteFood(4, Vocabluary.getWord('Vegetables'), MdiIcons.corn),
+    FavoriteFood(5, Vocabluary.getWord('Cereals'), MdiIcons.rice),
+    FavoriteFood(9, Vocabluary.getWord('Citrus'), MdiIcons.circleSlice8),
+    FavoriteFood(7, Vocabluary.getWord('Gluten'), MdiIcons.barley),
+    FavoriteFood(8, Vocabluary.getWord('Lactose'), MdiIcons.beer),
+    FavoriteFood(10, Vocabluary.getWord('Glucose'), MdiIcons.candycane)
   ];
 
   @override
@@ -37,9 +38,9 @@ class _FavoritesTabState extends State<FavoritesTab> {
     return ScopedModelDescendant<DataModel>(builder: (context, child, model) {
       return TabBody(
         Column(children: [
-          custom.Card(InfoLabel("Подбирайте диеты под свой вкус",
+          custom.Card(InfoLabel(Vocabluary.getWord('Choose diets to suit your taste'),
               description:
-                  "Выберите, какие продукты вы желаете видеть в диетах, а какие нужно отсеить из выдачи.",
+                  Vocabluary.getWord('Choose which foods you want to see in your diets and which to remove from the diet.'),
               icon: MdiIcons.heart)),
           custom.Card(Column(
             children: List<Widget>.generate(foodList.length, (int i) {

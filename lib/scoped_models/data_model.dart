@@ -1,14 +1,18 @@
 import 'package:construct_diet/common/diet.dart';
 import 'package:construct_diet/common/labels.dart';
+import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'dart:ui' as ui;
 
 class DataModel extends Model {
   bool _isSet = false;
   bool _isOpenedDiet = false;
   bool get isSet => _isSet;
   bool get isOpenedDiet => _isOpenedDiet;
+  bool isLangChange = Vocabluary.setLanguage(ui.window.locale.languageCode);
 
   int _genderIndex = 0;
   int _ageIndex = 13;
@@ -161,26 +165,26 @@ class DataModel extends Model {
   }
 
   List<Diet> dietList = [
-    Diet('Греческая', [1, 2, 4, 7, 8, 10], 14, 7, 830),
-    Diet('Болгарская', [1, 3, 5, 8, 10], 14, 10, 580),
-    Diet('Безуглеводная', [1, 2, 8], 14, 8, 740),
-    Diet('Белковая', [1, 2, 3, 4, 5, 7, 8, 10], 14, 10, 700),
-    Diet('Французская', [1, 2, 3, 4, 7, 10], 14, 8, 552),
-    Diet('Гречневая', [3, 5, 8], 14, 12, 970),
-    Diet('Китайская', [1, 2, 4, 10], 14, 10, 570),
-    Diet('Бразильская', [1, 2, 3, 4], 14, 9, 550),
-    Diet('Макробиотическая', [2, 3, 4, 7], 14, 7, 710),
-    Diet('Бобовая', [1, 2, 3, 4, 7, 8], 14, 8, 660),
-    Diet('Яичная', [1, 2, 3, 4, 9], 14, 7, 880),
-    Diet('Азиатская ', [1, 2, 3, 4, 7, 8, 10], 14, 8, 1060),
-    Diet('Японская', [1, 2, 3, 4, 7, 8], 13, 8, 695),
-    Diet('Итальянская', [1, 3, 4, 7, 8, 9], 12, 6, 810),
-    Diet('Капустная', [1, 2, 3, 4, 8], 10, 10, 771),
-    Diet('Кабачковая', [1, 2, 3, 4, 8, 9], 10, 6, 620),
-    Diet('Витаминно-белковая', [1, 2, 3, 4, 8, 9, 10], 10, 7, 1000),
-    Diet('Финиковая', [3, 5, 8, 10], 10, 8, 850),
-    Diet('Яблочная', [3, 7], 7, 7, 675),
-    Diet('Кефирно-яблочная', [3, 8], 7, 6, 673)
+    Diet(Vocabluary.getWord('Greek'), [1, 2, 4, 7, 8, 10], 14, 7, 830),
+    Diet(Vocabluary.getWord('Bulgarian'), [1, 3, 5, 8, 10], 14, 10, 580),
+    Diet(Vocabluary.getWord('Carbohydrate-free'), [1, 2, 8], 14, 8, 740),
+    Diet(Vocabluary.getWord('Protein'), [1, 2, 3, 4, 5, 7, 8, 10], 14, 10, 700),
+    Diet(Vocabluary.getWord('French'), [1, 2, 3, 4, 7, 10], 14, 8, 552),
+    Diet(Vocabluary.getWord('Buckwheat'), [3, 5, 8], 14, 12, 970),
+    Diet(Vocabluary.getWord('Chinese'), [1, 2, 4, 10], 14, 10, 570),
+    Diet(Vocabluary.getWord('Brazilian'), [1, 2, 3, 4], 14, 9, 550),
+    Diet(Vocabluary.getWord('Macrobiotic'), [2, 3, 4, 7], 14, 7, 710),
+    Diet(Vocabluary.getWord('Bean'), [1, 2, 3, 4, 7, 8], 14, 8, 660),
+    Diet(Vocabluary.getWord('Egg'), [1, 2, 3, 4, 9], 14, 7, 880),
+    Diet(Vocabluary.getWord('Asian'), [1, 2, 3, 4, 7, 8, 10], 14, 8, 1060),
+    Diet(Vocabluary.getWord('Japanese'), [1, 2, 3, 4, 7, 8], 13, 8, 695),
+    Diet(Vocabluary.getWord('Italian'), [1, 3, 4, 7, 8, 9], 12, 6, 810),
+    Diet(Vocabluary.getWord('Cabbage'), [1, 2, 3, 4, 8], 10, 10, 771),
+    Diet(Vocabluary.getWord('Courgette'), [1, 2, 3, 4, 8, 9], 10, 6, 620),
+    Diet(Vocabluary.getWord('Vitamin-protein'), [1, 2, 3, 4, 8, 9, 10], 10, 7, 1000),
+    Diet(Vocabluary.getWord('Date'), [3, 5, 8, 10], 10, 8, 850),
+    Diet(Vocabluary.getWord('Apple'), [3, 7], 7, 7, 675),
+    Diet(Vocabluary.getWord('Kefir-apple'), [3, 8], 7, 6, 673)
   ];
 
   generateDietWidgetList() {

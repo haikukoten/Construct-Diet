@@ -1,3 +1,4 @@
+import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -13,7 +14,7 @@ class Diet {
   final List<IconData> icons;
 
   Diet(this.name, this.category, this.duration, this.efficiency, this.calorific)
-      : description = "-$efficiency кг за $duration дней, $calorific ккал",
+      : description = '-$efficiency ' + Vocabluary.getWord('kg in') + ' $duration ' + Vocabluary.getWord('days') + ', $calorific ' + Vocabluary.getWord('kcal'),
         icons = List<IconData>.generate(category.length, (index) {
           Map<int, IconData> _iconList = {
             1: MdiIcons.sausage,

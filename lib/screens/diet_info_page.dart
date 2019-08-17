@@ -3,6 +3,7 @@ import 'package:construct_diet/common/cards.dart' as custom;
 import 'package:construct_diet/common/diet.dart';
 import 'package:construct_diet/common/labels.dart';
 import 'package:construct_diet/common/screen_body.dart';
+import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -13,15 +14,15 @@ class DietInfoPage extends StatelessWidget {
   DietInfoPage(this.diet);
 
   final Map<IconData, String> descriptionList = {
-    MdiIcons.sausage: "мясные продукты",
-    MdiIcons.fish: "рыбные продукты",
-    MdiIcons.foodApple: "фрукты",
-    MdiIcons.corn: "овощи",
-    MdiIcons.rice: "крупы",
-    MdiIcons.circleSlice8: "цитрусовые",
-    MdiIcons.barley: "содержит глютен",
-    MdiIcons.beer: "содержит лактозу",
-    MdiIcons.candycane: "содержит глюкозу"
+    MdiIcons.sausage: Vocabluary.getWord('List Meat products'),
+    MdiIcons.fish: Vocabluary.getWord('List Fish products'),
+    MdiIcons.foodApple: Vocabluary.getWord('List Fruit'),
+    MdiIcons.corn: Vocabluary.getWord('List Vegetables'),
+    MdiIcons.rice: Vocabluary.getWord('List Cereals'),
+    MdiIcons.circleSlice8: Vocabluary.getWord('List Citrus'),
+    MdiIcons.barley: Vocabluary.getWord('List Gluten'),
+    MdiIcons.beer: Vocabluary.getWord('List Lactose'),
+    MdiIcons.candycane: Vocabluary.getWord('List Glucose')
   };
 
   Widget appBar(BuildContext context) {
@@ -62,7 +63,7 @@ class DietInfoPage extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.fromLTRB(5, 0, 0, 0.5),
                         child: Text(
-                          diet.name + " диета",
+                          diet.name + ' ' + Vocabluary.getWord('diet'),
                           style: Theme.of(context).textTheme.caption,
                         ),
                       ),
@@ -71,16 +72,16 @@ class DietInfoPage extends StatelessWidget {
                 ),
                 InfoLabel("${diet.positiveIndex}%",
                     description:
-                        "Совпадение с вашими параметрами и предпочтениями",
+                        Vocabluary.getWord('Match your preferences'),
                     icon: MdiIcons.starCircleOutline),
-                InfoLabel("Эффективность диеты",
+                InfoLabel(Vocabluary.getWord('Effectiveness of diet'),
                     description:
-                        "-${diet.efficiency} кг за ${diet.duration} дней",
+                        '-${diet.efficiency} ' + Vocabluary.getWord('kg in') + ' ${diet.duration} ' + Vocabluary.getWord('days'),
                     icon: MdiIcons.playSpeed),
-                InfoLabel("Калорийность диеты",
-                    description: "${diet.calorific} ккал",
+                InfoLabel(Vocabluary.getWord('Calorie diet'),
+                    description: '${diet.calorific} ' + Vocabluary.getWord('kcal'),
                     icon: MdiIcons.animationOutline),
-                InfoLabel("Структура питания",
+                InfoLabel(Vocabluary.getWord('Nutrition structure'),
                     description: [
                       for (int i = 0; i < diet.icons.length; i++)
                         "- " + descriptionList[diet.icons[i]]
@@ -90,11 +91,11 @@ class DietInfoPage extends StatelessWidget {
                   height: 5,
                 ),
                 ButtonLabel(
-                  "Подробная информация",
-                  description: "Показать результаты поисковой системы",
+                  Vocabluary.getWord('More information about diet'),
+                  description: Vocabluary.getWord('Show search engine results'),
                   onPressed: () {
                     launch(
-                        "https://www.yandex.ru/search/?text=${diet.name}+диета");
+                        'https://www.google.com/search?q=${diet.name}+' + Vocabluary.getWord('diet'));
                   },
                 ),
               ],
