@@ -35,12 +35,19 @@ class Tip extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.symmetric(vertical: 9, horizontal: 12),
+            padding: EdgeInsets.symmetric(vertical: 11, horizontal: 16),
             constraints: BoxConstraints(maxWidth: 253),
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
               border: Border.all(color: Theme.of(context).primaryColor),
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.3),
+                  blurRadius: 8,
+                  offset: Offset(0, 3)
+                ),
+              ],
             ),
             child: Material(
               color: Colors.transparent,
