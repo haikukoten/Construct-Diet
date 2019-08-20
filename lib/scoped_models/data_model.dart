@@ -181,7 +181,8 @@ class DataModel extends Model {
     Diet(Vocabluary.getWord('Italian'), [1, 3, 4, 7, 8, 9], 12, 6, 810),
     Diet(Vocabluary.getWord('Cabbage'), [1, 2, 3, 4, 8], 10, 10, 771),
     Diet(Vocabluary.getWord('Courgette'), [1, 2, 3, 4, 8, 9], 10, 6, 620),
-    Diet(Vocabluary.getWord('Vitamin-protein'), [1, 2, 3, 4, 8, 9, 10], 10, 7, 1000),
+    Diet(Vocabluary.getWord('Vitamin-protein'), [1, 2, 3, 4, 8, 9, 10], 10, 7,
+        1000),
     Diet(Vocabluary.getWord('Date'), [3, 5, 8, 10], 10, 8, 850),
     Diet(Vocabluary.getWord('Apple'), [3, 7], 7, 7, 675),
     Diet(Vocabluary.getWord('Kefir-apple'), [3, 8], 7, 6, 673)
