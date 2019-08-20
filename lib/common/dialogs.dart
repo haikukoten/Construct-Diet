@@ -19,24 +19,32 @@ class Dialog extends StatelessWidget {
     return Center(
       child: Container(
         width: 270,
+        constraints: BoxConstraints(maxHeight: 365),
         decoration: BoxDecoration(
           color: Theme.of(context).cardColor,
-          border: Border.all(color: Theme.of(context).dividerColor),
           borderRadius: BorderRadius.all(Radius.circular(10)),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 8,
+                offset: Offset(0, 3)),
+          ],
         ),
         child: Material(
           color: Colors.transparent,
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: actions +
-                [
-                  Divider(height: 0),
-                  DialogButtonLabel(
-                    Vocabluary.getWord('Cancel'),
-                    onPressed: () => Navigator.pop(context),
-                    color: Theme.of(context).errorColor,
-                  ),
-                ],
+            children: [
+              Expanded(
+                child: ListView(children: actions, padding: EdgeInsets.zero),
+              ),
+              Divider(height: 1),
+              DialogButtonLabel(
+                Vocabluary.getWord('Cancel'),
+                onPressed: () => Navigator.pop(context),
+                color: Theme.of(context).errorColor,
+              ),
+            ],
           ),
         ),
       ),
