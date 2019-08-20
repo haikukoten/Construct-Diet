@@ -35,7 +35,7 @@ class Tip extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.symmetric(vertical: 11, horizontal: 16),
+            padding: EdgeInsets.symmetric(vertical: 11, horizontal: 13),
             constraints: BoxConstraints(maxWidth: 253),
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
@@ -43,10 +43,9 @@ class Tip extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(12)),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
-                  blurRadius: 8,
-                  offset: Offset(0, 3)
-                ),
+                    color: Colors.black.withOpacity(0.2),
+                    blurRadius: 4,
+                    offset: Offset(0, 2)),
               ],
             ),
             child: Material(
