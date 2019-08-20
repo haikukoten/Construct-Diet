@@ -15,7 +15,7 @@ class Vocabluary {
       'Second degree of obesity': 'Second degree of obesity',
       'Third degree of obesity': 'Third degree of obesity',
 
-      /* InfoLabel */
+      /* Info Card */
       'Indicate your parameters': 'Indicate your parameters',
       'Click to edit': 'Click to edit',
 
@@ -141,8 +141,8 @@ class Vocabluary {
       'Age': 'Age',
       'Height': 'Height',
       'Weight': 'Weight',
-      'Female': 'Female',
-      'Male': 'Male',
+      'Female': 'female',
+      'Male': 'male',
       'Gender': 'Gender',
 
       /** data_model **/
@@ -211,7 +211,7 @@ class Vocabluary {
       'Use the interface for iOS': 'Использовать интерфейс для iOS',
       'Affects the appearance of components': 'Влияет на внешность компонентов',
 
-      /* InfoLabel */
+      /* Info Card */
       'Version': 'Версия',
       'Build': 'сборка',
 
@@ -304,8 +304,8 @@ class Vocabluary {
       'Age': 'Возраст',
       'Height': 'Рост',
       'Weight': 'Вес',
-      'Female': 'Женский',
-      'Male': 'Мужской',
+      'Female': 'женский',
+      'Male': 'мужской',
       'Gender': 'Пол',
 
       /** data_model **/
