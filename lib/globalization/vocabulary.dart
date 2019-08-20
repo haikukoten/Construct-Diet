@@ -333,13 +333,12 @@ class Vocabluary {
     },
   };
 
-  // Functions
   static bool _checkLanguage(String language) {
     for (int i = 0; i < _appLanguages.length; i++) {
       if (_appLanguages[i] == language) {
         return true;
-      } // if
-    } // for
+      }
+    }
     return false;
   }
 
