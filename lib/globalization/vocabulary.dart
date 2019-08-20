@@ -300,7 +300,7 @@ class Vocabluary {
       /** edit_page **/
       'Body parameters': 'Параметры тела',
       'cm': 'см',
-      'years old': 'Лет',
+      'years old': 'лет',
       'Age': 'Возраст',
       'Height': 'Рост',
       'Weight': 'Вес',
