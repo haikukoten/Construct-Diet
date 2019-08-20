@@ -6,6 +6,11 @@ class Vocabluary {
   static Map<String, Map<String, String>> _wordManager = {
     'en': {
       /** main **/
+      /* dialog */
+      'Yes': 'Yes',
+      'No': 'No',
+      'Cancel': 'Cancel',
+
       /* diagnosisList */
       'Expressed lack of weight': 'Expressed lack of weight',
       'Underweight': 'Underweight',
@@ -170,6 +175,11 @@ class Vocabluary {
     },
     'ru': {
       /** main **/
+      /* dialog */
+      'Yes': 'Да',
+      'No': 'Нет',
+      'Cancel': 'Отмена',
+
       /* diagnosisList */
       'Expressed lack of weight': 'Выраженный недостаток веса',
       'Underweight': 'Недостаточный вес',
