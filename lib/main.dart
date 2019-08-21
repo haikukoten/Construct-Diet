@@ -225,12 +225,16 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                             child: ScopedModelDescendant<DataModel>(
                                 builder: (context, child, model) {
                               return !model.isSet
-                                  ? InfoLabel(Vocabluary.getWord('Indicate your parameters'),
-                                      description: Vocabluary.getWord('Click to edit'),
+                                  ? InfoLabel(
+                                      Vocabluary.getWord(
+                                          'Indicate your parameters'),
+                                      description:
+                                          Vocabluary.getWord('Click to edit'),
                                       icon: MdiIcons.creation)
                                   : InfoLabel(
                                       diagnosisList[model.getStatus()],
-                                      description: Vocabluary.getWord('Click to edit'),
+                                      description:
+                                          Vocabluary.getWord('Click to edit'),
                                       icon: model.getStatus() == 2
                                           ? MdiIcons.checkCircle
                                           : MdiIcons.alertCircle,
@@ -360,16 +364,16 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                     ),
                     tabs: <Tab>[
                       Tab(
-                        child: TabContent(
-                          Vocabluary.getWord('Result'), MdiIcons.fileDocumentBoxOutline),
+                        child: TabContent(Vocabluary.getWord('Result'),
+                            MdiIcons.fileDocumentBoxOutline),
                       ),
                       Tab(
-                        child: TabContent(
-                          Vocabluary.getWord('Preferences'), MdiIcons.heartOutline),
+                        child: TabContent(Vocabluary.getWord('Preferences'),
+                            MdiIcons.heartOutline),
                       ),
                       Tab(
-                        child: TabContent(
-                          Vocabluary.getWord('Another'), MdiIcons.cardBulletedOutline)),
+                          child: TabContent(Vocabluary.getWord('Another'),
+                              MdiIcons.cardBulletedOutline)),
                     ],
                     controller: controllerTab,
                   ),
