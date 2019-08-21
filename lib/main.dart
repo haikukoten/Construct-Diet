@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:construct_diet/common/clear_behavior.dart';
 import 'package:construct_diet/common/custom_appbar.dart' as custom;
 import 'package:construct_diet/common/custom_tab.dart';
+import 'package:construct_diet/common/diets_list.dart';
 import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:construct_diet/common/labels.dart';
 import 'package:construct_diet/common/page_transition.dart';
@@ -20,7 +21,14 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:md2_tab_indicator/md2_tab_indicator.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-void main() => runApp(MyApp(model: DataModel()));
+Future main() async {
+  var model = DataModel();
+
+  model.dietList = Diets.load();
+  if (model.isSet) model.generateDietWidgetList();
+
+  runApp(MyApp(model: model));
+}
 
 class MyApp extends StatelessWidget {
   final DataModel model;
