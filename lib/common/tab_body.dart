@@ -19,8 +19,8 @@ class _TabBodyState extends State<TabBody> {
         ? MediaQuery.of(context).size.width * 0.05
         : 16;
     return SingleChildScrollView(
-      padding: EdgeInsets.fromLTRB(padding, 0, padding, 0),
-      child: ConstrainedBox(constraints: BoxConstraints(), child: child),
+      padding: EdgeInsets.symmetric(horizontal: padding),
+      child: child,
     );
   }
 }
