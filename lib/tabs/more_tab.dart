@@ -1,9 +1,12 @@
 import 'package:construct_diet/common/buttons.dart' as custom;
 import 'package:construct_diet/common/cards.dart' as custom;
+import 'package:construct_diet/common/dialogs.dart' as custom;
 import 'package:construct_diet/common/labels.dart';
+import 'package:construct_diet/common/page_transition.dart';
 import 'package:construct_diet/common/tab_body.dart';
 import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:construct_diet/scoped_models/data_model.dart';
+import 'package:construct_diet/screens/contributors_page.dart';
 import 'package:construct_diet/theme.dart' as custom;
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -73,40 +76,41 @@ class _MoreTabState extends State<MoreTab> {
             GestureDetector(
               onLongPress: () {
                 showCupertinoModalPopup<void>(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Container(
-                        constraints: MediaQuery.of(context).size.width > 780
-                            ? BoxConstraints(maxWidth: 500)
-                            : BoxConstraints(),
-                        height: 126,
-                        margin: EdgeInsets.fromLTRB(8, 8, 8, 4),
-                        child: custom.Card(
-                          DisplayLabel(
-                            Vocabluary.getWord('Developer\'s menu'),
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 4),
-                              child: Column(
-                                children: <Widget>[
-                                  SwitchLabel(
-                                    Vocabluary.getWord(
-                                        'Use the interface for iOS'),
-                                    description: Vocabluary.getWord(
-                                        'Affects the appearance of components'),
-                                    icon: Icons.phone_iphone,
-                                    value: Theme.of(context).platform ==
-                                        TargetPlatform.iOS,
-                                    onChanged: (isOn) {
-                                      changePlatform(isOn);
-                                    },
-                                  ),
-                                ],
-                              ),
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Container(
+                      constraints: MediaQuery.of(context).size.width > 780
+                          ? BoxConstraints(maxWidth: 500)
+                          : BoxConstraints(),
+                      height: 126,
+                      margin: EdgeInsets.fromLTRB(8, 8, 8, 4),
+                      child: custom.Card(
+                        DisplayLabel(
+                          Vocabluary.getWord('Developer\'s menu'),
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 4),
+                            child: Column(
+                              children: <Widget>[
+                                SwitchLabel(
+                                  Vocabluary.getWord(
+                                      'Use the interface for iOS'),
+                                  description: Vocabluary.getWord(
+                                      'Affects the appearance of components'),
+                                  icon: Icons.phone_iphone,
+                                  value: Theme.of(context).platform ==
+                                      TargetPlatform.iOS,
+                                  onChanged: (isOn) {
+                                    changePlatform(isOn);
+                                  },
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                      );
-                    });
+                      ),
+                    );
+                  },
+                );
               },
               child: Material(
                 color: Colors.transparent,
@@ -119,46 +123,108 @@ class _MoreTabState extends State<MoreTab> {
               ),
             ),
           ),
-          custom.Card(TitleLabel(
-            Vocabluary.getWord('Settings'),
-            icon: MdiIcons.settingsOutline,
-            child: Column(children: [
-              Divider(
-                height: 5,
-                color: Colors.transparent,
-              ),
-              SwitchLabel(
-                Vocabluary.getWord('Go to the dark side'),
-                description: Vocabluary.getWord('Activate a dark theme'),
-                icon: MdiIcons.weatherNight,
-                value: Theme.of(context).brightness == Brightness.dark,
-                onChanged: (isOn) {
-                  changeTheme(isOn);
-                },
-              ),
-              Divider(height: 5),
-              ButtonLabel(
-                Vocabluary.getWord('Reset the settings'),
-                description:
-                    Vocabluary.getWord('After the reset, start the app again.'),
-                icon: Icons.settings_backup_restore,
-                onPressed: () => ScopedModel.of<DataModel>(context)
-                    .clearStorage()
-                    .then((s) => SystemChannels.platform
-                        .invokeMethod('SystemNavigator.pop')),
-              )
-            ]),
-          )),
           custom.Card(
             TitleLabel(
-              Vocabluary.getWord('Developers'),
-              icon: Icons.code,
+              Vocabluary.getWord('Settings'),
+              icon: MdiIcons.settingsOutline,
               child: Column(
                 children: [
-                  InfoLabel(Vocabluary.getWord('Semyon Butenko'),
-                      description: Vocabluary.getWord('Lead developer, designer')),
+                  Divider(
+                    height: 5,
+                    color: Colors.transparent,
+                  ),
+                  ButtonLabel(
+                    Vocabluary.getWord('Language'),
+                    description: Vocabluary.getWord('language_name'),
+                    icon: Icons.translate,
+                    onPressed: () => {
+                      custom
+                          .showSelectionDialog<String>(
+                        context: context,
+                        actions: List<Widget>.generate(
+                          Vocabluary.getLanguages().length,
+                          (int i) {
+                            var lang = Vocabluary.getLanguages()[i];
+                            return DialogButtonLabel(
+                              lang['name'],
+                              onPressed: () {
+                                if (lang['code'] ==
+                                    Vocabluary.getCurrentLanguage())
+                                  return Navigator.pop(context);
+                                else
+                                  return Navigator.pop(context, lang['code']);
+                              },
+                            );
+                          },
+                        ),
+                      )
+                          .then(
+                        (code) async {
+                          if (code == null) return;
+                          await Future.delayed(
+                              const Duration(milliseconds: 300), () {
+                            Vocabluary.setLanguage(code);
+                            ScopedModel.of<DataModel>(context).language =
+                                Vocabluary.checkLanguage(code);
+
+                            ScopedModel.of<DataModel>(context).saveToStorage();
+                            custom.showDialog<String>(
+                              Vocabluary.getWord('Changes applied'),
+                              description: Vocabluary.getWord(
+                                  'To display the changes, run the application again.'),
+                              context: context,
+                              actions: [
+                                Flexible(
+                                  child: DialogButtonLabel(
+                                    "ОК",
+                                    onPressed: () => SystemChannels.platform
+                                        .invokeMethod('SystemNavigator.pop'),
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                              ],
+                            );
+                          });
+                        },
+                      ),
+                    },
+                  ),
+                  Divider(height: 5),
+                  SwitchLabel(
+                    Vocabluary.getWord('Go to the dark side'),
+                    description: Vocabluary.getWord('Activate a dark theme'),
+                    icon: MdiIcons.weatherNight,
+                    value: Theme.of(context).brightness == Brightness.dark,
+                    onChanged: (isOn) {
+                      changeTheme(isOn);
+                    },
+                  ),
+                  Divider(height: 5),
+                  ButtonLabel(
+                    Vocabluary.getWord('Reset the settings'),
+                    description: Vocabluary.getWord(
+                        'After the reset, start the app again.'),
+                    icon: Icons.settings_backup_restore,
+                    onPressed: () => ScopedModel.of<DataModel>(context)
+                        .clearStorage()
+                        .then((s) => SystemChannels.platform
+                            .invokeMethod('SystemNavigator.pop')),
+                  ),
                 ],
               ),
+            ),
+          ),
+          custom.Card(
+            ButtonLabel(
+              Vocabluary.getWord('Project Contributors'),
+              description: Vocabluary.getWord(
+                  'People who have made a certain contribution to the project.'),
+              onPressed: () => {
+                Navigator.push(
+                  context,
+                  TransitionPageRoute(widget: ContributorsPage()),
+                )
+              },
             ),
           ),
           custom.Card(

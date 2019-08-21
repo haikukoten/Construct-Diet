@@ -5,11 +5,16 @@ class Vocabluary {
 
   static Map<String, Map<String, String>> _wordManager = {
     'en': {
+      'language_name': 'English',
+
       /** main **/
       /* dialog */
       'Yes': 'Yes',
       'No': 'No',
       'Cancel': 'Cancel',
+      'Changes applied': 'Changes applied',
+      'To display the changes, run the application again.':
+          "To display the changes, run the application again.",
 
       /* diagnosisList */
       'Expressed lack of weight': 'Expressed lack of weight',
@@ -60,6 +65,9 @@ class Vocabluary {
       /* Settings */
       'Settings': 'Settings',
 
+      /* Language Card */
+      'Language': 'Language',
+
       /* Theme Card */
       'Go to the dark side': 'Go to the dark side',
       'Activate a dark theme': 'Activate a dark theme',
@@ -69,10 +77,10 @@ class Vocabluary {
       'After the reset, start the app again.':
           'After the reset, start the app again.',
 
-      /* Dev Card */
-      'Developers': 'Developers',
-      'Semyon Butenko': 'Semyon Butenko',
-      'Lead developer, designer': 'Lead developer, designer',
+      /* Contributors Card */
+      'Project Contributors': 'Project Contributors',
+      'People who have made a certain contribution to the project.':
+          'People who have made a certain contribution to the project.',
 
       /* Social Card */
       'We\'re on social media': 'We\'re on social media',
@@ -174,11 +182,16 @@ class Vocabluary {
       'Kefir-apple': 'Kefir-apple',
     },
     'ru': {
+      'language_name': 'Русский',
+
       /** main **/
       /* dialog */
       'Yes': 'Да',
       'No': 'Нет',
       'Cancel': 'Отмена',
+      'Changes applied': 'Изменения применены',
+      'To display the changes, run the application again.':
+          "Для отображения изменений, запустите приложение снова.",
 
       /* diagnosisList */
       'Expressed lack of weight': 'Выраженный недостаток веса',
@@ -228,6 +241,9 @@ class Vocabluary {
       /* Settings */
       'Settings': 'Настройки',
 
+      /* Language Card */
+      'Language': 'Язык интерфейса',
+
       /* Theme Card */
       'Go to the dark side': 'Перейти на тёмную сторону',
       'Activate a dark theme': 'Активировать тёмную тему',
@@ -237,10 +253,10 @@ class Vocabluary {
       'After the reset, start the app again.':
           'После сброса запустите приложение снова.',
 
-      /* Dev Card */
-      'Developers': 'Разработчики',
-      'Semyon Butenko': 'Семён Бутенко',
-      'Lead developer, designer': 'Ведущий разработчик, дизайнер',
+      /* Contributors Card */
+      'Project Contributors': 'Участники проекта',
+      'People who have made a certain contribution to the project.':
+          'Люди, сделавшие определённый вклад в проект.',
 
       /* Social Card */
       'We\'re on social media': 'Мы в социальных сетях',
@@ -349,6 +365,10 @@ class Vocabluary {
 
   static void setLanguage(String lang) {
     _appLanguage = checkLanguage(lang);
+  }
+
+  static String getCurrentLanguage() {
+    return _appLanguage;
   }
 
   static String checkLanguage(String lang) {
