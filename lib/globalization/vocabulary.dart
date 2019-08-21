@@ -343,26 +343,18 @@ class Vocabluary {
     },
   };
 
-  static bool _checkLanguage(String language) {
-    for (int i = 0; i < _appLanguages.length; i++) {
-      if (_appLanguages[i] == language) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   static String getWord(String wordID) {
     return _wordManager[_appLanguage][wordID];
   }
 
-  static bool setLanguage(String lang) {
-    if (lang != null) {
-      if (_checkLanguage(lang)) {
-        _appLanguage = lang;
-        return true;
-      }
-    }
-    return false;
+  static void setLanguage(String lang) {
+    _appLanguage = checkLanguage(lang);
+  }
+
+  static String checkLanguage(String lang) {
+    if (_appLanguages.contains(lang))
+      return lang;
+    else
+      return _appLanguage;
   }
 }
