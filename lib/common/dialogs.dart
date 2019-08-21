@@ -56,7 +56,7 @@ class Dialog extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 8, 0, 12),
+                padding: EdgeInsets.fromLTRB(15, 8, 15, 12),
                 child: Text(
                   description,
                   textAlign: TextAlign.center,
