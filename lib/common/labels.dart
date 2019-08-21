@@ -98,26 +98,29 @@ class DialogButtonLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(8, 5, 8, 5),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          highlightColor: Colors.grey.withAlpha(30),
-          splashColor: Colors.grey.withAlpha(30),
-          onTap: onPressed,
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          child: Padding(
-            padding: EdgeInsets.all(10),
-            child: Container(
-              width: 250,
-              alignment: Alignment.center,
-              child: Text(title,
-                  strutStyle: StrutStyle(
-                    leading: 0,
-                  ),
-                  style:
-                      Theme.of(context).textTheme.title.copyWith(color: color)),
+    return Flexible(
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(8, 5, 8, 5),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            highlightColor: Colors.grey.withAlpha(30),
+            splashColor: Colors.grey.withAlpha(30),
+            onTap: onPressed,
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: Container(
+                alignment: Alignment.center,
+                child: Text(title,
+                    strutStyle: StrutStyle(
+                      leading: 0,
+                    ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .title
+                        .copyWith(color: color)),
+              ),
             ),
           ),
         ),
