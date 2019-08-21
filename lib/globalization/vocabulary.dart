@@ -1,7 +1,7 @@
 class Vocabluary {
   // Vars
   static String _appLanguage = 'en';
-  static List<String> _appLanguages = <String>['ru', 'en'];
+  static List<String> _appLanguages = <String>['en', 'ru'];
 
   static Map<String, Map<String, String>> _wordManager = {
     'en': {
@@ -356,5 +356,15 @@ class Vocabluary {
       return lang;
     else
       return _appLanguage;
+  }
+
+  static List<Map<String, String>> getLanguages() {
+    return [
+      for (int i = 0; i < _wordManager.length; i++)
+        {
+          'code': _appLanguages[i],
+          'name': _wordManager[_appLanguages[i]]['language_name']
+        }
+    ];
   }
 }
