@@ -48,11 +48,14 @@ class Dialog extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 12),
+                padding: EdgeInsets.only(top: 14),
                 child: Text(
                   title,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.title,
+                  style: Theme.of(context)
+                      .textTheme
+                      .title
+                      .copyWith(fontSize: 15.5),
                 ),
               ),
               Padding(
