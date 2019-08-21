@@ -86,7 +86,9 @@ class SelectionDialog extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Flexible(
-                child: ListView(children: actions, padding: EdgeInsets.zero),
+                child: SingleChildScrollView(
+                  child: Column(children: actions),
+                ),
               ),
               Divider(height: 1),
               DialogButtonLabel(
