@@ -7,7 +7,6 @@ Future<String> showDialog<String>(String title,
     {@required BuildContext context,
     String description,
     List<Widget> actions}) {
-  title = description;
   return showCupertinoDialog<String>(
       context: context,
       builder: (BuildContext context) =>
@@ -48,10 +47,26 @@ class Dialog extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Divider(height: 1),
-              Expanded(
-                child: ListView(children: actions),
+              Padding(
+                padding: EdgeInsets.only(top: 12),
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.title,
+                ),
               ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 8, 0, 12),
+                child: Text(
+                  description,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.subtitle,
+                ),
+              ),
+              Divider(height: 1),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: actions),
             ],
           ),
         ),
