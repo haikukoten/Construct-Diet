@@ -1,18 +1,16 @@
 import 'package:construct_diet/common/diet.dart';
 import 'package:construct_diet/common/labels.dart';
-import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'dart:ui' as ui;
-
 class DataModel extends Model {
+  String language;
+
   bool _isSet = false;
   bool _isOpenedDiet = false;
   bool get isSet => _isSet;
   bool get isOpenedDiet => _isOpenedDiet;
-  bool isLangChange = Vocabluary.setLanguage(ui.window.locale.languageCode);
 
   int _genderIndex = 0;
   int _ageIndex = 13;
@@ -104,6 +102,7 @@ class DataModel extends Model {
 
     prefs.setBool('isSet', _isSet);
     prefs.setBool('isOpenedDiet', _isOpenedDiet);
+    prefs.setString('language', language);
 
     prefs.setInt('genderIndex', _genderIndex);
     prefs.setInt('ageIndex', _ageIndex);
@@ -122,8 +121,9 @@ class DataModel extends Model {
   void loadToStorage() async {
     final prefs = await SharedPreferences.getInstance();
 
-    if (prefs.getBool('isSet') == null) return;
+    language = prefs.getString('language');
 
+    if (prefs.getBool('isSet') == null) return;
     _isSet = prefs.getBool('isSet');
     _isOpenedDiet = prefs.getBool('isOpenedDiet');
 

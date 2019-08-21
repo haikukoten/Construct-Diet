@@ -20,10 +20,20 @@ import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:md2_tab_indicator/md2_tab_indicator.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:ui' as ui;
 
 Future main() async {
   var model = DataModel();
 
+  final prefs = await SharedPreferences.getInstance();
+  var lang = prefs.getString('language');
+  if (lang == null) {
+    lang = Vocabluary.checkLanguage(ui.window.locale.languageCode);
+    prefs.setString('language', lang);
+  }
+
+  Vocabluary.setLanguage(lang);
   model.dietList = Diets.load();
   if (model.isSet) model.generateDietWidgetList();
 
