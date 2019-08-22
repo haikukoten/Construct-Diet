@@ -24,6 +24,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:ui' as ui;
 
 Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   var model = DataModel();
 
   final prefs = await SharedPreferences.getInstance();
