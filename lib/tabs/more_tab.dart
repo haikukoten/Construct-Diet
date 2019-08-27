@@ -92,8 +92,7 @@ class _MoreTabState extends State<MoreTab> {
                             child: Column(
                               children: <Widget>[
                                 SwitchLabel(
-                                  Vocabluary.getWord(
-                                      'Use the interface for iOS'),
+                                  Vocabluary.getWord('Use the UI for iOS'),
                                   description: Vocabluary.getWord(
                                       'Affects the appearance of components'),
                                   icon: Icons.phone_iphone,
@@ -203,7 +202,7 @@ class _MoreTabState extends State<MoreTab> {
                   ButtonLabel(
                     Vocabluary.getWord('Reset the settings'),
                     description: Vocabluary.getWord(
-                        'After the reset, start the app again.'),
+                        'After resetting settings, restart the app.'),
                     icon: Icons.settings_backup_restore,
                     onPressed: () => ScopedModel.of<DataModel>(context)
                         .clearStorage()

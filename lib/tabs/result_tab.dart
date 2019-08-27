@@ -64,12 +64,12 @@ class _ResultTabState extends State<ResultTab> {
                   model.widgetGoodDiet == null
                       ? PlugLabel(Vocabluary.getWord('Diets not found'),
                           description: model.overweight < 4
-                              ? Vocabluary.getWord('No need to lose weight')
+                              ? Vocabluary.getWord('No need for weight lose')
                               : Vocabluary.getWord(
-                                  'Try changing the filter by preferences'),
+                                  'Try changing the preferences filter'),
                           icon: MdiIcons.cards)
                       : TitleLabel(
-                          Vocabluary.getWord('The most appropriate diet'),
+                          Vocabluary.getWord('The most suitable diet'),
                           icon: MdiIcons.crown,
                           child: model.widgetGoodDiet,
                         ),

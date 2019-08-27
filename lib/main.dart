@@ -122,13 +122,13 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   ];
 
   List<String> diagnosisList = <String>[
-    Vocabluary.getWord('Expressed lack of weight'),
+    Vocabluary.getWord('Weight deficit'),
     Vocabluary.getWord('Underweight'),
     Vocabluary.getWord('Normal weight'),
     Vocabluary.getWord('Overweight'),
-    Vocabluary.getWord('First degree of obesity'),
-    Vocabluary.getWord('Second degree of obesity'),
-    Vocabluary.getWord('Third degree of obesity')
+    Vocabluary.getWord('Class I obesity'),
+    Vocabluary.getWord('Class II obesity'),
+    Vocabluary.getWord('Class III obesity')
   ];
 
   @override
@@ -246,7 +246,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                               return !model.isSet
                                   ? InfoLabel(
                                       Vocabluary.getWord(
-                                          'Indicate your parameters'),
+                                          'Specify your parameters'),
                                       description:
                                           Vocabluary.getWord('Click to edit'),
                                       icon: MdiIcons.creation)
@@ -391,7 +391,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                             MdiIcons.heartOutline),
                       ),
                       Tab(
-                          child: TabContent(Vocabluary.getWord('Another'),
+                          child: TabContent(Vocabluary.getWord('Other'),
                               MdiIcons.cardBulletedOutline)),
                     ],
                     controller: controllerTab,

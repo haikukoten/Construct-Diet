@@ -17,22 +17,22 @@ class Vocabluary {
           "To display the changes, run the application again.",
 
       /* diagnosisList */
-      'Expressed lack of weight': 'Weight deficit',
+      'Weight deficit': 'Weight deficit',
       'Underweight': 'Underweight',
       'Normal weight': 'Normal weight',
       'Overweight': 'Overweight',
-      'First degree of obesity': 'Class I obesity',
-      'Second degree of obesity': 'Class II obesity',
-      'Third degree of obesity': 'Class III obesity',
+      'Class I obesity': 'Class I obesity',
+      'Class II obesity': 'Class II obesity',
+      'Class III obesity': 'Class III obesity',
 
       /* Info Card */
-      'Indicate your parameters': 'Specify your parameters',
+      'Specify your parameters': 'Specify your parameters',
       'Click to edit': 'Click to edit',
 
       /* TabContent */
       'Result': 'Result',
       'Preferences': 'Preferences',
-      'Another': 'Other',
+      'Other': 'Other',
 
       /** favorite_tab **/
       /* foodList */
@@ -54,7 +54,7 @@ class Vocabluary {
       /** more_tab **/
       /* Developer edge menu */
       'Developer\'s menu': 'Developer\'s menu',
-      'Use the interface for iOS': 'Use the UI for iOS',
+      'Use the UI for iOS': 'Use the UI for iOS',
       'Affects the appearance of components':
           'Affects the appearance of components',
 
@@ -74,7 +74,7 @@ class Vocabluary {
 
       /* Refresh Setting Card */
       'Reset the settings': 'Reset the settings',
-      'After the reset, start the app again.':
+      'After resetting settings, restart the app.':
           'After resetting settings, restart the app.',
 
       /* Contributors Card */
@@ -107,10 +107,10 @@ class Vocabluary {
 
       /* Diets bli */
       'Diets not found': 'Diets not found',
-      'No need to lose weight': 'No need for weight lose',
-      'Try changing the filter by preferences':
+      'No need for weight lose': 'No need for weight lose',
+      'Try changing the preferences filter':
           'Try changing the preferences filter',
-      'The most appropriate diet': 'The most suitable diet',
+      'The most suitable diet': 'The most suitable diet',
       'Diets': 'Diets',
       'Click on the diet to show more information':
           'Click on the diet to show more information',
@@ -119,8 +119,7 @@ class Vocabluary {
 
       /* Match */
       'Match your preferences': 'Match your preferences',
-      /* ??????? */
-      'Effectiveness of diet': 'Diet efficiency',
+      'Diet efficiency': 'Diet efficiency',
       'kg in': 'kg in',
       'days': 'days',
 
@@ -194,22 +193,22 @@ class Vocabluary {
           "Для отображения изменений, запустите приложение снова.",
 
       /* diagnosisList */
-      'Expressed lack of weight': 'Выраженный недостаток веса',
+      'Weight deficit': 'Выраженный недостаток веса',
       'Underweight': 'Недостаточный вес',
       'Normal weight': 'Нормальный вес',
       'Overweight': 'Избыточный вес',
-      'First degree of obesity': 'Первая степень ожирения',
-      'Second degree of obesity': 'Вторая степень ожирения',
-      'Third degree of obesity': 'Третья степень ожирения',
+      'Class I obesity': 'Первая степень ожирения',
+      'Class II obesity': 'Вторая степень ожирения',
+      'Class III obesity': 'Третья степень ожирения',
 
       /* InfoLabel */
-      'Indicate your parameters': 'Укажите свои параметры',
+      'Specify your parameters': 'Укажите свои параметры',
       'Click to edit': 'Нажмите для редактирования',
 
       /* TabContent */
       'Result': 'Результат',
       'Preferences': 'Предпочтения',
-      'Another': 'Другое',
+      'Other': 'Другое',
 
       /** favorite_tab **/
       /* foodList */
@@ -231,7 +230,7 @@ class Vocabluary {
       /** more_tab **/
       /* Developer edge menu */
       'Developer\'s menu': 'Меню разработчика',
-      'Use the interface for iOS': 'Использовать интерфейс для iOS',
+      'Use the UI for iOS': 'Использовать интерфейс для iOS',
       'Affects the appearance of components': 'Влияет на внешность компонентов',
 
       /* Info Card */
@@ -250,7 +249,7 @@ class Vocabluary {
 
       /* Refresh Setting Card */
       'Reset the settings': 'Сбросить настройки',
-      'After the reset, start the app again.':
+      'After resetting settings, restart the app.':
           'После сброса запустите приложение снова.',
 
       /* Contributors Card */
@@ -283,10 +282,10 @@ class Vocabluary {
 
       /* Diets bli */
       'Diets not found': 'Диеты не найдены',
-      'No need to lose weight': 'Нет необходимости в похудении',
-      'Try changing the filter by preferences':
+      'No need for weight lose': 'Нет необходимости в похудении',
+      'Try changing the preferences filter':
           'Попробуйте изменить фильтр по предпочтениям',
-      'The most appropriate diet': 'Самая подходящая диета',
+      'The most suitable diet': 'Самая подходящая диета',
       'Diets': 'Диеты',
       'Click on the diet to show more information':
           'Нажмите на диету, чтобы показать больше информации',
@@ -296,7 +295,7 @@ class Vocabluary {
       /* Match */
       'Match your preferences':
           'Совпадение с вашими параметрами и предпочтениями',
-      'Effectiveness of diet': 'Эффективность диеты',
+      'Diet efficiency': 'Эффективность диеты',
       'kg in': 'кг за',
       'days': 'дней',
 
