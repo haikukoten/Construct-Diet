@@ -71,15 +71,17 @@ class DietInfoPage extends StatelessWidget {
                   ),
                 ),
                 InfoLabel("${diet.positiveIndex}%",
-                    description:
-                        Vocabluary.getWord('Match your preferences'),
+                    description: Vocabluary.getWord('Match your preferences'),
                     icon: MdiIcons.starCircleOutline),
-                InfoLabel(Vocabluary.getWord('Effectiveness of diet'),
-                    description:
-                        '-${diet.efficiency} ' + Vocabluary.getWord('kg in') + ' ${diet.duration} ' + Vocabluary.getWord('days'),
+                InfoLabel(Vocabluary.getWord('Diet efficiency'),
+                    description: '-${diet.efficiency} ' +
+                        Vocabluary.getWord('kg in') +
+                        ' ${diet.duration} ' +
+                        Vocabluary.getWord('days'),
                     icon: MdiIcons.playSpeed),
                 InfoLabel(Vocabluary.getWord('Calorie diet'),
-                    description: '${diet.calorific} ' + Vocabluary.getWord('kcal'),
+                    description:
+                        '${diet.calorific} ' + Vocabluary.getWord('kcal'),
                     icon: MdiIcons.animationOutline),
                 InfoLabel(Vocabluary.getWord('Nutrition structure'),
                     description: [
@@ -94,8 +96,8 @@ class DietInfoPage extends StatelessWidget {
                   Vocabluary.getWord('More information about diet'),
                   description: Vocabluary.getWord('Show search engine results'),
                   onPressed: () {
-                    launch(
-                        'https://www.google.com/search?q=${diet.name}+' + Vocabluary.getWord('diet'));
+                    launch('https://www.google.com/search?q=${diet.name}+' +
+                        Vocabluary.getWord('diet'));
                   },
                 ),
               ],
