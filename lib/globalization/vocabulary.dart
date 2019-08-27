@@ -17,22 +17,22 @@ class Vocabluary {
           "To display the changes, run the application again.",
 
       /* diagnosisList */
-      'Expressed lack of weight': 'Expressed lack of weight',
+      'Expressed lack of weight': 'Weight deficit',
       'Underweight': 'Underweight',
       'Normal weight': 'Normal weight',
       'Overweight': 'Overweight',
-      'First degree of obesity': 'First degree of obesity',
-      'Second degree of obesity': 'Second degree of obesity',
-      'Third degree of obesity': 'Third degree of obesity',
+      'First degree of obesity': 'Class I obesity',
+      'Second degree of obesity': 'Class II obesity',
+      'Third degree of obesity': 'Class III obesity',
 
       /* Info Card */
-      'Indicate your parameters': 'Indicate your parameters',
+      'Indicate your parameters': 'Specify your parameters',
       'Click to edit': 'Click to edit',
 
       /* TabContent */
       'Result': 'Result',
       'Preferences': 'Preferences',
-      'Another': 'Another',
+      'Another': 'Other',
 
       /** favorite_tab **/
       /* foodList */
@@ -54,7 +54,7 @@ class Vocabluary {
       /** more_tab **/
       /* Developer edge menu */
       'Developer\'s menu': 'Developer\'s menu',
-      'Use the interface for iOS': 'Use the interface for iOS',
+      'Use the interface for iOS': 'Use the UI for iOS',
       'Affects the appearance of components':
           'Affects the appearance of components',
 
@@ -75,7 +75,7 @@ class Vocabluary {
       /* Refresh Setting Card */
       'Reset the settings': 'Reset the settings',
       'After the reset, start the app again.':
-          'After the reset, start the app again.',
+          'After resetting settings, restart the app.',
 
       /* Contributors Card */
       'Project Contributors': 'Project Contributors',
@@ -107,10 +107,10 @@ class Vocabluary {
 
       /* Diets bli */
       'Diets not found': 'Diets not found',
-      'No need to lose weight': 'No need to lose weight',
+      'No need to lose weight': 'No need for weight lose',
       'Try changing the filter by preferences':
-          'Try changing the filter by preferences',
-      'The most appropriate diet': 'The most appropriate diet',
+          'Try changing the preferences filter',
+      'The most appropriate diet': 'The most suitable diet',
       'Diets': 'Diets',
       'Click on the diet to show more information':
           'Click on the diet to show more information',
@@ -120,7 +120,7 @@ class Vocabluary {
       /* Match */
       'Match your preferences': 'Match your preferences',
       /* ??????? */
-      'Effectiveness of diet': 'Effectiveness of diet',
+      'Effectiveness of diet': 'Diet efficiency',
       'kg in': 'kg in',
       'days': 'days',
 
