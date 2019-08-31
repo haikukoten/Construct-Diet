@@ -12,7 +12,7 @@ class Card extends StatelessWidget {
       constraints: BoxConstraints(minHeight: 70),
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
-        border: Border.all(color: Theme.of(context).dividerColor),
+        border: Border.all(color: Theme.of(context).cardTheme.color),
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Material(

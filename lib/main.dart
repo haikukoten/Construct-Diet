@@ -176,7 +176,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           tag: 'appbar',
           child: Material(
             elevation: 3.5 - (step * 2),
-            shadowColor: Theme.of(context).dividerColor,
+            shadowColor: Theme.of(context).cardTheme.color,
             borderRadius: BorderRadius.all(Radius.circular(8.5)),
             color: Theme.of(context).cardColor,
             child: InkWell(
