@@ -49,7 +49,7 @@ class ButtonLabel extends StatelessWidget {
                         : Container(),
                     Container(
                       width: MediaQuery.of(context).size.width > 750
-                          ? 750 - 140
+                          ? 750 - 140.0
                           : MediaQuery.of(context).size.width - 140,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
