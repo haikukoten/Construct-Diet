@@ -177,7 +177,7 @@ class ThemeIOS {
     brightness: Brightness.dark,
     accentColor: Colors.grey,
     toggleableActiveColor: Color(0xFF8AB4F8),
-    dividerColor: Color(0xFF29292B),
+    dividerColor: Color(0xFF1D1E21),
     splashColor: Color(0x558AB4F8),
     highlightColor: Color(0x228AB4F8),
     primaryColor: Color(0xFF8AB4F8),
