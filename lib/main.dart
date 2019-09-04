@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
+import 'dart:ui' as ui;
 
 import 'package:construct_diet/common/clear_behavior.dart';
 import 'package:construct_diet/common/custom_appbar.dart' as custom;
@@ -14,6 +16,7 @@ import 'package:construct_diet/tabs/more_tab.dart';
 import 'package:construct_diet/tabs/result_tab.dart';
 import 'package:construct_diet/theme.dart' as custom;
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:construct_diet/web/github_api_interpreter.dart' as web;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -21,7 +24,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:md2_tab_indicator/md2_tab_indicator.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:ui' as ui;
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,8 +39,29 @@ Future main() async {
   Vocabluary.setLanguage(lang);
   model.dietList = Diets.load();
   if (model.isSet) model.generateDietWidgetList();
-
+  
+  gitExample();
+  
   runApp(MyApp(model: model));
+}
+
+
+/* TODO: Delete example */
+Future gitExample() async /* git users request example */
+{
+  var request = new web.UsersManadger();
+  request.fillAsync(Uri.parse('https://api.github.com/repos/oneLab-Projects/Construct-Diet/stats/contributors')).whenComplete(
+    () {
+      if (request.isFill == false) {
+        print('internet lost');
+        return;
+      }
+      for (int i = 0; i < request.users.length; i++) {
+        print(request.users[i].userInfo.nickname);
+        print('  ' + web.User.userGetXP(request.users[i]).toString());
+      }
+    }
+  );
 }
 
 class MyApp extends StatelessWidget {
