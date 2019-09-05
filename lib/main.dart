@@ -40,28 +40,7 @@ Future main() async {
   model.dietList = Diets.load();
   if (model.isSet) model.generateDietWidgetList();
   
-  gitExample();
-  
   runApp(MyApp(model: model));
-}
-
-
-/* TODO: Delete example */
-Future gitExample() async /* git users request example */
-{
-  var request = new web.UsersManadger();
-  request.fillAsync(Uri.parse('https://api.github.com/repos/oneLab-Projects/Construct-Diet/stats/contributors')).whenComplete(
-    () {
-      if (request.isFill == false) {
-        print('internet lost');
-        return;
-      }
-      for (int i = 0; i < request.users.length; i++) {
-        print(request.users[i].userInfo.nickname);
-        print('  ' + request.users[i].getAllTimeCommits().toString());
-      }
-    }
-  );
 }
 
 class MyApp extends StatelessWidget {

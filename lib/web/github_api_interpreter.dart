@@ -7,7 +7,9 @@ class IUsersManadger
   bool isFill;                         /* Заполнен ли класс? */
   List<User> users;                    /* Список пользователей */
 
-  int getTotalCommits() {}             /* Общее количество комитов в репозитории */
+  int getAllTimeCommits() {}           /* Получает количество коммитов за все время в репозитории */
+  int getAllTimeAdditions() {}         /* Получает количество добавлений за все время в репозитории */
+  int getAllTimeDeletions() {}         /* Получает количество удалений за все время в репозитории */
 }
 
 class IUser
@@ -15,9 +17,9 @@ class IUser
   List<WeekUserCommits> weeksCommits;  /* Список WeekUserCommits за все время существования репозитория */
   UserData userInfo;                   /* Информация о пользователе */
 
-  int getAllTimeCommits() {}           /* Получает количество коммитов за все время */
-  int getAllTimeAdditions() {}         /* Получает количество добавлений за все время */
-  int getAllTimeDeletions() {}         /* Получает количество удалений за все время */
+  int getAllTimeCommits() {}           /* Получает количество коммитов за все время пользователем */
+  int getAllTimeAdditions() {}         /* Получает количество добавлений за все время пользователем */
+  int getAllTimeDeletions() {}         /* Получает количество удалений за все время пользователем */
 
   WeekUserCommits getLastWeek() {}     /* Получает WeekUserCommits класс за последнюю неделю */
 }
@@ -65,16 +67,44 @@ class UsersManadger implements IUsersManadger
     users.sort( (a, b) => b.getAllTimeCommits().compareTo(a.getAllTimeCommits()));
   }
 
-  int getTotalCommits()
+  int getAllTimeCommits()
   {
     if (isFill) {
-      int totalCommits = 0;
+      int total = 0;
 
       for (int i = 0; i < users.length; i++) {
-        totalCommits += users[i].getAllTimeCommits();
+        total += users[i].getAllTimeCommits();
       }
 
-      return totalCommits;
+      return total;
+    }
+    return null;
+  }
+
+  int getAllTimeAdditions()
+  {
+    if (isFill) {
+      int total = 0;
+
+      for (int i = 0; i < users.length; i++) {
+        total += users[i].getAllTimeAdditions();
+      }
+
+      return total;
+    }
+    return null;
+  }
+
+  int getAllTimeDeletions()
+  {
+    if (isFill) {
+      int total = 0;
+
+      for (int i = 0; i < users.length; i++) {
+        total += users[i].getAllTimeDeletions();
+      }
+
+      return total;
     }
     return null;
   }
@@ -112,11 +142,6 @@ class User implements IUser
   int getAllTimeCommits()
   {
     return  _allTimeCommits;
-  }
-
-  static int userGetXP(User e)
-  {
-    return (((e.getAllTimeAdditions() + e.getAllTimeDeletions()) / 2) / e.getAllTimeCommits()).round();
   }
 
   int getAllTimeAdditions()
