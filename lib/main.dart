@@ -58,7 +58,7 @@ Future gitExample() async /* git users request example */
       }
       for (int i = 0; i < request.users.length; i++) {
         print(request.users[i].userInfo.nickname);
-        print('  ' + web.User.userGetXP(request.users[i]).toString());
+        print('  ' + request.users[i].getAllTimeCommits().toString());
       }
     }
   );

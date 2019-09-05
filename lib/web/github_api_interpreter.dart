@@ -1,50 +1,44 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+// Interfaces
+class IUsersManadger
+{
+  bool isFill;                         /* Заполнен ли класс? */
+  List<User> users;                    /* Список пользователей */
 
-/* PAGE_WIKI
+  int getTotalCommits() {}             /* Общее количество комитов в репозитории */
+}
 
-  UsersManadger
-  {
-    bool isFill;                       /* Заполнен ли класс? */
-    List<User> users;                  /* Список пользователей */
+class IUser
+{
+  List<WeekUserCommits> weeksCommits;  /* Список WeekUserCommits за все время существования репозитория */
+  UserData userInfo;                   /* Информация о пользователе */
 
-    int getTotalCommits()              /* Общее количество комитов в репозитории */
-  }
+  int getAllTimeCommits() {}           /* Получает количество коммитов за все время */
+  int getAllTimeAdditions() {}         /* Получает количество добавлений за все время */
+  int getAllTimeDeletions() {}         /* Получает количество удалений за все время */
 
-  User
-  {
-    List<WeekUserCommits> weeksCommits = 
-        new List<WeekUserCommits>();   /* Список WeekUserCommits за все время существования репозитория */
-    UserData userInfo;                 /* Информация о пользователе */
+  WeekUserCommits getLastWeek() {}     /* Получает WeekUserCommits класс за последнюю неделю */
+}
 
-    int getAllTimeCommits();           /* Получает количество коммитов за все время */
-    int getAllTimeAdditions();         /* Получает количество добавлений за все время */
-    int getAllTimeDeletions();         /* Получает количество удалений за все время */
+class IWeekUserCommits
+{
+  int week;                            /* Получает неделю в UNIX */
+  int commits;                         /* Получает количество коммитов за неделю */
+  int additions;                       /* Получает количество добавлений за неделю */
+  int deletions;                       /* Получает количество удалений за неделю */
+}
 
-    WeekUserCommits getLastWeek();     /* Получает WeekUserCommits класс за последнюю неделю */
+class IUserData
+{
+  String nickname;                     /* Получает имя пользователя */
+  Uri avatarUri;                       /* Получает сылку на фото профиля пользователя */
+  Uri profileUri;                      /* Получает ссылку на профильпользователя */
+}
 
-    static int userGetXP(User e);      /* Получает количество опыта пользователя опираясь на его статистику */
-  }
-
-  class WeekUserCommits
-  {
-    int week;                          /* Получает неделю в UNIX */
-    int commits;                       /* Получает количество коммитов за неделю */
-    int additions;                     /* Получает количество добавлений за неделю */
-    int deletions;                     /* Получает количество удалений за неделю */
-  }
-
-  class UserData
-  {
-    String nickname; /* Получает имя пользователя */
-    Uri avatarUri; /* Получает сылку на фото профиля пользователя */
-    Uri profileUri; /* Получает ссылку на профильпользователя */
-  }
-
-*/
-
-class UsersManadger
+// Classes
+class UsersManadger implements IUsersManadger
 {
   bool isFill = false;
   List<User> users = new List<User>();
@@ -68,7 +62,7 @@ class UsersManadger
 
   void _sortingUsers() /* From max commits set*/
   {
-    users.sort( (a, b) => User.userGetXP(b).compareTo(User.userGetXP(a)));
+    users.sort( (a, b) => b.getAllTimeCommits().compareTo(a.getAllTimeCommits()));
   }
 
   int getTotalCommits()
@@ -87,7 +81,7 @@ class UsersManadger
 }
 
 // !Lib classes
-class User
+class User implements IUser
 {
   int _allTimeCommits;
   List<WeekUserCommits> weeksCommits = new List<WeekUserCommits>();
@@ -152,7 +146,7 @@ class User
   }
 }
 
-class WeekUserCommits
+class WeekUserCommits implements IWeekUserCommits
 {
   int week;
   int commits;
@@ -168,7 +162,7 @@ class WeekUserCommits
   }
 }
 
-class UserData
+class UserData  implements IUserData
 {
   String nickname;
   Uri avatarUri;
