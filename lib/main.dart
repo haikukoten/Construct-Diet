@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'dart:ui' as ui;
 
@@ -16,7 +15,7 @@ import 'package:construct_diet/tabs/more_tab.dart';
 import 'package:construct_diet/tabs/result_tab.dart';
 import 'package:construct_diet/theme.dart' as custom;
 import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:construct_diet/web/github_api_interpreter.dart' as web;
+import 'package:construct_diet/web/github_contributors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -40,6 +39,24 @@ Future main() async {
   model.dietList = Diets.load();
   if (model.isSet) model.generateDietWidgetList();
   
+  var request = new ContributorsList();
+  request.fillAsync('https://api.github.com/repos/oneLab-Projects/Construct-Diet/stats/contributors').whenComplete(() {
+    print(request.contributors.length);
+    for (int i = 0; i < request.contributors.length; i++) {
+      print(request.contributors[i].nickname);
+      print(request.contributors[i].profileUrl);
+      print(request.contributors[i].avatarUrl);
+      print(request.contributors[i].commits);
+      print(request.contributors[i].additions);
+      print(request.contributors[i].deletions);
+      print('\n');
+    }
+  });
+
+  Contributor.getListAsync('https://api.github.com/repos/oneLab-Projects/Construct-Diet/stats/contributors').then((e) {
+    // TODO: List dont fill in this case.
+  });
+
   runApp(MyApp(model: model));
 }
 
