@@ -15,7 +15,6 @@ import 'package:construct_diet/tabs/more_tab.dart';
 import 'package:construct_diet/tabs/result_tab.dart';
 import 'package:construct_diet/theme.dart' as custom;
 import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:construct_diet/web/github_contributors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';

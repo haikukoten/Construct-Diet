@@ -5,6 +5,7 @@ import 'package:construct_diet/common/labels.dart';
 import 'package:construct_diet/common/screen_body.dart';
 import 'package:construct_diet/common/split_column.dart';
 import 'package:construct_diet/common/tab_body.dart';
+import 'package:construct_diet/web/github_contributors.dart';
 import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -124,22 +125,52 @@ class _ContributorsPageState extends State<ContributorsPage>
           appBar(context),
           TabBody(
             custom.Card(
-              SplitColumn(
-                children: <Widget>[
-                  for (int i = 0; i < 5; i++)
-                    ContributorLabel(
-                      'Your Name',
-                      nickname: '@YourNickName',
-                      avatarUrl: 'null',
-                      additions: 0,
-                      deletions: 0,
-                    ),
-                ],
-              ),
+              ContributorsItems()
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+//------------------------ ContributorsItems --------------------------------
+
+class ContributorsItems extends StatefulWidget {
+  @override
+  _ContributorsItemsState createState() => _ContributorsItemsState();
+}
+
+class _ContributorsItemsState extends State<ContributorsItems> {
+  List<Widget> labelsList = [];
+  @override
+  void initState() {
+    super.initState();
+    setLabels();
+  }
+
+  setLabels()
+  {
+    var request = new ContributorsList();
+    request.fillAsync('https://api.github.com/repos/oneLab-Projects/Construct-Diet/stats/contributors')
+    .whenComplete(() {
+      setState(() {
+        for (int i = 0; i < request.contributors.length; i++)
+          labelsList.add(new ContributorLabel(
+            request.contributors[i].name,
+            nickname: request.contributors[i].nickname,
+            avatarUrl: request.contributors[i].avatarUrl,
+            additions: request.contributors[i].additions,
+            deletions: request.contributors[i].deletions,
+          ));
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SplitColumn(
+      children: labelsList,
     );
   }
 }
