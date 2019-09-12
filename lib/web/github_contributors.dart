@@ -8,13 +8,17 @@ class ContributorsList {
   {
     Future request = http.get(requestUrl);
     await request
-    .then((response) { 
+    .then((response) async { 
       List<dynamic> jsonTree = json.decode(response.body);
-
       for (int i = 0; i < jsonTree.length; i++) {
-        contributors.add(new Contributor.fillFromJson(jsonTree[i]));
+        Future requestProfile = http.get(jsonTree[i]['author']['url']);
+        await requestProfile
+        .then((responseProfile) { 
+          Map<dynamic, dynamic> jsonProfile = json.decode(responseProfile.body);
+          jsonTree[i]['author']['name'] = jsonProfile['name'];
+        });
+        contributors.add(Contributor.fillFromJson(jsonTree[i]));
       }
-
       contributors = Contributor.sortContributors(contributors);
     });
   }
@@ -22,6 +26,7 @@ class ContributorsList {
 
 class Contributor
 {
+  String name;
   String nickname;
 
   String profileUrl;
@@ -34,6 +39,8 @@ class Contributor
   Contributor.fillFromJson(Map<dynamic, dynamic> e)
   {
     nickname = e['author']['login'];
+    name = e['author']['name'];
+
     profileUrl = e['author']['html_url'];
     avatarUrl = e['author']['avatar_url'];
 
@@ -50,25 +57,5 @@ class Contributor
   {
     e.sort((a, b) => b.commits.compareTo(a.commits));
     return e;
-  }
-
-  static Future<List<Contributor>> getListAsync(String requestUrl) async 
-  {
-    Future request = http.get(requestUrl);
-    await request
-    .then((response) { 
-      List<dynamic> jsonTree = json.decode(response.body);
-      var list = new List<Contributor>();
-      
-      for (int i = 0; i < jsonTree.length; i++) {
-        list.add(new Contributor.fillFromJson(jsonTree[i]));
-      }
-
-      return Contributor.sortContributors(list);
-    })
-    .catchError((e) {
-      return null;
-    });
-
   }
 }

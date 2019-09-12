@@ -126,38 +126,14 @@ class _ContributorsPageState extends State<ContributorsPage>
             custom.Card(
               SplitColumn(
                 children: <Widget>[
-                  ContributorLabel(
-                    "Semyon Butenko",
-                    nickname: "Laim0n",
-                    avatarUrl:
-                        'https://sun1-84.userapi.com/c856136/v856136189/7345e/Ht4mdQUJuu0.jpg',
-                    additions: 100,
-                    deletions: 22,
-                  ),
-                  ContributorLabel(
-                    "Semyon Butenko",
-                    nickname: "Laim0n",
-                    avatarUrl:
-                        'https://sun1-84.userapi.com/c856136/v856136189/7345e/Ht4mdQUJuu0.jpg',
-                    additions: 100,
-                    deletions: 22,
-                  ),
-                  ContributorLabel(
-                    "Semyon Butenko",
-                    nickname: "Laim0n",
-                    avatarUrl:
-                        'https://sun1-84.userapi.com/c856136/v856136189/7345e/Ht4mdQUJuu0.jpg',
-                    additions: 100,
-                    deletions: 22,
-                  ),
-                  ContributorLabel(
-                    "Semyon Butenko",
-                    nickname: "Laim0n",
-                    avatarUrl:
-                        'https://sun1-84.userapi.com/c856136/v856136189/7345e/Ht4mdQUJuu0.jpg',
-                    additions: 100,
-                    deletions: 22,
-                  ),
+                  for (int i = 0; i < 5; i++)
+                    ContributorLabel(
+                      'Your Name',
+                      nickname: '@YourNickName',
+                      avatarUrl: 'null',
+                      additions: 0,
+                      deletions: 0,
+                    ),
                 ],
               ),
             ),
