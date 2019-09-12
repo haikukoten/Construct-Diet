@@ -22,7 +22,7 @@ class MoreTab extends StatefulWidget {
 }
 
 class _MoreTabState extends State<MoreTab> {
-  String version = "1.1.0";
+  String version = "1.2.8";
   String buildNumber = "10";
 
   @override
