@@ -38,9 +38,12 @@ Future main() async {
   Vocabluary.setLanguage(lang);
   model.dietList = Diets.load();
   if (model.isSet) model.generateDietWidgetList();
-  
+
   var request = new ContributorsList();
-  request.fillAsync('https://api.github.com/repos/oneLab-Projects/Construct-Diet/stats/contributors').whenComplete(() {
+  request
+      .fillAsync(
+          'https://api.github.com/repos/oneLab-Projects/Construct-Diet/stats/contributors')
+      .whenComplete(() {
     print(request.contributors.length);
     for (int i = 0; i < request.contributors.length; i++) {
       print(request.contributors[i].nickname);
@@ -53,7 +56,9 @@ Future main() async {
     }
   });
 
-  Contributor.getListAsync('https://api.github.com/repos/oneLab-Projects/Construct-Diet/stats/contributors').then((e) {
+  Contributor.getListAsync(
+          'https://api.github.com/repos/oneLab-Projects/Construct-Diet/stats/contributors')
+      .then((e) {
     // TODO: List dont fill in this case.
   });
 
