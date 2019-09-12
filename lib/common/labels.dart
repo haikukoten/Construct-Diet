@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+import 'package:shimmer/shimmer.dart';
+
 import 'buttons.dart' as custom;
 
 class ButtonLabel extends StatelessWidget {
@@ -89,6 +91,7 @@ class ButtonLabel extends StatelessWidget {
     );
   }
 }
+
 
 class ContributorLabel extends StatelessWidget {
   final String title;
@@ -183,6 +186,86 @@ class ContributorLabel extends StatelessWidget {
                               .copyWith(fontSize: 14),
                         ),
                       ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+class ContributorShimmerLabel extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(4, 5, 4, 5),
+      child: Material(
+        color: Colors.transparent,
+        child: Shimmer.fromColors(
+          highlightColor: Colors.grey.withAlpha(45),
+          baseColor: Colors.grey.withAlpha(15),
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Row(
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.only(right: 12),
+                        child: Container(
+                          width: 26,
+                          height: 26,
+                          decoration: new BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: new BorderRadius.circular(26),
+                          ),
+                        ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          height: 13,
+                          width: 75,
+                          decoration: new BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: new BorderRadius.circular(2),
+                          ),
+                        ),
+                        Container(
+                          margin: new EdgeInsets.only(top: 6),
+                          height: 10,
+                          width: 45,
+                          decoration: new BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: new BorderRadius.circular(2),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Positioned(
+                  right: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                          height: 13,
+                          width: 60,
+                          decoration: new BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: new BorderRadius.circular(2),
+                          ),
+                        ),
                     ],
                   ),
                 )

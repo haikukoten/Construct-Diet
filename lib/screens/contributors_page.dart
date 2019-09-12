@@ -1,4 +1,3 @@
-import 'package:construct_diet/common/avatar.dart';
 import 'package:construct_diet/common/buttons.dart' as custom;
 import 'package:construct_diet/common/cards.dart' as custom;
 import 'package:construct_diet/common/labels.dart';
@@ -8,6 +7,7 @@ import 'package:construct_diet/common/tab_body.dart';
 import 'package:construct_diet/web/github_contributors.dart';
 import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:md2_tab_indicator/md2_tab_indicator.dart';
 
@@ -142,28 +142,58 @@ class ContributorsItems extends StatefulWidget {
 }
 
 class _ContributorsItemsState extends State<ContributorsItems> {
-  List<Widget> labelsList = [];
+
+  static List<Widget> labelsList = [];
+
   @override
   void initState() {
     super.initState();
-    setLabels();
+
+    _setShimmerLabels();
+    _setLabels();
   }
 
-  setLabels()
+  _setShimmerLabels()
+  {
+    setState(() {
+      labelsList = [
+        ContributorShimmerLabel(),
+        ContributorShimmerLabel(),
+      ];
+    });
+  }
+
+  _setLabels()
   {
     var request = new ContributorsList();
     request.fillAsync('https://api.github.com/repos/oneLab-Projects/Construct-Diet/stats/contributors')
     .whenComplete(() {
-      setState(() {
-        for (int i = 0; i < request.contributors.length; i++)
-          labelsList.add(new ContributorLabel(
-            request.contributors[i].name,
-            nickname: '@' + request.contributors[i].nickname,
-            avatarUrl: request.contributors[i].avatarUrl,
-            additions: request.contributors[i].additions,
-            deletions: request.contributors[i].deletions,
-          ));
-      });
+      List<Widget> newLabelsList = [];
+
+      for (int i = 0; i < request.contributors.length; i++) {
+        newLabelsList.add(new ContributorLabel(
+          request.contributors[i].name,
+          nickname: '@' + request.contributors[i].nickname,
+          avatarUrl: request.contributors[i].avatarUrl,
+          additions: request.contributors[i].additions,
+          deletions: request.contributors[i].deletions,
+          onPressed: () async {
+            String url = request.contributors[i].profileUrl;
+            if (await canLaunch(url)) {
+              await launch(url);
+            }
+          },
+        ));
+      } // for
+
+      if (newLabelsList.length > 0) {
+        setState(() {
+          labelsList = newLabelsList;
+        });
+      }
+      else {
+        _setLabels();
+      }
     });
   }
 
