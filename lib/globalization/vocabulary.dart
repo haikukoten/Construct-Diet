@@ -3,7 +3,7 @@ class Vocabluary {
   static String _appLanguage = 'en';
   static List<String> _appLanguages = <String>['en', 'ru'];
 
-  /* TODO: Lang from json */
+  // TODO: Lang from json
   static Map<String, Map<String, String>> _wordManager = {
     'en': {
       'language_name': 'English',
