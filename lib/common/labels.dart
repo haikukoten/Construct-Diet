@@ -108,7 +108,7 @@ class ContributorLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(3, 5, 8, 5),
+      padding: EdgeInsets.fromLTRB(4, 5, 4, 5),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -125,7 +125,7 @@ class ContributorLabel extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                         padding: EdgeInsets.only(right: 12),
-                        child: Avatar(size: 28, url: avatarUrl)),
+                        child: Avatar(size: 26, url: avatarUrl)),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -159,7 +159,7 @@ class ContributorLabel extends StatelessWidget {
                         color: Theme.of(context).primaryColorLight,
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 1, right: 5),
+                        padding: EdgeInsets.only(top: 1, right: 4),
                         child: Text(
                           additions.toString(),
                           style: Theme.of(context)
