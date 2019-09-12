@@ -192,7 +192,9 @@ class _ContributorsItemsState extends State<ContributorsItems> {
         });
       }
       else {
-        _setLabels();
+        Future.delayed(const Duration(milliseconds: 200), () {
+          _setLabels();
+        });
       }
     });
   }
