@@ -3,6 +3,7 @@ import 'package:construct_diet/common/buttons.dart' as custom;
 import 'package:construct_diet/common/cards.dart' as custom;
 import 'package:construct_diet/common/labels.dart';
 import 'package:construct_diet/common/screen_body.dart';
+import 'package:construct_diet/common/split_column.dart';
 import 'package:construct_diet/common/tab_body.dart';
 import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:flutter/material.dart';
@@ -67,24 +68,18 @@ class _ContributorsPageState extends State<ContributorsPage>
                   Divider(
                     height: 0,
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5),
-                    child: Column(
-                      children: <Widget>[
-                        InfoLabel("Вклад в разработку",
-                            description: "↑154 ↓50 строк кода в сумме.",
-                            icon: MdiIcons.codeTags),
-                        InfoLabel("Денежный вклад",
-                            description: "\$50.4 в сумме.",
-                            icon: MdiIcons.coin),
-                      ],
-                    ),
+                  Column(
+                    children: <Widget>[
+                      InfoLabel("Вклад в разработку",
+                          description: "154 строк кода в сумме.",
+                          icon: MdiIcons.codeTags),
+                    ],
                   ),
                   Divider(
                     height: 0,
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(25, 2, 25, 0),
+                    padding: EdgeInsets.fromLTRB(25, 3, 25, 0),
                     child: TabBar(
                       labelColor: Theme.of(context).primaryColor,
                       unselectedLabelColor: Theme.of(context).primaryColorDark,
@@ -98,7 +93,7 @@ class _ContributorsPageState extends State<ContributorsPage>
                           child: Text("Разработчики"),
                         ),
                         Tab(
-                          child: Text("Пожертвование"),
+                          child: Text("Спонсоры"),
                         ),
                       ],
                       controller: controllerTab,
@@ -129,7 +124,7 @@ class _ContributorsPageState extends State<ContributorsPage>
           appBar(context),
           TabBody(
             custom.Card(
-              Column(
+              SplitColumn(
                 children: <Widget>[
                   ContributorLabel(
                     "Semyon Butenko",
