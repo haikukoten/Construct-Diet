@@ -1,5 +1,6 @@
 import 'package:construct_diet/common/cards.dart' as custom;
 import 'package:construct_diet/common/labels.dart';
+import 'package:construct_diet/common/split_column.dart';
 import 'package:construct_diet/common/tab_body.dart';
 import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:construct_diet/scoped_models/data_model.dart';
@@ -38,33 +39,23 @@ class _FavoritesTabState extends State<FavoritesTab> {
     return ScopedModelDescendant<DataModel>(builder: (context, child, model) {
       return TabBody(
         Column(children: [
-          custom.Card(InfoLabel(Vocabluary.getWord('Choose diets to suit your taste'),
-              description:
-                  Vocabluary.getWord('Choose which foods you want to see in your diets and which to remove from the diet.'),
+          custom.Card(InfoLabel(
+              Vocabluary.getWord('Choose diets to suit your taste'),
+              description: Vocabluary.getWord(
+                  'Choose which foods you want to see in your diets and which to remove from the diet.'),
               icon: MdiIcons.heart)),
-          custom.Card(Column(
+          custom.Card(SplitColumn(
             children: List<Widget>.generate(foodList.length, (int i) {
               FavoriteFood food = foodList[i];
-              return Column(
-                children: <Widget>[
-                  i == 0
-                      ? Container(
-                          height: 1,
-                        )
-                      : Divider(
-                          height: 0,
-                        ),
-                  SelectFavoriteLabel(
-                    food.name,
-                    icon: food.icon,
-                    isLiked: model.getPositiveOrNegative(food.id),
-                    onChanged: (value) {
-                      setState(() {
-                        model.addFavorite(food.id, value);
-                      });
-                    },
-                  ),
-                ],
+              return SelectFavoriteLabel(
+                food.name,
+                icon: food.icon,
+                isLiked: model.getPositiveOrNegative(food.id),
+                onChanged: (value) {
+                  setState(() {
+                    model.addFavorite(food.id, value);
+                  });
+                },
               );
             }),
           ))

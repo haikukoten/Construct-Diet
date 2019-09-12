@@ -3,6 +3,7 @@ import 'package:construct_diet/common/cards.dart' as custom;
 import 'package:construct_diet/common/dialogs.dart' as custom;
 import 'package:construct_diet/common/labels.dart';
 import 'package:construct_diet/common/page_transition.dart';
+import 'package:construct_diet/common/split_column.dart';
 import 'package:construct_diet/common/tab_body.dart';
 import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:construct_diet/scoped_models/data_model.dart';
@@ -126,12 +127,9 @@ class _MoreTabState extends State<MoreTab> {
             TitleLabel(
               Vocabluary.getWord('Settings'),
               icon: MdiIcons.settingsOutline,
-              child: Column(
+              paddingBottom: 0,
+              child: SplitColumn(
                 children: [
-                  Divider(
-                    height: 5,
-                    color: Colors.transparent,
-                  ),
                   ButtonLabel(
                     Vocabluary.getWord('Language'),
                     description: Vocabluary.getWord('language_name'),
@@ -188,7 +186,6 @@ class _MoreTabState extends State<MoreTab> {
                       ),
                     },
                   ),
-                  Divider(height: 5),
                   SwitchLabel(
                     Vocabluary.getWord('Go to the dark side'),
                     description: Vocabluary.getWord('Activate a dark theme'),
@@ -198,7 +195,6 @@ class _MoreTabState extends State<MoreTab> {
                       changeTheme(isOn);
                     },
                   ),
-                  Divider(height: 5),
                   ButtonLabel(
                     Vocabluary.getWord('Reset the settings'),
                     description: Vocabluary.getWord(

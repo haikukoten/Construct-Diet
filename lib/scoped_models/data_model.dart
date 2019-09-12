@@ -180,22 +180,11 @@ class DataModel extends Model {
     }
 
     _widgetDietList = List<Widget>.generate(
-      _sortedDietList.length,
+      _sortedDietList.length - 1,
       (int i) {
-        if (i == 0) return Container();
+        i += 1;
         var diet = _sortedDietList[i];
-        return Column(
-          children: <Widget>[
-            i == 1
-                ? Container(
-                    height: 0,
-                  )
-                : Divider(
-                    height: 0,
-                  ),
-            DietLabel(diet),
-          ],
-        );
+        return DietLabel(diet);
       },
     );
     if (_widgetDietList.length == 0) {
@@ -207,11 +196,7 @@ class DataModel extends Model {
     if (_widgetDietList.length == 1) _widgetDietList = [];
 
     var diet = _sortedDietList[0];
-    _widgetGoodDiet = Column(
-      children: <Widget>[
-        DietLabel(diet),
-      ],
-    );
+    _widgetGoodDiet = DietLabel(diet);
   }
 
   Widget _widgetGoodDiet;

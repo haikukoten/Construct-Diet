@@ -23,7 +23,7 @@ class ButtonLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(8, 5, 8, 5),
+      padding: EdgeInsets.all(8),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -542,7 +542,7 @@ class _SwitchLabelState extends State<SwitchLabel> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(8, 5, 8, 5),
+      padding: EdgeInsets.all(8),
       child: Material(
         color: Colors.transparent,
         child: InkWell(

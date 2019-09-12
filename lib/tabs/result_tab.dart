@@ -1,5 +1,6 @@
 import 'package:construct_diet/common/cards.dart' as custom;
 import 'package:construct_diet/common/labels.dart';
+import 'package:construct_diet/common/split_column.dart';
 import 'package:construct_diet/common/tab_body.dart';
 import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:construct_diet/scoped_models/data_model.dart';
@@ -28,35 +29,27 @@ class _ResultTabState extends State<ResultTab> {
                         TitleLabel(
                           Vocabluary.getWord('Health information'),
                           icon: Icons.info_outline,
-                          child: Column(children: [
-                            Divider(
-                              height: 5,
-                              color: Colors.transparent,
-                            ),
-                            Column(
-                              children: <Widget>[
-                                InfoLabel(Vocabluary.getWord('Body mass index'),
-                                    description: model.imt.toStringAsFixed(2)),
-                                InfoLabel(
-                                    Vocabluary.getWord('Allowable weight'),
-                                    description:
-                                        Vocabluary.getWord('LeftWModel') +
-                                            '${model.minWeight}' +
-                                            Vocabluary.getWord('MiddleWModel') +
-                                            '${model.maxWeight}' +
-                                            Vocabluary.getWord(
-                                                'MiddleRightWModel') +
-                                            '${model.idealWeight}' +
-                                            Vocabluary.getWord('RightWModel')),
-                                InfoLabel(Vocabluary.getWord('Overweight'),
-                                    description: model.overweight == 0
-                                        ? Vocabluary.getWord('Missing')
-                                        : (model.overweight.toString() +
-                                            ' ' +
-                                            Vocabluary.getWord('kg')))
-                              ],
-                            ),
-                          ]),
+                          child: Column(
+                            children: <Widget>[
+                              InfoLabel(Vocabluary.getWord('Body mass index'),
+                                  description: model.imt.toStringAsFixed(2)),
+                              InfoLabel(Vocabluary.getWord('Allowable weight'),
+                                  description: Vocabluary.getWord(
+                                          'LeftWModel') +
+                                      '${model.minWeight}' +
+                                      Vocabluary.getWord('MiddleWModel') +
+                                      '${model.maxWeight}' +
+                                      Vocabluary.getWord('MiddleRightWModel') +
+                                      '${model.idealWeight}' +
+                                      Vocabluary.getWord('RightWModel')),
+                              InfoLabel(Vocabluary.getWord('Overweight'),
+                                  description: model.overweight == 0
+                                      ? Vocabluary.getWord('Missing')
+                                      : (model.overweight.toString() +
+                                          ' ' +
+                                          Vocabluary.getWord('kg')))
+                            ],
+                          ),
                         ),
                       )
                     : Container(),
@@ -79,7 +72,7 @@ class _ResultTabState extends State<ResultTab> {
                         Vocabluary.getWord('Diets'),
                         icon: MdiIcons.cardsOutline,
                         paddingBottom: 0,
-                        child: Column(children: model.widgetDietList),
+                        child: SplitColumn(children: model.widgetDietList),
                       ))
                     : Container(),
               ],
