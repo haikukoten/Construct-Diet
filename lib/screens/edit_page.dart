@@ -1,6 +1,7 @@
 import 'package:construct_diet/common/buttons.dart' as custom;
 import 'package:construct_diet/common/labels.dart';
 import 'package:construct_diet/common/screen_body.dart';
+import 'package:construct_diet/common/split_column.dart';
 import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:construct_diet/scoped_models/data_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,7 +15,10 @@ class EditPage extends StatefulWidget {
 
 class _EditPageState extends State<EditPage> {
   List<int> ageList = [for (int i = 12; i <= 100; i++) i];
-  List<String> genderList = <String>[Vocabluary.getWord('Female'), Vocabluary.getWord('Male')];
+  List<String> genderList = <String>[
+    Vocabluary.getWord('Female'),
+    Vocabluary.getWord('Male')
+  ];
   List<int> heightList = [for (int i = 100; i <= 250; i++) i];
   List<int> weightList = [for (int i = 30; i <= 250; i++) i];
 
@@ -171,7 +175,7 @@ class _EditPageState extends State<EditPage> {
           borderRadius: BorderRadius.all(Radius.circular(8.5)),
           color: Theme.of(context).cardColor,
           child: Padding(
-            padding: EdgeInsets.fromLTRB(0, 2, 0, 2),
+            padding: EdgeInsets.fromLTRB(0, 2, 0, 0),
             child: Column(
               children: <Widget>[
                 Padding(
@@ -200,21 +204,38 @@ class _EditPageState extends State<EditPage> {
                 ),
                 ScopedModelDescendant<DataModel>(
                     builder: (context, child, model) {
-                  return Column(
+                  return SplitColumn(
                     children: <Widget>[
                       buttonOpenPicker(
                           Vocabluary.getWord('Gender'),
-                          model.isWoman ? Vocabluary.getWord('Female') : Vocabluary.getWord('Male'),
+                          model.isWoman
+                              ? Vocabluary.getWord('Female')
+                              : Vocabluary.getWord('Male'),
                           null,
                           model.genderIndex,
                           model.setGender,
                           genderList),
-                      buttonOpenPicker(Vocabluary.getWord('Age'), model.age, Vocabluary.getWord('years old'),
-                          model.ageIndex, model.setAge, ageList),
-                      buttonOpenPicker(Vocabluary.getWord('Height'), model.height, Vocabluary.getWord('cm'),
-                          model.heightIndex, model.setHeight, heightList),
-                      buttonOpenPicker(Vocabluary.getWord('Weight'), model.weight, Vocabluary.getWord('kg'),
-                          model.weightIndex, model.setWeight, weightList),
+                      buttonOpenPicker(
+                          Vocabluary.getWord('Age'),
+                          model.age,
+                          Vocabluary.getWord('years old'),
+                          model.ageIndex,
+                          model.setAge,
+                          ageList),
+                      buttonOpenPicker(
+                          Vocabluary.getWord('Height'),
+                          model.height,
+                          Vocabluary.getWord('cm'),
+                          model.heightIndex,
+                          model.setHeight,
+                          heightList),
+                      buttonOpenPicker(
+                          Vocabluary.getWord('Weight'),
+                          model.weight,
+                          Vocabluary.getWord('kg'),
+                          model.weightIndex,
+                          model.setWeight,
+                          weightList),
                     ],
                   );
                 }),
