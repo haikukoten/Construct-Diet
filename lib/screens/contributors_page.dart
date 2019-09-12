@@ -158,7 +158,7 @@ class _ContributorsItemsState extends State<ContributorsItems> {
         for (int i = 0; i < request.contributors.length; i++)
           labelsList.add(new ContributorLabel(
             request.contributors[i].name,
-            nickname: request.contributors[i].nickname,
+            nickname: '@' + request.contributors[i].nickname,
             avatarUrl: request.contributors[i].avatarUrl,
             additions: request.contributors[i].additions,
             deletions: request.contributors[i].deletions,
