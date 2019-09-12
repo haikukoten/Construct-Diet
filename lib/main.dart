@@ -371,7 +371,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               BoxShadow(
                 color: Theme.of(context).platform == TargetPlatform.iOS
                     ? Colors.transparent
-                    : Colors.black.withAlpha(15),
+                    : Colors.black.withAlpha(120),
+                offset: Offset(0, 2),
                 blurRadius: 3,
               ),
             ],
