@@ -684,7 +684,7 @@ class _SelectFavoriteLabelState extends State<SelectFavoriteLabel> {
                     ),
                     value: isLiked == 1,
                     onChanged: (isOn) {
-                      if (isOn == true) {
+                      if (isOn) {
                         setState(() {
                           isLiked = 1;
                         });
@@ -714,7 +714,7 @@ class _SelectFavoriteLabelState extends State<SelectFavoriteLabel> {
                     ),
                     value: isLiked == 2,
                     onChanged: (isOn) {
-                      if (isOn == true) {
+                      if (isOn) {
                         setState(() {
                           isLiked = 2;
                         });
