@@ -1,3 +1,4 @@
+import 'package:construct_diet/common/avatar.dart';
 import 'package:construct_diet/common/diet.dart';
 import 'package:construct_diet/common/page_transition.dart';
 import 'package:construct_diet/scoped_models/data_model.dart';
@@ -78,6 +79,111 @@ class ButtonLabel extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: Icon(
                     Icons.chevron_right,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ContributorLabel extends StatelessWidget {
+  final String title;
+  final String nickname;
+  final String avatarUrl;
+  final int additions;
+  final int deletions;
+  final VoidCallback onPressed;
+
+  ContributorLabel(this.title,
+      {this.nickname,
+      this.avatarUrl,
+      this.additions,
+      this.deletions,
+      this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(3, 5, 8, 5),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          highlightColor: Colors.grey.withAlpha(30),
+          splashColor: Colors.grey.withAlpha(30),
+          onTap: onPressed,
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Row(
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.only(right: 12),
+                        child: Avatar(size: 28, url: avatarUrl)),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(title,
+                            strutStyle: StrutStyle(
+                              leading: 0,
+                            ),
+                            style: Theme.of(context).textTheme.title),
+                        nickname != null
+                            ? Padding(
+                                padding: EdgeInsets.only(top: 3.2),
+                                child: Text(
+                                  nickname,
+                                  style: Theme.of(context).textTheme.subtitle,
+                                ),
+                              )
+                            : Container()
+                      ],
+                    ),
+                  ],
+                ),
+                Positioned(
+                  right: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(
+                        MdiIcons.arrowUpBold,
+                        size: 15,
+                        color: Theme.of(context).primaryColorLight,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 1, right: 5),
+                        child: Text(
+                          additions.toString(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .caption
+                              .copyWith(fontSize: 14),
+                        ),
+                      ),
+                      Icon(
+                        MdiIcons.arrowDownBold,
+                        size: 15,
+                        color: Theme.of(context).errorColor,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 1),
+                        child: Text(
+                          deletions.toString(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .caption
+                              .copyWith(fontSize: 14),
+                        ),
+                      ),
+                    ],
                   ),
                 )
               ],
