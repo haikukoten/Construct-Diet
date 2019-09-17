@@ -92,7 +92,6 @@ class ButtonLabel extends StatelessWidget {
   }
 }
 
-
 class ContributorLabel extends StatelessWidget {
   final String title;
   final String nickname;
@@ -198,79 +197,74 @@ class ContributorLabel extends StatelessWidget {
   }
 }
 
-
 class ContributorShimmerLabel extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(4, 5, 4, 5),
-      child: Material(
-        color: Colors.transparent,
-        child: Shimmer.fromColors(
-          highlightColor: Colors.grey.withAlpha(45),
-          baseColor: Colors.grey.withAlpha(15),
-          child: Padding(
-            padding: EdgeInsets.all(10),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.only(right: 12),
-                        child: Container(
-                          width: 26,
-                          height: 26,
-                          decoration: new BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: new BorderRadius.circular(26),
-                          ),
-                        ),
+      padding: EdgeInsets.fromLTRB(4, 9, 4, 9),
+      child: Shimmer.fromColors(
+        highlightColor: Colors.grey.withAlpha(45),
+        baseColor: Colors.grey.withAlpha(15),
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Row(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(right: 12),
+                    child: Container(
+                      width: 26,
+                      height: 26,
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(26),
+                      ),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          height: 13,
-                          width: 75,
-                          decoration: new BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: new BorderRadius.circular(2),
-                          ),
-                        ),
-                        Container(
-                          margin: new EdgeInsets.only(top: 6),
-                          height: 10,
-                          width: 45,
-                          decoration: new BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: new BorderRadius.circular(2),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Positioned(
-                  right: 0,
-                  child: Row(
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Container(
-                          height: 13,
-                          width: 60,
-                          decoration: new BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: new BorderRadius.circular(2),
-                          ),
+                        height: 12,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(2),
                         ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 6),
+                        height: 10,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(2),
+                        ),
+                      ),
                     ],
                   ),
-                )
-              ],
-            ),
+                ],
+              ),
+              Positioned(
+                right: 0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      height: 12,
+                      width: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
         ),
       ),

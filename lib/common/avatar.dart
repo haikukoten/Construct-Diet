@@ -25,6 +25,15 @@ class _AvatarState extends State<Avatar> {
               placeholder: kTransparentImage,
               image: widget.url,
             ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25.0),
+                border: Border.all(
+                  width: 0.5,
+                  color: Theme.of(context).dividerColor,
+                ),
+              ),
+            ),
           ],
         ),
       ),
