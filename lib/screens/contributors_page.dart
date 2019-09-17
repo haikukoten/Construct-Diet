@@ -124,9 +124,7 @@ class _ContributorsPageState extends State<ContributorsPage>
         children: [
           appBar(context),
           TabBody(
-            custom.Card(
-              ContributorsItems()
-            ),
+            custom.Card(ContributorsItems()),
           ),
         ],
       ),
@@ -142,7 +140,6 @@ class ContributorsItems extends StatefulWidget {
 }
 
 class _ContributorsItemsState extends State<ContributorsItems> {
-
   static List<Widget> labelsList = [];
 
   @override
@@ -153,8 +150,7 @@ class _ContributorsItemsState extends State<ContributorsItems> {
     _setLabels();
   }
 
-  _setShimmerLabels()
-  {
+  _setShimmerLabels() {
     setState(() {
       labelsList = [
         ContributorShimmerLabel(),
@@ -163,17 +159,18 @@ class _ContributorsItemsState extends State<ContributorsItems> {
     });
   }
 
-  _setLabels()
-  {
+  _setLabels() {
     var request = new ContributorsList();
-    request.fillAsync('https://api.github.com/repos/oneLab-Projects/Construct-Diet/stats/contributors')
-    .whenComplete(() {
+    request
+        .fillAsync(
+            'https://api.github.com/repos/oneLab-Projects/Construct-Diet/stats/contributors')
+        .whenComplete(() {
       List<Widget> newLabelsList = [];
 
       for (int i = 0; i < request.contributors.length; i++) {
         newLabelsList.add(new ContributorLabel(
           request.contributors[i].name,
-          nickname: '@' + request.contributors[i].nickname,
+          nickname: request.contributors[i].nickname,
           avatarUrl: request.contributors[i].avatarUrl,
           additions: request.contributors[i].additions,
           deletions: request.contributors[i].deletions,
@@ -190,8 +187,7 @@ class _ContributorsItemsState extends State<ContributorsItems> {
         setState(() {
           labelsList = newLabelsList;
         });
-      }
-      else {
+      } else {
         Future.delayed(const Duration(milliseconds: 200), () {
           _setLabels();
         });
