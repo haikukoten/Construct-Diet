@@ -158,8 +158,7 @@ class _MoreTabState extends State<MoreTab> {
                           .then(
                         (code) async {
                           if (code == null) return;
-                          await Future.delayed(
-                              const Duration(milliseconds: 300), () {
+                          await Future.delayed(Duration(milliseconds: 300), () {
                             Vocabluary.setLanguage(code);
                             ScopedModel.of<DataModel>(context).language =
                                 Vocabluary.checkLanguage(code);

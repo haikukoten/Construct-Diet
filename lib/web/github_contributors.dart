@@ -4,16 +4,13 @@ import 'package:http/http.dart' as http;
 class ContributorsList {
   List<Contributor> contributors = new List<Contributor>();
 
-  Future fillAsync(String requestUrl) async 
-  {
+  Future fillAsync(String requestUrl) async {
     Future request = http.get(requestUrl);
-    await request
-    .then((response) async { 
+    await request.then((response) async {
       List<dynamic> jsonTree = json.decode(response.body);
       for (int i = 0; i < jsonTree.length; i++) {
         Future requestProfile = http.get(jsonTree[i]['author']['url']);
-        await requestProfile
-        .then((responseProfile) { 
+        await requestProfile.then((responseProfile) {
           Map<dynamic, dynamic> jsonProfile = json.decode(responseProfile.body);
           jsonTree[i]['author']['name'] = jsonProfile['name'];
         });
@@ -24,8 +21,7 @@ class ContributorsList {
   }
 }
 
-class Contributor
-{
+class Contributor {
   String name;
   String nickname;
 
@@ -36,8 +32,7 @@ class Contributor
   int additions;
   int deletions;
 
-  Contributor.fillFromJson(Map<dynamic, dynamic> e)
-  {
+  Contributor.fillFromJson(Map<dynamic, dynamic> e) {
     nickname = e['author']['login'];
     name = e['author']['name'];
 
@@ -53,8 +48,7 @@ class Contributor
     }
   }
 
-  static List<Contributor> sortContributors(List<Contributor> e)
-  {
+  static List<Contributor> sortContributors(List<Contributor> e) {
     e.sort((a, b) => b.commits.compareTo(a.commits));
     return e;
   }

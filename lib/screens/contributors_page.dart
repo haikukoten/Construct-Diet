@@ -6,6 +6,7 @@ import 'package:construct_diet/common/split_column.dart';
 import 'package:construct_diet/common/tab_body.dart';
 import 'package:construct_diet/web/github_contributors.dart';
 import 'package:construct_diet/globalization/vocabulary.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -34,6 +35,7 @@ class _ContributorsPageState extends State<ContributorsPage>
         tag: 'appbar',
         child: Material(
           elevation: 1.5,
+          clipBehavior: Clip.antiAlias,
           shadowColor: Theme.of(context).cardTheme.color,
           borderRadius: BorderRadius.all(Radius.circular(8.5)),
           color: Theme.of(context).cardColor,
@@ -43,7 +45,7 @@ class _ContributorsPageState extends State<ContributorsPage>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 5, 8, 5),
+                    padding: EdgeInsets.fromLTRB(8, 5, 8, 0),
                     child: Row(
                       children: <Widget>[
                         custom.IconButton(
@@ -66,20 +68,10 @@ class _ContributorsPageState extends State<ContributorsPage>
                       ],
                     ),
                   ),
-                  Divider(
-                    height: 0,
-                  ),
-                  Column(
-                    children: <Widget>[
-                      InfoLabel("Вклад в разработку",
-                          description: "154 строк кода в сумме.",
-                          icon: MdiIcons.codeTags),
-                    ],
-                  ),
-                  Divider(
-                    height: 0,
-                  ),
-                  Padding(
+                  InfoLabel("Вклад в разработку",
+                      description: "154 строк кода в сумме.",
+                      icon: MdiIcons.codeTags),
+                  /*Padding(
                     padding: EdgeInsets.fromLTRB(25, 3, 25, 0),
                     child: TabBar(
                       labelColor: Theme.of(context).primaryColor,
@@ -99,16 +91,25 @@ class _ContributorsPageState extends State<ContributorsPage>
                       ],
                       controller: controllerTab,
                     ),
-                  ),
+                  ),*/
                 ],
               ),
-              Container(
-                color: Theme.of(context).scaffoldBackgroundColor,
-                child: Center(
-                  child: Column(
-                    children: [Text("аааааааа")],
-                  ),
-                ),
+              AnimatedOpacity(
+                duration: Duration(milliseconds: 200),
+                opacity: 0,
+                child: Container(
+                    color: Theme.of(context).cardColor,
+                    height: 60,
+                    margin: EdgeInsets.only(top: 50),
+                    alignment: Alignment.center,
+                    child: SizedBox(
+                        width: 28,
+                        height: 28,
+                        child: Theme.of(context).platform == TargetPlatform.iOS
+                            ? CupertinoActivityIndicator()
+                            : CircularProgressIndicator(
+                                strokeWidth: 2.5,
+                              ))),
               )
             ],
           ),
@@ -188,7 +189,7 @@ class _ContributorsItemsState extends State<ContributorsItems> {
           labelsList = newLabelsList;
         });
       } else {
-        Future.delayed(const Duration(milliseconds: 200), () {
+        Future.delayed(Duration(milliseconds: 200), () {
           _setLabels();
         });
       }
