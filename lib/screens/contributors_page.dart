@@ -29,61 +29,52 @@ class _ContributorsPageState extends State<ContributorsPage>
 
   Widget appBar(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(17, 16, 17, 5),
+      padding: EdgeInsets.fromLTRB(17, 16, 17, 6),
       child: Hero(
         tag: 'appbar',
-        child: SizedBox(
-          height: 108.2,
-          child: Material(
-            elevation: 1.5,
-            clipBehavior: Clip.antiAlias,
-            shadowColor: Theme.of(context).cardTheme.color,
-            borderRadius: BorderRadius.all(Radius.circular(8.5)),
-            color: Theme.of(context).cardColor,
-            child: Stack(
-              children: <Widget>[
-                Stack(
+        child: Material(
+          elevation: 1.5,
+          clipBehavior: Clip.antiAlias,
+          shadowColor: Theme.of(context).cardTheme.color,
+          borderRadius: BorderRadius.all(Radius.circular(8.5)),
+          color: Theme.of(context).cardColor,
+          child: Stack(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.fromLTRB(8, 5, 8, 0),
+                child: Row(
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(8, 5, 8, 0),
-                      child: Row(
-                        children: <Widget>[
-                          custom.IconButton(
-                            icon:
-                                Theme.of(context).platform == TargetPlatform.iOS
-                                    ? Icons.arrow_back_ios
-                                    : Icons.arrow_back,
-                            iconSize:
-                                Theme.of(context).platform == TargetPlatform.iOS
-                                    ? 18
-                                    : 22,
-                            onPressed: () => Navigator.pop(context),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                            child: Text(
-                              Vocabluary.getWord('Project Contributors'),
-                              style: Theme.of(context).textTheme.caption,
-                            ),
-                          ),
-                        ],
-                      ),
+                    custom.IconButton(
+                      icon: Theme.of(context).platform == TargetPlatform.iOS
+                          ? Icons.arrow_back_ios
+                          : Icons.arrow_back,
+                      iconSize: Theme.of(context).platform == TargetPlatform.iOS
+                          ? 18
+                          : 22,
+                      onPressed: () => Navigator.pop(context),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 37),
-                      child: ButtonLabel(
-                        "Сделать свой вклад в разработку",
-                        description:
-                            "Нажмите, чтобы перейти на страницу в GitHub.",
-                        icon: MdiIcons.codeTags,
-                        onPressed: () => launch(
-                            'https://github.com/oneLab-Projects/Construct-Diet'),
+                      padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                      child: Text(
+                        Vocabluary.getWord('Project Contributors'),
+                        style: Theme.of(context).textTheme.caption,
                       ),
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 36.5),
+                child: ButtonLabel(
+                  "Сделать свой вклад в разработку",
+                  description:
+                      "Нажмите, чтобы перейти на страницу проекта в GitHub.",
+                  icon: MdiIcons.codeTags,
+                  onPressed: () => launch(
+                      'https://github.com/oneLab-Projects/Construct-Diet'),
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -96,8 +87,9 @@ class _ContributorsPageState extends State<ContributorsPage>
       Column(
         children: [
           appBar(context),
-          TabBody(
-            Column(
+          Padding(
+            padding: EdgeInsets.fromLTRB(17, 0, 17, 0),
+            child: Column(
               children: <Widget>[
                 custom.Card(
                   InfoLabel("oneLab – это мы!",
