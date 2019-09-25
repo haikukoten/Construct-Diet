@@ -83,6 +83,14 @@ class Vocabluary {
       'People who have made a certain contribution to the project.':
           'People who have made a certain contribution to the project.',
 
+      /* Contributors Page */
+      'Contribute to the development': 'Contribute to the development',
+      'Click here to go on project\'s GitHub page.':
+          'Click here to go on project\'s GitHub page.',
+      'oneLab – this is us!': 'oneLab – this is us!',
+      'Click on member to go on their GitHub page.':
+          'Click on member to go on their GitHub page.',
+
       /* Social Card */
       'We\'re on social media': 'We\'re on social media',
 
@@ -257,6 +265,14 @@ class Vocabluary {
       'Project Contributors': 'Участники проекта',
       'People who have made a certain contribution to the project.':
           'Люди, сделавшие определённый вклад в проект.',
+
+      /* Contributors Page */
+      'Contribute to the development': 'Сделайте свой вклад в разработку',
+      'Click here to go on project\'s GitHub page.':
+          'Нажмите, чтобы перейти на страницу проекта в GitHub.',
+      'oneLab – this is us!': 'oneLab – это мы!',
+      'Click on member to go on their GitHub page.':
+          'Нажмите на участника, чтобы перейти на его страницу в GitHub.',
 
       /* Social Card */
       'We\'re on social media': 'Мы в социальных сетях',

@@ -66,9 +66,9 @@ class _ContributorsPageState extends State<ContributorsPage>
               Padding(
                 padding: EdgeInsets.only(top: 36.5),
                 child: ButtonLabel(
-                  "Сделать свой вклад в разработку",
-                  description:
-                      "Нажмите, чтобы перейти на страницу проекта в GitHub.",
+                  Vocabluary.getWord('Contribute to the development'),
+                  description: Vocabluary.getWord(
+                      'Click here to go on project\'s GitHub page.'),
                   icon: MdiIcons.codeTags,
                   onPressed: () => launch(
                       'https://github.com/oneLab-Projects/Construct-Diet'),
@@ -92,9 +92,9 @@ class _ContributorsPageState extends State<ContributorsPage>
             child: Column(
               children: <Widget>[
                 custom.Card(
-                  InfoLabel("oneLab – это мы!",
-                      description:
-                          "Нажмите на участника, чтобы перейти на его страницу в GitHub.",
+                  InfoLabel(Vocabluary.getWord('oneLab – this is us!'),
+                      description: Vocabluary.getWord(
+                          'Click on member to go on their GitHub page.'),
                       icon: MdiIcons.accountGroupOutline),
                 ),
                 custom.Card(ContributorsItems()),
