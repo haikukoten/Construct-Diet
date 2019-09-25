@@ -37,9 +37,7 @@ class IconButton extends StatelessWidget {
   factory IconButton.url(IconData icon, String url) {
     return IconButton(
       icon: icon,
-      onPressed: () {
-        launch(url);
-      },
+      onPressed: () => launch(url),
     );
   }
 }
