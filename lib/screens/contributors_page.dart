@@ -10,7 +10,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:md2_tab_indicator/md2_tab_indicator.dart';
 
 class ContributorsPage extends StatefulWidget {
   @override
@@ -33,85 +32,58 @@ class _ContributorsPageState extends State<ContributorsPage>
       padding: EdgeInsets.fromLTRB(17, 16, 17, 5),
       child: Hero(
         tag: 'appbar',
-        child: Material(
-          elevation: 1.5,
-          clipBehavior: Clip.antiAlias,
-          shadowColor: Theme.of(context).cardTheme.color,
-          borderRadius: BorderRadius.all(Radius.circular(8.5)),
-          color: Theme.of(context).cardColor,
-          child: Stack(
-            children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(8, 5, 8, 0),
-                    child: Row(
-                      children: <Widget>[
-                        custom.IconButton(
-                          icon: Theme.of(context).platform == TargetPlatform.iOS
-                              ? Icons.arrow_back_ios
-                              : Icons.arrow_back,
-                          iconSize:
-                              Theme.of(context).platform == TargetPlatform.iOS
-                                  ? 18
-                                  : 22,
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                          child: Text(
-                            Vocabluary.getWord('Project Contributors'),
-                            style: Theme.of(context).textTheme.caption,
+        child: SizedBox(
+          height: 108.2,
+          child: Material(
+            elevation: 1.5,
+            clipBehavior: Clip.antiAlias,
+            shadowColor: Theme.of(context).cardTheme.color,
+            borderRadius: BorderRadius.all(Radius.circular(8.5)),
+            color: Theme.of(context).cardColor,
+            child: Stack(
+              children: <Widget>[
+                Stack(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(8, 5, 8, 0),
+                      child: Row(
+                        children: <Widget>[
+                          custom.IconButton(
+                            icon:
+                                Theme.of(context).platform == TargetPlatform.iOS
+                                    ? Icons.arrow_back_ios
+                                    : Icons.arrow_back,
+                            iconSize:
+                                Theme.of(context).platform == TargetPlatform.iOS
+                                    ? 18
+                                    : 22,
+                            onPressed: () => Navigator.pop(context),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  InfoLabel("Вклад в разработку",
-                      description: "154 строк кода в сумме.",
-                      icon: MdiIcons.codeTags),
-                  /*Padding(
-                    padding: EdgeInsets.fromLTRB(25, 3, 25, 0),
-                    child: TabBar(
-                      labelColor: Theme.of(context).primaryColor,
-                      unselectedLabelColor: Theme.of(context).primaryColorDark,
-                      indicator: MD2Indicator(
-                        indicatorHeight: 3,
-                        indicatorColor: Theme.of(context).primaryColor,
-                        indicatorSize: MD2IndicatorSize.normal,
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                            child: Text(
+                              Vocabluary.getWord('Project Contributors'),
+                              style: Theme.of(context).textTheme.caption,
+                            ),
+                          ),
+                        ],
                       ),
-                      tabs: [
-                        Tab(
-                          child: Text("Разработчики"),
-                        ),
-                        Tab(
-                          child: Text("Спонсоры"),
-                        ),
-                      ],
-                      controller: controllerTab,
                     ),
-                  ),*/
-                ],
-              ),
-              AnimatedOpacity(
-                duration: Duration(milliseconds: 200),
-                opacity: 0,
-                child: Container(
-                    color: Theme.of(context).cardColor,
-                    height: 60,
-                    margin: EdgeInsets.only(top: 50),
-                    alignment: Alignment.center,
-                    child: SizedBox(
-                        width: 28,
-                        height: 28,
-                        child: Theme.of(context).platform == TargetPlatform.iOS
-                            ? CupertinoActivityIndicator()
-                            : CircularProgressIndicator(
-                                strokeWidth: 2.5,
-                              ))),
-              )
-            ],
+                    Padding(
+                      padding: EdgeInsets.only(top: 37),
+                      child: ButtonLabel(
+                        "Сделать свой вклад в разработку",
+                        description:
+                            "Нажмите, чтобы перейти на страницу в GitHub.",
+                        icon: MdiIcons.codeTags,
+                        onPressed: () => launch(
+                            'https://github.com/oneLab-Projects/Construct-Diet'),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -125,7 +97,17 @@ class _ContributorsPageState extends State<ContributorsPage>
         children: [
           appBar(context),
           TabBody(
-            custom.Card(ContributorsItems()),
+            Column(
+              children: <Widget>[
+                custom.Card(
+                  InfoLabel("oneLab – это мы!",
+                      description:
+                          "Нажмите на участника, чтобы перейти на его страницу в GitHub.",
+                      icon: MdiIcons.accountGroupOutline),
+                ),
+                custom.Card(ContributorsItems()),
+              ],
+            ),
           ),
         ],
       ),
