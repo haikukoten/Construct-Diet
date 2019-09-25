@@ -83,8 +83,8 @@ class _MoreTabState extends State<MoreTab> {
                       constraints: MediaQuery.of(context).size.width > 780
                           ? BoxConstraints(maxWidth: 500)
                           : BoxConstraints(),
-                      height: 126,
                       margin: EdgeInsets.fromLTRB(8, 8, 8, 4),
+                      height: 132,
                       child: custom.Card(
                         DisplayLabel(
                           Vocabluary.getWord('Developer\'s menu'),

@@ -651,7 +651,7 @@ class _SwitchLabelState extends State<SwitchLabel> {
                         : Container(),
                     Container(
                       width: MediaQuery.of(context).size.width > 750
-                          ? 750.0 - 164.0
+                          ? 750.0 - 320.0
                           : MediaQuery.of(context).size.width - 164,
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
