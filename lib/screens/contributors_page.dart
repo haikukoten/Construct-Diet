@@ -92,7 +92,7 @@ class _ContributorsPageState extends State<ContributorsPage>
             child: Column(
               children: <Widget>[
                 custom.Card(
-                  InfoLabel(Vocabluary.getWord('oneLab – this is us!'),
+                  InfoLabel(Vocabluary.getWord('Project\'s community'),
                       description: Vocabluary.getWord(
                           'Click on member to go on their GitHub page.'),
                       icon: MdiIcons.accountGroupOutline),

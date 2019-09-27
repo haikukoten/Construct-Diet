@@ -87,7 +87,7 @@ class Vocabluary {
       'Contribute to the development': 'Contribute to the development',
       'Click here to go on project\'s GitHub page.':
           'Click here to go on project\'s GitHub page.',
-      'oneLab – this is us!': 'oneLab – this is us!',
+      'Project\'s community': 'Project\'s community',
       'Click on member to go on their GitHub page.':
           'Click on member to go on their GitHub page.',
 
@@ -270,7 +270,7 @@ class Vocabluary {
       'Contribute to the development': 'Сделайте свой вклад в разработку',
       'Click here to go on project\'s GitHub page.':
           'Нажмите, чтобы перейти на страницу проекта в GitHub.',
-      'oneLab – this is us!': 'oneLab – это мы!',
+      'Project\'s community': 'Сообщество проекта',
       'Click on member to go on their GitHub page.':
           'Нажмите на участника, чтобы перейти на его страницу в GitHub.',
 
