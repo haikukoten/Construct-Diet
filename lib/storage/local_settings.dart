@@ -45,12 +45,12 @@ class LocalSettings
 
   Future saveContainer() async
   {
-    if (await io.Directory(path).exists() == false)
+    if (!(await io.Directory(path).exists()))
     {
       await io.Directory(path).create(recursive: true);
     }
 
-    if (await io.File(absolutePath).exists())
+    if (!(await io.File(absolutePath).exists()))
     {
       await io.File(absolutePath).create(recursive: true);
     }
