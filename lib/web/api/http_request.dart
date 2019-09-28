@@ -26,7 +26,7 @@ class HTTPRequest
   int _code;
   int get code => _code;
 
-  Future getFromUri(String uri, RequestType type) async
+  Future<HTTPRequest> getFromUri(String uri, RequestType type) async
   {
     switch(type)
     {
@@ -40,6 +40,8 @@ class HTTPRequest
         throw Exception('Incorrect request type.');
         break;
     }
+
+    return this;
   }
 
   Future _getRequest(String uri) async

@@ -32,7 +32,7 @@ if (container.isVirtual)
 */
 class LocalSettings
 {
-  Future getContainer(String containerName) async
+  Future<LocalSettings> getContainer(String containerName) async
   {
     _path = await _appPath + '/settings/public';
     _name = containerName + '.json';
@@ -46,6 +46,8 @@ class LocalSettings
     {
       _isVirtual = true;
     }
+
+    return this;
   }
 
   bool _isVirtual = true;
