@@ -25,7 +25,7 @@ class LocalSettings
   String _path;
   String get path => _path;
 
-  Map<String, dynamic> _fileJson;
+  Map<String, dynamic> _fileJson = {};
 
   dynamic getItem(String name)
   {
@@ -34,18 +34,18 @@ class LocalSettings
 
   void addItem(String name, dynamic item)
   {
-    _fileJson[name] = item;
-    saveContainer();
+    _fileJson.putIfAbsent(name, () => item);
   }
 
   Future saveContainer() async
   {
     await io.File(path).writeAsString(json.encode(_fileJson));
+    _isVirtual = false;
   }
 
-  Future<String> getOrigin() async
+  String getOrigin()
   {
-    return await io.File(path).readAsString();
+    return json.encode(_fileJson);
   }
 
   Future<String> get _appPath async 
