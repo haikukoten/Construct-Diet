@@ -2,6 +2,34 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io' as io;
 import 'dart:convert';
 
+/* USE EXAMPLE
+var container = new LocalSettings();
+await container.getContainer('contributors');
+
+container.setItem('users', [
+  {
+    'Name': 'Roman',
+  },
+  {
+    'Name': 'Igor',
+  },
+  {
+    'Name': 'Guru',
+  },
+  {
+    'Name': 'Suru',
+  },
+]);
+
+print(container.isVirtual);
+print(container.absolutePath);
+print(container.getOrigin());
+
+if (container.isVirtual)
+{
+  await container.saveContainer();
+}
+*/
 class LocalSettings
 {
   Future getContainer(String containerName) async

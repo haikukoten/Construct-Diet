@@ -7,6 +7,17 @@ enum RequestType
   POST
 }
 
+/* USE EXAMPLE
+final request = new HTTPRequest();
+await request.getFromUri('https://api.onelab.work/cd/developers.json', RequestType.GET);
+
+final list = request.getContentLikeList();
+
+if (list != null) {
+  print(list.length.toString());
+  print(list[0]['nickname']);
+}
+*/
 class HTTPRequest 
 {
   String _content;
