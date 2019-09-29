@@ -110,8 +110,8 @@ class DietInfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenBody(
-      appBar(context),
-    );
+    return Container(
+        color: Theme.of(context).cardColor,
+        child: SafeArea(child: Column(children: [appBar(context)])));
   }
 }
