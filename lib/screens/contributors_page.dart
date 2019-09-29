@@ -1,11 +1,13 @@
+import 'dart:convert';
+
 import 'package:construct_diet/common/buttons.dart' as custom;
 import 'package:construct_diet/common/cards.dart' as custom;
 import 'package:construct_diet/common/labels.dart';
 import 'package:construct_diet/common/screen_body.dart';
 import 'package:construct_diet/common/split_column.dart';
-import 'package:construct_diet/common/tab_body.dart';
-import 'package:construct_diet/web/github_contributors.dart';
+import 'package:construct_diet/storage/local_settings.dart';
 import 'package:construct_diet/globalization/vocabulary.dart';
+import 'package:construct_diet/web/api/http_request.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -121,8 +123,9 @@ class _ContributorsItemsState extends State<ContributorsItems> {
   void initState() {
     super.initState();
 
-    _setShimmerLabels();
-    _setLabels();
+    _setShimmerLabels(); // Обновляет список виджетов на виджеты загрузки
+    _setLablesFromLocal(); // Обновляет список виджетов из локальных настроек
+    _updateLables(); // Обновляет локальные настройки и обновляет список виджетов из локальных настроек
   }
 
   _setShimmerLabels() {
@@ -134,40 +137,173 @@ class _ContributorsItemsState extends State<ContributorsItems> {
     });
   }
 
-  _setLabels() {
-    var request = new ContributorsList();
-    request
-        .fillAsync(
-            'https://api.github.com/repos/oneLab-Projects/Construct-Diet/stats/contributors')
-        .whenComplete(() {
-      List<Widget> newLabelsList = [];
+  Future _setLablesFromLocal() async {
+    // Получает доступ к локальному контейнеру
+    var container = await LocalSettings().getContainer('main');
 
-      for (int i = 0; i < request.contributors.length; i++) {
-        newLabelsList.add(new ContributorLabel(
-          request.contributors[i].name,
-          nickname: request.contributors[i].nickname,
-          avatarUrl: request.contributors[i].avatarUrl,
-          additions: request.contributors[i].additions,
-          deletions: request.contributors[i].deletions,
-          onPressed: () async {
-            String url = request.contributors[i].profileUrl;
-            if (await canLaunch(url)) {
-              await launch(url);
-            }
-          },
-        ));
-      } // for
+    if (container.isVirtual) { // Если файл только в оперативной памяти
+      return;
+    }
 
-      if (newLabelsList.length > 0) {
-        setState(() {
-          labelsList = newLabelsList;
-        });
-      } else {
-        Future.delayed(Duration(milliseconds: 200), () {
-          _setLabels();
+    List<dynamic> list = container.getItem('contributors'); // Получает елемент по ключу из контейнера
+    
+    if (list.length > 0) { // Если в списке есть елементы
+      _setLabels(list, true); // Обновляет список без фотографий
+    }
+  }
+
+  void _setLabels(List<dynamic> list, bool isLocal) { // Добавляет виджеты исходя из данных list
+    List<Widget> labels = [];
+    for (var i = 0; i < list.length; i++) { 
+      var item = list[i];
+
+      String name;
+      if (Vocabluary.getCurrentLanguage() == 'ru') {
+        name = item['name']['ru'];
+      }
+      else {
+        name = item['name']['en'];
+      }
+
+      List<int> encode = [];
+      for (var i = 0; i < name.length; i++) {
+        encode.add(name.codeUnitAt(i));
+      }
+
+      labels.add(new ContributorLabel(
+        utf8.decode(encode),
+        nickname: item['nickname'],
+        avatarUrl: isLocal == true
+          ? null
+          : item['avatar_uri'],
+        additions: item['commits']['additions'],
+        deletions: item['commits']['deletions'],
+        onPressed: () async {
+          String url = item['profile_uri'];
+          if (await canLaunch(url)) {
+            await launch(url);
+          }
+        },
+      ));
+    }
+
+    setState(() { // Обновляет список
+      labelsList = labels;
+    });
+  }
+
+  Future _updateLables() async { // Обновляет локальные настройки и обновляет список виджетов из локальных настроек
+    // Запросы на два api рессурса (github, onelab)
+    var githubRequest = await HTTPRequest().getFromUri('https://api.github.com/repos/oneLab-Projects/Construct-Diet/stats/contributors', RequestType.GET);
+    var onelabRequest = await HTTPRequest().getFromUri('https://api.onelab.work/cd/developers.json', RequestType.GET);
+
+    if (githubRequest.code != 200) { // Если ошибка то функция обрывается
+      return;
+    }
+
+    List<dynamic> list = [];
+    if (onelabRequest.code != 200) { // Если ошибка то парсится без onelab request
+      list = await _getItemsFromRequests(githubRequest);
+    }
+    else {
+      list = await _getItemsFromCombineOfRequests(githubRequest, onelabRequest);
+    }
+
+    if (list.length > 0) { // Если в списке есть елементы
+      _setLabels(list, false); // Обновляет список с фотографиями
+    }
+
+    // Получает доступ к локальному контейнеру
+    var container = await LocalSettings().getContainer('main');
+    container.setItem('contributors', list); // Сохраняет елементы в virtual
+
+    await container.saveContainer(); // Сохраняет койтейнер
+  }
+
+  Future<List<dynamic>> _getItemsFromRequests(HTTPRequest r1) async {
+    var list = r1.getContentLikeList();
+    List<dynamic> outList = [];
+    for (var i = 0; i < list.length; i++) { // Присваевает имя елементу
+      var r2 = await HTTPRequest().getFromUri(list[i]['author']['url'], RequestType.GET);
+      var map = r2.getContentLikeMap();
+
+      if (r2.code == 200) {
+        list[i]['author'].putIfAbsent('name', () => {
+          'ru': map['name'],
+          'en': map['name'],
         });
       }
-    });
+
+      outList.add(_parceToItem(list[i]));
+    }
+
+    return outList;
+  }
+
+  Future<List<dynamic>> _getItemsFromCombineOfRequests(HTTPRequest r1, HTTPRequest r2) async {
+    var list = r1.getContentLikeList();
+    var onelist = r2.getContentLikeList();
+
+    for (var i = 0; i < list.length; i++) { // Пытается присвоить имя елементу если логины в двух requests совпадают
+      for (var j = 0; j < onelist.length; j++) {
+        if (list[i]['author']['login'] == onelist[j]['nickname']) {
+          list[i]['author'].putIfAbsent('name', () => onelist[j]['displayName']);
+        }
+      }
+    }
+
+    List<dynamic> outList = [];
+    for (var i = 0; i < list.length; i++) { // Присваевает имя елементу у которых логины не совпали с onelab request
+      if (list[i]['author'].containsKey('name') == false) {
+        var r2 = await HTTPRequest().getFromUri(list[i]['author']['url'], RequestType.GET);
+        var map = r2.getContentLikeMap();
+
+        if (r2.code == 200) {
+          list[i]['author'].putIfAbsent('name', () => {
+            'ru': map['name'],
+            'en': map['name'],
+          });
+        }
+      }
+
+      outList.add(_parceToItem(list[i]));
+    }
+
+    return outList;
+  }
+
+  Map<dynamic, dynamic> _parceToItem(Map<dynamic, dynamic> map) { // Парсит github request + onelab request в json формат виджета
+    String nickname = map['author']['login'];
+    String auri = map['author']['avatar_url'];
+    String uri = map['author']['html_url'];
+    String nameRu = map['author']['name']['ru'];
+    String nameEn = map['author']['name']['en'];
+    var adList = map['weeks'];
+
+    return {
+      'nickname': nickname,
+      'profile_uri': uri,
+      'avatar_uri': auri,
+      'name': {
+        'ru': nameRu,
+        'en': nameEn
+      },
+      'commits': {
+        'additions': _getListTotal(adList, 'a'),
+        'deletions': _getListTotal(adList, 'd')
+      }
+    };
+  }
+
+  int _getListTotal(List<dynamic> list, String key) // Получает сумму ключей в списке
+  {
+    int out = 0;
+
+    for (var i = 0; i < list.length; i++) {
+      out += list[i][key];
+    }
+
+    return out;
   }
 
   @override

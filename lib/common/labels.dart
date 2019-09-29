@@ -126,8 +126,17 @@ class ContributorLabel extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Padding(
-                        padding: EdgeInsets.only(right: 12),
-                        child: Avatar(size: 26, url: avatarUrl)),
+                      padding: EdgeInsets.only(right: 12),
+                      child: avatarUrl == null 
+                        ? Container (
+                          width: 26,
+                          height: 26,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.withAlpha(15),
+                            borderRadius: BorderRadius.circular(26),
+                          ))
+                        : Avatar(size: 26, url: avatarUrl) 
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,

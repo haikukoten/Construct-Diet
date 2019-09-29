@@ -70,21 +70,25 @@ class LocalSettings
 
   void setItem(String name, dynamic item)
   {
-    _fileJson.putIfAbsent(name, () => item);
+    if (_fileJson.containsKey(name)) {
+      _fileJson[name] = item;
+    }
+    else {
+      _fileJson.putIfAbsent(name, () => item);
+    }
+    
   }
 
   Future saveContainer() async
   {
-    if (!(await io.Directory(path).exists()))
-    {
+    if (!(await io.Directory(path).exists())) {
       await io.Directory(path).create(recursive: true);
     }
 
-    if (!(await io.File(absolutePath).exists()))
-    {
-      await io.File(absolutePath).create(recursive: true);
+    if (!(await io.File(absolutePath).exists())) {
+      await io.File(absolutePath).create();
     }
-
+    
     await io.File(absolutePath).writeAsString(json.encode(_fileJson));
 
     _isVirtual = false;
@@ -92,12 +96,10 @@ class LocalSettings
 
   Future<String> getOrigin() async
   {
-    if (isVirtual)
-    {
+    if (isVirtual) {
       return json.encode(_fileJson);
     }
-    else
-    {
+    else {
       return await io.File(absolutePath).readAsString();
     }
   }
