@@ -56,7 +56,7 @@ class _EditPageState extends State<EditPage> {
                   child: DisplayLabel(
                     title,
                     child: SizedBox(
-                      height: 154,
+                      height: 155,
                       child: Stack(
                         children: <Widget>[
                           CupertinoPicker(
