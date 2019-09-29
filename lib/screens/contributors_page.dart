@@ -165,14 +165,9 @@ class _ContributorsItemsState extends State<ContributorsItems> {
         name = item['name']['en'];
       }
 
-      List<int> encode = [];
-      for (var i = 0; i < name.length; i++) {
-        encode.add(name.codeUnitAt(i));
-      }
-
       labels.add(new ContributorLabel(
-        utf8.decode(encode),
-        nickname: item['nickname'],
+        toUFT8(name),
+        nickname: toUFT8(item['nickname']),
         avatarUrl: isLocal == true
           ? null
           : item['avatar_uri'],
@@ -304,6 +299,17 @@ class _ContributorsItemsState extends State<ContributorsItems> {
     }
 
     return out;
+  }
+
+  String toUFT8(String buffer)
+  {
+    List<int> encode = [];
+
+    for (var i = 0; i < buffer.length; i++) {
+      encode.add(buffer.codeUnitAt(i));
+    }
+
+    return utf8.decode(encode);
   }
 
   @override
