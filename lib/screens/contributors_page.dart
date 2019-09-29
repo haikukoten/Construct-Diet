@@ -153,6 +153,8 @@ class _ContributorsItemsState extends State<ContributorsItems> {
   }
 
   void _setLabels(List<dynamic> list, bool isLocal) { // Добавляет виджеты исходя из данных list
+    list = _sortItems(list);
+
     List<Widget> labels = [];
     for (var i = 0; i < list.length; i++) { 
       var item = list[i];
@@ -181,7 +183,6 @@ class _ContributorsItemsState extends State<ContributorsItems> {
         },
       ));
     }
-
     setState(() { // Обновляет список
       labelsList = labels;
     });
@@ -310,6 +311,12 @@ class _ContributorsItemsState extends State<ContributorsItems> {
     }
 
     return utf8.decode(encode);
+  }
+
+  List<dynamic> _sortItems(List<dynamic> items)
+  {
+    items.sort((a, b) => b['commits']['additions'].compareTo(a['commits']['additions']));
+    return items;
   }
 
   @override
