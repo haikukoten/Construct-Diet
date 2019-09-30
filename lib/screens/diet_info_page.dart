@@ -2,7 +2,6 @@ import 'package:construct_diet/common/buttons.dart' as custom;
 import 'package:construct_diet/common/cards.dart' as custom;
 import 'package:construct_diet/common/diet.dart';
 import 'package:construct_diet/common/labels.dart';
-import 'package:construct_diet/common/screen_body.dart';
 import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
