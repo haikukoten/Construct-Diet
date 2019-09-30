@@ -16,6 +16,7 @@ import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:package_info/package_info.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'dart:io';
 
 class MoreTab extends StatefulWidget {
   @override
@@ -35,9 +36,22 @@ class _MoreTabState extends State<MoreTab> {
     });
   }
 
+  Widget changeThemeButton() {
+    return SwitchLabel(
+      Vocabluary.getWord('Go to the dark side'),
+      description: Vocabluary.getWord('Activate a dark theme'),
+      icon: MdiIcons.weatherNight,
+      value: Theme.of(context).brightness == Brightness.dark,
+      onChanged: (isOn) {
+        changeTheme(isOn);
+      },
+    );
+  }
+
   void changeTheme(bool isNight) {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
+          statusBarBrightness: !isNight ? Brightness.light : Brightness.dark,
           statusBarColor: Colors.white.withAlpha(0),
           statusBarIconBrightness:
               !isNight ? Brightness.dark : Brightness.light,
@@ -45,6 +59,7 @@ class _MoreTabState extends State<MoreTab> {
           systemNavigationBarIconBrightness:
               !isNight ? Brightness.dark : Brightness.light),
     );
+
     if (Theme.of(context).platform == TargetPlatform.iOS) {
       DynamicTheme.of(context)
           .setThemeData(isNight ? custom.ThemeIOS.dark : custom.ThemeIOS.light);
@@ -173,8 +188,15 @@ class _MoreTabState extends State<MoreTab> {
                                 Flexible(
                                   child: DialogButtonLabel(
                                     "ОК",
-                                    onPressed: () => SystemChannels.platform
-                                        .invokeMethod('SystemNavigator.pop'),
+                                    onPressed: () {
+                                      if (Platform.isIOS) {
+                                        exit(0);
+                                      }
+                                      if (Platform.isAndroid) {
+                                        SystemChannels.platform.invokeMethod(
+                                            'SystemNavigator.pop');
+                                      }
+                                    },
                                     color: Theme.of(context).primaryColor,
                                   ),
                                 ),
@@ -185,15 +207,7 @@ class _MoreTabState extends State<MoreTab> {
                       ),
                     },
                   ),
-                  SwitchLabel(
-                    Vocabluary.getWord('Go to the dark side'),
-                    description: Vocabluary.getWord('Activate a dark theme'),
-                    icon: MdiIcons.weatherNight,
-                    value: Theme.of(context).brightness == Brightness.dark,
-                    onChanged: (isOn) {
-                      changeTheme(isOn);
-                    },
-                  ),
+                  changeThemeButton(),
                   ButtonLabel(
                     Vocabluary.getWord('Reset the settings'),
                     description: Vocabluary.getWord(
@@ -215,9 +229,14 @@ class _MoreTabState extends State<MoreTab> {
                   'People who have made a certain contribution to the project.'),
               onPressed: () => {
                 Navigator.push(
-                  context,
-                  TransitionPageRoute(widget: ContributorsPage()),
-                )
+                    context, TransitionPageRoute(widget: ContributorsPage())
+                    /*TargetPlatform.iOS != null
+                      ? CupertinoPageRoute(
+                          builder: (BuildContext context) =>
+                              new ContributorsPage())
+                      : MaterialPageRoute(
+                          builder: (context) => ContributorsPage()),*/
+                    )
               },
             ),
           ),

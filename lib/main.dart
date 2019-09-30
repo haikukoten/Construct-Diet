@@ -15,6 +15,7 @@ import 'package:construct_diet/tabs/more_tab.dart';
 import 'package:construct_diet/tabs/result_tab.dart';
 import 'package:construct_diet/theme.dart' as custom;
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -30,7 +31,8 @@ Future main() async {
   final prefs = await SharedPreferences.getInstance();
   var lang = prefs.getString('language');
   if (lang == null) {
-    lang = Vocabluary.checkLanguage(ui.window.locale.languageCode);
+    String langCode = ui.window.locale.languageCode;
+    lang = Vocabluary.checkLanguage(langCode);
     prefs.setString('language', lang);
   }
 
@@ -51,8 +53,10 @@ class MyApp extends StatelessWidget {
       SystemUiOverlayStyle(
           statusBarColor: Colors.white.withAlpha(0),
           systemNavigationBarColor: Colors.white,
-          systemNavigationBarIconBrightness: Brightness.dark),
+          systemNavigationBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.light),
     );
+
     return ScopedModel<DataModel>(
       model: model,
       child: DynamicTheme(
@@ -327,16 +331,16 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           ],
         ),
       ),
-      bottomNavigationBar: Center(
+      bottomNavigationBar: Container(padding: Platform.isIOS ? EdgeInsets.only(bottom: 25) : EdgeInsets.all(0),child:Center(
         heightFactor: 1,
         child: Container(
           height: 61,
           alignment: Alignment.center,
           constraints: MediaQuery.of(context).size.width > 780
               ? BoxConstraints(
-                  maxWidth: Theme.of(context).platform == TargetPlatform.iOS
-                      ? double.infinity
-                      : 765)
+              maxWidth: Theme.of(context).platform == TargetPlatform.iOS
+                  ? double.infinity
+                  : 765)
               : BoxConstraints(),
           decoration: BoxDecoration(
             color: Theme.of(context).bottomAppBarColor,
@@ -367,9 +371,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             child: ConstrainedBox(
               constraints: MediaQuery.of(context).size.width > 780
                   ? BoxConstraints(
-                      maxWidth: Theme.of(context).platform != TargetPlatform.iOS
-                          ? double.infinity
-                          : 765)
+                  maxWidth: Theme.of(context).platform != TargetPlatform.iOS
+                      ? double.infinity
+                      : 765)
                   : BoxConstraints(),
               child: Column(
                 children: <Widget>[
@@ -398,14 +402,14 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                     controller: controllerTab,
                   ),
                   Theme.of(context).platform == TargetPlatform.iOS
-                      ? Container()
+                      ? Divider(height: 0)
                       : Divider(height: 1),
                 ],
               ),
             ),
           ),
         ),
-      ),
+      ),)
     );
   }
 }

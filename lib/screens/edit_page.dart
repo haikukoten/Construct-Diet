@@ -6,6 +6,8 @@ import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:construct_diet/scoped_models/data_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class EditPage extends StatefulWidget {
@@ -174,73 +176,73 @@ class _EditPageState extends State<EditPage> {
           shadowColor: Colors.black.withAlpha(100),
           borderRadius: BorderRadius.all(Radius.circular(8.5)),
           color: Theme.of(context).cardColor,
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(0, 2, 0, 0),
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.fromLTRB(8, 3, 15, 0),
-                  child: Row(
-                    children: <Widget>[
-                      custom.IconButton(
-                        icon: Theme.of(context).platform == TargetPlatform.iOS
-                            ? Icons.arrow_back_ios
-                            : Icons.arrow_back,
-                        iconSize:
-                            Theme.of(context).platform == TargetPlatform.iOS
-                                ? 18
-                                : 22,
-                        onPressed: () => Navigator.pop(context),
+          child: ListView(
+            scrollDirection: Axis.vertical,
+            addAutomaticKeepAlives: true,
+            shrinkWrap: true,
+            children: <Widget>[
+              Container(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    custom.IconButton(
+                      icon: Theme.of(context).platform == TargetPlatform.iOS
+                          ? Icons.arrow_back_ios
+                          : Icons.arrow_back,
+                      iconSize: Theme.of(context).platform == TargetPlatform.iOS
+                          ? 18
+                          : 22,
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(0.0),
+                      child: Text(
+                        Vocabluary.getWord('Body parameters'),
+                        style: Theme.of(context).textTheme.caption,
                       ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(5, 1, 0, 0.5),
-                        child: Text(
-                          Vocabluary.getWord('Body parameters'),
-                          style: Theme.of(context).textTheme.caption,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                ScopedModelDescendant<DataModel>(
-                    builder: (context, child, model) {
-                  return SplitColumn(
-                    children: <Widget>[
-                      buttonOpenPicker(
-                          Vocabluary.getWord('Gender'),
-                          model.isWoman
-                              ? Vocabluary.getWord('Female')
-                              : Vocabluary.getWord('Male'),
-                          null,
-                          model.genderIndex,
-                          model.setGender,
-                          genderList),
-                      buttonOpenPicker(
-                          Vocabluary.getWord('Age'),
-                          model.age,
-                          Vocabluary.getWord('years old'),
-                          model.ageIndex,
-                          model.setAge,
-                          ageList),
-                      buttonOpenPicker(
-                          Vocabluary.getWord('Height'),
-                          model.height,
-                          Vocabluary.getWord('cm'),
-                          model.heightIndex,
-                          model.setHeight,
-                          heightList),
-                      buttonOpenPicker(
-                          Vocabluary.getWord('Weight'),
-                          model.weight,
-                          Vocabluary.getWord('kg'),
-                          model.weightIndex,
-                          model.setWeight,
-                          weightList),
-                    ],
-                  );
-                }),
-              ],
-            ),
+              ),
+              ScopedModelDescendant<DataModel>(
+                  builder: (context, child, model) {
+                return SplitColumn(
+                  children: <Widget>[
+                    buttonOpenPicker(
+                        Vocabluary.getWord('Gender'),
+                        model.isWoman
+                            ? Vocabluary.getWord('Female')
+                            : Vocabluary.getWord('Male'),
+                        null,
+                        model.genderIndex,
+                        model.setGender,
+                        genderList),
+                    buttonOpenPicker(
+                        Vocabluary.getWord('Age'),
+                        model.age,
+                        Vocabluary.getWord('years old'),
+                        model.ageIndex,
+                        model.setAge,
+                        ageList),
+                    buttonOpenPicker(
+                        Vocabluary.getWord('Height'),
+                        model.height,
+                        Vocabluary.getWord('cm'),
+                        model.heightIndex,
+                        model.setHeight,
+                        heightList),
+                    buttonOpenPicker(
+                        Vocabluary.getWord('Weight'),
+                        model.weight,
+                        Vocabluary.getWord('kg'),
+                        model.weightIndex,
+                        model.setWeight,
+                        weightList),
+                  ],
+                );
+              }),
+            ],
           ),
         ),
       ),
