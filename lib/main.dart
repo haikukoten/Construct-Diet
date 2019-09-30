@@ -331,10 +331,11 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           ],
         ),
       ),
-      bottomNavigationBar: Container(padding: Platform.isIOS ? EdgeInsets.only(bottom: 25) : EdgeInsets.all(0),child:Center(
+      //padding: Platform.isIOS ? EdgeInsets.only(bottom: 25) : EdgeInsets.all(0),
+      bottomNavigationBar: Container(child:Center(
         heightFactor: 1,
         child: Container(
-          height: 61,
+          height: (Platform.isIOS) ? 90 : 61,
           alignment: Alignment.center,
           constraints: MediaQuery.of(context).size.width > 780
               ? BoxConstraints(
