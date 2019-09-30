@@ -168,7 +168,8 @@ class _EditPageState extends State<EditPage> {
 
   Widget appBar() {
     return Padding(
-      padding: EdgeInsets.fromLTRB(12, 12, 12, 14),
+      padding: EdgeInsets.all(10),
+      //padding: EdgeInsets.fromLTRB(12, 12, 12, 14),
       child: Hero(
         tag: 'appbar',
         child: Material(
@@ -177,6 +178,7 @@ class _EditPageState extends State<EditPage> {
           borderRadius: BorderRadius.all(Radius.circular(8.5)),
           color: Theme.of(context).cardColor,
           child: ListView(
+            padding: EdgeInsets.only(top: 10),
             scrollDirection: Axis.vertical,
             addAutomaticKeepAlives: true,
             shrinkWrap: true,

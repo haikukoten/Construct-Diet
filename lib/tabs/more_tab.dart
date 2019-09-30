@@ -99,7 +99,7 @@ class _MoreTabState extends State<MoreTab> {
                       child:
                     Container(
                       constraints: BoxConstraints(maxWidth: 500),
-                      margin: EdgeInsets.only(left: 10, right: 10, bottom: (Platform.isIOS && utils.isX(context)) ? 25 : 10),
+                      margin: EdgeInsets.only(left: 10, right: 10, bottom: (Platform.isIOS && utils.isX(context)) ? 26 : 8),
                       height: (!Platform.isIOS && !utils.isX(context)) ? 145 : 135,
                       child: custom.Card(
                         DisplayLabel(
