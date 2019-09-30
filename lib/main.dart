@@ -246,7 +246,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                           opacity: step > 0.99 ? 1 : 0,
                           curve: Interval(0.5, 1),
                           child: Container(
-                            height: 65,
+                            height: 70,
                             child: ScopedModelDescendant<DataModel>(
                                 builder: (context, child, model) {
                               return !model.isSet

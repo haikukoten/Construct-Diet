@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:construct_diet/common/avatar.dart';
 import 'package:construct_diet/common/diet.dart';
 import 'package:construct_diet/common/page_transition.dart';
@@ -429,17 +431,16 @@ class InfoLabel extends StatelessWidget {
                   ))
               : Container(),
           Container(
-            width: MediaQuery.of(context).size.width > 750
-                ? 750.0 - 140.0
-                : MediaQuery.of(context).size.width - 140,
+            width: 200,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: description != null ? 0 : 4),
+                    padding: EdgeInsets.only(),
                     child: Text(
                       title,
+                      overflow: TextOverflow.fade,
                       strutStyle: StrutStyle(
                         leading: 0,
                       ),
@@ -448,7 +449,7 @@ class InfoLabel extends StatelessWidget {
                   ),
                   description != null
                       ? Padding(
-                          padding: EdgeInsets.only(top: 3.2),
+                          padding: EdgeInsets.only(top: (Platform.isIOS) ? 3.2 : 0),
                           child: Text(
                             description,
                             style: Theme.of(context).textTheme.subtitle,
