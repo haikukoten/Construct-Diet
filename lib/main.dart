@@ -32,7 +32,7 @@ Future main() async {
   var lang = prefs.getString('language');
   if (lang == null) {
     String langCode = ui.window.locale.languageCode;
-    lang = Vocabluary.checkLanguage(langCode);
+    lang = Vocabluary.checkLanguage(langCode != null ? langCode : "English");
     prefs.setString('language', lang);
   }
 
@@ -164,8 +164,13 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       });
     }
   }
-
+  bool isX(){
+    final bool isIt = MediaQuery.of(context).size.height >= 812.0;
+    return isIt;
+  }
   Widget appBar() {
+
+
     double padding = MediaQuery.of(context).size.width > 700
         ? MediaQuery.of(context).size.width - 779
         : 12;
@@ -331,11 +336,12 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           ],
         ),
       ),
-      //padding: Platform.isIOS ? EdgeInsets.only(bottom: 25) : EdgeInsets.all(0),
-      bottomNavigationBar: Container(child:Center(
+      // AA
+      bottomNavigationBar: Container(
+        child:Center(
         heightFactor: 1,
         child: Container(
-          height: (Platform.isIOS) ? 90 : 61,
+          height: (isX() && Platform.isIOS) ? 90 : 61,
           alignment: Alignment.center,
           constraints: MediaQuery.of(context).size.width > 780
               ? BoxConstraints(
