@@ -17,6 +17,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:package_info/package_info.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'dart:io';
+import 'package:construct_diet/utils/content.dart' as utils;
 
 class MoreTab extends StatefulWidget {
   @override
@@ -95,11 +96,11 @@ class _MoreTabState extends State<MoreTab> {
                   context: context,
                   builder: (BuildContext context) {
                     return Container(
-                      constraints: MediaQuery.of(context).size.width > 780
-                          ? BoxConstraints(maxWidth: 500)
-                          : BoxConstraints(),
-                      margin: EdgeInsets.fromLTRB(8, 8, 8, 4),
-                      height: 132,
+                      child:
+                    Container(
+                      constraints: BoxConstraints(maxWidth: 500),
+                      margin: EdgeInsets.only(left: 10, right: 10, bottom: (Platform.isIOS && utils.isX(context)) ? 25 : 10),
+                      height: (!Platform.isIOS && !utils.isX(context)) ? 145 : 135,
                       child: custom.Card(
                         DisplayLabel(
                           Vocabluary.getWord('Developer\'s menu'),
@@ -123,7 +124,7 @@ class _MoreTabState extends State<MoreTab> {
                           ),
                         ),
                       ),
-                    );
+                    ),);
                   },
                 );
               },

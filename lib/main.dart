@@ -23,6 +23,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:md2_tab_indicator/md2_tab_indicator.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'utils/content.dart' as utils;
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -164,13 +165,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       });
     }
   }
-  bool isX(){
-    final bool isIt = MediaQuery.of(context).size.height >= 812.0;
-    return isIt;
-  }
+
+
   Widget appBar() {
-
-
     double padding = MediaQuery.of(context).size.width > 700
         ? MediaQuery.of(context).size.width - 779
         : 12;
@@ -341,7 +338,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         child:Center(
         heightFactor: 1,
         child: Container(
-          height: (isX() && Platform.isIOS) ? 90 : 61,
+          height: (utils.isX(context) && Platform.isIOS) ? 90 : 61,
           alignment: Alignment.center,
           constraints: MediaQuery.of(context).size.width > 780
               ? BoxConstraints(

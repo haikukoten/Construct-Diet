@@ -604,7 +604,7 @@ class DisplayLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 15),
+      padding: EdgeInsets.only(top: 14),
       child: Column(
         children: <Widget>[
           Text(
@@ -612,7 +612,7 @@ class DisplayLabel extends StatelessWidget {
             style: Theme.of(context).textTheme.body1,
           ),
           Container(
-            padding: EdgeInsets.symmetric(vertical: 5),
+
             child: child,
           ),
         ],
