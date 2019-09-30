@@ -494,7 +494,7 @@ class PlugLabel extends StatelessWidget {
         children: <Widget>[
           icon != null
               ? Container(
-                  margin: EdgeInsets.only(bottom: 16),
+                  margin: EdgeInsets.only(bottom: 8),
                   child: Icon(
                     icon,
                     size: 40,
@@ -604,7 +604,7 @@ class DisplayLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 14),
+      padding: EdgeInsets.only(top: 16),
       child: Column(
         children: <Widget>[
           Text(
