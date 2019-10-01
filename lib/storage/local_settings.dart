@@ -30,20 +30,15 @@ if (container.isVirtual)
   await container.saveContainer();
 }
 */
-class LocalSettings
-{
-  Future<LocalSettings> getContainer(String containerName) async
-  {
+class LocalSettings {
+  Future<LocalSettings> getContainer(String containerName) async {
     _path = await _appPath + '/settings/public';
     _name = containerName + '.json';
-    if (await io.File(absolutePath).exists())
-    {
+    if (await io.File(absolutePath).exists()) {
       _isVirtual = false;
-      
+
       _fileJson = json.decode(await getOrigin());
-    }
-    else
-    {
+    } else {
       _isVirtual = true;
     }
 
@@ -63,24 +58,19 @@ class LocalSettings
 
   Map<String, dynamic> _fileJson = {};
 
-  dynamic getItem(String name)
-  {
+  dynamic getItem(String name) {
     return _fileJson[name];
   }
 
-  void setItem(String name, dynamic item)
-  {
+  void setItem(String name, dynamic item) {
     if (_fileJson.containsKey(name)) {
       _fileJson[name] = item;
-    }
-    else {
+    } else {
       _fileJson.putIfAbsent(name, () => item);
     }
-    
   }
 
-  Future saveContainer() async
-  {
+  Future saveContainer() async {
     if (!(await io.Directory(path).exists())) {
       await io.Directory(path).create(recursive: true);
     }
@@ -88,24 +78,21 @@ class LocalSettings
     if (!(await io.File(absolutePath).exists())) {
       await io.File(absolutePath).create();
     }
-    
+
     await io.File(absolutePath).writeAsString(json.encode(_fileJson));
 
     _isVirtual = false;
   }
 
-  Future<String> getOrigin() async
-  {
+  Future<String> getOrigin() async {
     if (isVirtual) {
       return json.encode(_fileJson);
-    }
-    else {
+    } else {
       return await io.File(absolutePath).readAsString();
     }
   }
 
-  Future<String> get _appPath async 
-  {
+  Future<String> get _appPath async {
     final directory = await getApplicationDocumentsDirectory();
 
     return directory.path;

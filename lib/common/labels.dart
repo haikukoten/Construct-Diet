@@ -53,7 +53,7 @@ class ButtonLabel extends StatelessWidget {
                           )
                         : Container(),
                     Container(
-                      width: MediaQuery.of(context).size.width > 750
+                      width: MediaQuery.of(context).size.width >= 750
                           ? 750 - 140.0
                           : MediaQuery.of(context).size.width - 140,
                       child: Column(
@@ -67,7 +67,7 @@ class ButtonLabel extends StatelessWidget {
                               style: Theme.of(context).textTheme.title),
                           description != null
                               ? Padding(
-                                  padding: EdgeInsets.only(top: 3.2),
+                                  padding: EdgeInsets.only(top: 3),
                                   child: Text(
                                     description,
                                     style: Theme.of(context).textTheme.subtitle,
@@ -128,17 +128,16 @@ class ContributorLabel extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.only(right: 12),
-                      child: avatarUrl == null 
-                        ? Container (
-                          width: 26,
-                          height: 26,
-                          decoration: BoxDecoration(
-                            color: Colors.grey.withAlpha(15),
-                            borderRadius: BorderRadius.circular(26),
-                          ))
-                        : Avatar(size: 26, url: avatarUrl) 
-                    ),
+                        padding: EdgeInsets.only(right: 12),
+                        child: avatarUrl == null
+                            ? Container(
+                                width: 26,
+                                height: 26,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.withAlpha(15),
+                                  borderRadius: BorderRadius.circular(26),
+                                ))
+                            : Avatar(size: 26, url: avatarUrl)),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -421,7 +420,7 @@ class InfoLabel extends StatelessWidget {
           icon != null
               ? Container(
                   margin: EdgeInsets.only(
-                    right: 15,
+                    right: 12,
                     top: description.contains("\n") ? 5 : 0,
                   ),
                   child: Icon(
@@ -437,7 +436,7 @@ class InfoLabel extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(),
+                    padding: EdgeInsets.only(bottom: 2),
                     child: Text(
                       title,
                       overflow: TextOverflow.fade,
@@ -449,7 +448,8 @@ class InfoLabel extends StatelessWidget {
                   ),
                   description != null
                       ? Padding(
-                          padding: EdgeInsets.only(top: (Platform.isIOS) ? 3.2 : 0),
+                          padding:
+                              EdgeInsets.only(top: (Platform.isIOS) ? 3.2 : 0),
                           child: Text(
                             description,
                             style: Theme.of(context).textTheme.subtitle,
@@ -613,7 +613,6 @@ class DisplayLabel extends StatelessWidget {
             style: Theme.of(context).textTheme.body1,
           ),
           Container(
-
             child: child,
           ),
         ],

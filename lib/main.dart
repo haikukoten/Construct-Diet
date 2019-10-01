@@ -166,7 +166,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     }
   }
 
-
   Widget appBar() {
     double padding = MediaQuery.of(context).size.width > 700
         ? MediaQuery.of(context).size.width - 779
@@ -285,135 +284,138 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IgnorePointer(
-        ignoring: waitAnimation,
-        child: Stack(
-          children: <Widget>[
-            Center(
-              child: SafeArea(
-                child: NotificationListener<ScrollNotification>(
-                  onNotification: (scrollNotification) {
-                    if (scrollNotification is ScrollEndNotification) {
-                      animateScrollInfoContainer(scrollNotification.metrics);
-                    }
-                    return true;
-                  },
-                  child: NestedScrollView(
-                    controller: controllerScroll,
-                    headerSliverBuilder:
-                        (BuildContext context, bool innerBoxIsScrolled) {
-                      return <Widget>[
-                        custom.SliverAppBar(
-                          pinned: true,
-                          expandedHeight: appBarHeight,
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                          flexibleSpace: LayoutBuilder(
-                            builder: (BuildContext context,
-                                BoxConstraints constraints) {
-                              step = ((constraints.maxHeight - 73) *
-                                      100 /
-                                      (appBarHeight - 73)) /
-                                  100;
-                              return appBar();
-                            },
-                          ),
-                        ),
-                      ];
+        body: IgnorePointer(
+          ignoring: waitAnimation,
+          child: Stack(
+            children: <Widget>[
+              Center(
+                child: SafeArea(
+                  child: NotificationListener<ScrollNotification>(
+                    onNotification: (scrollNotification) {
+                      if (scrollNotification is ScrollEndNotification) {
+                        animateScrollInfoContainer(scrollNotification.metrics);
+                      }
+                      return true;
                     },
-                    body: TabBarView(
-                      physics: NeverScrollableScrollPhysics(),
-                      children: tabs,
-                      controller: controllerTab,
+                    child: NestedScrollView(
+                      controller: controllerScroll,
+                      headerSliverBuilder:
+                          (BuildContext context, bool innerBoxIsScrolled) {
+                        return <Widget>[
+                          custom.SliverAppBar(
+                            pinned: true,
+                            expandedHeight: appBarHeight,
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                            flexibleSpace: LayoutBuilder(
+                              builder: (BuildContext context,
+                                  BoxConstraints constraints) {
+                                step = ((constraints.maxHeight - 73) *
+                                        100 /
+                                        (appBarHeight - 73)) /
+                                    100;
+                                return appBar();
+                              },
+                            ),
+                          ),
+                        ];
+                      },
+                      body: TabBarView(
+                        physics: NeverScrollableScrollPhysics(),
+                        children: tabs,
+                        controller: controllerTab,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
-      // AA
-      bottomNavigationBar: Container(
-        child:Center(
-        heightFactor: 1,
-        child: Container(
-          height: (utils.isX(context) && Platform.isIOS) ? 90 : 61,
-          alignment: Alignment.center,
-          constraints: MediaQuery.of(context).size.width > 780
-              ? BoxConstraints(
-              maxWidth: Theme.of(context).platform == TargetPlatform.iOS
-                  ? double.infinity
-                  : 765)
-              : BoxConstraints(),
-          decoration: BoxDecoration(
-            color: Theme.of(context).bottomAppBarColor,
-            border: Theme.of(context).platform == TargetPlatform.iOS
-                ? Border.all(width: 0.5, color: Theme.of(context).dividerColor)
-                : Border(),
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(context).platform == TargetPlatform.iOS
-                    ? Colors.transparent
-                    : Colors.black.withAlpha(50),
-                offset: Offset(0, 0),
-                blurRadius: 2,
-              ),
             ],
-            borderRadius: BorderRadius.vertical(
-                top: Theme.of(context).platform == TargetPlatform.iOS
-                    ? Radius.zero
-                    : Radius.circular(16)),
           ),
-          child: Material(
-            clipBehavior: Clip.hardEdge,
-            borderRadius: BorderRadius.vertical(
-                top: Theme.of(context).platform == TargetPlatform.iOS
-                    ? Radius.zero
-                    : Radius.circular(16)),
-            type: MaterialType.transparency,
-            child: ConstrainedBox(
+        ),
+        // AA
+        bottomNavigationBar: Container(
+          child: Center(
+            heightFactor: 1,
+            child: Container(
+              height: (utils.isX(context) && Platform.isIOS) ? 90 : 61,
+              alignment: Alignment.center,
               constraints: MediaQuery.of(context).size.width > 780
                   ? BoxConstraints(
-                  maxWidth: Theme.of(context).platform != TargetPlatform.iOS
-                      ? double.infinity
-                      : 765)
+                      maxWidth: Theme.of(context).platform == TargetPlatform.iOS
+                          ? double.infinity
+                          : 765)
                   : BoxConstraints(),
-              child: Column(
-                children: <Widget>[
-                  TabBar(
-                    labelPadding: EdgeInsets.all(6),
-                    labelColor: Theme.of(context).primaryColor,
-                    unselectedLabelColor: Theme.of(context).primaryColorDark,
-                    indicator: MD2Indicator(
-                      indicatorHeight: 0,
-                      indicatorColor: Theme.of(context).primaryColor,
-                      indicatorSize: MD2IndicatorSize.full,
-                    ),
-                    tabs: <Tab>[
-                      Tab(
-                        child: TabContent(Vocabluary.getWord('Result'),
-                            MdiIcons.fileDocumentBoxOutline),
-                      ),
-                      Tab(
-                        child: TabContent(Vocabluary.getWord('Preferences'),
-                            MdiIcons.heartOutline),
-                      ),
-                      Tab(
-                          child: TabContent(Vocabluary.getWord('Other'),
-                              MdiIcons.cardBulletedOutline)),
-                    ],
-                    controller: controllerTab,
+              decoration: BoxDecoration(
+                color: Theme.of(context).bottomAppBarColor,
+                border: Theme.of(context).platform == TargetPlatform.iOS
+                    ? Border.all(
+                        width: 0.5, color: Theme.of(context).dividerColor)
+                    : Border(),
+                boxShadow: [
+                  BoxShadow(
+                    color: Theme.of(context).platform == TargetPlatform.iOS
+                        ? Colors.transparent
+                        : Colors.black.withAlpha(50),
+                    offset: Offset(0, 0),
+                    blurRadius: 2,
                   ),
-                  Theme.of(context).platform == TargetPlatform.iOS
-                      ? Divider(height: 0)
-                      : Divider(height: 1),
                 ],
+                borderRadius: BorderRadius.vertical(
+                    top: Theme.of(context).platform == TargetPlatform.iOS
+                        ? Radius.zero
+                        : Radius.circular(16)),
+              ),
+              child: Material(
+                clipBehavior: Clip.hardEdge,
+                borderRadius: BorderRadius.vertical(
+                    top: Theme.of(context).platform == TargetPlatform.iOS
+                        ? Radius.zero
+                        : Radius.circular(16)),
+                type: MaterialType.transparency,
+                child: ConstrainedBox(
+                  constraints: MediaQuery.of(context).size.width > 780
+                      ? BoxConstraints(
+                          maxWidth:
+                              Theme.of(context).platform != TargetPlatform.iOS
+                                  ? double.infinity
+                                  : 765)
+                      : BoxConstraints(),
+                  child: Column(
+                    children: <Widget>[
+                      TabBar(
+                        labelPadding: EdgeInsets.all(6),
+                        labelColor: Theme.of(context).primaryColor,
+                        unselectedLabelColor:
+                            Theme.of(context).primaryColorDark,
+                        indicator: MD2Indicator(
+                          indicatorHeight: 0,
+                          indicatorColor: Theme.of(context).primaryColor,
+                          indicatorSize: MD2IndicatorSize.full,
+                        ),
+                        tabs: <Tab>[
+                          Tab(
+                            child: TabContent(Vocabluary.getWord('Result'),
+                                MdiIcons.fileDocumentBoxOutline),
+                          ),
+                          Tab(
+                            child: TabContent(Vocabluary.getWord('Preferences'),
+                                MdiIcons.heartOutline),
+                          ),
+                          Tab(
+                              child: TabContent(Vocabluary.getWord('Other'),
+                                  MdiIcons.cardBulletedOutline)),
+                        ],
+                        controller: controllerTab,
+                      ),
+                      Theme.of(context).platform == TargetPlatform.iOS
+                          ? Divider(height: 0)
+                          : Divider(height: 1),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-      ),)
-    );
+        ));
   }
 }

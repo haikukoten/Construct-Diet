@@ -30,8 +30,8 @@ class _ContributorsPageState extends State<ContributorsPage>
   }
 
   Widget appBar(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(17, 16, 17, 6),
+    return Flex(direction: Axis.vertical, children: <Widget>[Padding(
+      padding: EdgeInsets.all(16),
       child: Hero(
         tag: 'appbar',
         child: Material(
@@ -80,7 +80,7 @@ class _ContributorsPageState extends State<ContributorsPage>
           ),
         ),
       ),
-    );
+    )],);
   }
 
   @override
@@ -141,38 +141,39 @@ class _ContributorsItemsState extends State<ContributorsItems> {
     // Получает доступ к локальному контейнеру
     var container = await LocalSettings().getContainer('main');
 
-    if (container.isVirtual) { // Если файл только в оперативной памяти
+    if (container.isVirtual) {
+      // Если файл только в оперативной памяти
       return;
     }
 
-    List<dynamic> list = container.getItem('contributors'); // Получает елемент по ключу из контейнера
-    
-    if (list.length > 0) { // Если в списке есть елементы
+    List<dynamic> list = container
+        .getItem('contributors'); // Получает елемент по ключу из контейнера
+
+    if (list.length > 0) {
+      // Если в списке есть елементы
       _setLabels(list, true); // Обновляет список без фотографий
     }
   }
 
-  void _setLabels(List<dynamic> list, bool isLocal) { // Добавляет виджеты исходя из данных list
+  void _setLabels(List<dynamic> list, bool isLocal) {
+    // Добавляет виджеты исходя из данных list
     list = _sortItems(list);
 
     List<Widget> labels = [];
-    for (var i = 0; i < list.length; i++) { 
+    for (var i = 0; i < list.length; i++) {
       var item = list[i];
 
       String name;
       if (Vocabluary.getCurrentLanguage() == 'ru') {
         name = item['name']['ru'];
-      }
-      else {
+      } else {
         name = item['name']['en'];
       }
 
       labels.add(new ContributorLabel(
         toUFT8(name),
         nickname: toUFT8(item['nickname']),
-        avatarUrl: isLocal == true
-          ? null
-          : item['avatar_uri'],
+        avatarUrl: isLocal == true ? null : item['avatar_uri'],
         additions: item['commits']['additions'],
         deletions: item['commits']['deletions'],
         onPressed: () async {
@@ -183,29 +184,36 @@ class _ContributorsItemsState extends State<ContributorsItems> {
         },
       ));
     }
-    setState(() { // Обновляет список
+    setState(() {
+      // Обновляет список
       labelsList = labels;
     });
   }
 
-  Future _updateLables() async { // Обновляет локальные настройки и обновляет список виджетов из локальных настроек
+  Future _updateLables() async {
+    // Обновляет локальные настройки и обновляет список виджетов из локальных настроек
     // Запросы на два api рессурса (github, onelab)
-    var githubRequest = await HTTPRequest().getFromUri('https://api.github.com/repos/oneLab-Projects/Construct-Diet/stats/contributors', RequestType.GET);
-    var onelabRequest = await HTTPRequest().getFromUri('https://api.onelab.work/cd/developers.json', RequestType.GET);
+    var githubRequest = await HTTPRequest().getFromUri(
+        'https://api.github.com/repos/oneLab-Projects/Construct-Diet/stats/contributors',
+        RequestType.GET);
+    var onelabRequest = await HTTPRequest().getFromUri(
+        'https://api.onelab.work/cd/developers.json', RequestType.GET);
 
-    if (githubRequest.code != 200) { // Если ошибка то функция обрывается
+    if (githubRequest.code != 200) {
+      // Если ошибка то функция обрывается
       return;
     }
 
     List<dynamic> list = [];
-    if (onelabRequest.code != 200) { // Если ошибка то парсится без onelab request
+    if (onelabRequest.code != 200) {
+      // Если ошибка то парсится без onelab request
       list = await _getItemsFromRequests(githubRequest);
-    }
-    else {
+    } else {
       list = await _getItemsFromCombineOfRequests(githubRequest, onelabRequest);
     }
 
-    if (list.length > 0) { // Если в списке есть елементы
+    if (list.length > 0) {
+      // Если в списке есть елементы
       _setLabels(list, false); // Обновляет список с фотографиями
     }
 
@@ -219,15 +227,19 @@ class _ContributorsItemsState extends State<ContributorsItems> {
   Future<List<dynamic>> _getItemsFromRequests(HTTPRequest r1) async {
     var list = r1.getContentLikeList();
     List<dynamic> outList = [];
-    for (var i = 0; i < list.length; i++) { // Присваевает имя елементу
-      var r2 = await HTTPRequest().getFromUri(list[i]['author']['url'], RequestType.GET);
+    for (var i = 0; i < list.length; i++) {
+      // Присваевает имя елементу
+      var r2 = await HTTPRequest()
+          .getFromUri(list[i]['author']['url'], RequestType.GET);
       var map = r2.getContentLikeMap();
 
       if (r2.code == 200) {
-        list[i]['author'].putIfAbsent('name', () => {
-          'ru': map['name'],
-          'en': map['name'],
-        });
+        list[i]['author'].putIfAbsent(
+            'name',
+            () => {
+                  'ru': map['name'],
+                  'en': map['name'],
+                });
       }
 
       outList.add(_parceToItem(list[i]));
@@ -236,29 +248,36 @@ class _ContributorsItemsState extends State<ContributorsItems> {
     return outList;
   }
 
-  Future<List<dynamic>> _getItemsFromCombineOfRequests(HTTPRequest r1, HTTPRequest r2) async {
+  Future<List<dynamic>> _getItemsFromCombineOfRequests(
+      HTTPRequest r1, HTTPRequest r2) async {
     var list = r1.getContentLikeList();
     var onelist = r2.getContentLikeList();
 
-    for (var i = 0; i < list.length; i++) { // Пытается присвоить имя елементу если логины в двух requests совпадают
+    for (var i = 0; i < list.length; i++) {
+      // Пытается присвоить имя елементу если логины в двух requests совпадают
       for (var j = 0; j < onelist.length; j++) {
         if (list[i]['author']['login'] == onelist[j]['nickname']) {
-          list[i]['author'].putIfAbsent('name', () => onelist[j]['displayName']);
+          list[i]['author']
+              .putIfAbsent('name', () => onelist[j]['displayName']);
         }
       }
     }
 
     List<dynamic> outList = [];
-    for (var i = 0; i < list.length; i++) { // Присваевает имя елементу у которых логины не совпали с onelab request
+    for (var i = 0; i < list.length; i++) {
+      // Присваевает имя елементу у которых логины не совпали с onelab request
       if (list[i]['author'].containsKey('name') == false) {
-        var r2 = await HTTPRequest().getFromUri(list[i]['author']['url'], RequestType.GET);
+        var r2 = await HTTPRequest()
+            .getFromUri(list[i]['author']['url'], RequestType.GET);
         var map = r2.getContentLikeMap();
 
         if (r2.code == 200) {
-          list[i]['author'].putIfAbsent('name', () => {
-            'ru': map['name'],
-            'en': map['name'],
-          });
+          list[i]['author'].putIfAbsent(
+              'name',
+              () => {
+                    'ru': map['name'],
+                    'en': map['name'],
+                  });
         }
       }
 
@@ -268,7 +287,8 @@ class _ContributorsItemsState extends State<ContributorsItems> {
     return outList;
   }
 
-  Map<dynamic, dynamic> _parceToItem(Map<dynamic, dynamic> map) { // Парсит github request + onelab request в json формат виджета
+  Map<dynamic, dynamic> _parceToItem(Map<dynamic, dynamic> map) {
+    // Парсит github request + onelab request в json формат виджета
     String nickname = map['author']['login'];
     String auri = map['author']['avatar_url'];
     String uri = map['author']['html_url'];
@@ -280,10 +300,7 @@ class _ContributorsItemsState extends State<ContributorsItems> {
       'nickname': nickname,
       'profile_uri': uri,
       'avatar_uri': auri,
-      'name': {
-        'ru': nameRu,
-        'en': nameEn
-      },
+      'name': {'ru': nameRu, 'en': nameEn},
       'commits': {
         'additions': _getListTotal(adList, 'a'),
         'deletions': _getListTotal(adList, 'd')
@@ -291,7 +308,8 @@ class _ContributorsItemsState extends State<ContributorsItems> {
     };
   }
 
-  int _getListTotal(List<dynamic> list, String key) // Получает сумму ключей в списке
+  int _getListTotal(
+      List<dynamic> list, String key) // Получает сумму ключей в списке
   {
     int out = 0;
 
@@ -302,8 +320,7 @@ class _ContributorsItemsState extends State<ContributorsItems> {
     return out;
   }
 
-  String toUFT8(String buffer)
-  {
+  String toUFT8(String buffer) {
     List<int> encode = [];
 
     for (var i = 0; i < buffer.length; i++) {
@@ -313,9 +330,9 @@ class _ContributorsItemsState extends State<ContributorsItems> {
     return utf8.decode(encode);
   }
 
-  List<dynamic> _sortItems(List<dynamic> items)
-  {
-    items.sort((a, b) => b['commits']['additions'].compareTo(a['commits']['additions']));
+  List<dynamic> _sortItems(List<dynamic> items) {
+    items.sort((a, b) =>
+        b['commits']['additions'].compareTo(a['commits']['additions']));
     return items;
   }
 

@@ -14,7 +14,12 @@ class Diet {
   final List<IconData> icons;
 
   Diet(this.name, this.category, this.duration, this.efficiency, this.calorific)
-      : description = '-$efficiency ' + Vocabluary.getWord('kg in') + ' $duration ' + Vocabluary.getWord('days') + ', $calorific ' + Vocabluary.getWord('kcal'),
+      : description = '-$efficiency ' +
+            Vocabluary.getWord('kg in') +
+            ' $duration ' +
+            Vocabluary.getWord('days') +
+            ', $calorific ' +
+            Vocabluary.getWord('kcal'),
         icons = List<IconData>.generate(category.length, (index) {
           Map<int, IconData> _iconList = {
             1: MdiIcons.sausage,

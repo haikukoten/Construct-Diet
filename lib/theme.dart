@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class ThemeAndroid {
   static ThemeData light = ThemeData(
     platform: TargetPlatform.android,
