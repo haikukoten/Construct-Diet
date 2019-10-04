@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:construct_diet/common/avatar.dart';
 import 'package:construct_diet/common/diet.dart';
 import 'package:construct_diet/common/page_transition.dart';
@@ -430,33 +428,29 @@ class InfoLabel extends StatelessWidget {
                   ))
               : Container(),
           Container(
-            width: 200,
+            width: MediaQuery.of(context).size.width >= 750
+                ? 750 - 140.0
+                : MediaQuery.of(context).size.width - 140,
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 2),
-                    child: Text(
-                      title,
-                      overflow: TextOverflow.fade,
-                      strutStyle: StrutStyle(
-                        leading: 0,
-                      ),
-                      style: Theme.of(context).textTheme.title,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(title,
+                    strutStyle: StrutStyle(
+                      leading: 0,
                     ),
-                  ),
-                  description != null
-                      ? Padding(
-                          padding:
-                              EdgeInsets.only(top: (Platform.isIOS) ? 3.2 : 0),
-                          child: Text(
-                            description,
-                            style: Theme.of(context).textTheme.subtitle,
-                          ),
-                        )
-                      : Container()
-                ]),
+                    style: Theme.of(context).textTheme.title),
+                description != null
+                    ? Padding(
+                        padding: EdgeInsets.only(top: 3),
+                        child: Text(
+                          description,
+                          style: Theme.of(context).textTheme.subtitle,
+                        ),
+                      )
+                    : Container()
+              ],
+            ),
           ),
         ],
       ),

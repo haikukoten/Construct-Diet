@@ -168,8 +168,7 @@ class _EditPageState extends State<EditPage> {
 
   Widget appBar() {
     return Padding(
-      padding: EdgeInsets.all(10),
-      //padding: EdgeInsets.fromLTRB(12, 12, 12, 14),
+      padding: EdgeInsets.fromLTRB(12, 12, 12, 14),
       child: Hero(
         tag: 'appbar',
         child: Material(
@@ -178,34 +177,31 @@ class _EditPageState extends State<EditPage> {
           borderRadius: BorderRadius.all(Radius.circular(8.5)),
           color: Theme.of(context).cardColor,
           child: ListView(
-            padding: EdgeInsets.only(top: 10),
+            padding: EdgeInsets.only(top: 5),
             scrollDirection: Axis.vertical,
             addAutomaticKeepAlives: true,
             shrinkWrap: true,
             children: <Widget>[
               Container(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    custom.IconButton(
-                      icon: Theme.of(context).platform == TargetPlatform.iOS
-                          ? Icons.arrow_back_ios
-                          : Icons.arrow_back,
-                      iconSize: Theme.of(context).platform == TargetPlatform.iOS
-                          ? 18
-                          : 22,
-                      onPressed: () => Navigator.pop(context),
+                padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                child: Row(children: <Widget>[
+                  custom.IconButton(
+                    icon: Theme.of(context).platform == TargetPlatform.iOS
+                        ? Icons.arrow_back_ios
+                        : Icons.arrow_back,
+                    iconSize: Theme.of(context).platform == TargetPlatform.iOS
+                        ? 18
+                        : 22,
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(5, 1, 0, 0.5),
+                    child: Text(
+                      Vocabluary.getWord('Body parameters'),
+                      style: Theme.of(context).textTheme.caption,
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(0.0),
-                      child: Text(
-                        Vocabluary.getWord('Body parameters'),
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ]),
               ),
               ScopedModelDescendant<DataModel>(
                   builder: (context, child, model) {

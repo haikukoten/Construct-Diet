@@ -96,37 +96,32 @@ class _MoreTabState extends State<MoreTab> {
                   context: context,
                   builder: (BuildContext context) {
                     return Container(
-                      child: Container(
-                        constraints: BoxConstraints(maxWidth: 500),
-                        margin: EdgeInsets.only(
-                            left: 10,
-                            right: 10,
-                            bottom: (Platform.isIOS && utils.isX(context))
-                                ? 20
-                                : 8),
-                        height: (!Platform.isIOS && !utils.isX(context))
-                            ? 145
-                            : 135,
-                        child: custom.Card(
-                          DisplayLabel(
-                            Vocabluary.getWord('Developer\'s menu'),
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 0),
-                              child: Column(
-                                children: <Widget>[
-                                  SwitchLabel(
-                                    Vocabluary.getWord('Use the UI for iOS'),
-                                    description: Vocabluary.getWord(
-                                        'Affects the appearance of components'),
-                                    icon: Icons.phone_iphone,
-                                    value: Theme.of(context).platform ==
-                                        TargetPlatform.iOS,
-                                    onChanged: (isOn) {
-                                      changePlatform(isOn);
-                                    },
-                                  ),
-                                ],
-                              ),
+                      constraints: BoxConstraints(maxWidth: 500),
+                      margin: EdgeInsets.only(
+                          left: 10,
+                          right: 10,
+                          bottom:
+                              (Platform.isIOS && utils.isX(context)) ? 20 : 8),
+                      height: 120,
+                      child: custom.Card(
+                        DisplayLabel(
+                          Vocabluary.getWord('Developer\'s menu'),
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 0),
+                            child: Column(
+                              children: <Widget>[
+                                SwitchLabel(
+                                  Vocabluary.getWord('Use the UI for iOS'),
+                                  description: Vocabluary.getWord(
+                                      'Affects the appearance of components'),
+                                  icon: Icons.phone_iphone,
+                                  value: Theme.of(context).platform ==
+                                      TargetPlatform.iOS,
+                                  onChanged: (isOn) {
+                                    changePlatform(isOn);
+                                  },
+                                ),
+                              ],
                             ),
                           ),
                         ),
