@@ -86,7 +86,7 @@ class MyApp extends StatelessWidget {
   MyApp({Key key, @required this.model}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     setTheme(context);
 
     return ScopedModel<DataModel>(
