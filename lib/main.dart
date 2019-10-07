@@ -51,8 +51,7 @@ Future setTheme(BuildContext c) async
   await settings.getContainer("settings");
 
   if (settings.isVirtual) {
-
-    settings.setItem("is_dark", false);
+    changeTheme(false, c);
     await settings.saveContainer();
   }
   else {
