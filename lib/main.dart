@@ -45,50 +45,12 @@ Future main() async {
   runApp(MyApp(model: model));
 }
 
-Future setTheme(BuildContext c) async {
-  var settings = new LocalSettings();
-  await settings.getContainer("settings");
-
-  if (settings.isVirtual) {
-    settings.setItem("is_dark", false);
-    await settings.saveContainer();
-  } else {
-    bool dark = settings.getItem("is_dark") as bool;
-
-    if (dark) {
-      changeTheme(true, c);
-    }
-  }
-}
-
-void changeTheme(bool isNight, BuildContext context) {
-  if (Theme.of(context).platform == TargetPlatform.iOS) {
-    DynamicTheme.of(context)
-        .setThemeData(isNight ? custom.ThemeIOS.dark : custom.ThemeIOS.light);
-  } else {
-    DynamicTheme.of(context).setThemeData(
-        isNight ? custom.ThemeAndroid.dark : custom.ThemeAndroid.light);
-  }
-
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-        statusBarBrightness: !isNight ? Brightness.light : Brightness.dark,
-        statusBarColor: Colors.white.withAlpha(0),
-        statusBarIconBrightness: !isNight ? Brightness.dark : Brightness.light,
-        systemNavigationBarColor: !isNight ? Colors.white : Color(0xFF2E2F32),
-        systemNavigationBarIconBrightness:
-            !isNight ? Brightness.dark : Brightness.light),
-  );
-}
-
 class MyApp extends StatelessWidget {
   final DataModel model;
   MyApp({Key key, @required this.model}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) { 
-    setTheme(context);
-
+  Widget build(BuildContext context) {
     return ScopedModel<DataModel>(
       model: model,
       child: DynamicTheme(
@@ -363,6 +325,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             ],
           ),
         ),
+        // AA
         bottomNavigationBar: Container(
           child: Center(
             heightFactor: 1,

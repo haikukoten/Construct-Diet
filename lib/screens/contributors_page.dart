@@ -20,69 +20,67 @@ class ContributorsPage extends StatefulWidget {
 
 class _ContributorsPageState extends State<ContributorsPage>
     with TickerProviderStateMixin {
+  TabController controllerTab;
+
   @override
   void initState() {
     super.initState();
+    controllerTab = TabController(length: 2, vsync: this);
+    controllerTab.addListener(() {});
   }
 
   Widget appBar(BuildContext context) {
-    return Flex(
-      direction: Axis.vertical,
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.all(16),
-          child: Hero(
-            tag: 'appbar',
-            child: Material(
-              elevation: 1.5,
-              clipBehavior: Clip.antiAlias,
-              shadowColor: Theme.of(context).cardTheme.color,
-              borderRadius: BorderRadius.all(Radius.circular(8.5)),
-              color: Theme.of(context).cardColor,
-              child: Stack(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(8, 5, 8, 0),
-                    child: Row(
-                      children: <Widget>[
-                        custom.IconButton(
-                          icon: Theme.of(context).platform == TargetPlatform.iOS
-                              ? Icons.arrow_back_ios
-                              : Icons.arrow_back,
-                          iconSize:
-                              Theme.of(context).platform == TargetPlatform.iOS
-                                  ? 18
-                                  : 22,
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                          child: Text(
-                            Vocabluary.getWord('Project Contributors'),
-                            style: Theme.of(context).textTheme.caption,
-                          ),
-                        ),
-                      ],
+    return Flex(direction: Axis.vertical, children: <Widget>[Padding(
+      padding: EdgeInsets.all(16),
+      child: Hero(
+        tag: 'appbar',
+        child: Material(
+          elevation: 1.5,
+          clipBehavior: Clip.antiAlias,
+          shadowColor: Theme.of(context).cardTheme.color,
+          borderRadius: BorderRadius.all(Radius.circular(8.5)),
+          color: Theme.of(context).cardColor,
+          child: Stack(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.fromLTRB(8, 5, 8, 0),
+                child: Row(
+                  children: <Widget>[
+                    custom.IconButton(
+                      icon: Theme.of(context).platform == TargetPlatform.iOS
+                          ? Icons.arrow_back_ios
+                          : Icons.arrow_back,
+                      iconSize: Theme.of(context).platform == TargetPlatform.iOS
+                          ? 18
+                          : 22,
+                      onPressed: () => Navigator.pop(context),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 36.5),
-                    child: ButtonLabel(
-                      Vocabluary.getWord('Contribute to the development'),
-                      description: Vocabluary.getWord(
-                          'Click here to go on project\'s GitHub page.'),
-                      icon: MdiIcons.codeTags,
-                      onPressed: () => launch(
-                          'https://github.com/oneLab-Projects/Construct-Diet'),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                      child: Text(
+                        Vocabluary.getWord('Project Contributors'),
+                        style: Theme.of(context).textTheme.caption,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+              Padding(
+                padding: EdgeInsets.only(top: 36.5),
+                child: ButtonLabel(
+                  Vocabluary.getWord('Contribute to the development'),
+                  description: Vocabluary.getWord(
+                      'Click here to go on project\'s GitHub page.'),
+                  icon: MdiIcons.codeTags,
+                  onPressed: () => launch(
+                      'https://github.com/oneLab-Projects/Construct-Diet'),
+                ),
+              ),
+            ],
           ),
         ),
-      ],
-    );
+      ),
+    )],);
   }
 
   @override
@@ -111,6 +109,8 @@ class _ContributorsPageState extends State<ContributorsPage>
   }
 }
 
+//------------------------ ContributorsItems --------------------------------
+
 class ContributorsItems extends StatefulWidget {
   @override
   _ContributorsItemsState createState() => _ContributorsItemsState();
@@ -122,12 +122,13 @@ class _ContributorsItemsState extends State<ContributorsItems> {
   @override
   void initState() {
     super.initState();
-    _showPlug(); // показать заглужку
-    _showUsersFromLocal(); // получить участников с локального хранилища
-    _updateUsers(); // обновить участников с сервера
+
+    _setShimmerLabels(); // Обновляет список виджетов на виджеты загрузки
+    _setLablesFromLocal(); // Обновляет список виджетов из локальных настроек
+    _updateLables(); // Обновляет локальные настройки и обновляет список виджетов из локальных настроек
   }
 
-  _showPlug() {
+  _setShimmerLabels() {
     setState(() {
       labelsList = [
         ContributorShimmerLabel(),
@@ -136,19 +137,26 @@ class _ContributorsItemsState extends State<ContributorsItems> {
     });
   }
 
-  Future _showUsersFromLocal() async {
+  Future _setLablesFromLocal() async {
+    // Получает доступ к локальному контейнеру
     var container = await LocalSettings().getContainer('main');
 
-    if (container.isVirtual) return;
+    if (container.isVirtual) {
+      // Если файл только в оперативной памяти
+      return;
+    }
 
-    List<dynamic> list = container.getItem('contributors');
+    List<dynamic> list = container
+        .getItem('contributors'); // Получает елемент по ключу из контейнера
 
     if (list.length > 0) {
-      _getUsersFromServer(list, true); // Обновляет список без фотографий
+      // Если в списке есть елементы
+      _setLabels(list, true); // Обновляет список без фотографий
     }
   }
 
-  void _getUsersFromServer(List<dynamic> list, bool isLocal) {
+  void _setLabels(List<dynamic> list, bool isLocal) {
+    // Добавляет виджеты исходя из данных list
     list = _sortItems(list);
 
     List<Widget> labels = [];
@@ -163,8 +171,8 @@ class _ContributorsItemsState extends State<ContributorsItems> {
       }
 
       labels.add(new ContributorLabel(
-        _convertToUTF8(name),
-        nickname: _convertToUTF8(item['nickname']),
+        toUFT8(name),
+        nickname: toUFT8(item['nickname']),
         avatarUrl: isLocal == true ? null : item['avatar_uri'],
         additions: item['commits']['additions'],
         deletions: item['commits']['deletions'],
@@ -177,46 +185,64 @@ class _ContributorsItemsState extends State<ContributorsItems> {
       ));
     }
     setState(() {
+      // Обновляет список
       labelsList = labels;
     });
   }
 
-  Future _updateUsers() async {
+  Future _updateLables() async {
+    // Обновляет локальные настройки и обновляет список виджетов из локальных настроек
+    // Запросы на два api рессурса (github, onelab)
     var githubRequest = await HTTPRequest().getFromUri(
         'https://api.github.com/repos/oneLab-Projects/Construct-Diet/stats/contributors',
         RequestType.GET);
     var onelabRequest = await HTTPRequest().getFromUri(
         'https://api.onelab.work/cd/developers.json', RequestType.GET);
-    if (githubRequest.code != 200) return;
+
+    if (githubRequest.code != 200) {
+      // Если ошибка то функция обрывается
+      return;
+    }
 
     List<dynamic> list = [];
-    if (onelabRequest.code != 200)
+    if (onelabRequest.code != 200) {
+      // Если ошибка то парсится без onelab request
       list = await _getItemsFromRequests(githubRequest);
-    else
+    } else {
       list = await _getItemsFromCombineOfRequests(githubRequest, onelabRequest);
-    if (list.length > 0) _getUsersFromServer(list, false);
+    }
 
+    if (list.length > 0) {
+      // Если в списке есть елементы
+      _setLabels(list, false); // Обновляет список с фотографиями
+    }
+
+    // Получает доступ к локальному контейнеру
     var container = await LocalSettings().getContainer('main');
-    container.setItem('contributors', list);
-    await container.saveContainer();
+    container.setItem('contributors', list); // Сохраняет елементы в virtual
+
+    await container.saveContainer(); // Сохраняет койтейнер
   }
 
   Future<List<dynamic>> _getItemsFromRequests(HTTPRequest r1) async {
     var list = r1.getContentLikeList();
     List<dynamic> outList = [];
-
     for (var i = 0; i < list.length; i++) {
+      // Присваевает имя елементу
       var r2 = await HTTPRequest()
           .getFromUri(list[i]['author']['url'], RequestType.GET);
       var map = r2.getContentLikeMap();
-      if (r2.code == 200)
+
+      if (r2.code == 200) {
         list[i]['author'].putIfAbsent(
             'name',
             () => {
                   'ru': map['name'],
                   'en': map['name'],
                 });
-      outList.add(_parseToItem(list[i]));
+      }
+
+      outList.add(_parceToItem(list[i]));
     }
 
     return outList;
@@ -228,6 +254,7 @@ class _ContributorsItemsState extends State<ContributorsItems> {
     var onelist = r2.getContentLikeList();
 
     for (var i = 0; i < list.length; i++) {
+      // Пытается присвоить имя елементу если логины в двух requests совпадают
       for (var j = 0; j < onelist.length; j++) {
         if (list[i]['author']['login'] == onelist[j]['nickname']) {
           list[i]['author']
@@ -238,26 +265,30 @@ class _ContributorsItemsState extends State<ContributorsItems> {
 
     List<dynamic> outList = [];
     for (var i = 0; i < list.length; i++) {
+      // Присваевает имя елементу у которых логины не совпали с onelab request
       if (list[i]['author'].containsKey('name') == false) {
         var r2 = await HTTPRequest()
             .getFromUri(list[i]['author']['url'], RequestType.GET);
         var map = r2.getContentLikeMap();
 
-        if (r2.code == 200)
+        if (r2.code == 200) {
           list[i]['author'].putIfAbsent(
               'name',
               () => {
                     'ru': map['name'],
                     'en': map['name'],
                   });
+        }
       }
-      outList.add(_parseToItem(list[i]));
+
+      outList.add(_parceToItem(list[i]));
     }
 
     return outList;
   }
 
-  Map<dynamic, dynamic> _parseToItem(Map<dynamic, dynamic> map) {
+  Map<dynamic, dynamic> _parceToItem(Map<dynamic, dynamic> map) {
+    // Парсит github request + onelab request в json формат виджета
     String nickname = map['author']['login'];
     String auri = map['author']['avatar_url'];
     String uri = map['author']['html_url'];
@@ -277,7 +308,9 @@ class _ContributorsItemsState extends State<ContributorsItems> {
     };
   }
 
-  int _getListTotal(List<dynamic> list, String key) {
+  int _getListTotal(
+      List<dynamic> list, String key) // Получает сумму ключей в списке
+  {
     int out = 0;
 
     for (var i = 0; i < list.length; i++) {
@@ -287,7 +320,7 @@ class _ContributorsItemsState extends State<ContributorsItems> {
     return out;
   }
 
-  String _convertToUTF8(String buffer) {
+  String toUFT8(String buffer) {
     List<int> encode = [];
 
     for (var i = 0; i < buffer.length; i++) {
