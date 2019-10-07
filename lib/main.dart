@@ -5,7 +5,6 @@ import 'package:construct_diet/common/clear_behavior.dart';
 import 'package:construct_diet/common/custom_appbar.dart' as custom;
 import 'package:construct_diet/common/custom_tab.dart';
 import 'package:construct_diet/common/diets_list.dart';
-import 'package:construct_diet/storage/local_settings.dart';
 import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:construct_diet/common/labels.dart';
 import 'package:construct_diet/common/page_transition.dart';
@@ -45,54 +44,19 @@ Future main() async {
   runApp(MyApp(model: model));
 }
 
-Future setTheme(BuildContext c) async
-{
-  var settings = new LocalSettings();
-  await settings.getContainer("settings");
-
-  if (settings.isVirtual) {
-    changeTheme(false, c);
-
-    settings.setItem("is_dark", false);
-    await settings.saveContainer();
-  }
-  else {
-    bool dark = settings.getItem("is_dark") as bool;
-
-    if (dark) {
-      changeTheme(true, c);
-    }
-  }
-}
-
-void changeTheme(bool isNight, BuildContext context) {
-  if (Theme.of(context).platform == TargetPlatform.iOS) {
-    DynamicTheme.of(context)
-        .setThemeData(isNight ? custom.ThemeIOS.dark : custom.ThemeIOS.light);
-  } else {
-    DynamicTheme.of(context).setThemeData(
-        isNight ? custom.ThemeAndroid.dark : custom.ThemeAndroid.light);
-  }
-
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-        statusBarBrightness: !isNight ? Brightness.light : Brightness.dark,
-        statusBarColor: Colors.white.withAlpha(0),
-        statusBarIconBrightness:
-            !isNight ? Brightness.dark : Brightness.light,
-        systemNavigationBarColor: !isNight ? Colors.white : Color(0xFF2E2F32),
-        systemNavigationBarIconBrightness:
-            !isNight ? Brightness.dark : Brightness.light),
-  );
-}
-
 class MyApp extends StatelessWidget {
   final DataModel model;
   MyApp({Key key, @required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    setTheme(context);
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+          statusBarColor: Colors.white.withAlpha(0),
+          systemNavigationBarColor: Colors.white,
+          systemNavigationBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.light),
+    );
 
     return ScopedModel<DataModel>(
       model: model,
