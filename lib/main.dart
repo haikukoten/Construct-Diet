@@ -45,17 +45,14 @@ Future main() async {
   runApp(MyApp(model: model));
 }
 
-Future setTheme(BuildContext c) async
-{
+Future setTheme(BuildContext c) async {
   var settings = new LocalSettings();
   await settings.getContainer("settings");
 
   if (settings.isVirtual) {
-
     settings.setItem("is_dark", false);
     await settings.saveContainer();
-  }
-  else {
+  } else {
     bool dark = settings.getItem("is_dark") as bool;
 
     if (dark) {
@@ -77,8 +74,7 @@ void changeTheme(bool isNight, BuildContext context) {
     SystemUiOverlayStyle(
         statusBarBrightness: !isNight ? Brightness.light : Brightness.dark,
         statusBarColor: Colors.white.withAlpha(0),
-        statusBarIconBrightness:
-            !isNight ? Brightness.dark : Brightness.light,
+        statusBarIconBrightness: !isNight ? Brightness.dark : Brightness.light,
         systemNavigationBarColor: !isNight ? Colors.white : Color(0xFF2E2F32),
         systemNavigationBarIconBrightness:
             !isNight ? Brightness.dark : Brightness.light),
@@ -367,7 +363,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             ],
           ),
         ),
-        // AA
         bottomNavigationBar: Container(
           child: Center(
             heightFactor: 1,
