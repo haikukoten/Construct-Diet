@@ -7,6 +7,7 @@ import 'package:construct_diet/common/split_column.dart';
 import 'package:construct_diet/common/tab_body.dart';
 import 'package:construct_diet/globalization/vocabulary.dart';
 import 'package:construct_diet/scoped_models/data_model.dart';
+import 'package:construct_diet/storage/local_settings.dart';
 import 'package:construct_diet/screens/contributors_page.dart';
 import 'package:construct_diet/theme.dart' as custom;
 import 'package:dynamic_theme/dynamic_theme.dart';
@@ -45,6 +46,11 @@ class _MoreTabState extends State<MoreTab> {
       value: Theme.of(context).brightness == Brightness.dark,
       onChanged: (isOn) {
         changeTheme(isOn);
+
+        var settings = new LocalSettings();
+        settings.getContainer("settings");
+        settings.setItem("is_dark", isOn);
+        settings.saveContainer();
       },
     );
   }
@@ -61,12 +67,13 @@ class _MoreTabState extends State<MoreTab> {
               !isNight ? Brightness.dark : Brightness.light),
     );
 
-    if (Theme.of(context).platform == TargetPlatform.iOS) {
-      DynamicTheme.of(context)
-          .setThemeData(isNight ? custom.ThemeIOS.dark : custom.ThemeIOS.light);
-    } else {
-      DynamicTheme.of(context).setThemeData(
-          isNight ? custom.ThemeAndroid.dark : custom.ThemeAndroid.light);
+    if (isNight)
+    {
+      DynamicTheme.of(context).setBrightness(Brightness.dark);
+    }
+    else
+    {
+      DynamicTheme.of(context).setBrightness(Brightness.light);
     }
   }
 
