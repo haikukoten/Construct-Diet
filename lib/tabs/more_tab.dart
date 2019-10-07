@@ -49,7 +49,7 @@ class _MoreTabState extends State<MoreTab> {
     );
   }
 
-  void changeTheme(bool isNight) {
+  void changeTheme(bool isNight) { 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
           statusBarBrightness: !isNight ? Brightness.light : Brightness.dark,
