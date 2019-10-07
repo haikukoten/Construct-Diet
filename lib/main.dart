@@ -332,7 +332,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             ],
           ),
         ),
-        // AA
         bottomNavigationBar: Container(
           child: Center(
             heightFactor: 1,
